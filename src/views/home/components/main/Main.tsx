@@ -6,6 +6,7 @@ import { homeStyles } from '../../styles/homeStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SendSwitchProfile, SendSwitchActivateCard, SendTemplateSelected } from '../../../../reactQuery/users';
 import { useNavigation } from '@react-navigation/native';
+import MenuSuperior from '../../../menuSuperior/MenuSuperior';
 
 const Main = () => {
   const { tab, setTab } = HomeHook();
@@ -83,6 +84,7 @@ const Main = () => {
 
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
+      <MenuSuperior />
       <View style={globalStyles.container}>
         <View style={homeStyles.switchContainer}>
           <View style={homeStyles.switchContainer}>

@@ -1,13 +1,14 @@
-import { View, Text } from 'react-native';
+import {View, Text, GestureResponderEvent} from 'react-native';
 import React from 'react';
 import Main from './components/main/Main';
-import Profile from './components/main/profile/Profile';
-import ChangePassword from './components/main/profile/ChangePassword';
+import Login from '../login/Login';
+
 
 const Home = () => {
-  //return <ChangePassword />;
-  //return <Profile />;
-return <Main />;
+  return (
+    <Main />
+  );
 };
 
 export default Home;
+

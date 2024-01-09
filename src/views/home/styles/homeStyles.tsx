@@ -24,7 +24,11 @@ export const homeStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  
+  mainContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    // Otros estilos según sea necesario
+  },
   tab: {
     display: 'flex',
     flexDirection: 'row',
