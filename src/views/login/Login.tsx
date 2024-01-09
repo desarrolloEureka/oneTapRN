@@ -2,6 +2,7 @@ import React, { useState, Dispatch, SetStateAction } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 interface LoginProps {
   handleNext: (event: GestureResponderEvent) => void;
   handleBack: () => void;
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: 50,
   },
+  
   title: {
     color: '#396593',
     fontSize: 24,

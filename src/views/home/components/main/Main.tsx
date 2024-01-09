@@ -4,6 +4,7 @@ import { globalStyles } from '../../../../globalStyles/globalStyles';
 import HomeHook from '../../hooks/HomeHook';
 import { homeStyles } from '../../styles/homeStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MenuSuperior from '../../../menuSuperior/MenuSuperior';
 
 const Main = () => {
   const { tab, setTab } = HomeHook();
@@ -64,6 +65,7 @@ const Main = () => {
 
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
+      <MenuSuperior />
       <View style={globalStyles.container}>
         <View style={homeStyles.switchContainer}>
           <View style={homeStyles.switchContainer}>
