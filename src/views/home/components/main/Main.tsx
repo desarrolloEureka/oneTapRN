@@ -17,8 +17,8 @@ const Main = () => {
   const handleSwitchToggle1 = () => {
     // Muestra una alerta cuando se cambia el estado del Switch 1
     Alert.alert(
-      'Cambio de estado',
-      `Switch 1: ${isSwitchOn1 ? 'Activado' : 'Desactivado'}`,
+      'Alerta',
+      `Acabas de ${isSwitchOn1 ? 'activar activar el perfil social, por ende este será el perfil que verán las personas cuando escaneen tu tarjeta' : 'activar activar el perfil PRO, por ende este será el perfil que verán las personas cuando escaneen tu tarjeta'}`,
       [
         { text: 'OK', onPress: () => handleUpdateSwitch() }
       ],
@@ -34,8 +34,8 @@ const Main = () => {
   const handleSwitchToggle2 = () => {
     // Muestra una alerta cuando se cambia el estado del Switch 2
     Alert.alert(
-      'Cambio de estado',
-      `Switch 2: ${isSwitchOn2 ? 'Activado' : 'Desactivado'}`,
+      'Alerta',
+      `Acabas de ${isSwitchOn2 ? 'activar tu tarjeta' : 'desactivar tu tarjeta, por ende nadie podrá ver tu perfil hasta que vuelvas a activarla '}`,
       [
         { text: 'OK', onPress: () => handleUpdateSwitchCard() }
       ],

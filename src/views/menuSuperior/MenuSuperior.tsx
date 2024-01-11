@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 
 const MenuSuperior = () => {
@@ -10,8 +10,58 @@ const MenuSuperior = () => {
   };
 
   const handleItemPress = (item: { id: number; name: string }) => {
-    console.log('Item pressed:', item.name);
-    setModalVisible(false);
+    if (item.id === 11) {
+      // Si el id es 11 (Cerrar Sesión), muestra una alerta
+      Alert.alert(
+        'Alerta',
+        '¿Estás seguro de que deseas cerrar sesión?',
+        [
+          {
+            text: 'NO',
+            style: 'cancel',
+          },
+          {
+            text: 'SI',
+            onPress: () => {
+              // Aquí puedes agregar lógica para cerrar sesión
+              setModalVisible(false);
+              // Lógica adicional de cierre de sesión...
+            },
+          },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      // Si el id no es 11, simplemente cierra el modal
+      setModalVisible(false);
+    }
+    
+
+    if (item.id === 10) {
+      // Si el id es 1 (Eliminar Cuenta), muestra una alerta
+      Alert.alert(
+        'Alerta',
+        '¿Estás seguro de que deseas eliminar tu sesión?',
+        [
+          {
+            text: 'NO',
+            style: 'cancel',
+          },
+          {
+            text: 'SI',
+            onPress: () => {
+              // Aquí puedes agregar lógica para cerrar sesión
+              setModalVisible(false);
+              // Lógica adicional de cierre de sesión...
+            },
+          },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      // Si el id no es 11, simplemente cierra el modal
+      setModalVisible(false);
+    }
   };
 
   const renderModalContent = () => {
@@ -46,7 +96,7 @@ const MenuSuperior = () => {
 
   return (
     <View style={styles.container}>
-       <TouchableOpacity onPress={toggleModal} style={styles.button}>
+      <TouchableOpacity onPress={toggleModal} style={styles.button}>
         <Text style={styles.iconText}>☰</Text>
       </TouchableOpacity>
 
@@ -87,4 +137,3 @@ const styles = StyleSheet.create({
 });
 
 export default MenuSuperior;
-

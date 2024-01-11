@@ -1,24 +1,26 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-interface OnboardingOneProps {
-  handleNext: (event: GestureResponderEvent) => void;
-}
+const OnboardingOne = () => {
+  const navigation = useNavigation();
 
-const OnboardingOne: React.FC<OnboardingOneProps> = ({ handleNext }) => {
+  const handleNextPress = () => {
+    // Navegar a la pantalla OnboardingTwo
+    navigation.navigate('OnboardingTwo');
+  };
+
   return (
     <View style={styles.container}>
       <Image
-        source={require('images/onboarding_1.png')}
+        source={require('../../images/onboarding_1.png')}
         style={styles.image}
       />
       <View style={styles.overlayTextContainer}>
         <Text style={styles.overlayText}>Elige tu tarjeta y plantilla</Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleNext}>
-        <Text style={styles.buttonText}>
-          Siguiente
-        </Text>
+      <TouchableOpacity style={styles.button} onPress={handleNextPress}>
+        <Text style={styles.buttonText}>Siguiente</Text>
       </TouchableOpacity>
     </View>
   );
@@ -63,3 +65,4 @@ const styles = StyleSheet.create({
 });
 
 export default OnboardingOne;
+

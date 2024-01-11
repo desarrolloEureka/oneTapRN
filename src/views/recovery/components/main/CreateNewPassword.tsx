@@ -1,51 +1,45 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-interface CreateNewPasswordProps {
-  handleNext: () => void;
-  handleBack: () => void;
-}
+const CreateNewPassword = () => {
+  const navigation = useNavigation();
 
-const CreateNewPassword: React.FC<CreateNewPasswordProps> = ({ handleNext }) => {
-  const dictionary = {
-    newPassword: {
-      createNewPass: 'Crear Nueva Contraseña',
-      nPassword: 'Nueva Contraseña',
-      repeatPassword: 'Repetir Contraseña',
-      nextNewPassword: 'Siguiente',
-    },
+  const handleNextPress = () => {
+    // Navegar a la pantalla PasswordChanged
+    navigation.navigate('PasswordChanged');
   };
 
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>
-          {dictionary?.newPassword.createNewPass}
+          Crear nueva Contraseña
         </Text>
       </View>
       <Text style={styles.label}>
-        {dictionary?.newPassword.nPassword}
+        Nueva contraseña
       </Text>
       <TextInput
         style={styles.input}
-        placeholder={dictionary?.newPassword.nPassword}
+        placeholder="Nueva contraseña"
         placeholderTextColor="#396593"
         underlineColorAndroid="transparent" // Para Android
       />
       <Text style={styles.label}>
-        {dictionary?.newPassword.repeatPassword}
+        Repetir contraseña
       </Text>
       <TextInput
         style={styles.input}
-        placeholder={dictionary?.newPassword.repeatPassword}
+        placeholder="Repetir contraseña"
         placeholderTextColor="#396593"
         secureTextEntry={true}
         underlineColorAndroid="transparent" // Para Android
       />
-      
-      <TouchableOpacity style={styles.button} onPress={handleNext}>
+
+      <TouchableOpacity style={styles.button} onPress={handleNextPress}>
         <Text style={styles.buttonText}>
-          {dictionary?.newPassword.nextNewPassword}
+          Siguiente
         </Text>
       </TouchableOpacity>
     </View>

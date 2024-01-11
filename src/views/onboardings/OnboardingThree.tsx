@@ -1,25 +1,26 @@
-
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-interface OnboardingThreeProps {
-  handleNext: (event: GestureResponderEvent) => void;
-}
+const OnboardingThree = () => {
+  const navigation = useNavigation();
 
-const OnboardingThree: React.FC<OnboardingThreeProps> = ({ handleNext }) => {
+  const handleNextPress = () => {
+    // Navegar a la pantalla OnboardingInicioSesion
+    navigation.navigate('OnboardingInicioSesion');
+  };
+
   return (
     <View style={styles.container}>
       <Image
-        source={require('images/onboarding_3.png')}
+        source={require('../../images/onboarding_3.png')}
         style={styles.image}
       />
       <View style={styles.overlayTextContainer}>
         <Text style={styles.overlayText}>Lorem input</Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleNext}>
-        <Text style={styles.buttonText}>
-          Siguiente
-        </Text>
+      <TouchableOpacity style={styles.button} onPress={handleNextPress}>
+        <Text style={styles.buttonText}>Siguiente</Text>
       </TouchableOpacity>
     </View>
   );
@@ -28,7 +29,7 @@ const OnboardingThree: React.FC<OnboardingThreeProps> = ({ handleNext }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative', // Asegura que el posicionamiento relativo funcione
+    position: 'relative',
   },
   image: {
     width: '100%',
@@ -47,8 +48,8 @@ const styles = StyleSheet.create({
     // Otros estilos de texto aquí
   },
   button: {
-    position: 'absolute', // Posiciona el botón absolutamente
-    bottom: 50, // Ajusta la posición del botón desde la parte inferior
+    position: 'absolute',
+    bottom: 50,
     width: 265,
     height: 45,
     borderRadius: 100,
