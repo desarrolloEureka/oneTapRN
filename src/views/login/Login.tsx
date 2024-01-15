@@ -1,50 +1,95 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
-
-interface LoginProps {
-  handleNext: (event: GestureResponderEvent) => void;
-  handleBack: () => void;
-}
-
-const Login: React.FC<LoginProps> = ({ handleNext, handleBack }) => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
+
+  const handleForgotPassword = () => {
+    navigation.navigate('RecoveryPassword');
+  };
+
+
+  const handleLogin = async () => {
+    try {
+      if (email && password) {
+        await auth().signInWithEmailAndPassword(email, password);
+        const usersCollection = firestore().collection('users');
+        await usersCollection.add({
+          email,
+          timestamp: firestore.FieldValue.serverTimestamp(),
+        });
+
+        // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
+        navigation.navigate('Main');
+      } else {
+        Alert.alert('Error', 'Por favor, complete todos los campos.');
+      }
+    } catch (error:any) {
+      console.error('Error al iniciar sesión:', error.message);
+      Alert.alert(
+        'Error',
+        'Error al iniciar sesión. Verifique sus credenciales.'
+      );
+    }
+  };
 
   return (
     <View style={styles.container}>
+      {/* Vista de inicio de sesión */}
       <View>
         <Text style={styles.title}>Iniciar Sesión</Text>
-      </View>
-      <Text style={styles.label}>Nombres</Text>
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#396593"
-        underlineColorAndroid="transparent" // Para Android
-      />
-      <Text style={styles.label}>Contraseña</Text>
-      <View style={styles.passwordContainer}>
+        <Text style={styles.label}>Correo Electrónico</Text>
         <TextInput
-          style={styles.passwordInput}
+          style={styles.input}
           placeholderTextColor="#396593"
-          secureTextEntry={!showPassword}
-          underlineColorAndroid="transparent" // Para Android
+          underlineColorAndroid="transparent"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         />
+        <Text style={styles.label}>Contraseña</Text>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholderTextColor="#396593"
+            secureTextEntry={!showPassword}
+            underlineColorAndroid="transparent"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          />
+          <TouchableOpacity
+            style={styles.eyeIcon}
+            onPress={() => setShowPassword(!showPassword)}>
+            <Icon
+              name={showPassword ? 'eye-slash' : 'eye'}
+              size={20}
+              color="#396593"
+            />
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
-          style={styles.eyeIcon}
-          onPress={() => setShowPassword(!showPassword)}
-        >
-          <Icon name={showPassword ? 'eye-slash' : 'eye'} size={20} color="#396593" />
+          style={styles.passwordInput}
+          onPress={handleForgotPassword}>
+          <Text>Recuperar Contraseña</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Siguiente</Text>
         </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styles.forgotPassword} onPress={handleNext}>
-        <Text>Recuperar Contraseña</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={handleNext}>
-        <Text style={styles.buttonText}>Siguiente</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -57,20 +102,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: 50,
   },
-  
   title: {
     color: '#396593',
     fontSize: 24,
     marginTop: 10,
     marginBottom: 50,
+    marginLeft: 130,
   },
   input: {
     height: 52,
     width: 386,
     fontSize: 16,
-    color: '#396593', // Color del texto
+    color: '#396593',
     borderBottomWidth: 1,
-    borderBottomColor: '#396593', // Color de la línea
+    borderBottomColor: '#396593',
     marginBottom: 10,
     paddingLeft: 10,
   },
@@ -83,7 +128,7 @@ const styles = StyleSheet.create({
     width: 265,
     height: 45,
     backgroundColor: '#62AD9B',
-    marginTop: 300,
+    marginLeft: 70,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
@@ -91,10 +136,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
-  },
-  forgotPassword: {
-    alignSelf: 'flex-end', // Alinea el componente a la derecha
-    marginTop: 10,
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -116,3 +157,4 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
+

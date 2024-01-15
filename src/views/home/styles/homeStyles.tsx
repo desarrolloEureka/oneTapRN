@@ -162,6 +162,15 @@ export const homeStyles = StyleSheet.create({
     marginBottom: 10
 
   }, 
+  buttonT: {
+    height: "45%",
+    width: "40%",
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonTextT: {
+    fontSize: 12,
+  },
   navbar: {
     flexDirection: 'row',
     justifyContent: 'space-around',

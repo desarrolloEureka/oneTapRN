@@ -1,24 +1,30 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-interface OnboardingOneProps {
-  handleNext: (event: GestureResponderEvent) => void;
-}
+const OnboardingOne = () => {
+  const navigation = useNavigation();
 
-const OnboardingOne: React.FC<OnboardingOneProps> = ({ handleNext }) => {
+  const handleNextPress = () => {
+    // Navegar a la pantalla OnboardingTwo
+    navigation.navigate('OnboardingTwo');
+  };
+
   return (
     <View style={styles.container}>
       <Image
-        source={require('images/onboarding_1.png')}
+        source={require('../../images/onboarding_1.png')}
         style={styles.image}
       />
       <View style={styles.overlayTextContainer}>
         <Text style={styles.overlayText}>Elige tu tarjeta y plantilla</Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleNext}>
-        <Text style={styles.buttonText}>
-          Siguiente
-        </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleNextPress}
+        activeOpacity={0.8} // Este valor puede ajustarse según tus preferencias
+      >
+        <Text style={styles.buttonText}>Siguiente</Text>
       </TouchableOpacity>
     </View>
   );
@@ -30,8 +36,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   image: {
-    width: '100%',
-    height: '100%',
+    flex: 1,  // Asegura que la imagen se expanda para ocupar todo el espacio disponible
     resizeMode: 'cover',
   },
   overlayTextContainer: {
@@ -54,7 +59,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#62AD9B',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 50,
+    marginLeft: 70,
+    borderWidth: 0, // Quita el borde
   },
   buttonText: {
     color: 'white',

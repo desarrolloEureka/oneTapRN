@@ -1,17 +1,47 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import Modal from 'react-native-modal';
+import { useNavigation } from '@react-navigation/native';
 
 const MenuSuperior = () => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleItemPress = (item: { id: number; name: string }) => {
-    console.log('Item pressed:', item.name);
+  const handleItemPress = (item) => {
     setModalVisible(false);
+
+    if (item.id === 5) {
+      navigation.navigate('AcercaDe');
+    } else if (item.id === 7) {
+      navigation.navigate('Terminos');
+    } else if (item.id === 6) {
+      navigation.navigate('Politicas');    
+    } else if (item.id === 10 || item.id === 11) {
+      Alert.alert(
+        'Alerta',
+        item.id === 10
+          ? '¿Estás seguro de que deseas eliminar tu cuenta?'
+          : '¿Estás seguro de que deseas cerrar sesión?',
+        [
+          {
+            text: 'NO',
+            style: 'cancel',
+          },
+          {
+            text: 'SI',
+            onPress: () => {
+              // Lógica adicional de cerrar sesión...
+              navigation.navigate('Login'); // Navegar a la pantalla de login
+            },
+          },
+        ],
+        { cancelable: false }
+      );
+    }
   };
 
   const renderModalContent = () => {
@@ -46,7 +76,7 @@ const MenuSuperior = () => {
 
   return (
     <View style={styles.container}>
-       <TouchableOpacity onPress={toggleModal} style={styles.button}>
+      <TouchableOpacity onPress={toggleModal} style={styles.button}>
         <Text style={styles.iconText}>☰</Text>
       </TouchableOpacity>
 
@@ -87,4 +117,3 @@ const styles = StyleSheet.create({
 });
 
 export default MenuSuperior;
-

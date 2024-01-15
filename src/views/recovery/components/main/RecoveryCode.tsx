@@ -5,28 +5,16 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  GestureResponderEvent,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-interface RecoveryCodeProps {
-  handleNext: () => void;
-  handleBack: () => void;
-}
+const RecoveryCode = () => {
+  const navigation = useNavigation();
 
-const RecoveryCode: React.FC<RecoveryCodeProps> = ({ handleNext, handleBack }) => {
-  // Considera cómo gestionar la traducción en React Native (puede ser a través de una biblioteca específica)
-  const dictionary = {
-    recoveryCode: {
-      titleCode: 'Título del Código de Recuperación',
-      descriptionCode: 'Descripción del Código de Recuperación',
-      code: 'Código:',
-      resendCode: 'Reenviar Código',
-      nextCode: 'Siguiente',
-      backCode: 'Volver',
-    },
+  const handleNextPress = () => {
+    // Navegar a la pantalla CreateNewPassword
+    navigation.navigate('CreateNewPassword');
   };
-
-
 
   return (
     <View style={styles.container}>
@@ -43,15 +31,15 @@ const RecoveryCode: React.FC<RecoveryCodeProps> = ({ handleNext, handleBack }) =
         <TextInput style={styles.input} placeholder="D4" />
       </View>
 
-      <Text style={styles.codeLabel}>{dictionary?.recoveryCode.code}</Text>
+      <Text style={styles.codeLabel}>Codigo</Text>
       <TouchableOpacity style={styles.resendButton}>
         <Text style={styles.resendButtonText}>
-          Reenviar codigo de verificacion
+          Reenviar código de verificación
         </Text>
       </TouchableOpacity>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleNext}>
+        <TouchableOpacity style={styles.button} onPress={handleNextPress}>
           <Text style={styles.buttonText}>Siguiente</Text>
         </TouchableOpacity>
       </View>
@@ -101,10 +89,9 @@ const styles = StyleSheet.create({
     marginLeft: 40,
   },
   resendButton: {
-    
     marginLeft: 10,
-    borderWidth: 1, // Añade esta línea
-    borderColor: 'black', // Añade esta línea
+    borderWidth: 1,
+    borderColor: 'black',
     borderRadius: 120,
     justifyContent: 'center',
     alignItems: 'center',
@@ -116,16 +103,16 @@ const styles = StyleSheet.create({
     width: 265,
     height: 42,
     fontSize: 16,
+    textAlign: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 220,
-    marginBottom: -350,
+    marginTop: 200,
+    marginBottom: -330,
     backgroundColor: '#62AD9B',
     borderRadius: 120,
-    
   },
   button: {
     width: 265,
@@ -135,6 +122,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop:-200,
   },
   buttonText: {
     fontSize: 16,

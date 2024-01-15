@@ -1,34 +1,29 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-interface PasswordModifiedSuccessfullyProps {
-  handleNext: () => void;
-  handleBack: () => void;
-}
+const PasswordChanged = () => {
+  const navigation = useNavigation();
 
-const PasswordModifiedSuccessfully: React.FC<PasswordModifiedSuccessfullyProps> = ({ handleNext }) => {
-  // Considera cómo gestionar la traducción en React Native (puede ser a través de una biblioteca específica)
-  const dictionary = {
-    passwordChangedSuccessfully: 'Contraseña modificada exitosamente',
-    nextNewPassword: 'Siguiente',
+  const handleGoToLogin = () => {
+    // Navegar a la pantalla Login
+    navigation.navigate('OnboardingInicioSesion');
   };
 
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>
-          {dictionary?.passwordChangedSuccessfully}
+          Contraseña modificada exitosamente
         </Text>
       </View>
-
       <View style={styles.imageContainer}>
-        <Image
-          source={require('images/password_change_girl.png')}
-          style={styles.image}
-        />
+      <Image
+                    source={require('src/images/password_change_girl.png')}
+                    style={styles.image}
+                  />
       </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleNext}>
+      <TouchableOpacity style={styles.button} onPress={handleGoToLogin}>
         <Text style={styles.buttonText}>
           Volver al inicio
         </Text>
@@ -42,37 +37,37 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white', // Color azul agua marina
+    backgroundColor: 'white',
     paddingTop: 103,
   },
   title: {
     color: '#396593',
     fontSize: 24,
-    marginTop: 10,
-  },
-  imageContainer: {
-    width: 337,
-    height: 421,
-    marginTop: 10,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    marginTop: -100,
   },
   button: {
     width: 265,
     height: 45,
     borderRadius: 100,
     backgroundColor: '#62AD9B',
-    
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: -100,
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
   },
+  imageContainer: {
+    width: 337,
+    height: 421,
+    marginTop: 10
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover'
+  }
 });
 
-export default PasswordModifiedSuccessfully;
+export default PasswordChanged;
