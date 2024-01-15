@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,14 +22,24 @@ const Login = () => {
   const handleForgotPassword = () => {
     navigation.navigate('RecoveryPassword');
   };
+   const { data, isLoading, isRefetching } = GetLoginQuery({
+    user: email,
+    password
+  });
 
   const handleLogin = async () => {
     try {
       if (email && password) {
-        
+        await auth().signInWithEmailAndPassword(email, password);
 
-        // esto es lo que debo descomentar para mostrar la funcionalidad del login
-        //await auth().signInWithEmailAndPassword(email, password);
+        
+        const usersCollection = firestore().collection('users');
+
+       
+        await usersCollection.add({
+          email,
+          timestamp: firestore.FieldValue.serverTimestamp(),
+        });
 
         // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
         navigation.navigate('Main');
@@ -37,12 +48,14 @@ const Login = () => {
       }
     } catch (error:any) {
       console.error('Error al iniciar sesión:', error.message);
-      Alert.alert('Error', 'Error al iniciar sesión. Verifique sus credenciales.');
+      Alert.alert(
+        'Error',
+        'Error al iniciar sesión. Verifique sus credenciales.'
+      );
     }
   };
 
   return (
-    
     <View style={styles.container}>
       {/* Vista de inicio de sesión */}
       <View>
@@ -94,14 +107,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    paddingTop: 50
+    paddingTop: 50,
   },
   title: {
     color: '#396593',
     fontSize: 24,
     marginTop: 10,
     marginBottom: 50,
-    marginLeft:130,
+    marginLeft: 130,
   },
   input: {
     height: 52,
@@ -111,45 +124,44 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#396593',
     marginBottom: 10,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   label: {
     color: '#008F9E',
     marginTop: 3,
-    marginRight: 290
+    marginRight: 290,
   },
   button: {
     width: 265,
     height: 45,
     backgroundColor: '#62AD9B',
-    // marginTop: -200,
-    // marginBottom: 200,
-    marginLeft:70,
+    marginLeft: 70,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
   },
   buttonText: {
     color: 'white',
-    fontSize: 16
+    fontSize: 16,
   },
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#396593',
-    marginBottom: 10
+    marginBottom: 10,
   },
   passwordInput: {
     flex: 1,
     height: 52,
     fontSize: 16,
     color: '#396593',
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   eyeIcon: {
-    padding: 10
-  }
+    padding: 10,
+  },
 });
 
 export default Login;
+
