@@ -1,47 +1,31 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import Modal from 'react-native-modal';
+import { useNavigation } from '@react-navigation/native';
 
 const MenuSuperior = () => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleItemPress = (item: { id: number; name: string }) => {
-    if (item.id === 11) {
-      // Si el id es 11 (Cerrar Sesión), muestra una alerta
-      Alert.alert(
-        'Alerta',
-        '¿Estás seguro de que deseas cerrar sesión?',
-        [
-          {
-            text: 'NO',
-            style: 'cancel',
-          },
-          {
-            text: 'SI',
-            onPress: () => {
-              // Aquí puedes agregar lógica para cerrar sesión
-              setModalVisible(false);
-              // Lógica adicional de cierre de sesión...
-            },
-          },
-        ],
-        { cancelable: false }
-      );
-    } else {
-      // Si el id no es 11, simplemente cierra el modal
-      setModalVisible(false);
-    }
-    
+  const handleItemPress = (item) => {
+    setModalVisible(false);
 
-    if (item.id === 10) {
-      // Si el id es 1 (Eliminar Cuenta), muestra una alerta
+    if (item.id === 5) {
+      navigation.navigate('AcercaDe');
+    } else if (item.id === 7) {
+      navigation.navigate('Terminos');
+    } else if (item.id === 6) {
+      navigation.navigate('Politicas');    
+    } else if (item.id === 10 || item.id === 11) {
       Alert.alert(
         'Alerta',
-        '¿Estás seguro de que deseas eliminar tu sesión?',
+        item.id === 10
+          ? '¿Estás seguro de que deseas eliminar tu cuenta?'
+          : '¿Estás seguro de que deseas cerrar sesión?',
         [
           {
             text: 'NO',
@@ -50,17 +34,13 @@ const MenuSuperior = () => {
           {
             text: 'SI',
             onPress: () => {
-              // Aquí puedes agregar lógica para cerrar sesión
-              setModalVisible(false);
-              // Lógica adicional de cierre de sesión...
+              // Lógica adicional de cerrar sesión...
+              navigation.navigate('Login'); // Navegar a la pantalla de login
             },
           },
         ],
         { cancelable: false }
       );
-    } else {
-      // Si el id no es 11, simplemente cierra el modal
-      setModalVisible(false);
     }
   };
 

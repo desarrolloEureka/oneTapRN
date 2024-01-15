@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const PasswordChanged = () => {
@@ -17,7 +17,12 @@ const PasswordChanged = () => {
           Contraseña modificada exitosamente
         </Text>
       </View>
-
+      <View style={styles.imageContainer}>
+      <Image
+                    source={require('src/images/password_change_girl.png')}
+                    style={styles.image}
+                  />
+      </View>
       <TouchableOpacity style={styles.button} onPress={handleGoToLogin}>
         <Text style={styles.buttonText}>
           Volver al inicio
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#396593',
     fontSize: 24,
-    marginTop: 10,
+    marginTop: -100,
   },
   button: {
     width: 265,
@@ -47,12 +52,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#62AD9B',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: -100,
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
   },
+  imageContainer: {
+    width: 337,
+    height: 421,
+    marginTop: 10
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover'
+  }
 });
 
 export default PasswordChanged;

@@ -16,6 +16,10 @@ import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassw
 import RecoveryCode from './src/views/recovery/components/main/RecoveryCode';
 import CreateNewPassword from './src/views/recovery/components/main/CreateNewPassword';
 import PasswordChanged from './src/views/recovery/components/main/PasswordChanged';
+import AcercaDe from './src/views/opcionesMenu/AcercaDe';
+import Terminos from './src/views/opcionesMenu/Terminos';
+import Politicas from './src/views/opcionesMenu/Politicas';
+import Plantillas from './src/views/home/components/main/home/Plantillas';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +45,10 @@ const App = () => {
         <Stack.Screen name="RecoveryCode" component={RecoveryCode} />
         <Stack.Screen name="CreateNewPassword" component={CreateNewPassword} />
         <Stack.Screen name="PasswordChanged" component={PasswordChanged} />
+        <Stack.Screen name="AcercaDe" component={AcercaDe} />
+        <Stack.Screen name="Terminos" component={Terminos} />
+        <Stack.Screen name="Politicas" component={Politicas} />
+        <Stack.Screen name="Plantillas" component={Plantillas} />
       </Stack.Navigator>
     </NavigationContainer>
   );

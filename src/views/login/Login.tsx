@@ -1,91 +1,89 @@
-
-
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  GestureResponderEvent
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import RecoveryPassword from '../recovery/components/main/RecoveryPassword';
+import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showForgotPasswordView, setShowForgotPasswordView] = useState(false);
 
   const navigation = useNavigation();
 
   const handleForgotPassword = () => {
-    setShowForgotPasswordView(true);
+    navigation.navigate('RecoveryPassword');
   };
 
-  const handleNextAndNavigate = () => {
-    if (username && password) {
-      // Realiza alguna lógica adicional aquí si es necesario
-      navigation.navigate('Main');
-    } else {
-      console.log('Por favor, complete todos los campos.');
+  const handleLogin = async () => {
+    try {
+      if (email && password) {
+        
+
+        // esto es lo que debo descomentar para mostrar la funcionalidad del login
+        //await auth().signInWithEmailAndPassword(email, password);
+
+        // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
+        navigation.navigate('Main');
+      } else {
+        Alert.alert('Error', 'Por favor, complete todos los campos.');
+      }
+    } catch (error:any) {
+      console.error('Error al iniciar sesión:', error.message);
+      Alert.alert('Error', 'Error al iniciar sesión. Verifique sus credenciales.');
     }
   };
 
   return (
+    
     <View style={styles.container}>
-      {showForgotPasswordView ? (
-        <RecoveryPassword
-          handleBack={() => setShowForgotPasswordView(false)}
-          handleNext={() => {}}
+      {/* Vista de inicio de sesión */}
+      <View>
+        <Text style={styles.title}>Iniciar Sesión</Text>
+        <Text style={styles.label}>Correo Electrónico</Text>
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#396593"
+          underlineColorAndroid="transparent"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         />
-      ) : (
-        // Vista de inicio de sesión
-        <View>
-          <Text style={styles.title}>Iniciar Sesión</Text>
-          <Text style={styles.label}>Nombres</Text>
+        <Text style={styles.label}>Contraseña</Text>
+        <View style={styles.passwordContainer}>
           <TextInput
-            style={styles.input}
-            placeholderTextColor="#396593"
-            underlineColorAndroid="transparent"
-            value={username}
-            onChangeText={text => setUsername(text)}
-          />
-          <Text style={styles.label}>Contraseña</Text>
-          <View style={styles.passwordContainer}>
-            <TextInput
-              style={styles.passwordInput}
-              placeholderTextColor="#396593"
-              secureTextEntry={!showPassword}
-              underlineColorAndroid="transparent"
-              value={password}
-              onChangeText={text => setPassword(text)}
-            />
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={() => setShowPassword(!showPassword)}>
-              <Icon
-                name={showPassword ? 'eye-slash' : 'eye'}
-                size={20}
-                color="#396593"
-              />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
             style={styles.passwordInput}
-            onPress={handleForgotPassword}>
-            <Text>Recuperar Contraseña</Text>
-          </TouchableOpacity>
+            placeholderTextColor="#396593"
+            secureTextEntry={!showPassword}
+            underlineColorAndroid="transparent"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          />
           <TouchableOpacity
-            style={styles.button}
-            onPress={handleNextAndNavigate}>
-            <Text style={styles.buttonText}>Siguiente</Text>
+            style={styles.eyeIcon}
+            onPress={() => setShowPassword(!showPassword)}>
+            <Icon
+              name={showPassword ? 'eye-slash' : 'eye'}
+              size={20}
+              color="#396593"
+            />
           </TouchableOpacity>
         </View>
-      )}
+        <TouchableOpacity
+          style={styles.passwordInput}
+          onPress={handleForgotPassword}>
+          <Text>Recuperar Contraseña</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Siguiente</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -102,7 +100,8 @@ const styles = StyleSheet.create({
     color: '#396593',
     fontSize: 24,
     marginTop: 10,
-    marginBottom: 50
+    marginBottom: 50,
+    marginLeft:130,
   },
   input: {
     height: 52,
@@ -123,10 +122,12 @@ const styles = StyleSheet.create({
     width: 265,
     height: 45,
     backgroundColor: '#62AD9B',
-    marginTop: 20,
+    // marginTop: -200,
+    // marginBottom: 200,
+    marginLeft:70,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 100
+    borderRadius: 100,
   },
   buttonText: {
     color: 'white',

@@ -19,7 +19,11 @@ const OnboardingOne = () => {
       <View style={styles.overlayTextContainer}>
         <Text style={styles.overlayText}>Elige tu tarjeta y plantilla</Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleNextPress}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleNextPress}
+        activeOpacity={0.8} // Este valor puede ajustarse según tus preferencias
+      >
         <Text style={styles.buttonText}>Siguiente</Text>
       </TouchableOpacity>
     </View>
@@ -32,8 +36,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   image: {
-    width: '100%',
-    height: '100%',
+    flex: 1,  // Asegura que la imagen se expanda para ocupar todo el espacio disponible
     resizeMode: 'cover',
   },
   overlayTextContainer: {
@@ -56,7 +59,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#62AD9B',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 50,
+    marginLeft: 70,
+    borderWidth: 0, // Quita el borde
   },
   buttonText: {
     color: 'white',
@@ -65,4 +69,3 @@ const styles = StyleSheet.create({
 });
 
 export default OnboardingOne;
-

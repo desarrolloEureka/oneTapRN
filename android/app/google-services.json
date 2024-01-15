@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "78156170241",
+    "project_id": "onetaprn",
+    "storage_bucket": "onetaprn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78156170241:android:963742f6c093fa42d1ec00",
+        "android_client_info": {
+          "package_name": "com.eureka.onetap.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHG3m2sYmvFZhPvPPahlhwmu1M_UiQ7JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

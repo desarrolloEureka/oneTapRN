@@ -32,8 +32,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   image: {
-    width: '100%',
-    height: '100%',
+    flex: 1,  // Asegura que la imagen se expanda para ocupar todo el espacio disponible
     resizeMode: 'cover',
   },
   overlayTextContainer: {
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#62AD9B',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 50,
+    marginLeft: 70,
   },
   buttonText: {
     color: 'white',

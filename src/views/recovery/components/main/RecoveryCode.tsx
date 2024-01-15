@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     width: 265,
     height: 42,
     fontSize: 16,
+    textAlign: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop:-200,
   },
   buttonText: {
     fontSize: 16,
