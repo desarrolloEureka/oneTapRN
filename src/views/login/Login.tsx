@@ -22,20 +22,13 @@ const Login = () => {
   const handleForgotPassword = () => {
     navigation.navigate('RecoveryPassword');
   };
-   const { data, isLoading, isRefetching } = GetLoginQuery({
-    user: email,
-    password
-  });
+
 
   const handleLogin = async () => {
     try {
       if (email && password) {
         await auth().signInWithEmailAndPassword(email, password);
-
-        
         const usersCollection = firestore().collection('users');
-
-       
         await usersCollection.add({
           email,
           timestamp: firestore.FieldValue.serverTimestamp(),
