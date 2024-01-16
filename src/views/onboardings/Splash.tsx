@@ -1,15 +1,34 @@
 import React, { useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 const Splash = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Simula un temporizador de 5 segundos antes de navegar a la siguiente pantalla
+    const checkFirstTime = async () => {
+      try {
+        const isFirstTime = await AsyncStorage.getItem('firstTime');
+
+        if (isFirstTime === null) {
+          // Es la primera vez, navega a OnboardingOne
+          navigation.navigate('OnboardingOne');
+          // Guarda la bandera indicando que ya ha iniciado la aplicación
+          await AsyncStorage.setItem('firstTime', 'false');
+        } else {
+          // Ya ha iniciado antes, navega a Login
+          navigation.navigate('Login');
+        }
+      } catch (error) {
+        console.error('Error al verificar el primer inicio de sesión:', error);
+        // Manejar el error según sea necesario
+      }
+    };
+
+    // Simula un temporizador de 5 segundos antes de ejecutar la verificación
     const timer = setTimeout(() => {
-      // Reemplaza 'OnboardingOne' con el nombre correcto de tu componente
-      navigation.navigate('OnboardingOne');
+      checkFirstTime();
     }, 5000);
 
     // Limpia el temporizador si el componente se desmonta antes de que transcurran los 5 segundos
