@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
+import { firebase } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { authFire } from '../../firebase/firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +20,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
-
   const handleForgotPassword = () => {
     navigation.navigate('RecoveryPassword');
   };
@@ -27,13 +28,8 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       if (email && password) {
-        await auth().signInWithEmailAndPassword(email, password);
-        const usersCollection = firestore().collection('users');
-        await usersCollection.add({
-          email,
-          timestamp: firestore.FieldValue.serverTimestamp(),
-        });
-
+        const res = await signInWithEmailAndPassword(authFire, email, password);
+         console.log(res)
         // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
         navigation.navigate('Main');
       } else {
