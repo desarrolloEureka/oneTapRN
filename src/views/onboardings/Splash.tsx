@@ -1,12 +1,43 @@
-import React, { useEffect } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import React, { useCallback, useEffect } from 'react';
+import { View, Image, StyleSheet, BackHandler } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+import { RouteStackParamList } from '../home/components/main/Main';
 
 const Splash = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RouteStackParamList, 'Splash'>>()
+  const route = useRoute();
 
   useEffect(() => {
+    const onBackPress = () => {
+
+      /* const currentRoute = routes[routes.length - 1].name
+      console.log('routes: ', routes); */
+      const currentRoute = route.name;
+      //console.log('currentRoute: ', currentRoute);
+      console.log('route: ', route);
+
+      if (currentRoute === "Home") {
+        console.log("Salir");
+        //BackHandler.exitApp();
+        return true;
+      } else {
+        console.log("Else ", currentRoute);
+        return false;
+      }
+    };
+    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => subscription.remove();
+  }, [navigation])
+
+  useEffect(() => {
+    const currentRoute = route.name;
+    /* console.log('currentRoute: ', currentRoute);
+    console.log('route: ', route); */
+
     const checkFirstTime = async () => {
       try {
         const isFirstTime = await AsyncStorage.getItem('firstTime');
@@ -18,7 +49,13 @@ const Splash = () => {
           await AsyncStorage.setItem('firstTime', 'false');
         } else {
           // Ya ha iniciado antes, navega a Login
-          navigation.navigate('Login');
+          const isUser = await AsyncStorage.getItem('@user');
+          if (isUser) {
+            navigation.push('Home');
+          } else {
+            navigation.push('Login');
+          }
+
         }
       } catch (error) {
         console.error('Error al verificar el primer inicio de sesión:', error);
@@ -29,7 +66,7 @@ const Splash = () => {
     // Simula un temporizador de 5 segundos antes de ejecutar la verificación
     const timer = setTimeout(() => {
       checkFirstTime();
-    }, 5000);
+    }, 2000);
 
     // Limpia el temporizador si el componente se desmonta antes de que transcurran los 5 segundos
     return () => clearTimeout(timer);

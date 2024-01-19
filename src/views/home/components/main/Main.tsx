@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -19,32 +19,40 @@ import {
   SendSwitchActivateCard,
   SendTemplateSelected
 } from '../../../../reactQuery/users';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useNavigationState } from '@react-navigation/native';
 import MenuSuperior from '../../../menuSuperior/MenuSuperior';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+export type RouteStackParamList = {
+  Home: undefined;
+  PreviewTemplate: undefined;
+  Profile: { isProUser: boolean };
+  ChangePassword: undefined;
+  OnboardingOne: undefined;
+  OnboardingTwo: undefined;
+  OnboardingThree: undefined;
+  OnboardingInicioSesion: undefined;
+  Login: undefined;
+  RecoveryPassword: undefined;
+  RecoveryCode: undefined;
+  CreateNewPassword: undefined;
+  PasswordChanged: undefined;
+  AcercaDe: undefined;
+  Terminos: undefined;
+  Politicas: undefined;
+  Plantillas: undefined;
+  webViewPassword: undefined;
+  Splash: undefined;
+}
 
 const Main = () => {
   const { tab, setTab } = HomeHook();
   const [isSwitchOn1, setSwitchOn1] = useState(false);
   const [isSwitchOn2, setSwitchOn2] = useState(false);
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
   const route = useRoute();
-/* 
-  BackHandler.addEventListener('hardwareBackPress', function () {
-    const currentRouteName = route.name;
-    console.log("currentRouteName ", currentRouteName);
-
-    if (currentRouteName === "Main") {
-      console.log("Salir");
-      BackHandler.exitApp();
-      return true;
-    } else {
-      return false;
-    }
-  }); */
-
-  useEffect(() => {
-    console.log("Holaaaaaaa");
-  }, []);
+  const routes = useNavigationState(state => state.routes);
+  const navigation = useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>()
 
   const handleSwitchToggle1 = () => {
     // Muestra una alerta cuando se cambia el estado del Switch 1
@@ -88,6 +96,7 @@ const Main = () => {
   };
 
   const handleTabPress = (tabName: string) => {
+
     //console.log(`Pestaña presionada: ${tabName}`);
     if (tabName === 'Social') {
       navigation.navigate('Profile', { isProUser: false });

@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Terminos = () => {
   const navigation = useNavigation();
   const goBack = () => {
-    navigation.navigate('Main');
+    navigation.navigate('Home');
   };
   return (
     <View style={styles.container}>

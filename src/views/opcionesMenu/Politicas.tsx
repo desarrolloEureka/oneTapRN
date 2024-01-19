@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Politicas = () => {
   const navigation = useNavigation();
   const goBack = () => {
-    navigation.navigate('Main');
+    navigation.navigate('Home');
   };
   return (
     <View style={styles.container}>
