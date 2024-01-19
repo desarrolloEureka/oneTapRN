@@ -11,7 +11,7 @@ import OnboardingOne from './src/views/onboardings/OnboardigndOne';
 import OnboardingTwo from './src/views/onboardings/OnboargindTwo';
 import OnboardingThree from './src/views/onboardings/OnboardingThree';
 import OnboardingInicioSesion from './src/views/onboardings/OnboardingInicioSesion';
-import Main from './src/views/home/components/main/Main';
+import { RouteStackParamList } from './src/views/home/components/main/Main';
 import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassword';
 import RecoveryCode from './src/views/recovery/components/main/RecoveryCode';
 import CreateNewPassword from './src/views/recovery/components/main/CreateNewPassword';
@@ -20,8 +20,10 @@ import AcercaDe from './src/views/opcionesMenu/AcercaDe';
 import Terminos from './src/views/opcionesMenu/Terminos';
 import Politicas from './src/views/opcionesMenu/Politicas';
 import Plantillas from './src/views/home/components/main/home/Plantillas';
+import webViewPassword from './src/views/recovery/components/main/webViewPassword';
+import Splash from './src/views/onboardings/Splash';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RouteStackParamList>();
 
 const App = () => {
   return (
@@ -30,6 +32,7 @@ const App = () => {
         screenOptions={{
           headerShown: false, // Oculta la barra de navegación en todas las pantallas
         }}
+        initialRouteName='Splash'
       >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="PreviewTemplate" component={PreviewTemplate} />
@@ -39,7 +42,6 @@ const App = () => {
         <Stack.Screen name="OnboardingTwo" component={OnboardingTwo} />
         <Stack.Screen name="OnboardingThree" component={OnboardingThree} />
         <Stack.Screen name="OnboardingInicioSesion" component={OnboardingInicioSesion} />
-        <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="RecoveryPassword" component={RecoveryPassword} />
         <Stack.Screen name="RecoveryCode" component={RecoveryCode} />
@@ -49,6 +51,8 @@ const App = () => {
         <Stack.Screen name="Terminos" component={Terminos} />
         <Stack.Screen name="Politicas" component={Politicas} />
         <Stack.Screen name="Plantillas" component={Plantillas} />
+        <Stack.Screen name="webViewPassword" component={webViewPassword} />
+        <Stack.Screen name="Splash" component={Splash} />
       </Stack.Navigator>
     </NavigationContainer>
   );

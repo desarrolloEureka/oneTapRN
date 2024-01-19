@@ -145,7 +145,7 @@ export const homeStyles = StyleSheet.create({
     height: 222,
     overflow: 'hidden',
     borderRadius: 10,
-    backgroundColor: '#62AD9B',
+    backgroundColor: '#02AF9B',
     marginTop: 300,
     justifyContent: 'center',
      alignItems: 'center',

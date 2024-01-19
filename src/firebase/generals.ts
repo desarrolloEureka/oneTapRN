@@ -1,5 +1,5 @@
-import { BackgroundImages, Templates } from '@/types/home';
-import { AllRefPropsFirebase } from '@/types/userFirebase';
+import { BackgroundImages, Templates } from '../types/home';
+import { AllRefPropsFirebase } from '../types/userFirebase';
 import { collection, doc, getDocs } from 'firebase/firestore';
 import { dataBase } from './firebaseConfig';
 

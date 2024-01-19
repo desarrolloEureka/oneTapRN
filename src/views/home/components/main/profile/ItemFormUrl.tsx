@@ -24,13 +24,17 @@ const ItemFormUrl = ({
     labelArray,
     social,
     value,
-    dataForm
+    dataForm,
+    handleSeeMore,
+    itemDetail,
 }: {
     index: IndexDataForm;
     labelArray: DataFormValues[] | EducationDataFormValues[] | CareerDataFormValues[];
     social: boolean;
     value: any
     dataForm: DataForm;
+    handleSeeMore: (e: number) => void;
+    itemDetail: number;
 }) => {
 
     const { handleAddData } = ProfileHook({
@@ -44,13 +48,13 @@ const ItemFormUrl = ({
     };
 
     return (
-        <View style={{ height: 310, width: "100%", justifyContent: 'center' }}>
+        <View style={{ height: itemDetail === 5 && value[0] === 'urls' ? 820 : 310, width: "100%", justifyContent: 'center' }}>
             <View style={{ height: "90%", width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
 
-                <View style={{ height: "15%", width: "100%", alignItems: 'flex-end' }}>
+                <View style={{ height: itemDetail === 5 && value[0] === 'urls' ? "10%" : "15%", width: "100%", alignItems: 'flex-end' }}>
                     <TouchableOpacity style={{ height: "100%", width: "35%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => { handleAddData('urls', social) }} >
                         <View style={{ height: "100%", width: "20%", alignItems: 'center', justifyContent: 'center' }}>
-                            <Icon name="plus-circle" size={20} color="#62ad9b" />
+                            <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
                         <View style={{ height: "100%", width: "75%", justifyContent: 'center' }}>
                             <Text style={{ fontSize: 11 }}>Agregar otra URL</Text>
@@ -58,10 +62,98 @@ const ItemFormUrl = ({
                     </TouchableOpacity>
                 </View>
 
-                {labelArray.map((val, key) => {
-                    return (
-                        <View key={key} style={{ height: 200, justifyContent: 'center' }}>
+                <View style={{ height: itemDetail === 5 && value[0] === 'urls' ? "83%" : "70%", width: "100%", justifyContent: 'center' }}>
+                    {itemDetail === 5 && value[0] === 'urls' ?
+                        labelArray.map((val, key) => {
+                            return (
+                                <View key={key} style={{ height: 200, justifyContent: 'center' }}>
+                                    <View style={{ height: "60%", width: "100%", justifyContent: 'center', flexDirection: 'row' }}>
+                                        <View style={{ height: "100%", width: "75%", alignItems: 'center', justifyContent: 'center' }}>
+                                            <View style={{ height: "40%", width: "90%", alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
+                                                <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                                                    <View style={{ height: "100%", width: "42%", alignItems: 'flex-start', justifyContent: 'center' }}>
+                                                        <Text>°Nombre del dato:</Text>
+                                                    </View>
+                                                    <View style={{ height: "100%", width: "58%", alignItems: 'center', justifyContent: 'center' }}>
+                                                        <TextInput
+                                                            style={profileStyles.inputBox}
+                                                            placeholderTextColor="#000000"
+                                                            underlineColorAndroid="transparent"
+                                                        />
+                                                    </View>
+                                                </View>
+                                            </View>
 
+                                            <View style={{ height: "40%", width: "90%", alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
+                                                <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                                                    <View style={{ height: "100%", width: "35%", alignItems: 'flex-start', justifyContent: 'center' }}>
+                                                        <Text>°URL opcional:</Text>
+                                                    </View>
+                                                    <View style={{ height: "100%", width: "65%", alignItems: 'center', justifyContent: 'center' }}>
+                                                        <TextInput
+                                                            style={profileStyles.inputBox}
+                                                            placeholderTextColor="#000000"
+                                                            underlineColorAndroid="transparent"
+                                                        />
+                                                    </View>
+                                                </View>
+                                            </View>
+
+                                        </View>
+                                        <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
+                                            <View style={{ height: "80%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
+                                                <SwitchGeneral />
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={{ height: "40%", width: "100%", justifyContent: 'center', flexDirection: 'row' }}>
+                                        <View style={{ height: "100%", width: "15%", justifyContent: 'center', alignItems: 'center' }}>
+                                            <TouchableOpacity style={{ height: "60%", width: "85%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 100 }} onPress={handleOpenUrl}>
+                                                <FontAwesome5 name="shopping-cart" size={23} color="#396593" />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={{ height: "100%", width: "85%", justifyContent: 'center', alignItems: 'center' }}>
+                                            {showUrls ?
+                                                <View style={{ height: "50%", width: "98%", justifyContent: 'center', backgroundColor: "white", borderRadius: 14, flexDirection: 'row' }}>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Ionicons name="logo-facebook" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Ionicons name="logo-instagram" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Ionicons name="logo-linkedin" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <MaterialIcons name="tiktok" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <MaterialCommunityIcons name="email-outline" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Fontisto name="world-o" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Feather name="send" size={23} color="#02AF9B" />
+                                                    </TouchableOpacity>
+                                                </View>
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </View>
+                                </View>
+                            );
+                        })
+                        :
+                        <View style={{ height: 200, justifyContent: 'center' }}>
                             <View style={{ height: "60%", width: "100%", justifyContent: 'center', flexDirection: 'row' }}>
                                 <View style={{ height: "100%", width: "75%", alignItems: 'center', justifyContent: 'center' }}>
                                     <View style={{ height: "40%", width: "90%", alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
@@ -112,31 +204,31 @@ const ItemFormUrl = ({
                                     {showUrls ?
                                         <View style={{ height: "50%", width: "98%", justifyContent: 'center', backgroundColor: "white", borderRadius: 14, flexDirection: 'row' }}>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Ionicons name="logo-facebook" size={23} color="#62ad9b" />
+                                                <Ionicons name="logo-facebook" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Ionicons name="logo-twitter" size={23} color="#62ad9b" />
+                                                <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Ionicons name="logo-twitter" size={23} color="#62ad9b" />
+                                                <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Ionicons name="logo-instagram" size={23} color="#62ad9b" />
+                                                <Ionicons name="logo-instagram" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Ionicons name="logo-linkedin" size={23} color="#62ad9b" />
+                                                <Ionicons name="logo-linkedin" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <MaterialIcons name="tiktok" size={23} color="#62ad9b" />
+                                                <MaterialIcons name="tiktok" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <MaterialCommunityIcons name="email-outline" size={23} color="#62ad9b" />
+                                                <MaterialCommunityIcons name="email-outline" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Fontisto name="world-o" size={23} color="#62ad9b" />
+                                                <Fontisto name="world-o" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ height: "100%", width: "11%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Feather name="send" size={23} color="#62ad9b" />
+                                                <Feather name="send" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
                                         </View>
                                         :
@@ -145,10 +237,10 @@ const ItemFormUrl = ({
                                 </View>
                             </View>
                         </View>
-                    );
-                })}
+                    }
+                </View>
 
-                <TouchableOpacity style={{ height: "15%", width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }}>
+                <TouchableOpacity style={{ height: itemDetail === 5 && value[0] === 'urls' ? "7%" : "15%", width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(5)}>
                     <View style={{ height: "100%", width: "30%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                         <View style={{ height: "100%", width: "75%", alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 12, color: "#396593" }}>Ver más (2)</Text>

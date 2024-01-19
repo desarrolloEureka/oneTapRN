@@ -17,6 +17,7 @@ import { firebase } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { authFire } from '../../firebase/firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +35,8 @@ const Login = () => {
         const res = await signInWithEmailAndPassword(authFire, email, password);
         console.log(res);
         // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
-        navigation.navigate('Main');
+        AsyncStorage.setItem("@user", JSON.stringify(res));
+        navigation.navigate('Home');
       } else {
         Alert.alert('Error', 'Por favor, complete todos los campos.');
       }
@@ -48,60 +50,60 @@ const Login = () => {
   };
 
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       {/* <ScrollView style={{flex:1}}> */}
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{flex: 1}}>
-            
-    <View style={styles.container}>
-      {/* Vista de inicio de sesión */}
-      <View>
-        <Text style={styles.title}>Iniciar Sesión</Text>
+        style={{ flex: 1 }}>
 
-        {/* Línea debajo del título */}
-        <View style={styles.titleLine} />
+        <View style={styles.container}>
+          {/* Vista de inicio de sesión */}
+          <View>
+            <Text style={styles.title}>Iniciar Sesión</Text>
 
-        <Text style={styles.label}>Correo Electrónico</Text>
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#396593"
-          underlineColorAndroid="transparent"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
-        <Text style={styles.label}>Contraseña</Text>
-        <View style={styles.passwordContainer}>
-          <TextInput
-            style={styles.passwordInput}
-            placeholderTextColor="#396593"
-            secureTextEntry={!showPassword}
-            underlineColorAndroid="transparent"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-          />
-          <TouchableOpacity
-            style={styles.eyeIcon}
-            onPress={() => setShowPassword(!showPassword)}>
-            <Icon
-              name={showPassword ? 'eye-slash' : 'eye'}
-              size={20}
-              color="#396593"
+            {/* Línea debajo del título */}
+            <View style={styles.titleLine} />
+
+            <Text style={styles.label}>Correo Electrónico</Text>
+            <TextInput
+              style={styles.input}
+              placeholderTextColor="#396593"
+              underlineColorAndroid="transparent"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
             />
-          </TouchableOpacity>
+            <Text style={styles.label}>Contraseña</Text>
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.passwordInput}
+                placeholderTextColor="#396593"
+                secureTextEntry={!showPassword}
+                underlineColorAndroid="transparent"
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+              />
+              <TouchableOpacity
+                style={styles.eyeIcon}
+                onPress={() => setShowPassword(!showPassword)}>
+                <Icon
+                  name={showPassword ? 'eye-slash' : 'eye'}
+                  size={20}
+                  color="#396593"
+                />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.forgotPassword}
+              onPress={handleForgotPassword}>
+              <Text>Recuperar Contraseña</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+              <Text style={styles.buttonText}>Siguiente</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <TouchableOpacity
-          style={styles.forgotPassword}
-          onPress={handleForgotPassword}>
-          <Text>Recuperar Contraseña</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Siguiente</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-    
-    </KeyboardAvoidingView>
-    {/* </ScrollView> */}
+
+      </KeyboardAvoidingView>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    marginTop:-200, 
+    marginTop: -200,
   },
   title: {
     color: '#396593',
@@ -147,13 +149,13 @@ const styles = StyleSheet.create({
   button: {
     width: 265,
     height: 45,
-    backgroundColor: '#62AD9B',
-    marginLeft: 50,
+    backgroundColor: '#02AF9B',
+    marginLeft: 70,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
     marginTop: 140,
-    marginBottom:-140,
+    marginBottom: -140,
   },
   buttonText: {
     color: 'white',

@@ -1,5 +1,4 @@
-import { LoginFirebaseProps } from '@/types/login';
-import { dataBase } from 'app/[lang]/firebase/firebaseConfig';
+import { app, dataBase } from '../firebase/firebaseConfig';
 import {
   confirmPasswordReset,
   createUserWithEmailAndPassword,
@@ -8,7 +7,9 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-const auth = getAuth();
+import { LoginFirebaseProps } from '../types/login';
+
+const auth = getAuth(app);
 
 const userRefByUser = (ref: any) =>
   query(collection(dataBase, 'users'), where('user_name', '==', ref.user));
@@ -20,7 +21,7 @@ export const userExist = async (user: string) => {
   if (querySnapshot.empty) return false;
 
   querySnapshot.forEach((doc) => {
-    localStorage.setItem('@user', JSON.stringify(doc.data()));
+    //localStorage.setItem('@user', JSON.stringify(doc.data()));
     userFound = doc.data();
   });
   return userFound;
