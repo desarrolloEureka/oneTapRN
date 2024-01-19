@@ -6,6 +6,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -24,18 +28,17 @@ const Login = () => {
     navigation.navigate('RecoveryPassword');
   };
 
-
   const handleLogin = async () => {
     try {
       if (email && password) {
         const res = await signInWithEmailAndPassword(authFire, email, password);
-         console.log(res)
+        console.log(res);
         // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
         navigation.navigate('Main');
       } else {
         Alert.alert('Error', 'Por favor, complete todos los campos.');
       }
-    } catch (error:any) {
+    } catch (error) {
       console.error('Error al iniciar sesión:', error.message);
       Alert.alert(
         'Error',
@@ -45,10 +48,19 @@ const Login = () => {
   };
 
   return (
+    <SafeAreaView style={{flex:1}}>
+      {/* <ScrollView style={{flex:1}}> */}
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{flex: 1}}>
+            
     <View style={styles.container}>
       {/* Vista de inicio de sesión */}
       <View>
         <Text style={styles.title}>Iniciar Sesión</Text>
+
+        {/* Línea debajo del título */}
+        <View style={styles.titleLine} />
+
         <Text style={styles.label}>Correo Electrónico</Text>
         <TextInput
           style={styles.input}
@@ -78,7 +90,7 @@ const Login = () => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          style={styles.passwordInput}
+          style={styles.forgotPassword}
           onPress={handleForgotPassword}>
           <Text>Recuperar Contraseña</Text>
         </TouchableOpacity>
@@ -87,6 +99,10 @@ const Login = () => {
         </TouchableOpacity>
       </View>
     </View>
+    
+    </KeyboardAvoidingView>
+    {/* </ScrollView> */}
+    </SafeAreaView>
   );
 };
 
@@ -96,18 +112,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    paddingTop: 50,
+    marginTop:-200, 
   },
   title: {
     color: '#396593',
     fontSize: 24,
     marginTop: 10,
-    marginBottom: 50,
+    marginBottom: 20,
     marginLeft: 130,
+  },
+  titleLine: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#396593',
+    marginBottom: 10,
+    alignSelf: 'center',
+    width: 150,
+    marginLeft: 38,
   },
   input: {
     height: 52,
-    width: 386,
+    width: 366, // Ajustado para que sea un poco más corto
     fontSize: 16,
     color: '#396593',
     borderBottomWidth: 1,
@@ -118,16 +142,18 @@ const styles = StyleSheet.create({
   label: {
     color: '#008F9E',
     marginTop: 3,
-    marginRight: 290,
+    marginRight: 240,
   },
   button: {
     width: 265,
     height: 45,
     backgroundColor: '#62AD9B',
-    marginLeft: 70,
+    marginLeft: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
+    marginTop: 140,
+    marginBottom:-140,
   },
   buttonText: {
     color: 'white',
@@ -150,7 +176,10 @@ const styles = StyleSheet.create({
   eyeIcon: {
     padding: 10,
   },
+  forgotPassword: {
+    marginLeft: 20,
+    marginBottom: 20,
+  },
 });
 
 export default Login;
-

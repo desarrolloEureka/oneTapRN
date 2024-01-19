@@ -17,7 +17,7 @@ export const homeStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: '#396593',
-
+    marginLeft:160,
     marginTop: 120
   },
   columnContainer: {
