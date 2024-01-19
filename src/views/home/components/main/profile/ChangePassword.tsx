@@ -38,7 +38,7 @@ const ChangePassword = () => {
                     Cambiar Contraseña
                 </Text>
             </View>
-            <Text style={styles.label}>
+            <Text style={styles.labelPassword}>
                 Contraseña
             </Text>
 
@@ -56,16 +56,15 @@ const ChangePassword = () => {
                     </View>
                     <TouchableOpacity style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }} onPress={handleSeePassword}>
                         {showPasswordOne ?
-                            <MaterialCommunityIcons name="eye-outline" size={30} color="#62ad9b" />
+                            <MaterialCommunityIcons name="eye-outline" size={30} color="#02AF9B" />
                             :
 
-                            <MaterialCommunityIcons name="eye-off-outline" size={30} color="#62ad9b" />
+                            <MaterialCommunityIcons name="eye-off-outline" size={30} color="#02AF9B" />
                         }
                     </TouchableOpacity>
                 </View>
 
             </View>
-
 
             <Text style={styles.label}>
                 Confirmar Contraseña
@@ -85,9 +84,9 @@ const ChangePassword = () => {
                     </View>
                     <TouchableOpacity style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }} onPress={handleSeePasswordTwo}>
                         {showPasswordTwo ?
-                            <MaterialCommunityIcons name="eye-outline" size={30} color="#62ad9b" />
+                            <MaterialCommunityIcons name="eye-outline" size={30} color="#02AF9B" />
                             :
-                            <MaterialCommunityIcons name="eye-off-outline" size={30} color="#62ad9b" />
+                            <MaterialCommunityIcons name="eye-off-outline" size={30} color="#02AF9B" />
                         }
                     </TouchableOpacity>
                 </View>
@@ -128,12 +127,17 @@ const styles = StyleSheet.create({
     label: {
         color: '#008F9E',
         marginTop: 3,
-        marginRight: 250,
+        marginRight: 220,
+    },
+    labelPassword: {
+        color: '#008F9E',
+        marginTop: 3,
+        marginRight: 280,
     },
     button: {
         width: 265,
         height: 45,
-        backgroundColor: '#62AD9B',
+        backgroundColor: '#02AF9B',
         marginTop: 300,
         justifyContent: 'center',
         alignItems: 'center',

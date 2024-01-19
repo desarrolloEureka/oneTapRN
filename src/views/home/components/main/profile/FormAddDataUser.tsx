@@ -82,6 +82,8 @@ const FormAddDataUser = ({ dataForm, isProUser, handleSeeMore, itemDetail }: { d
                                             social={false}
                                             value={value}
                                             dataForm={dataForm}
+                                            handleSeeMore={handleSeeMore}
+                                            itemDetail={itemDetail}
                                         />
                             );
                     } else {
@@ -96,9 +98,18 @@ const FormAddDataUser = ({ dataForm, isProUser, handleSeeMore, itemDetail }: { d
                                 handleSeeMore={handleSeeMore}
                                 itemDetail={itemDetail}
                             />
-                        ) : (
-                            null
-                        );
+                        ) : value[0] == 'urls' ? (
+                            <ItemFormUrl
+                                key={key}
+                                index={index}
+                                labelArray={labelArray}
+                                social={false}
+                                value={value}
+                                dataForm={dataForm}
+                                handleSeeMore={handleSeeMore}
+                                itemDetail={itemDetail}
+                            />
+                        ) : null;
                     }
                 }
             })}

@@ -30,7 +30,7 @@ const SwitchGeneral = ({ label }: { label?: string; }) => {
                     <Switch
                         value={isSwitchOn}
                         onValueChange={handleSwitchToggle}
-                        trackColor={{ false: '#62AD9B', true: '#62AD9B' }}
+                        trackColor={{ false: '#02AF9B', true: '#02AF9B' }}
                         thumbColor={'#f4f3f4'}
                         ios_backgroundColor="#3e3e3e"
                         style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}

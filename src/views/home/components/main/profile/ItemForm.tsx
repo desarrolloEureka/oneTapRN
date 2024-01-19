@@ -16,42 +16,42 @@ const ItemForm = ({ label, icon }: { label?: string; icon?: string; }) => {
 
                         {icon === 'person-outline' ?
                             <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                <Ionicons name="person-outline" size={28} color="#62ad9b" />
+                                <Ionicons name="person-outline" size={28} color="#02AF9B" />
                             </View>
                             :
                             icon === 'file-present' ?
                                 <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                    <MaterialIcons name="file-present" size={28} color="#62ad9b" />
+                                    <MaterialIcons name="file-present" size={28} color="#02AF9B" />
                                 </View>
                                 :
                                 icon === 'work-outline' ?
                                     <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                        <MaterialIcons name="work-outline" size={28} color="#62ad9b" />
+                                        <MaterialIcons name="work-outline" size={28} color="#02AF9B" />
                                     </View>
                                     :
                                     icon === 'explore' ?
                                         <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                            <MaterialIcons name="explore" size={28} color="#62ad9b" />
+                                            <MaterialIcons name="explore" size={28} color="#02AF9B" />
                                         </View>
                                         :
                                         icon === 'translate' ?
                                             <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                                <MaterialIcons name="translate" size={28} color="#62ad9b" />
+                                                <MaterialIcons name="translate" size={28} color="#02AF9B" />
                                             </View>
                                             :
                                             icon === 'paperclip' ?
                                                 <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                                    <MaterialCommunityIcons name="paperclip" size={28} color="#62ad9b" />
+                                                    <MaterialCommunityIcons name="paperclip" size={28} color="#02AF9B" />
                                                 </View>
                                                 :
                                                 icon === 'email-outline' ?
                                                     <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                                        <MaterialCommunityIcons name="email-outline" size={28} color="#62ad9b" />
+                                                        <MaterialCommunityIcons name="email-outline" size={28} color="#02AF9B" />
                                                     </View>
                                                     :
                                                     icon === 'phone' ?
                                                         <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                                            <SimpleLineIcons name="phone" size={28} color="#62ad9b" />
+                                                            <SimpleLineIcons name="phone" size={28} color="#02AF9B" />
                                                         </View>
                                                         :
                                                         null

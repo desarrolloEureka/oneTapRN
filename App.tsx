@@ -20,6 +20,7 @@ import AcercaDe from './src/views/opcionesMenu/AcercaDe';
 import Terminos from './src/views/opcionesMenu/Terminos';
 import Politicas from './src/views/opcionesMenu/Politicas';
 import Plantillas from './src/views/home/components/main/home/Plantillas';
+import webViewPassword from './src/views/recovery/components/main/webViewPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,7 @@ const App = () => {
         <Stack.Screen name="Terminos" component={Terminos} />
         <Stack.Screen name="Politicas" component={Politicas} />
         <Stack.Screen name="Plantillas" component={Plantillas} />
+        <Stack.Screen name="webViewPassword" component={webViewPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );

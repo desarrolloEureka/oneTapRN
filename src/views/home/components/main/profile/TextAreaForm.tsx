@@ -32,17 +32,17 @@ const TextAreaForm = ({ label, icon }: { label: string; icon?: string; }) => {
                     <View style={{ flexDirection: 'row', alignItems: 'center', height: "80%", width: "90%", borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
                         {icon === 'person-outline' ?
                             <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                <Ionicons name="person-outline" size={28} color="#62ad9b" />
+                                <Ionicons name="person-outline" size={28} color="#02AF9B" />
                             </View>
                             :
                             icon === 'translate' ?
                                 <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                    <MaterialIcons name="translate" size={28} color="#62ad9b" />
+                                    <MaterialIcons name="translate" size={28} color="#02AF9B" />
                                 </View>
                                 :
                                 icon === 'person' ?
                                     <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                        <FontAwesome6 name="person" size={28} color="#62ad9b" />
+                                        <FontAwesome6 name="person" size={28} color="#02AF9B" />
                                     </View>
                                     :
                                     null

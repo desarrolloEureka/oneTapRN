@@ -43,9 +43,9 @@ const ItemFormEducation = ({
                 <View style={{ height: itemDetail === 3 && value[0] === 'education' ? "10%" : "15%", width: "100%", alignItems: 'flex-end' }}>
                     <TouchableOpacity style={{ height: "100%", width: "50%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => { handleAddData('education', social) }} >
                         <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
-                            <Icon name="plus-circle" size={20} color="#62ad9b" />
+                            <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
-                        <View style={{ height: "100%", width: "75%", justifyContent: 'center' }}>
+                        <View style={{ height: "100%", width: "95%", justifyContent: 'center' }}>
                             <Text style={{ fontSize: 11 }}>Agregar formación academica</Text>
                         </View>
                     </TouchableOpacity>
@@ -61,7 +61,7 @@ const ItemFormEducation = ({
                                         <View style={{ height: "25%", width: "90%", alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
                                             <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                                                 <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                                    <Ionicons name="library-outline" size={30} color="#62ad9b" />
+                                                    <Ionicons name="library-outline" size={30} color="#02AF9B" />
                                                 </View>
                                                 <View style={{ height: "100%", width: "20%", alignItems: 'center', justifyContent: 'center' }}>
                                                     <Text>°Titulo:</Text>
@@ -105,7 +105,7 @@ const ItemFormEducation = ({
                                             </View>
                                         </View>
                                         <View style={{ height: "25%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
-                                            <Text style={{ color: "#62ad9b" }}>Educación y formación académica</Text>
+                                            <Text style={{ color: "#02AF9B" }}>Educación y formación académica</Text>
                                         </View>
                                     </View>
                                     <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
@@ -122,7 +122,7 @@ const ItemFormEducation = ({
                                 <View style={{ height: "25%", width: "90%", alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
                                     <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                                         <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                            <Ionicons name="library-outline" size={30} color="#62ad9b" />
+                                            <Ionicons name="library-outline" size={30} color="#02AF9B" />
                                         </View>
                                         <View style={{ height: "100%", width: "20%", alignItems: 'center', justifyContent: 'center' }}>
                                             <Text>°Titulo:</Text>
@@ -166,7 +166,7 @@ const ItemFormEducation = ({
                                     </View>
                                 </View>
                                 <View style={{ height: "25%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
-                                    <Text style={{ color: "#62ad9b" }}>Educación y formación académica</Text>
+                                    <Text style={{ color: "#02AF9B" }}>Educación y formación académica</Text>
                                 </View>
                             </View>
                             <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>

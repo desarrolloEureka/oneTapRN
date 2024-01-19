@@ -36,13 +36,12 @@ const ItemFormProfessional = ({
     });
     return (
         <View style={{ height: itemDetail === 4 && value[0] === 'professional_career' ? 660 : 310, width: "100%", justifyContent: 'center' }}>
-
             <View style={{ height: "90%", width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
-
+               
                 <View style={{ height: itemDetail === 4 && value[0] === 'professional_career' ? "10%" : "15%", width: "100%", alignItems: 'flex-end' }}>
                     <TouchableOpacity style={{ height: "100%", width: "55%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => { handleAddData('professional_career', social) }} >
                         <View style={{ height: "100%", width: "20%", alignItems: 'center', justifyContent: 'center' }}>
-                            <Icon name="plus-circle" size={20} color="#62ad9b" />
+                            <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
                         <View style={{ height: "100%", width: "75%", justifyContent: 'center' }}>
                             <Text style={{ fontSize: 11 }}>Agregar trayectoria profesional</Text>
@@ -59,7 +58,7 @@ const ItemFormProfessional = ({
                                         <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
                                             <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                                                 <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                                    <Ionicons name="analytics-outline" size={30} color="#62ad9b" />
+                                                    <Ionicons name="analytics-outline" size={30} color="#02AF9B" />
                                                 </View>
                                                 <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
                                                     <Text>°Empresa:</Text>
@@ -116,7 +115,7 @@ const ItemFormProfessional = ({
                                             </View>
                                         </View>
                                         <View style={{ height: "20%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
-                                            <Text style={{ color: "#62ad9b" }}>Trayectoria profesional</Text>
+                                            <Text style={{ color: "#02AF9B" }}>Trayectoria profesional</Text>
                                         </View>
                                     </View>
                                     <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
@@ -133,7 +132,7 @@ const ItemFormProfessional = ({
                                 <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
                                     <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                                         <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                            <Ionicons name="analytics-outline" size={30} color="#62ad9b" />
+                                            <Ionicons name="analytics-outline" size={30} color="#02AF9B" />
                                         </View>
                                         <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
                                             <Text>°Empresa:</Text>
@@ -190,7 +189,7 @@ const ItemFormProfessional = ({
                                     </View>
                                 </View>
                                 <View style={{ height: "20%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
-                                    <Text style={{ color: "#62ad9b" }}>Trayectoria profesional</Text>
+                                    <Text style={{ color: "#02AF9B" }}>Trayectoria profesional</Text>
                                 </View>
                             </View>
                             <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>

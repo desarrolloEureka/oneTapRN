@@ -1,115 +1,163 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import { resetPasswordFirebase } from '../../../../firebase/auth';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RecoveryPassword = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
 
-  const handleNextPress = () => {
-    // Navegar a la pantalla RecoveryCode
-    navigation.navigate('RecoveryCode');
+  const handleNextPress = async () => {
+    try {
+      await resetPasswordFirebase(email);
+      Alert.alert(
+        'Éxito',
+        'Si el correo existe en nuestra base de datos, un email será entregado para reestablecer tu contraseña'
+      );
+    } catch (error) {
+      Alert.alert(
+        'Error',
+        'Hubo un problema al intentar reiniciar la contraseña. Por favor, inténtalo de nuevo.'
+      );
+    }
   };
 
   const handleBackPress = () => {
-    // Volver a la pantalla Login
     navigation.goBack();
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-        <Icon name="arrow-left" size={24} color="black" />
-      </TouchableOpacity>
-
-      <View style={styles.contentContainer}>
-        <Text style={styles.heading}>Recuperar Contraseña</Text>
-        <View style={styles.tabSeparator} />
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Correo</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Correo Electrónico"
-            placeholderTextColor="white"
-            underlineColorAndroid="transparent"
-          />
-        </View>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleNextPress}>
-          <Text style={styles.buttonText}>Siguiente</Text>
+    <SafeAreaView style={{ backgroundColor: '#e8e8e8', flex: 1 }}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={handleBackPress}>
+          <Icon name="arrow-back-ios" size={27} color="black" />
         </TouchableOpacity>
       </View>
-    </View>
+      <View style={styles.contentContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.heading}>Recuperar Contraseña</Text>
+        </View>
+
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Correo</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Correo Electrónico"
+              placeholderTextColor="white"
+              underlineColorAndroid="transparent"
+              onChangeText={(text) => setEmail(text)}
+            />
+          </View>
+        </View>
+      </View>
+      <View style={styles.footerContainer}>
+        {email != '' ?
+          <TouchableOpacity style={styles.button} onPress={handleNextPress}>
+            <Text style={styles.buttonText}>Siguiente</Text>
+          </TouchableOpacity>
+          :
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Siguiente</Text>
+          </View>
+        }
+
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    backgroundColor: '#CCCCCC',
+  headerContainer: {
+    height: '8%',
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    paddingLeft: 15,
   },
   contentContainer: {
-    flex: 1,
+    height: '77%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backButton: {
-    position: 'absolute',
-    left: 20,
-    top: 20,
-    zIndex: 1,
+  titleContainer: {
+    height: '15%',
+    width: '60%',
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
-  heading: {
-    color: '#0077b6',
-    fontSize: 26,
-    marginBottom: 20,
-    marginTop: -350,
-  },
-  tabSeparator: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#030124',
-    marginVertical: 5,
-    width: '100%',
+  container: {
+    paddingTop: 2,
+    height: "85%",
+    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   inputContainer: {
+    height: '25%',
+    width: '90%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  footerContainer: {
+    height: '15%',
+    width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heading: {
+    color: '#396593',
+    fontFamily: 'Open Sans',
+    fontSize: 20,
+    fontWeight: '700',
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderColor: "#396593"
   },
   label: {
-    color: '#62AD9B',
-    fontSize: 16,
-    marginBottom: 10,
-    marginRight: 300,
+    fontFamily: 'Open Sans',
+    fontSize: 15,
+    fontWeight: '400',
+    color: '#008F9E',
   },
   input: {
     height: 52,
-    width: 386,
-    fontSize: 16,
-    color: 'white',
+    width: '100%',
     borderBottomWidth: 1,
-    borderBottomColor: '#0077b6',
-    marginBottom: 20,
-    paddingLeft: 20,
-  },
-  buttonContainer: {
-    marginBottom: 20,
+    borderBottomColor: '#008F9E',
+    color: '#030124',
+    fontFamily: 'Open Sans',
+    fontSize: 17,
+    fontWeight: '300',
   },
   button: {
-    width: 184,
-    height: 45,
-    borderRadius: 30,
-    backgroundColor: '#62AD9B',
-    justifyContent: 'center',
+    backgroundColor: '#02AF9B',
+    height: '45%',
+    width: '60%',
     alignItems: 'center',
-    marginTop:-300,
+    justifyContent: 'center',
+    borderRadius: 30,
+    shadowColor: '#000',
   },
   buttonText: {
-    color: 'white',
+    color: '#FFFFFF',
+    fontFamily: 'Lato',
     fontSize: 16,
+    fontWeight: '300',
+    lineHeight: 19,
+    letterSpacing: 0.08,
+    textAlign: 'left',
   },
 });
 

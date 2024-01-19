@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,37 +7,55 @@ import {
   Switch,
   Image,
   ScrollView,
-  Alert
+  Alert,
+  BackHandler
 } from 'react-native';
-import {globalStyles} from '../../../../globalStyles/globalStyles';
+import { globalStyles } from '../../../../globalStyles/globalStyles';
 import HomeHook from '../../hooks/HomeHook';
-import {homeStyles} from '../../styles/homeStyles';
+import { homeStyles } from '../../styles/homeStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   SendSwitchProfile,
   SendSwitchActivateCard,
   SendTemplateSelected
 } from '../../../../reactQuery/users';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import MenuSuperior from '../../../menuSuperior/MenuSuperior';
 
 const Main = () => {
-  const {tab, setTab} = HomeHook();
-  const navigation = useNavigation();
+  const { tab, setTab } = HomeHook();
   const [isSwitchOn1, setSwitchOn1] = useState(false);
   const [isSwitchOn2, setSwitchOn2] = useState(false);
+  const navigation = useNavigation();
+  const route = useRoute();
+/* 
+  BackHandler.addEventListener('hardwareBackPress', function () {
+    const currentRouteName = route.name;
+    console.log("currentRouteName ", currentRouteName);
+
+    if (currentRouteName === "Main") {
+      console.log("Salir");
+      BackHandler.exitApp();
+      return true;
+    } else {
+      return false;
+    }
+  }); */
+
+  useEffect(() => {
+    console.log("Holaaaaaaa");
+  }, []);
 
   const handleSwitchToggle1 = () => {
     // Muestra una alerta cuando se cambia el estado del Switch 1
     Alert.alert(
       'Alerta',
-      `Acabas de ${
-        isSwitchOn1
-          ? 'activar activar el perfil social, por ende este será el perfil que verán las personas cuando escaneen tu tarjeta'
-          : 'activar activar el perfil PRO, por ende este será el perfil que verán las personas cuando escaneen tu tarjeta'
+      `Acabas de ${isSwitchOn1
+        ? 'activar activar el perfil social, por ende este será el perfil que verán las personas cuando escaneen tu tarjeta'
+        : 'activar activar el perfil PRO, por ende este será el perfil que verán las personas cuando escaneen tu tarjeta'
       }`,
-      [{text: 'OK', onPress: () => handleUpdateSwitch()}],
-      {cancelable: false}
+      [{ text: 'OK', onPress: () => handleUpdateSwitch() }],
+      { cancelable: false }
     );
   };
 
@@ -50,13 +68,12 @@ const Main = () => {
     // Muestra una alerta cuando se cambia el estado del Switch 2
     Alert.alert(
       'Alerta',
-      `Acabas de ${
-        isSwitchOn2
-          ? 'activar tu tarjeta'
-          : 'desactivar tu tarjeta, por ende nadie podrá ver tu perfil hasta que vuelvas a activarla '
+      `Acabas de ${isSwitchOn2
+        ? 'activar tu tarjeta'
+        : 'desactivar tu tarjeta, por ende nadie podrá ver tu perfil hasta que vuelvas a activarla '
       }`,
-      [{text: 'OK', onPress: () => handleUpdateSwitchCard()}],
-      {cancelable: false}
+      [{ text: 'OK', onPress: () => handleUpdateSwitchCard() }],
+      { cancelable: false }
     );
   };
 
@@ -71,9 +88,12 @@ const Main = () => {
   };
 
   const handleTabPress = (tabName: string) => {
-    // Lógica de manejo de la pestaña (puedes personalizar según tus necesidades)
-    console.log(`Pestaña presionada: ${tabName}`);
-    navigation.navigate('Profile');
+    //console.log(`Pestaña presionada: ${tabName}`);
+    if (tabName === 'Social') {
+      navigation.navigate('Profile', { isProUser: false });
+    } else {
+      navigation.navigate('Profile', { isProUser: true });
+    }
   };
 
   interface GridItem {
@@ -82,9 +102,9 @@ const Main = () => {
   }
 
   const data: GridItem[] = [
-    {id: 1, imageSource: require('src/images/social.png')},
-    {id: 2, imageSource: require('src/images/corporativa.png')},
-    {id: 3, imageSource: require('src/images/profesional.png')}
+    { id: 1, imageSource: require('src/images/social.png') },
+    { id: 2, imageSource: require('src/images/corporativa.png') },
+    { id: 3, imageSource: require('src/images/profesional.png') }
     // Agrega más elementos según sea necesario
   ];
 
@@ -106,42 +126,42 @@ const Main = () => {
         <View style={homeStyles.switchContainer}>
           <View style={homeStyles.switchContainer}>
             <View style={homeStyles.switchWrapper}>
-              <Text style={[homeStyles.switchText, {color: '#030124'}]}>
+              <Text style={[homeStyles.switchText, { color: '#030124' }]}>
                 Perfil a mostrar{' '}
               </Text>
               <Switch
                 value={isSwitchOn1}
                 onValueChange={handleSwitchToggle1}
-                trackColor={{false: '#62AD9B', true: '#62AD9B'}}
+                trackColor={{ false: '#02AF9B', true: '#02AF9B' }}
                 thumbColor={isSwitchOn1 ? 'white' : 'white'}
                 ios_backgroundColor="#3e3e3e"
                 style={homeStyles.switch}
               />
-              <Text style={[homeStyles.switchText, {color: '#030124'}]}>
+              <Text style={[homeStyles.switchText, { color: '#030124' }]}>
                 Social | PRO
               </Text>
             </View>
 
             <View style={homeStyles.switchWrapper}>
-              <Text style={[homeStyles.switchText, {color: '#030124'}]}>
+              <Text style={[homeStyles.switchText, { color: '#030124' }]}>
                 Activar tarjeta
               </Text>
               <Switch
                 value={isSwitchOn2}
                 onValueChange={handleSwitchToggle2}
-                trackColor={{false: '#62AD9B', true: '#62AD9B'}}
+                trackColor={{ false: '#02AF9B', true: '#02AF9B' }}
                 thumbColor={isSwitchOn2 ? 'white' : 'white'}
                 ios_backgroundColor="#3e3e3e"
                 style={homeStyles.switch}
               />
-              <Text style={[homeStyles.switchText, {color: '#030124'}]}>
+              <Text style={[homeStyles.switchText, { color: '#030124' }]}>
                 ON | OFF
               </Text>
             </View>
           </View>
 
           <TouchableOpacity
-            style={[homeStyles.button, {backgroundColor: 'white'}]}
+            style={[homeStyles.button, { backgroundColor: 'white' }]}
             onPress={handleEyeButtonPress}>
             <Text style={homeStyles.buttonText}>
               <Icon name="eye" size={20} color="blue" /> 12
@@ -169,7 +189,7 @@ const Main = () => {
                   <View style={homeStyles.imageContainer}>
                     <Image
                       source={data[0].imageSource}
-                      style={{width: 80, height: 150}}
+                      style={{ width: 80, height: 150 }}
                     />
                     <View
                       style={{
@@ -177,7 +197,7 @@ const Main = () => {
                         width: '100%',
                         position: 'absolute'
                       }}>
-                      <View style={{flex: 1, flexDirection: 'row'}}>
+                      <View style={{ flex: 1, flexDirection: 'row' }}>
                         <View
                           style={{
                             flex: 1,
@@ -212,7 +232,7 @@ const Main = () => {
                         </View>
                       </View>
 
-                      <View style={{flex: 1, flexDirection: 'row'}}>
+                      <View style={{ flex: 1, flexDirection: 'row' }}>
                         <View
                           style={{
                             flex: 1,
@@ -238,7 +258,7 @@ const Main = () => {
                             style={homeStyles.buttonT}
                             onPress={() => handleImagePress(data[0].id)}>
                             <Text style={homeStyles.buttonTextT}>
-                              Cambiar Fondo de plantilla 
+                              Cambiar Fondo de plantilla
                             </Text>
                           </TouchableOpacity>
                         </View>
@@ -251,7 +271,7 @@ const Main = () => {
                     onPress={() => handleImagePress(data[1].id)}>
                     <Image
                       source={data[1].imageSource}
-                      style={{width: 80, height: 150}}
+                      style={{ width: 80, height: 150 }}
                     />
                   </TouchableOpacity>
                 </View>
@@ -259,11 +279,11 @@ const Main = () => {
 
               <View style={homeStyles.imageRow}>
                 <TouchableOpacity
-                  style={[homeStyles.imageContainer, {marginTop: 10}]}
+                  style={[homeStyles.imageContainer, { marginTop: 10 }]}
                   onPress={() => handleImagePress(data[2].id)}>
                   <Image
                     source={data[2].imageSource}
-                    style={{width: 80, height: 150}}
+                    style={{ width: 80, height: 150 }}
                   />
                 </TouchableOpacity>
               </View>
@@ -276,7 +296,7 @@ const Main = () => {
                   onPress={() => handleImagePress(1)}>
                   <Image
                     source={require('src/images/plantilla_social_ej1.png')}
-                    style={{width: 80, height: 150}}
+                    style={{ width: 80, height: 150 }}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -284,7 +304,7 @@ const Main = () => {
                   onPress={() => handleImagePress(2)}>
                   <Image
                     source={require('src/images/plantilla_social_ej2.png')}
-                    style={{width: 80, height: 150}}
+                    style={{ width: 80, height: 150 }}
                   />
                 </TouchableOpacity>
               </View>

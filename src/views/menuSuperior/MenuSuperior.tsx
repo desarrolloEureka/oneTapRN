@@ -19,8 +19,10 @@ const MenuSuperior = () => {
     } else if (item.id === 7) {
       navigation.navigate('Terminos');
     } else if (item.id === 6) {
-      navigation.navigate('Politicas');    
-    } else if (item.id === 10 || item.id === 11) {
+      navigation.navigate('Politicas');
+    } else if (item.id === 10) {
+      navigation.navigate('ChangePassword');
+    } else if (item.id === 11 || item.id === 12) {
       Alert.alert(
         'Alerta',
         item.id === 10
@@ -55,8 +57,9 @@ const MenuSuperior = () => {
       { id: 7, name: 'Terminos y condiciones' },
       { id: 8, name: 'Politicas de devolucion' },
       { id: 9, name: 'Preguntas Frecuentes' },
-      { id: 10, name: 'Eliminar cuenta' },
-      { id: 11, name: 'Cerrar Sesion' },
+      { id: 10, name: 'Cambiar Contraseña' },
+      { id: 11, name: 'Eliminar cuenta' },
+      { id: 12, name: 'Cerrar Sesion' },
     ];
 
     return (
