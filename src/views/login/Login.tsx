@@ -1,30 +1,27 @@
-import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import React, {useState} from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
   Alert,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
-import { firebase } from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import { authFire } from '../../firebase/firebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {authFire} from '../../firebase/firebaseConfig';
+import {StackNavigation} from '../../types/navigation';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
   const handleForgotPassword = () => {
     navigation.navigate('RecoveryPassword');
   };
@@ -35,26 +32,28 @@ const Login = () => {
         const res = await signInWithEmailAndPassword(authFire, email, password);
         console.log(res);
         // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
-        AsyncStorage.setItem("@user", JSON.stringify(res));
+        AsyncStorage.setItem('@user', JSON.stringify(res));
         navigation.navigate('Home');
       } else {
-        Alert.alert('Error', 'Por favor, complete todos los campos.');
+        Alert.alert('Error', 'Por favor, completa todos los campos.');
       }
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error.message);
-      Alert.alert(
-        'Error',
-        'Error al iniciar sesión. Verifique sus credenciales.'
-      );
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Error to login:', error.message);
+        Alert.alert(
+          'Error',
+          'Error al iniciar sesión. Verifica tus credenciales.'
+        );
+      }
     }
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       {/* <ScrollView style={{flex:1}}> */}
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}>
-
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{flex: 1}}>
         <View style={styles.container}>
           {/* Vista de inicio de sesión */}
           <View>
@@ -69,7 +68,8 @@ const Login = () => {
               placeholderTextColor="#396593"
               underlineColorAndroid="transparent"
               value={email}
-              onChangeText={(text) => setEmail(text)}
+              keyboardType="email-address"
+              onChangeText={text => setEmail(text)}
             />
             <Text style={styles.label}>Contraseña</Text>
             <View style={styles.passwordContainer}>
@@ -79,7 +79,7 @@ const Login = () => {
                 secureTextEntry={!showPassword}
                 underlineColorAndroid="transparent"
                 value={password}
-                onChangeText={(text) => setPassword(text)}
+                onChangeText={text => setPassword(text)}
               />
               <TouchableOpacity
                 style={styles.eyeIcon}
@@ -101,7 +101,6 @@ const Login = () => {
             </TouchableOpacity>
           </View>
         </View>
-
       </KeyboardAvoidingView>
       {/* </ScrollView> */}
     </SafeAreaView>
@@ -114,14 +113,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    marginTop: -200,
+    marginTop: -200
   },
   title: {
     color: '#396593',
     fontSize: 24,
     marginTop: 10,
     marginBottom: 20,
-    marginLeft: 130,
+    marginLeft: 130
   },
   titleLine: {
     borderBottomWidth: 1,
@@ -129,7 +128,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'center',
     width: 150,
-    marginLeft: 38,
+    marginLeft: 38
   },
   input: {
     height: 52,
@@ -139,12 +138,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#396593',
     marginBottom: 10,
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   label: {
     color: '#008F9E',
     marginTop: 3,
-    marginRight: 240,
+    marginRight: 240
   },
   button: {
     width: 265,
@@ -155,33 +154,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 100,
     marginTop: 140,
-    marginBottom: -140,
+    marginBottom: -140
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 16
   },
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#396593',
-    marginBottom: 10,
+    marginBottom: 10
   },
   passwordInput: {
     flex: 1,
     height: 52,
     fontSize: 16,
     color: '#396593',
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   eyeIcon: {
-    padding: 10,
+    padding: 10
   },
   forgotPassword: {
     marginLeft: 20,
-    marginBottom: 20,
-  },
+    marginBottom: 20
+  }
 });
 
 export default Login;
