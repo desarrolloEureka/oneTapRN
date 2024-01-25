@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
-import {signInWithEmailAndPassword} from 'firebase/auth';
-import React, {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -14,24 +13,77 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {authFire} from '../../firebase/firebaseConfig';
-import {StackNavigation} from '../../types/navigation';
+import { StackNavigation } from '../../types/navigation';
+import { LoginError } from '../../types/login';
+import { GetLoginQuery } from '../../reactQuery/users';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorForm, setErrorForm] = useState<LoginError | null>(null);
+  const [sendLogin, setSendLogin] = useState(false);
+
   const navigation = useNavigation<StackNavigation>();
+
   const handleForgotPassword = () => {
     navigation.navigate('RecoveryPassword');
   };
 
-  const handleLogin = async () => {
+  const { data, isLoading, isRefetching } = GetLoginQuery({
+    user: email,
+    password,
+    sendLogin,
+  });
+
+  const loginHandle = async () => {
+    if (email && password) {
+      setErrorForm(null);
+      setSendLogin(true);
+    } else {
+      setSendLogin(false);
+      !email
+        ? setErrorForm({
+          errorType: 1,
+          errorMessage: "El correo es obligatorio",
+        })
+        : null;
+      !password
+        ? setErrorForm({
+          errorType: 2,
+          errorMessage: "La contraseña es obligatoria",
+        })
+        : null;
+    }
+  };
+
+  const userIsLogged = useCallback(() => {
+    setSendLogin(false);
+    if (data) {
+      if (data.isAdmin) {
+        navigation.navigate('Home');
+      } else {
+        navigation.navigate('Home');
+      }
+    } else if (sendLogin) {
+      /*  Alert.alert(
+         'Error',
+         'Usuario no encontrado. Verifica tus credenciales.'
+       ); */
+    }
+  }, [data, navigation, sendLogin]);
+
+
+  useEffect(() => {
+    userIsLogged();
+  }, [userIsLogged]);
+
+
+  /* const handleLogin = async () => {
     try {
       if (email && password) {
         const res = await signInWithEmailAndPassword(authFire, email, password);
         console.log(res);
-        // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
         AsyncStorage.setItem('@user', JSON.stringify(res));
         navigation.navigate('Home');
       } else {
@@ -46,14 +98,14 @@ const Login = () => {
         );
       }
     }
-  };
+  }; */
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       {/* <ScrollView style={{flex:1}}> */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{flex: 1}}>
+        style={{ flex: 1 }}>
         <View style={styles.container}>
           {/* Vista de inicio de sesión */}
           <View>
@@ -96,7 +148,7 @@ const Login = () => {
               onPress={handleForgotPassword}>
               <Text>Recuperar Contraseña</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <TouchableOpacity style={styles.button} onPress={loginHandle}>
               <Text style={styles.buttonText}>Siguiente</Text>
             </TouchableOpacity>
           </View>
