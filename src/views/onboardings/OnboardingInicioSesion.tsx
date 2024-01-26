@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     width: 216,
     height: 180,
     marginBottom: 100,
-    marginTop: -300,
+    marginTop: -200,
     alignItems: 'flex-start',
   },
   image: {
