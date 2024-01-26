@@ -62,12 +62,12 @@ const FormEducation = ({
               <Ionicons name="library-outline" size={25} color="#02AF9B" />
             </View>
             <View style={{ height: "100%", width: "20%", alignItems: 'flex-start', justifyContent: 'center' }}>
-              <Text>{label}</Text>
+              <Text style={{ color: "black" }}>{label}</Text>
             </View>
           </>
           :
           <View style={{ height: "100%", width: "25%", alignItems: 'flex-start', justifyContent: 'center' }}>
-            <Text>{label}</Text>
+            <Text style={{ color: "black" }}>{label}</Text>
           </View>
         }
 
@@ -87,7 +87,7 @@ const FormEducation = ({
                 subindex: subLabel as EducationSubIndexDataForm,
               });
             }}
-            value={value() ?? ''}
+            value={value()}
           />
         </View>
       </View>

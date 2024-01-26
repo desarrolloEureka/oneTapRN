@@ -73,7 +73,7 @@ const ItemFormBasicInfo = ({
                             <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
                         <View style={{ height: "100%", width: "75%", justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 11 }}>{value[0] === 'phones' ? "Agregar otro telefono" : "Agregar otro correo"}</Text>
+                            <Text style={{ fontSize: 11, color: "black" }}>{value[0] === 'phones' ? "Agregar otro telefono" : "Agregar otro correo"}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

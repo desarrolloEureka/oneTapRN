@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import PhotoUser from './PhotoUser';
 import { profileStyles } from '../../../styles/profileStyles';
 import FormDataUser from './FormDataUser';
 import FormAddDataUser from './FormAddDataUser';
-import SwitchGeneral from './SwitchGeneral';
-import { profile } from '../../../../../initialData/profileInitialData';
 import { DataForm } from '../../../../../types/profile';
 import ProfileHook from './hooks/ProfileHook';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -91,7 +89,7 @@ const Profile = () => {
                     dataForm={dataForm}
                     handleDataSet={(e) => handleDataSet(e)}
                 />
-                
+
                 <FormAddDataUser
                     isProUser={isProUser}
                     dataForm={dataForm}

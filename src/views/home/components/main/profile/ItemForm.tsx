@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { profileStyles } from '../../../styles/profileStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -25,6 +25,7 @@ const ItemForm = ({
   subindex,
 }: ItemFormParams) => {
   const dataRef = useRef<any>(null);
+  const [inputText, setInputText] = useState('');
 
   const value = () => {
     const i = subindex as any;
@@ -35,18 +36,24 @@ const ItemForm = ({
       index != 'urls' &&
       index != 'professional_career'
     ) {
-      return dataRef?.current?.text ?? myValue?.text;
+      return dataRef?.current?.text ?? myValue?.text ?? inputText;
     } else {
-      if (dataRef.current) {
-        return dataRef?.current[i]?.text;
+      if (dataRef.current && typeof dataRef.current === 'object') {
+        if (dataRef.current[i] && typeof dataRef.current[i] === 'object') {
+          return dataRef?.current[i]?.text ?? inputText;
+        }
       }
     }
   };
+
   const isChecked = () => {
     const i = subindex as any;
     if (index == 'phones' || index == 'emails') {
+      console.log("dataRef isChecked ", dataRef);
       if (dataRef.current) {
         return dataRef?.current[i]?.checked;
+      } else {
+        console.log("No existe la referencia");
       }
     }
   };
@@ -110,14 +117,14 @@ const ItemForm = ({
               <TextInput
                 ref={dataRef}
                 id={`${name}-input`}
-                //placeholder={label}
                 style={profileStyles.inputBox}
                 placeholderTextColor="#000000"
                 underlineColorAndroid="transparent"
                 onChangeText={(text: any) => {
+                  setInputText(text);
                   handleData({ name: name, text: text, currentDataRef: dataRef, key: subindex });
                 }}
-                value={value() ?? ''}
+                value={value()}
               />
             </View>
           </View>

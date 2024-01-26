@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 
+
 import { TemplateData, UserData } from '../../../../../types/user';
 import { TemplateTypes } from '../../../../../types/home';
 import { SendTemplateSelected } from '../../../../../reactQuery/users';
@@ -42,21 +43,32 @@ const CustomCheckbox = ({
     handleModal?: () => void;
 }) => {
     const queryClient = useQueryClient();
+    const checkboxRef = useRef(null);
     const [isUpdate, setIsUpdate] = useState(false);
     const [fakeData, setFakeData] = useState(templates || []);
     const [isChecked, setIsChecked] = useState(checked ? checked : false);
 
     const handleSaveTemplate = async (background_id: string) => {
-
+        const userId = uid;
+        const templateData = templates;
+        if (templateData && selectedTemplate && userId) {
+            const newData = templateData?.map((val) => {
+                val.id === selectedTemplate && (val.background_id = background_id);
+                return val;
+            });
+            newData &&
+                (await SendTemplateSelected(userId, newData, queryClient).then(() => {
+                    handleModal && handleModal();
+                }));
+        }
     };
 
     const handleSelectTemplate = async () => {
-        console.log("handleSelectTemplate");
         if (handleSelectBackground) {
-            /* Logica para fondos */
+            handleSaveTemplate(value.id);
         } else {
             const userId = uid;
-            console.log("value.id ---> ", value.id);
+
             console.log("userId ---> ", userId);
             if (userId && fakeData.length > 0) {
                 const fakeDataClone = [...fakeData];
@@ -71,6 +83,7 @@ const CustomCheckbox = ({
                 setFakeData(fakeDataCloneFilter);
                 await SendTemplateSelected(userId, fakeDataCloneFilter, queryClient);
                 setIsUpdate(!isUpdate);
+                setIsChecked(!isChecked);
             }
         }
     };
@@ -84,7 +97,7 @@ const CustomCheckbox = ({
             <Ionicons
                 name={isChecked ? 'radio-button-on-outline' : 'radio-button-off-outline'}
                 size={19}
-                color={'white'}
+                color={handleSelectBackground ? '#5278a0' : 'white'}
             />
         </TouchableOpacity>
     );

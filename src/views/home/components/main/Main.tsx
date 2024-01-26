@@ -65,18 +65,18 @@ const Main = () => {
   const route = useRoute();
   const dataTemplateFilter = templates.data?.filter(elemento => elemento.type === tab);
   const { data, error } = GetUser();
+  const [selectedTemplate, setSelectedTemplate] = useState<string>();
   const [templateSelect, setTemplateSelect] = useState<TemplateType>({
     id: '',
     name: '',
     image: '',
   });
 
-  //console.log("adata getUser ", data);
-
   const navigation =
     useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
 
-  const handleModalBackground = () => {
+  const handleModalBackground = (item?: Templates) => {
+    item && setSelectedTemplate(item.id);
     setIsModalOpen(!isModalOpen);
   }
 
@@ -144,6 +144,14 @@ const Main = () => {
     return () => subscription.remove();
   });
 
+
+  const handleSelectBackground = (item: BackgroundType) => {
+    const data = {
+      id: item.id,
+    };
+    //setBackgroundSelect(data);
+  };
+
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
       <MenuSuperior />
@@ -205,7 +213,6 @@ const Main = () => {
                 renderItem={({ item, index }) => {
                   const i = item.id;
                   const itemData = data?.templateData?.find((val) => val.id === i);
-                  console.log("Item checked ", item.id);
                   return (
                     <View style={{ height: 280, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
                       <View style={{ height: "95%", width: "95%", backgroundColor: "#02AF9B", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
@@ -258,7 +265,7 @@ const Main = () => {
                             </View>
                           </View>
                           <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-end' }}>
-                            <TouchableOpacity style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={handleModalBackground}>
+                            <TouchableOpacity style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleModalBackground(item)}>
                               <MaterialCommunityIcons name="cards" size={15} color="white" />
                               <Text style={{ fontSize: 9, color: "white" }}>
                                 Cambiar {'\n'}  fondo
@@ -303,9 +310,12 @@ const Main = () => {
           isModalOpen={isModalOpen}
           handleModalBackground={handleModalBackground}
           dataBackgrounds={dataBackgrounds.data as BackgroundImages[]}
+          data={data && data}
+          optionSelected={tab}
+          handleSelectBackground={() => handleSelectBackground}
+          selectedTemplate={selectedTemplate}
         />
       }
-
 
     </SafeAreaView >
   );

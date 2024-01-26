@@ -33,6 +33,8 @@ const FormAddDataUser = ({
         handleDataSet,
     });
 
+    console.log("Se actulizo data...... ");
+    
     return (
         <SafeAreaView>
             {data.map((value, key) => {

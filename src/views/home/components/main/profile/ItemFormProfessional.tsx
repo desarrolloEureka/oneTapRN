@@ -68,7 +68,7 @@ const ItemFormProfessional = ({
                             <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
                         <View style={{ height: "100%", width: "75%", justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 11 }}>Agregar trayectoria profesional</Text>
+                            <Text style={{ fontSize: 11, color: "black" }}>Agregar trayectoria profesional</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

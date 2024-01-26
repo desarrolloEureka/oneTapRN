@@ -62,12 +62,12 @@ const FormProfession = ({
               <Ionicons name="library-outline" size={25} color="#02AF9B" />
             </View>
             <View style={{ height: "100%", width: "25%", alignItems: 'flex-start', justifyContent: 'center' }}>
-              <Text>{label}</Text>
+              <Text style={{ color: "black" }}>{label}</Text>
             </View>
           </>
           :
           <View style={{ height: "100%", width: "30%", alignItems: 'flex-start', justifyContent: 'center' }}>
-            <Text>{label}</Text>
+            <Text style={{ color: "black" }}>{label}</Text>
           </View>
         }
 

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Feather from 'react-native-vector-icons/Feather';
 import {
     CareerDataFormValues,
     IndexDataForm,
@@ -15,8 +12,6 @@ import {
     DataForm,
     NetworksSubIndexDataForm
 } from '../../../../../types/profile';
-import { profileStyles } from '../../../styles/profileStyles';
-import SwitchGeneral from './SwitchGeneral';
 import ProfileHook from './hooks/ProfileHook';
 import FormUrl from './FormUrl';
 
@@ -82,7 +77,7 @@ const ItemFormUrl = ({
                             <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
                         <View style={{ height: "100%", width: "75%", justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 11 }}>Agregar otra URL</Text>
+                            <Text style={{ fontSize: 11, color: "black" }}>Agregar otra URL</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

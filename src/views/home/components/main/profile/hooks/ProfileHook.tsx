@@ -50,6 +50,61 @@ const ProfileHook = ({
   const [isDataLoad, setIsDataLoad] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
 
+  const fillFields = (
+    index: IndexDataForm,
+    key: number,
+    text: string,
+    subindexEducation?: EducationSubIndexDataForm,
+    subindexCareer?: CareerSubIndexDataForm,
+    subindexUrl?: NetworksSubIndexDataForm
+  ) => {
+    const dataFormClone = { ...dataForm };
+    dataFormClone && index == 'education' && subindexEducation
+      ? (dataFormClone[index]![key][subindexEducation] = text)
+      : index == 'professional_career'
+        ? subindexCareer && (dataFormClone[index]![key][subindexCareer] = text)
+        : index == 'urls' &&
+        subindexUrl &&
+        (dataFormClone[index]![key][subindexUrl] = text);
+
+    handleDataSet && handleDataSet(dataFormClone);
+    setIsDataLoad(true);
+  };
+
+
+  const handleData = ({
+    name,
+    text,
+    subindex,
+    key,
+    currentDataRef,
+  }: handleDataProps) => {
+    const dataFormClone = { ...dataForm };
+    const index = name as keyof typeof dataFormClone;
+    console.log("text -----> ", text);
+
+    if (
+      index != 'phones' &&
+      index != 'education' &&
+      index != 'emails' &&
+      index != 'urls' &&
+      index != 'professional_career'
+    ) {
+      dataFormClone[index]!.text = text;
+      currentDataRef.current.text = text;
+      handleDataSet && handleDataSet(dataFormClone);
+      setIsDataLoad(true);
+    } else {
+      if (index == 'phones' || index == 'emails') {
+        const dataAux = dataFormClone[index];
+        if (dataAux && key != undefined) {
+          dataAux[key].text = text;
+        }
+      }
+    }
+  };
+
+
   const handleSendProfile = async () => {
     const userId = data?.uid;
     if (userId) {
@@ -171,90 +226,6 @@ const ProfileHook = ({
     key != undefined &&
       subindex &&
       fillFields(index, key, text, undefined, undefined, subindex);
-  };
-
-
-  const fillFields = (
-    index: IndexDataForm,
-    key: number,
-    text: string,
-    subindexEducation?: EducationSubIndexDataForm,
-    subindexCareer?: CareerSubIndexDataForm,
-    subindexUrl?: NetworksSubIndexDataForm
-  ) => {
-    const dataFormClone = { ...dataForm };
-    dataFormClone && index == 'education' && subindexEducation
-      ? (dataFormClone[index]![key][subindexEducation] = text)
-      : index == 'professional_career'
-        ? subindexCareer && (dataFormClone[index]![key][subindexCareer] = text)
-        : index == 'urls' &&
-        subindexUrl &&
-        (dataFormClone[index]![key][subindexUrl] = text);
-
-    handleDataSet && handleDataSet(dataFormClone);
-    setIsDataLoad(true);
-  };
-
-  const handleData = ({
-    name,
-    text,
-    subindex,
-    key,
-    currentDataRef,
-  }: handleDataProps) => {
-    const dataFormClone = { ...dataForm };
-    const index = name as keyof typeof dataFormClone;
-    if (
-      index != 'phones' &&
-      index != 'education' &&
-      index != 'emails' &&
-      index != 'urls' &&
-      index != 'professional_career'
-    ) {
-      dataFormClone[index]!.text = text;
-      currentDataRef.current.text = text;
-      handleDataSet && handleDataSet(dataFormClone);
-      setIsDataLoad(true);
-    } else {
-      if (index == 'phones' || index == 'emails') {
-        const dataAux = dataFormClone[index];
-        if (dataAux && key != undefined) {
-          dataAux[key].text = text;
-
-          //console.log("currentDataRef --> ", currentDataRef);
-          //console.log("currentDataRef.current[key].text --> ", currentDataRef.current[key]);
-          /* currentDataRef.current[key].text = text;
-          dataAux && handleDataSet && handleDataSet(dataFormClone); */
-        }
-        setIsDataLoad(true);
-      } else if (
-        index == 'education' &&
-        (subindex == 'title' ||
-          subindex == 'year' ||
-          subindex == 'institution') &&
-        key != undefined
-      ) {
-        currentDataRef.current[key][subindex] = text;
-        fillFields(index, key, text, subindex);
-      } else if (
-        index == 'professional_career' &&
-        (subindex == 'company' ||
-          subindex == 'data_end' ||
-          subindex == 'data_init' ||
-          subindex == 'position') &&
-        key != undefined
-      ) {
-        currentDataRef.current[key][subindex] = text;
-        fillFields(index, key, text, undefined, subindex);
-      } else if (
-        index == 'urls' &&
-        (subindex == 'name' || subindex == 'url' || subindex == 'icon') &&
-        key != undefined
-      ) {
-        currentDataRef.current[key][subindex] = text;
-        fillFields(index, key, text, undefined, undefined, subindex);
-      }
-    }
   };
 
   const handleDeleteData = () => {
@@ -447,8 +418,6 @@ const ProfileHook = ({
     },
     []
   );
-
-
 
   useEffect(() => {
     if (dataForm?.name?.label == '') {

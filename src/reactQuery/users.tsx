@@ -49,11 +49,9 @@ const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
         if (docSnap.exists()) {
           const user = docSnap.data() as UserData;
           const getUser = userDataToSend(user, resultUser);
-          console.log("getUser ", getUser);
           await AsyncStorage.setItem('@user', JSON.stringify(getUser));
 
           const userLogged = await AsyncStorage.getItem('@user');
-          //console.log("userLogged <<>> ", userLogged)
           return getUser;
         } else {
           return null;
@@ -174,11 +172,8 @@ const GetUser = () =>
     queryKey: ['user'],
     queryFn: async () => {
       const userLogged = await AsyncStorage.getItem('@user');
-      console.log("userLogged ", userLogged)
       if (userLogged) {
         const user = JSON.parse(userLogged) as UserData;
-        console.log("user ", user);
-        console.log("user.uid ", user.uid);
         const updatedUser = await getUserById(user.uid);
         if (updatedUser.exists()) {
           const userData = updatedUser.data() as UserData;

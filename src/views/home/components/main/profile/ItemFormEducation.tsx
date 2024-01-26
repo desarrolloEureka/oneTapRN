@@ -59,7 +59,7 @@ const ItemFormEducation = ({
     });
 
     return (
-        <View style={{ height: labelArray.length > 1 ? 'auto' : 280, minHeight: 280, width: "100%", justifyContent: 'center',paddingTop:20 }}>
+        <View style={{ height: labelArray.length > 1 ? 'auto' : 280, minHeight: 280, width: "100%", justifyContent: 'center', paddingTop: 20 }}>
             <View style={{ minHeight: 230, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
 
                 <View style={{ height: 40, width: "100%", alignItems: 'flex-end' }}>
@@ -68,7 +68,7 @@ const ItemFormEducation = ({
                             <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
                         <View style={{ height: "100%", width: "95%", justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 11 }}>Agregar formación academica</Text>
+                            <Text style={{ fontSize: 11, color: "black" }}>Agregar formación academica</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

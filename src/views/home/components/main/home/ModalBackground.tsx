@@ -1,32 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Modal, FlatList, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { BackgroundImages, TemplateTypes, Templates } from '../../../../../types/home';
 import { RadioButton } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import CustomCheckbox from './CustomCheckbox';
 
 const ModalBackground = ({
     isModalOpen,
     handleModalBackground,
     dataBackgrounds,
+    data,
+    optionSelected,
+    handleSelectBackground,
+    selectedTemplate
 }: {
     isModalOpen: boolean;
     handleModalBackground: () => void;
     dataBackgrounds: BackgroundImages[];
+    data?: any;
+    optionSelected?: string;
+    handleSelectBackground: () => void;
+    selectedTemplate?: string;
 }) => {
-
-    const data = [
-        { id: '1', text: 'Item 1' },
-        { id: '2', text: 'Item 2' },
-        { id: '3', text: 'Item 3' },
-        { id: '4', text: 'Item 4' },
-        { id: '5', text: 'Item 5' },
-        { id: '6', text: 'Item 6' },
-        { id: '7', text: 'Item 7' },
-        //{ id: '8', text: 'Item 8' },
-    ];
-
     return (
         <Modal
             animationType="slide"
@@ -56,33 +53,55 @@ const ModalBackground = ({
                             data={dataBackgrounds}
                             keyExtractor={item => item.id}
                             numColumns={2}
-                            renderItem={({ item, index }) => (
-                                <View style={{ height: 240, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
-                                    <View style={{ height: "90%", width: "90%", backgroundColor: "white", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            renderItem={({ item, index }) => {
+                                const x = data?.templateData?.find((val) => {
+                                    return (
+                                        val.type === optionSelected &&
+                                        val.background_id === item.id
+                                    );
+                                });
+                                return (
+                                    <View style={{ height: 240, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
+                                        <View style={{ height: "90%", width: "90%", backgroundColor: "white", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
 
-                                        <View style={{ height: "15%", width: "100%", alignItems: 'flex-end' }}>
-                                            <TouchableOpacity style={{ height: "100%", width: "30%", justifyContent: 'center', alignItems: 'center' }}>
-                                                <Ionicons name="radio-button-on-outline" size={20} color="#396593" />
-                                            </TouchableOpacity>
-                                        </View>
+                                            <View style={{ height: "15%", width: "100%", alignItems: 'flex-end' }}>
 
-                                        <View style={{ height: "70%", width: "98%", justifyContent: 'center', alignItems: 'center' }}>
-                                            <View style={{ height: "98%", width: "98%" }}>
-                                                <Image
-                                                    source={{ uri: `${item.image}` }}
-                                                    style={{ flex: 1, resizeMode: 'contain' }}
-                                                />
+                                                <View style={{ height: "100%", width: "30%", justifyContent: 'center', alignItems: 'center' }}>
+                                                    {data && (
+                                                        <CustomCheckbox
+                                                            uid={data.uid}
+                                                            optionSelected={optionSelected as TemplateTypes}
+                                                            value={item}
+                                                            templates={data.templateData}
+                                                            handleSelectBackground={
+                                                                handleSelectBackground
+                                                            }
+                                                            checked={x ? x.checked : false}
+                                                            selectedTemplate={selectedTemplate}
+                                                        />
+                                                    )}
+                                                </View>
 
                                             </View>
-                                        </View>
 
-                                        <View style={{ height: "15%", width: "98%", justifyContent: 'center' }}>
-                                            <Text style={{ paddingLeft: 10 }}>Fondo {index + 1}</Text>
-                                        </View>
+                                            <View style={{ height: "70%", width: "98%", justifyContent: 'center', alignItems: 'center' }}>
+                                                <View style={{ height: "98%", width: "98%" }}>
+                                                    <Image
+                                                        source={{ uri: `${item.image}` }}
+                                                        style={{ flex: 1, resizeMode: 'contain' }}
+                                                    />
 
+                                                </View>
+                                            </View>
+
+                                            <View style={{ height: "15%", width: "98%", justifyContent: 'center' }}>
+                                                <Text style={{ paddingLeft: 10 }}>Fondo {index + 1}</Text>
+                                            </View>
+
+                                        </View>
                                     </View>
-                                </View>
-                            )}
+                                )
+                            }}
                         />
                     </View>
                     <View style={{ height: "10%", width: "100%", justifyContent: 'center', alignItems: 'center', borderTopWidth: 1 }}>

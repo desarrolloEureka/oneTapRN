@@ -1,8 +1,7 @@
 import { EducationSubIndexDataForm, ItemFormParams } from '../../../../../types/profile';
 import { useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { profileStyles } from '../../../styles/profileStyles';
-import SwitchGeneral from './SwitchGeneral';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
@@ -62,12 +61,12 @@ const FormUrl = ({
               <Ionicons name="library-outline" size={25} color="#02AF9B" />
             </View>
             <View style={{ height: "100%", width: "30%", alignItems: 'flex-start', justifyContent: 'center' }}>
-              <Text>{label}</Text>
+              <Text style={{ color: "black" }}>{label}</Text>
             </View>
           </>
           :
           <View style={{ height: "100%", width: "30%", alignItems: 'flex-start', justifyContent: 'center' }}>
-            <Text>{label}</Text>
+            <Text style={{ color: "black" }}>{label}</Text>
           </View>
         }
 
