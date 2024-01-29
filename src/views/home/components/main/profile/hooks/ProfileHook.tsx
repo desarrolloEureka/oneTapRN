@@ -72,7 +72,7 @@ const ProfileHook = ({
   };
 
 
-  const handleData = ({
+  const handleData = async ({
     name,
     text,
     subindex,
@@ -98,9 +98,9 @@ const ProfileHook = ({
       if (index == 'phones' || index == 'emails') {
         const dataAux = dataFormClone[index];
         if (dataAux && key != undefined) {
-          dataAux[key].text = text;
+          dataAux[key]!.text = text;
           console.log(" dataAux[key].text ", dataAux[key].text);
-          dataAux && handleDataSet && handleDataSet(dataFormClone);
+          await dataAux && handleDataSet && handleDataSet(dataFormClone);
         }
       }
 

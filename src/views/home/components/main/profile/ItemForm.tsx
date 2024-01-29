@@ -28,6 +28,8 @@ const ItemForm = ({
   const [inputText, setInputText] = useState('');
 
   const value = () => {
+
+    console.log("Value Entre <<<<>>>>");
     const i = subindex as any;
     if (
       index != 'phones' &&
@@ -36,11 +38,15 @@ const ItemForm = ({
       index != 'urls' &&
       index != 'professional_career'
     ) {
-      return dataRef?.current?.text ?? myValue?.text ?? inputText;
+      console.log("Value Entre Iffffffffffff <<<<>>>>", myValue?.text);
+      return dataRef?.current?.text ?? myValue?.text;
     } else {
+      console.log("dataRef ", dataRef)
       if (dataRef.current && typeof dataRef.current === 'object') {
-        if (dataRef.current[i] && typeof dataRef.current[i] === 'object') {
-          return dataRef?.current[i]?.text ?? inputText;
+        console.log("Entre 1 if <<<<<>>>>>");
+        if (dataRef.current[i]) {
+          console.log("Entre 2 if <<<<<>>>>>");
+          return dataRef?.current[i]?.text;
         }
       }
     }
@@ -59,10 +65,13 @@ const ItemForm = ({
   };
 
   useEffect(() => {
+    console.log("dataRef ---------------------<> ", dataRef);
+    console.log("myValue ---------------------<_-- ", myValue);
     if (dataRef.current && myValue) {
       dataRef.current = myValue;
+      value();
     }
-  }, [dataRef, myValue]);
+  }, [dataRef, myValue, inputText]);
 
   return (
     <View style={{ height: 115, justifyContent: 'center', flexDirection: 'row' }}>
@@ -123,10 +132,10 @@ const ItemForm = ({
                 underlineColorAndroid="transparent"
                 maxLength={name === 'phones' ? 10 : undefined}
                 onChangeText={(text: any) => {
-                  //setInputText(text);
+                  setInputText(text);
                   handleData({ name: name, text: text, currentDataRef: dataRef, key: subindex });
                 }}
-                value={value() ?? ''}
+                value={value()}
               />
             </View>
           </View>

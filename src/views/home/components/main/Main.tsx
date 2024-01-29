@@ -118,7 +118,7 @@ const Main = () => {
     //setBackgroundSelect(data);
   };
 
-  console.log("Se actulizo todo.......");
+  console.log("Se actulizo todo....... <> ", data);
 
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
