@@ -146,7 +146,7 @@ const ItemFormUrl = ({
                                     {showUrls ?
                                         <View style={{ height: "50%", width: "98%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 14, flexDirection: 'row' }}>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'facebook' ? "#f3f4f6" : "transparent" }}
+                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'facebook' ? "#d9dce0" : "transparent", borderRadius: 10 }}
                                                 onPress={(text: any) =>
                                                     handleDataNetworks({
                                                         name: value[0],
@@ -157,7 +157,7 @@ const ItemFormUrl = ({
                                                 <Ionicons name="logo-facebook" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'twitter' ? "#f3f4f6" : "transparent" }}
+                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'twitter' ? "#d9dce0" : "transparent", borderRadius: 10 }}
                                                 onPress={(text: any) =>
                                                     handleDataNetworks({
                                                         name: value[0],
@@ -168,7 +168,7 @@ const ItemFormUrl = ({
                                                 <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'pending' ? "#f3f4f6" : "transparent" }}
+                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'pending' ? "#d9dce0" : "transparent", borderRadius: 10 }}
                                                 onPress={(text: any) =>
                                                     handleDataNetworks({
                                                         name: value[0],
@@ -179,7 +179,7 @@ const ItemFormUrl = ({
                                                 <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'instagram' ? "#f3f4f6" : "transparent" }}
+                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'instagram' ? "#d9dce0" : "transparent", borderRadius: 10 }}
                                                 onPress={(text: any) =>
                                                     handleDataNetworks({
                                                         name: value[0],
@@ -190,7 +190,7 @@ const ItemFormUrl = ({
                                                 <Ionicons name="logo-instagram" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'linkedin' ? "#f3f4f6" : "transparent" }}
+                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'linkedin' ? "#d9dce0" : "transparent", borderRadius: 10 }}
                                                 onPress={(text: any) =>
                                                     handleDataNetworks({
                                                         name: value[0],
@@ -201,7 +201,7 @@ const ItemFormUrl = ({
                                                 <Ionicons name="logo-linkedin" size={23} color="#02AF9B" />
                                             </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tikTok' ? "#f3f4f6" : "transparent" }}
+                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tikTok' ? "#d9dce0" : "transparent", borderRadius: 10 }}
                                                 onPress={(text: any) =>
                                                     handleDataNetworks({
                                                         name: value[0],

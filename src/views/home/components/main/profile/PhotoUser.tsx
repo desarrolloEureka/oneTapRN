@@ -7,8 +7,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
 import { SendDataImage } from '../../../../../reactQuery/users';
+import { GetUser } from '../../../../../reactQuery/users';
 
 const PhotoUser: React.FC = () => {
+  const { data } = GetUser();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -103,9 +105,9 @@ const PhotoUser: React.FC = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ height: '25%', width: '40%' }}>
+          <View style={{ height: '25%', width: '45%' }}>
             <View style={profileStyles.borderTargetName}>
-              <Text style={profileStyles.textName}>Hola David</Text>
+              <Text style={profileStyles.textName}>Hola {data && data?.user_name}</Text>
             </View>
           </View>
         </View>

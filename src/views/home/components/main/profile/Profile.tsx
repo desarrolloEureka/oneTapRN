@@ -62,7 +62,7 @@ const Profile = () => {
             <ScrollView contentContainerStyle={profileStyles.scrollViewContainer}>
                 <PhotoUser />
 
-                <View style={{ height: 100, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ height: 100, width: "100%", justifyContent: 'center', alignItems: 'center', marginTop: 12 }}>
                     <CustomSwitchGeneral
                         name='all_true'
                         handleSwitch={(e: any) => handleSwitchAll(e)}

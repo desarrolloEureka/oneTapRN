@@ -137,7 +137,7 @@ const Login = () => {
                 style={styles.eyeIcon}
                 onPress={() => setShowPassword(!showPassword)}>
                 <Icon
-                  name={showPassword ? 'eye-slash' : 'eye'}
+                  name={showPassword ? 'eye' : 'eye-slash'}
                   size={20}
                   color="#396593"
                 />
@@ -146,7 +146,7 @@ const Login = () => {
             <TouchableOpacity
               style={styles.forgotPassword}
               onPress={handleForgotPassword}>
-              <Text>Recuperar Contraseña</Text>
+              <Text style={{ color: "black" }}>Recuperar Contraseña</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={loginHandle}>
               <Text style={styles.buttonText}>Siguiente</Text>
@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
     marginLeft: 130
   },
   titleLine: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#396593',
+    //borderBottomWidth: 1,
+    //borderBottomColor: '#396593',
     marginBottom: 10,
     alignSelf: 'center',
     width: 150,

@@ -1,9 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { RadioButton } from 'react-native-paper';
-
-
-import { TemplateData, UserData } from '../../../../../types/user';
+import React, { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { TemplateData } from '../../../../../types/user';
 import { TemplateTypes } from '../../../../../types/home';
 import { SendTemplateSelected } from '../../../../../reactQuery/users';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -43,33 +40,29 @@ const CustomCheckbox = ({
     handleModal?: () => void;
 }) => {
     const queryClient = useQueryClient();
-    const checkboxRef = useRef(null);
     const [isUpdate, setIsUpdate] = useState(false);
     const [fakeData, setFakeData] = useState(templates || []);
-    const [isChecked, setIsChecked] = useState(checked ? checked : false);
 
     const handleSaveTemplate = async (background_id: string) => {
-        const userId = uid;
-        const templateData = templates;
-        if (templateData && selectedTemplate && userId) {
-            const newData = templateData?.map((val) => {
-                val.id === selectedTemplate && (val.background_id = background_id);
-                return val;
-            });
-            newData &&
-                (await SendTemplateSelected(userId, newData, queryClient).then(() => {
-                    handleModal && handleModal();
-                }));
+        if (!uid || !selectedTemplate || !templates) {
+            return;
         }
+
+        const updatedTemplates = templates.map(template => {
+            if (template.id === selectedTemplate) {
+                return { ...template, background_id };
+            }
+            return template;
+        });
+
+        await SendTemplateSelected(uid, updatedTemplates, queryClient);
     };
 
     const handleSelectTemplate = async () => {
         if (handleSelectBackground) {
-            handleSaveTemplate(value.id);
+            await handleSaveTemplate(value.id);
         } else {
             const userId = uid;
-
-            console.log("userId ---> ", userId);
             if (userId && fakeData.length > 0) {
                 const fakeDataClone = [...fakeData];
                 const fakeDataCloneFilter = fakeDataClone.filter(
@@ -80,10 +73,20 @@ const CustomCheckbox = ({
                     id: value.id,
                     checked: true,
                 });
-                setFakeData(fakeDataCloneFilter);
+                await setFakeData(fakeDataCloneFilter);
                 await SendTemplateSelected(userId, fakeDataCloneFilter, queryClient);
-                setIsUpdate(!isUpdate);
-                setIsChecked(!isChecked);
+                await setIsUpdate(!isUpdate);
+            } else {
+                const fakeDataClone = [...fakeData];
+                fakeDataClone.push({
+                    type: optionSelected,
+                    id: value.id,
+                    checked: true,
+                });
+                await setFakeData(fakeDataClone);
+                userId &&
+                    (await SendTemplateSelected(userId, fakeDataClone, queryClient));
+                await setIsUpdate(!isUpdate);
             }
         }
     };
@@ -91,11 +94,11 @@ const CustomCheckbox = ({
     return (
         <TouchableOpacity
             onPress={handleSelectTemplate}
-            disabled={isChecked}
+            disabled={checked}
             style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
         >
             <Ionicons
-                name={isChecked ? 'radio-button-on-outline' : 'radio-button-off-outline'}
+                name={checked ? 'radio-button-on-outline' : 'radio-button-off-outline'}
                 size={19}
                 color={handleSelectBackground ? '#5278a0' : 'white'}
             />

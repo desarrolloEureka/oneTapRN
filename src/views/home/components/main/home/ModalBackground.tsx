@@ -35,19 +35,14 @@ const ModalBackground = ({
         >
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.7)' }}>
                 <View style={{ height: "75%", width: "90%", justifyContent: 'center', alignItems: 'center', backgroundColor: "#02AF9B", borderRadius: 25 }}>
-
                     <View style={{ height: "10%", width: "100%", justifyContent: 'center', alignItems: 'flex-end' }}>
-
                         <View style={{ height: "100%", width: "90%", justifyContent: 'center', alignItems: 'flex-start' }}>
                             <Text>Seleccionar fondo</Text>
                         </View>
-
                         <TouchableOpacity style={{ height: "100%", width: "20%", justifyContent: 'center', alignItems: 'center', position: 'absolute' }} onPress={handleModalBackground}>
                             <Icon name="close" size={25} color="white" />
                         </TouchableOpacity>
-
                     </View>
-
                     <View style={{ height: "80%", width: "90%", justifyContent: 'center', alignItems: 'center' }}>
                         <FlatList
                             data={dataBackgrounds}
@@ -69,7 +64,7 @@ const ModalBackground = ({
                                                 <View style={{ height: "100%", width: "30%", justifyContent: 'center', alignItems: 'center' }}>
                                                     {data && (
                                                         <CustomCheckbox
-                                                            uid={data.uid}
+                                                            uid={data?.uid}
                                                             optionSelected={optionSelected as TemplateTypes}
                                                             value={item}
                                                             templates={data.templateData}
@@ -83,7 +78,6 @@ const ModalBackground = ({
                                                 </View>
 
                                             </View>
-
                                             <View style={{ height: "70%", width: "98%", justifyContent: 'center', alignItems: 'center' }}>
                                                 <View style={{ height: "98%", width: "98%" }}>
                                                     <Image
@@ -93,7 +87,6 @@ const ModalBackground = ({
 
                                                 </View>
                                             </View>
-
                                             <View style={{ height: "15%", width: "98%", justifyContent: 'center' }}>
                                                 <Text style={{ paddingLeft: 10 }}>Fondo {index + 1}</Text>
                                             </View>

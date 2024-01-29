@@ -132,15 +132,13 @@ const SendTemplateSelected = async (
   queryClient: any
 ) => {
   const templateData = data;
-
   await updateTemplateSelectedFirebase(userId, { templateData });
-
   const updatedUser = await getUserById(userId);
   if (updatedUser.exists()) {
-    const userData = updatedUser.data() as UserData;
-    const getUser = reBuildUserData(userData);
+    const userData = await updatedUser.data() as UserData;
+    const getUser = await reBuildUserData(userData);
     await AsyncStorage.setItem('@user', JSON.stringify(getUser));
-    //queryClient.setQueryData(['user'], () => getUser);
+    await queryClient.setQueryData(['user'], () => getUser);
   }
 };
 
@@ -173,12 +171,12 @@ const GetUser = () =>
     queryFn: async () => {
       const userLogged = await AsyncStorage.getItem('@user');
       if (userLogged) {
-        const user = JSON.parse(userLogged) as UserData;
+        const user = await JSON.parse(userLogged) as UserData;
         const updatedUser = await getUserById(user.uid);
         if (updatedUser.exists()) {
-          const userData = updatedUser.data() as UserData;
-          const getUser = reBuildUserData(userData);
-          AsyncStorage.setItem('@user', JSON.stringify(getUser));
+          const userData = await updatedUser.data() as UserData;
+          const getUser = await reBuildUserData(userData);
+          await AsyncStorage.setItem('@user', JSON.stringify(getUser));
           return getUser;
         } else {
           return user;
