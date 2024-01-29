@@ -26,6 +26,7 @@ export type DataFormValues = {
   social?: boolean;
   professional?: boolean;
   icon?: string;
+  order: number;
 };
 
 export type EducationDataFormValues = {
@@ -38,6 +39,7 @@ export type EducationDataFormValues = {
   social?: boolean;
   professional?: boolean;
   icon?: string;
+  order: number;
 };
 
 export type CareerDataFormValues = {
@@ -51,6 +53,7 @@ export type CareerDataFormValues = {
   social?: boolean;
   professional?: boolean;
   icon?: string;
+  order: number;
 };
 
 export type UrlDataFormValues = {
@@ -62,6 +65,7 @@ export type UrlDataFormValues = {
   principal?: boolean;
   social?: boolean;
   professional?: boolean;
+  order: number;
 };
 
 export type IndexDataForm =
@@ -83,7 +87,29 @@ export type IndexDataForm =
   | 'professional_career'
   | 'urls';
 
-export type handleDataProps = { name: string; text: string; subindex?: string; };
+export type EducationSubIndexDataForm = 'title' | 'institution' | 'year';
+export type CareerSubIndexDataForm =
+  | 'company'
+  | 'position'
+  | 'data_init'
+  | 'data_end';
+export type NetworksSubIndexDataForm = 'name' | 'url' | 'icon';
+export type handleDataProps = {
+  name: string;
+  text: string;
+  subindex?:
+  | EducationSubIndexDataForm
+  | CareerSubIndexDataForm
+  | NetworksSubIndexDataForm;
+  key?: number;
+  currentDataRef?: any;
+};
+export type handleDataNetworksProps = {
+  name: string;
+  text: string;
+  subindex?: NetworksSubIndexDataForm;
+  key?: number;
+};
 
 export interface ItemFormParams {
   label: string;
@@ -94,5 +120,15 @@ export interface ItemFormParams {
   icon?: string;
   deleteAction?: boolean;
   handleDeleteData?: ({ name }: { name: string }) => void;
-  handleModalAlert?: ({ name }: { name: string }) => void;
+  handleModalAlert?: ({ index, subindex }: { index: string, subindex: string }) => void;
+  value?: string | undefined;
+  myValue?: DataFormValues;
+  dataForm: DataForm;
+  index: IndexDataForm;
+  subindex?: number;
+  withCheck?: boolean;
+  subLabel?:
+  | EducationSubIndexDataForm
+  | CareerSubIndexDataForm
+  | NetworksSubIndexDataForm;
 }

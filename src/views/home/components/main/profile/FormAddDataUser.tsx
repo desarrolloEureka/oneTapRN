@@ -12,11 +12,29 @@ import {
     EducationDataFormValues,
 } from '../../../../../types/profile';
 
-const FormAddDataUser = ({ dataForm, isProUser, handleSeeMore, itemDetail }: { dataForm: DataForm; isProUser: boolean; handleSeeMore: (numItem: number) => void; itemDetail: number; }) => {
+const FormAddDataUser = ({
+    isDetailOpen,
+    itemDetail,
+    handleSeeMore,
+    isProUser,
+    dataForm,
+    handleDataSet,
+    handleModalAlert,
+}: {
+    isDetailOpen: boolean;
+    itemDetail: number;
+    handleSeeMore: (numItem: number) => void;
+    isProUser: boolean;
+    dataForm: DataForm;
+    handleDataSet: (e: DataForm) => void;
+    handleModalAlert: ({ index, subindex }: { index: string, subindex: string }) => void;
+}) => {
     const { data } = ProfileHook({
-        dataForm,
+        handleDataSet,
     });
 
+    console.log("Se actulizo data...... ");
+    
     return (
         <SafeAreaView>
             {data.map((value, key) => {
@@ -38,26 +56,32 @@ const FormAddDataUser = ({ dataForm, isProUser, handleSeeMore, itemDetail }: { d
                         return value[0] == 'phones' || value[0] == 'emails' ? (
                             <ItemFormBasicInfo
                                 key={key}
+                                dataForm={dataForm}
+                                handleDataSet={(e) => handleDataSet(e)}
+                                handleSeeMore={handleSeeMore}
                                 index={index}
                                 labelArray={labelArray}
-                                social={false}
                                 value={value}
-                                dataForm={dataForm}
-                                handleSeeMore={handleSeeMore}
                                 itemDetail={itemDetail}
+                                isDetailOpen={isDetailOpen}
+                                social={false}
+                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                             />
                         )
                             : (
                                 value[0] == 'education' ? (
                                     <ItemFormEducation
                                         key={key}
+                                        dataForm={dataForm}
+                                        handleDataSet={(e) => handleDataSet(e)}
+                                        handleSeeMore={handleSeeMore}
                                         index={index}
                                         labelArray={labelArray}
-                                        social={false}
                                         value={value}
-                                        dataForm={dataForm}
-                                        handleSeeMore={handleSeeMore}
                                         itemDetail={itemDetail}
+                                        isDetailOpen={isDetailOpen}
+                                        social={false}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                                     />
 
                                 ) :
@@ -65,49 +89,61 @@ const FormAddDataUser = ({ dataForm, isProUser, handleSeeMore, itemDetail }: { d
                                         (
                                             <ItemFormProfessional
                                                 key={key}
+                                                dataForm={dataForm}
+                                                handleDataSet={(e) => handleDataSet(e)}
+                                                handleSeeMore={handleSeeMore}
                                                 index={index}
                                                 labelArray={labelArray}
-                                                social={false}
                                                 value={value}
-                                                dataForm={dataForm}
-                                                handleSeeMore={handleSeeMore}
                                                 itemDetail={itemDetail}
+                                                isDetailOpen={isDetailOpen}
+                                                social={false}
+                                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                                             />
                                         )
                                         :
                                         <ItemFormUrl
                                             key={key}
+                                            dataForm={dataForm}
+                                            handleDataSet={(e) => handleDataSet(e)}
+                                            handleSeeMore={handleSeeMore}
                                             index={index}
                                             labelArray={labelArray}
-                                            social={false}
                                             value={value}
-                                            dataForm={dataForm}
-                                            handleSeeMore={handleSeeMore}
                                             itemDetail={itemDetail}
+                                            isDetailOpen={isDetailOpen}
+                                            social={false}
+                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                                         />
                             );
                     } else {
                         return value[0] == 'phones' || value[0] == 'emails' ? (
                             <ItemFormBasicInfo
                                 key={key}
+                                dataForm={dataForm}
+                                handleDataSet={(e) => handleDataSet(e)}
+                                handleSeeMore={handleSeeMore}
                                 index={index}
                                 labelArray={labelArray}
-                                social={false}
                                 value={value}
-                                dataForm={dataForm}
-                                handleSeeMore={handleSeeMore}
                                 itemDetail={itemDetail}
+                                isDetailOpen={isDetailOpen}
+                                social={false}
+                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                             />
                         ) : value[0] == 'urls' ? (
                             <ItemFormUrl
                                 key={key}
+                                dataForm={dataForm}
+                                handleDataSet={(e) => handleDataSet(e)}
+                                handleSeeMore={handleSeeMore}
                                 index={index}
                                 labelArray={labelArray}
-                                social={false}
                                 value={value}
-                                dataForm={dataForm}
-                                handleSeeMore={handleSeeMore}
                                 itemDetail={itemDetail}
+                                isDetailOpen={isDetailOpen}
+                                social={false}
+                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                             />
                         ) : null;
                     }

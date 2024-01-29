@@ -1,4 +1,4 @@
-import { getAllBackgroundImages, getAllTemplates } from '@/firebase/generals';
+import { getAllBackgroundImages, getAllTemplates } from '../firebase/generals';
 import { useQuery } from '@tanstack/react-query';
 
 const GetAllTemplates = () =>

@@ -24,20 +24,20 @@ const SwitchGeneral = ({ label }: { label?: string; }) => {
     };
 
     return (
-        <View style={{ height: "80%", width: "100%" }}>
+        <View style={{ height: "85%", width: "100%" }}>
             <View style={{ height: "100%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-                <View style={{ height: "50%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ height: "65%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
                     <Switch
                         value={isSwitchOn}
                         onValueChange={handleSwitchToggle}
                         trackColor={{ false: '#02AF9B', true: '#02AF9B' }}
                         thumbColor={'#f4f3f4'}
                         ios_backgroundColor="#3e3e3e"
-                        style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
+                        style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
                     />
                 </View>
-                <View style={{ height: "25%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={[{ color: '#030124' }]}>
+                <View style={{ height: "45%", width: "100%", justifyContent: 'center', alignItems: 'center', paddingTop: 3 }}>
+                    <Text style={[{ color: '#030124', fontSize: 13 }]}>
                         on/off
                     </Text>
                 </View>
