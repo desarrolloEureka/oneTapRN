@@ -60,17 +60,17 @@ const FormUrl = ({
             <View style={{ height: "100%", width: "10%", alignItems: 'flex-start', justifyContent: 'center' }}>
               <Ionicons name="library-outline" size={25} color="#02AF9B" />
             </View>
-            <View style={{ height: "100%", width: "30%", alignItems: 'flex-start', justifyContent: 'center' }}>
+            <View style={{ height: "100%", width: "45%", alignItems: 'flex-start', justifyContent: 'center' }}>
               <Text style={{ color: "black" }}>{label}</Text>
             </View>
           </>
           :
-          <View style={{ height: "100%", width: "30%", alignItems: 'flex-start', justifyContent: 'center' }}>
+          <View style={{ height: "100%", width: "40%", alignItems: 'flex-start', justifyContent: 'center' }}>
             <Text style={{ color: "black" }}>{label}</Text>
           </View>
         }
 
-        <View style={{ height: "100%", width: withCheck ? "60%" : "70%", alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ height: "100%", width: withCheck ? "45%" : "60%", alignItems: 'center', justifyContent: 'center' }}>
           <TextInput
             ref={dataRef}
             value={value() ?? ''}

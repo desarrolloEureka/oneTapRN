@@ -94,7 +94,6 @@ export const homeStyles = StyleSheet.create({
     justifyContent: 'space-between', // Espacio uniforme entre los elementos
     paddingHorizontal: 10,
     marginTop: 10,
-
   },
   switchWrapper: {
     marginVertical: 10,

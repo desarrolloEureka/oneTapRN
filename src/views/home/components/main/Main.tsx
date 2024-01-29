@@ -1,47 +1,23 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import {
-  Alert,
-  BackHandler,
-  FlatList,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View, FlatList, Image } from 'react-native';
+import { BackHandler } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { globalStyles } from '../../../../globalStyles/globalStyles';
-import {
-  SendSwitchActivateCard,
-  SendSwitchProfile,
-  SendTemplateSelected
-} from '../../../../reactQuery/users';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteStackParamList } from '../../../../types/navigation';
-import MenuSuperior from '../../../menuSuperior/MenuSuperior';
-import HomeHook from '../../hooks/HomeHook';
+import { globalStyles } from '../../../../globalStyles/globalStyles';
 import { homeStyles } from '../../styles/homeStyles';
-import ModalBackground from './home/ModalBackground';
-import { GetAllBackgroundImages, GetAllTemplates } from '../../../../reactQuery/home';
-import { BackgroundImages, TemplateTypes, Templates } from '../../../../types/home';
-import { useQueryClient } from '@tanstack/react-query';
-import {
-  GetUser,
-  SendBackgroundSelected,
-} from '../../../../reactQuery/users';
+import MenuSuperior from '../../../menuSuperior/MenuSuperior';
 import CustomSwitch from './home/CustomSwitch';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomCheckbox from './home/CustomCheckbox';
-
-interface GridItem {
-  id: number;
-  imageSource: any; // Ajusta el tipo según el tipo real de tus imágenes
-}
+import ModalBackground from './home/ModalBackground';
+import { BackgroundImages, TemplateTypes, Templates } from '../../../../types/home';
+import { SendSwitchActivateCard, SendSwitchProfile, } from '../../../../reactQuery/users';
+import { GetAllBackgroundImages, GetAllTemplates } from '../../../../reactQuery/home';
+import { GetUser } from '../../../../reactQuery/users';
+import HomeHook from '../../hooks/HomeHook';
 
 interface BackgroundType {
   id: string;
@@ -55,7 +31,6 @@ interface TemplateType {
 }
 
 const Main = () => {
-  const queryClient = useQueryClient();
   const { tab, setTab } = HomeHook();
   const [isSwitchOn1, setSwitchOn1] = useState(false);
   const [isSwitchOn2, setSwitchOn2] = useState(false);
@@ -114,15 +89,6 @@ const Main = () => {
     }
   };
 
-  const handleSelectTemplate = async (id: string) => {
-    console.log("ID  --> ", id);
-    const userId = data?.uid;
-    /*  
-     if (userId) {
-       await SendTemplateSelected(userId, id);
-     } */
-  };
-
   const handleNavigatePreview = () => {
     navigation.navigate('PreviewTemplate');
   };
@@ -152,6 +118,8 @@ const Main = () => {
     //setBackgroundSelect(data);
   };
 
+  console.log("Se actulizo todo.......");
+
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
       <MenuSuperior />
@@ -159,20 +127,22 @@ const Main = () => {
       <View style={globalStyles.container}>
         <View style={homeStyles.switchContainer}>
           <View style={homeStyles.switchContainer}>
-            <View style={homeStyles.switchWrapper}>
+            <View style={[homeStyles.switchWrapper, { margin: 15 }]}>
+
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
-                Perfil a mostrar{' '}
+                Perfil a Mostrar{' '}
               </Text>
               <CustomSwitch
                 profile={true}
               />
+
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
                 Social | PRO
               </Text>
             </View>
             <View style={homeStyles.switchWrapper}>
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
-                Activar tarjeta
+                Activar Tarjeta
               </Text>
               <CustomSwitch
                 profile={false}
@@ -193,6 +163,7 @@ const Main = () => {
 
       <View style={homeStyles.body}>
         <Text style={homeStyles.titleBody}>Plantillas</Text>
+
         <View style={homeStyles.tab}>
           <TouchableOpacity onPress={() => setTab('social')}>
             <Text>Social</Text>
@@ -201,6 +172,7 @@ const Main = () => {
             <Text>Profesional</Text>
           </TouchableOpacity>
         </View>
+
         <View style={homeStyles.tabSeparator} />
 
         <View style={{ height: 480, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
@@ -213,6 +185,7 @@ const Main = () => {
                 renderItem={({ item, index }) => {
                   const i = item.id;
                   const itemData = data?.templateData?.find((val) => val.id === i);
+                  //console.log("uid User ", data?.uid);
                   return (
                     <View style={{ height: 280, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
                       <View style={{ height: "95%", width: "95%", backgroundColor: "#02AF9B", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
@@ -226,18 +199,16 @@ const Main = () => {
                             </TouchableOpacity>
                           </View>
                           <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-end' }}>
-
-
                             <View style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }}>
 
                               {data && (
                                 <CustomCheckbox
-                                  uid={data.uid}
+                                  uid={data?.uid}
                                   optionSelected={tab as TemplateTypes}
                                   value={item}
                                   setTemplateSelect={setTemplateSelect}
                                   templates={data?.templateData}
-                                  checked={itemData ? itemData.checked : false}
+                                  checked={itemData != undefined ? itemData ? itemData?.checked : false : false}
                                 />
                               )}
 
@@ -281,6 +252,7 @@ const Main = () => {
             }
           </View>
         </View>
+
       </View>
 
       <View style={homeStyles.navbar}>
@@ -288,19 +260,19 @@ const Main = () => {
           onPress={() => handleTabPress('Home')}
           style={homeStyles.tabnav}>
           <Icon name="home" size={25} color="black" />
-          <Text>Home</Text>
+          <Text style={{ color: 'black' }}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => handleTabPress('Social')}
           style={homeStyles.tabnav}>
           <Icon name="users" size={25} color="black" />
-          <Text>Social</Text>
+          <Text style={{ color: 'black' }}>Social</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => handleTabPress('Professional')}
           style={homeStyles.tabnav}>
           <Icon name="briefcase" size={25} color="black" />
-          <Text>PRO</Text>
+          <Text style={{ color: 'black' }}>PRO</Text>
         </TouchableOpacity>
       </View>
 

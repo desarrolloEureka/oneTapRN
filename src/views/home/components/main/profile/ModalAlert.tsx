@@ -25,14 +25,14 @@ const ModalAlert = ({
                 <View style={{ height: 170, width: "90%", justifyContent: 'center', alignItems: 'center', backgroundColor: "#02AF9B", borderRadius: 25 }}>
                     <View style={{ height: "95%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ height: "65%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-                            <Text>¿Está seguro de eliminar este dato?</Text>
+                            <Text style={{ color: "white" }}>¿Está seguro de eliminar este dato?</Text>
                         </View>
                         <View style={{ height: "35%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 1 }}>
                             <TouchableOpacity style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'center', borderRightWidth: 1 }} onPress={() => handleDeleteData()}>
-                                <Text>Confirmar</Text>
+                                <Text style={{ color: "white" }}>Confirmar</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleModalAlert()}>
-                                <Text>Cancelar</Text>
+                                <Text style={{ color: "white" }}>Cancelar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

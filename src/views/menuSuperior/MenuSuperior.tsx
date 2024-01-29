@@ -4,6 +4,11 @@ import Modal from 'react-native-modal';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackNavigation } from '../../types/navigation';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const MenuSuperior = () => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -51,18 +56,18 @@ const MenuSuperior = () => {
 
   const renderModalContent = () => {
     const items = [
-      { id: 1, name: 'Comprar planes personales' },
-      { id: 2, name: 'Comprar plan corporativo' },
-      { id: 3, name: 'Cambiar material de la tarjeta' },
-      { id: 4, name: 'Ver tienda' },
-      { id: 5, name: 'Acerca de ' },
-      { id: 6, name: 'Politicas de privacidad' },
-      { id: 7, name: 'Terminos y condiciones' },
-      { id: 8, name: 'Politicas de devolucion' },
-      { id: 9, name: 'Preguntas Frecuentes' },
-      { id: 10, name: 'Cambiar Contraseña' },
-      { id: 11, name: 'Eliminar cuenta' },
-      { id: 12, name: 'Cerrar Sesion' }
+      { id: 1, name: 'Comprar planes personales', icon: 'shopping-cart' },//Feather
+      { id: 2, name: 'Comprar plan corporativo', icon: 'shopping-cart' },//Feather
+      { id: 3, name: 'Cambiar material de la tarjeta', icon: 'restore' },//MaterialCommunityIcons
+      { id: 4, name: 'Ver tienda', icon: 'storefront-outline' },//MaterialCommunityIcons
+      { id: 5, name: 'Acerca de ', icon: 'information-outline' },//MaterialCommunityIcons
+      { id: 6, name: 'Politicas de privacidad', icon: 'file-present' },//MaterialIcons
+      { id: 7, name: 'Terminos y condiciones', icon: 'file-present' },//MaterialIcons
+      { id: 8, name: 'Politicas de devolucion', icon: 'file-present' },//MaterialIcons
+      { id: 9, name: 'Preguntas Frecuentes', icon: 'chat-question-outline' },
+      { id: 10, name: 'Cambiar Contraseña', icon: 'password' },//MaterialIcons
+      { id: 11, name: 'Eliminar cuenta', icon: 'deleteuser' },//AntDesign
+      { id: 12, name: 'Cerrar Sesion', icon: 'logout' }//MaterialIcons
     ];
 
     return (
@@ -72,7 +77,11 @@ const MenuSuperior = () => {
             key={item.id}
             onPress={() => handleItemPress(item)}
             style={styles.item}>
-            <Text style={{ color: 'black' }}>{item.name}</Text>
+            {item.icon == 'shopping-cart' ? <Feather name={item.icon} size={24} color="black" /> : null}
+            {item.icon == 'restore' || item.icon == 'storefront-outline' || item.icon == 'information-outline' || item.icon == 'chat-question-outline' ? <MaterialCommunityIcons name={item.icon} size={24} color="black" /> : null}
+            {item.icon == 'file-present' || item.icon == 'password' || item.icon == 'logout' ? <MaterialIcons name={item.icon} size={24} color="black" /> : null}
+            {item.icon == 'deleteuser' ? <AntDesign name={item.icon} size={24} color="black" /> : null}
+            <Text style={{ color: 'black', paddingLeft: 12 }}> {item.name}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -117,7 +126,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    width: '100%'
+    width: '100%',
+    flexDirection: 'row'
   }
 });
 

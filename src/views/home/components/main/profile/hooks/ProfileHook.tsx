@@ -99,9 +99,24 @@ const ProfileHook = ({
         const dataAux = dataFormClone[index];
         if (dataAux && key != undefined) {
           dataAux[key].text = text;
+          console.log(" dataAux[key].text ", dataAux[key].text);
+          dataAux && handleDataSet && handleDataSet(dataFormClone);
         }
       }
+
+      /* 
+      if (index == 'phones' || index == 'emails') {
+        const dataAux = dataFormClone[index];
+        if (dataAux && key != undefined) {
+          dataAux[key].text = text;
+          currentDataRef.current[key].text = text;
+          dataAux && handleDataSet && handleDataSet(dataFormClone);
+        }
+        setIsDataLoad(true);
+      } 
+      */
     }
+
   };
 
 
@@ -277,6 +292,8 @@ const ProfileHook = ({
             icon: 'phone',
             order: 9,
           });
+        } else {
+          handleModalAlertLimit(true);
         }
       }
       if (index === 'emails') {
@@ -291,6 +308,8 @@ const ProfileHook = ({
             icon: 'email-outline',
             order: 10,
           });
+        } else {
+          handleModalAlertLimit(true);
         }
       }
       if (index === 'education') {
@@ -307,6 +326,8 @@ const ProfileHook = ({
             icon: '',
             order: 11,
           });
+        } else {
+          handleModalAlertLimit(true);
         }
       }
       if (index === 'professional_career') {
@@ -324,10 +345,12 @@ const ProfileHook = ({
             icon: '',
             order: 12,
           });
+        } else {
+          handleModalAlertLimit(true);
         }
       }
       if (index === 'urls') {
-        if (count && count < 3) {
+        if (count && count < 9) {
           dataFormClone[index]?.push({
             label: dataFormClone[index]![0].label,
             name: '',
@@ -339,10 +362,9 @@ const ProfileHook = ({
             professional: !social,
             order: 13,
           });
+        } else {
+          handleModalAlertLimit(true);
         }
-      }
-      if (count && count >= 3) {
-        handleModalAlertLimit(true);
       }
 
       handleDataSet && handleDataSet(dataFormClone);

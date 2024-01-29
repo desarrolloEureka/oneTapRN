@@ -49,7 +49,7 @@ const ItemForm = ({
   const isChecked = () => {
     const i = subindex as any;
     if (index == 'phones' || index == 'emails') {
-      console.log("dataRef isChecked ", dataRef);
+      //console.log("dataRef isChecked ", dataRef);
       if (dataRef.current) {
         return dataRef?.current[i]?.checked;
       } else {
@@ -117,14 +117,16 @@ const ItemForm = ({
               <TextInput
                 ref={dataRef}
                 id={`${name}-input`}
+                keyboardType={name === 'phones' ? "numeric" : name === 'emails' ? "email-address" : "default"}
                 style={profileStyles.inputBox}
                 placeholderTextColor="#000000"
                 underlineColorAndroid="transparent"
+                maxLength={name === 'phones' ? 10 : undefined}
                 onChangeText={(text: any) => {
-                  setInputText(text);
+                  //setInputText(text);
                   handleData({ name: name, text: text, currentDataRef: dataRef, key: subindex });
                 }}
-                value={value()}
+                value={value() ?? ''}
               />
             </View>
           </View>

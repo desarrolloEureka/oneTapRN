@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
-import { profile } from '../../../../../initialData/profileInitialData';
-import { DataForm } from '../../../../../types/profile';
+import { View, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
 import { Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { UpdatePassword } from '../../../../../reactQuery/users';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const ChangePassword = () => {
+    const navigation = useNavigation();
     const [showPasswordOne, setShowPasswordOne] = useState(false);
     const [showPasswordTwo, setShowPasswordTwo] = useState(false);
-
     const [password, setPassword] = useState<string>();
     const [passwordConfirm, setPasswordConfirm] = useState<string>();
-    const [errorForm, setErrorForm] = useState(null);
+    const [errorForm, setErrorForm] = useState(0);
+    const [stateUpdate, setStateUpdate] = useState(false);
 
     const handleSeePassword = () => {
         setShowPasswordOne(!showPasswordOne)
@@ -22,17 +23,38 @@ const ChangePassword = () => {
         setShowPasswordTwo(!showPasswordTwo)
     }
 
-    const handleChangePassword = () => {
+    const handleChangePassword = async () => {
         if (password && passwordConfirm && password === passwordConfirm) {
-            setErrorForm(null);
-            UpdatePassword(password);
+            setErrorForm(0);
+            const resUpdate = await UpdatePassword(password);
+            setStateUpdate(resUpdate);
+            if (resUpdate === true) {
+                Alert.alert('Éxito', 'La contraseña se cambió correctamente.');
+            } else {
+                Alert.alert('Error', 'Ocurrió un error y no fue posible cambiar la contraseña. Por favor, inténtalo de nuevo.');
+            }
         } else {
-            console.log("Error");
+            if (!password) {
+                setErrorForm(1);
+            } else if (!passwordConfirm) {
+                setErrorForm(2);
+            } else if (password !== passwordConfirm) {
+                setErrorForm(3);
+            }
         }
     }
 
+    const handleBackPress = () => {
+        navigation.goBack();
+    };
+
     return (
         <View style={styles.container}>
+            <View style={{ height: 100, width: "100%" }}>
+                <TouchableOpacity style={{ height: "100%", width: "18%", alignItems: 'center', justifyContent: 'center' }} onPress={handleBackPress}>
+                    <Icon name="arrow-back-ios" size={27} color="black" />
+                </TouchableOpacity>
+            </View>
             <View>
                 <Text style={styles.title}>
                     Cambiar Contraseña
@@ -58,13 +80,18 @@ const ChangePassword = () => {
                         {showPasswordOne ?
                             <MaterialCommunityIcons name="eye-outline" size={30} color="#02AF9B" />
                             :
-
                             <MaterialCommunityIcons name="eye-off-outline" size={30} color="#02AF9B" />
                         }
                     </TouchableOpacity>
                 </View>
 
             </View>
+
+            {errorForm === 1 &&
+                <Text style={{ color: 'red', marginTop: 3, marginRight: 200, marginBottom: 12 }}>
+                    La contraseña está vacía.
+                </Text>
+            }
 
             <Text style={styles.label}>
                 Confirmar Contraseña
@@ -93,6 +120,18 @@ const ChangePassword = () => {
 
             </View>
 
+            {errorForm === 2 &&
+                <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 12 }}>
+                    La confirmación de contraseña está vacía.
+                </Text>
+            }
+
+            {errorForm === 3 &&
+                <Text style={{ color: 'red', marginTop: 3, marginRight: 155, marginBottom: 12 }}>
+                    Las contraseñas no coinciden.
+                </Text>
+            }
+
             <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
                 <Text style={styles.buttonText}>
                     Continuar
@@ -105,10 +144,9 @@ const ChangePassword = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: 'white',
-        paddingTop: 50,
+        //paddingTop: 50,
     },
     title: {
         color: '#396593',
