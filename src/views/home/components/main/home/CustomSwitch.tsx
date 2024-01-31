@@ -35,10 +35,10 @@ const CustomSwitch = ({ profile }: { profile: boolean }) => {
             <Switch
                 value={profile ? switchProfile : switchCard}
                 onValueChange={handleSwitchChange}
-                trackColor={{ false: '#02AF9B', true: '#02AF9B' }}
+                trackColor={{ false: '#ABA9A6', true: '#02AF9B' }}
                 thumbColor={'#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"
-                style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
+                style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
             />
         </View>
     );

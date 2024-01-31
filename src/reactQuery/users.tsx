@@ -9,6 +9,7 @@ import {
   updateSwitchProfileFirebase,
   updateTemplateSelectedFirebase,
   updateUserData,
+  updateInactiveUser
 } from '../firebase/user';
 import { useQuery } from '@tanstack/react-query';
 import { UserData, TemplateData } from '../types/user';
@@ -50,7 +51,6 @@ const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
           const user = docSnap.data() as UserData;
           const getUser = userDataToSend(user, resultUser);
           await AsyncStorage.setItem('@user', JSON.stringify(getUser));
-
           const userLogged = await AsyncStorage.getItem('@user');
           return getUser;
         } else {
@@ -165,6 +165,11 @@ const SendDataUserProfile = async (userId: string, data: DataForm) => {
     });
 };
 
+const SendInactiveUser = async (userId: string) => {
+  const res = await updateInactiveUser(userId, { isActive: false });
+  return res;
+};
+
 const GetUser = () =>
   useQuery({
     queryKey: ['user'],
@@ -199,4 +204,5 @@ export {
   SendTemplateSelected,
   UpdatePassword,
   SendBackgroundSelected,
+  SendInactiveUser
 };

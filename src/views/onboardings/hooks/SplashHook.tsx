@@ -15,9 +15,14 @@ const SplashHook = () => {
         await AsyncStorage.setItem('firstTime', 'false');
       } else {
         const isUser = await AsyncStorage.getItem('@user');
-        //console.log("isUser ", isUser);
+
         if (isUser) {
-          navigation.push('Home');
+          const user = JSON.parse(isUser);
+          if (user?.isActive) {
+            navigation.push('Home');
+          } else {
+            navigation.push('Login');
+          }
         } else {
           navigation.push('Login');
         }

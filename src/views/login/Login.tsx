@@ -42,63 +42,39 @@ const Login = () => {
       setSendLogin(true);
     } else {
       setSendLogin(false);
-      !email
-        ? setErrorForm({
+      if (!email) {
+        setErrorForm({
           errorType: 1,
           errorMessage: "El correo es obligatorio",
         })
-        : null;
-      !password
-        ? setErrorForm({
+      } else if (!password) {
+        setErrorForm({
           errorType: 2,
           errorMessage: "La contraseña es obligatoria",
         })
-        : null;
+      }
     }
   };
 
   const userIsLogged = useCallback(() => {
     setSendLogin(false);
-    if (data) {
+    if (data && data?.isActive) {
       if (data.isAdmin) {
         navigation.navigate('Home');
       } else {
         navigation.navigate('Home');
       }
     } else if (sendLogin) {
-      /*  Alert.alert(
-         'Error',
-         'Usuario no encontrado. Verifica tus credenciales.'
-       ); */
+      setErrorForm({
+        errorType: 3,
+        errorMessage: "Usuario no Encontrado",
+      });
     }
   }, [data, navigation, sendLogin]);
-
 
   useEffect(() => {
     userIsLogged();
   }, [userIsLogged]);
-
-
-  /* const handleLogin = async () => {
-    try {
-      if (email && password) {
-        const res = await signInWithEmailAndPassword(authFire, email, password);
-        console.log(res);
-        AsyncStorage.setItem('@user', JSON.stringify(res));
-        navigation.navigate('Home');
-      } else {
-        Alert.alert('Error', 'Por favor, completa todos los campos.');
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Error to login:', error.message);
-        Alert.alert(
-          'Error',
-          'Error al iniciar sesión. Verifica tus credenciales.'
-        );
-      }
-    }
-  }; */
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -123,6 +99,13 @@ const Login = () => {
               keyboardType="email-address"
               onChangeText={text => setEmail(text)}
             />
+
+            {errorForm?.errorType === 1 &&
+              <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 12 }}>
+                {errorForm?.errorMessage}
+              </Text>
+            }
+
             <Text style={styles.label}>Contraseña</Text>
             <View style={styles.passwordContainer}>
               <TextInput
@@ -143,11 +126,25 @@ const Login = () => {
                 />
               </TouchableOpacity>
             </View>
+
+            {errorForm?.errorType === 2 &&
+              <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 20 }}>
+                {errorForm?.errorMessage}
+              </Text>
+            }
+
             <TouchableOpacity
               style={styles.forgotPassword}
               onPress={handleForgotPassword}>
               <Text style={{ color: "black" }}>Recuperar Contraseña</Text>
             </TouchableOpacity>
+
+            {errorForm?.errorType === 3 &&
+              <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 20 }}>
+                {errorForm?.errorMessage}.
+              </Text>
+            }
+
             <TouchableOpacity style={styles.button} onPress={loginHandle}>
               <Text style={styles.buttonText}>Siguiente</Text>
             </TouchableOpacity>
@@ -201,7 +198,7 @@ const styles = StyleSheet.create({
     width: 265,
     height: 45,
     backgroundColor: '#02AF9B',
-    marginLeft: 70,
+    marginLeft: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,

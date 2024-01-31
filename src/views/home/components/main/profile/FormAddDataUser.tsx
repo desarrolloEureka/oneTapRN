@@ -33,17 +33,6 @@ const FormAddDataUser = ({
         handleDataSet,
     });
 
- /*    console.log("Se actulizo data...... ");
-
-    data.map((item, index) => {
-        if (item[0] === 'phones') {
-            console.log("        ",);
-            console.log("item", item);
-            console.log("        ",);
-
-        }
-    }) */
-
     return (
         <SafeAreaView>
             {data.map((value, key) => {

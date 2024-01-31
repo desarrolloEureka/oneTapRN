@@ -9,13 +9,31 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { GetUser, SendInactiveUser } from '../../reactQuery/users';
+import LogOut from '../../hooks/logOut/LogOut';
 
 const MenuSuperior = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation<StackNavigation>();
+  const { data } = GetUser();
+  const { logOut } = LogOut();
+
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const handleDeleteUser = async () => {
+    const userId = data?.uid;
+    if (userId) {
+      const resUpdate = await SendInactiveUser(userId);
+      if (resUpdate === true) {
+        Alert.alert('Éxito', 'Se eliminó correctamente la cuenta');
+        logOut();
+      } else {
+        Alert.alert('Error', 'Ocurrió un error y no fue posible eliminar la cuenta. Por favor, inténtalo de nuevo.');
+      }
+    }
   };
 
   const handleItemPress = (item: { id: number; name: string }) => {
@@ -29,12 +47,10 @@ const MenuSuperior = () => {
       navigation.navigate('Politicas');
     } else if (item.id === 10) {
       navigation.navigate('ChangePassword');
-    } else if (item.id === 11 || item.id === 12) {
+    } else if (item.id === 11) {
       Alert.alert(
         'Alerta',
-        item.id === 11
-          ? '¿Estás seguro de que deseas eliminar tu cuenta?'
-          : '¿Estás seguro de que deseas cerrar sesión?',
+        '¿Estás seguro de que deseas eliminar tu cuenta?',
         [
           {
             text: 'NO',
@@ -43,9 +59,25 @@ const MenuSuperior = () => {
           {
             text: 'SI',
             onPress: async () => {
-              await AsyncStorage.removeItem('@user');
-              await AsyncStorage.clear();
-              navigation.navigate('Login');
+              handleDeleteUser();
+            }
+          }
+        ],
+        { cancelable: false }
+      );
+    } else if (item.id === 12) {
+      Alert.alert(
+        'Alerta',
+        '¿Estás seguro de que deseas cerrar sesión?',
+        [
+          {
+            text: 'NO',
+            style: 'cancel'
+          },
+          {
+            text: 'SI',
+            onPress: async () => {
+              logOut();
             }
           }
         ],

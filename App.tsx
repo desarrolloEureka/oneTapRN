@@ -20,7 +20,6 @@ import CreateNewPassword from './src/views/recovery/components/main/CreateNewPas
 import PasswordChanged from './src/views/recovery/components/main/PasswordChanged';
 import RecoveryCode from './src/views/recovery/components/main/RecoveryCode';
 import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassword';
-import webViewPassword from './src/views/recovery/components/main/webViewPassword';
 import { RouteStackParamList } from './src/types/navigation';
 
 const Stack = createNativeStackNavigator<RouteStackParamList>();
@@ -60,7 +59,6 @@ const App = () => {
           <Stack.Screen name="Terminos" component={Terminos} />
           <Stack.Screen name="Politicas" component={Politicas} />
           <Stack.Screen name="Plantillas" component={Plantillas} />
-          <Stack.Screen name="webViewPassword" component={webViewPassword} />
           <Stack.Screen name="Splash" component={Splash} />
         </Stack.Navigator>
       </NavigationContainer>

@@ -20,7 +20,7 @@ const CustomSwitchGeneral = ({ handleSwitch, name, checked, subindex }: { handle
             value={checked}
             key={name}
             onValueChange={() => handleSwitch({ checked, name, subindex })}
-            trackColor={{ false: '#02AF9B', true: '#02AF9B' }}
+            trackColor={{ false: '#ABA9A6', true: '#02AF9B' }}
             thumbColor={'#f4f3f4'}
             ios_backgroundColor="#3e3e3e"
             style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}

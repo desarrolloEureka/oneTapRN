@@ -19,7 +19,6 @@ export type RouteStackParamList = {
   Terminos: undefined;
   Politicas: undefined;
   Plantillas: undefined;
-  webViewPassword: undefined;
   Splash: undefined;
 };
 
