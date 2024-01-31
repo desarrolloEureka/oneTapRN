@@ -109,3 +109,14 @@ export const updateSwitchActivateCard = async (
     return null;
   }
 };
+
+export const updateInactiveUser = async (userId: string, newData: any): Promise<boolean> => {
+  try {
+    const userDocRef = doc(dataBase, 'users', userId);
+    await updateDoc(userDocRef, newData);
+    return true;
+  } catch (error) {
+    console.error("Error al actualizar el usuario:", error);
+    return false;
+  }
+};

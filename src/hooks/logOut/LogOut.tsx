@@ -1,19 +1,18 @@
-import React, {useEffect} from 'react';
-//import { useQueryClient } from 'react-query';
-//import { AsyncStorage } from '@react-native-async-storage/async-storage';
-//import { useNavigation } from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigation } from '../../types/navigation';
 
 const logOut = () => {
-  /* const queryClient = useQueryClient();
-  const navigation = useNavigation(); */
+  const queryClient = useQueryClient();
+  const navigation = useNavigation<StackNavigation>();
 
   const logOut = async () => {
-    console.log('Funcion de Cerrar Sesion....');
-    /* await AsyncStorage.clear();
-    queryClient.clear();
-    navigation.replace('Login'); */
+    await AsyncStorage.clear();
+    await queryClient.clear();
+    navigation.navigate('Login');
   };
-  return {logOut};
+  return { logOut };
 };
 
 export default logOut;
