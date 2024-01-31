@@ -21,10 +21,14 @@ const AcercaDe = () => {
 
       <View style={styles.versionTextContainer}>
         <Text style={styles.versionText}>One Tap Version 1.0</Text>
-        <Text style={styles.versionText}>2023-10-25</Text>
+        <Text style={styles.versionText}>2024-01-29</Text>
         <Text style={styles.versionText}>Todos los derechos reservados</Text>
-        <Text style={styles.versionText}>ONETAP</Text>
+        <Text style={styles.versionText}>REDACOL S.A.S</Text>
         <Text style={styles.versionText}>POWERED BY:</Text>
+        <Text style={styles.versionText}>EUREKA DREAMS</Text>
+      </View>
+      <View style={styles.imageContainer}>
+        <Image source={require('../../images/logoEureka.png')} style={styles.image} />
       </View>
     </View>
   );
@@ -39,17 +43,18 @@ const styles = StyleSheet.create({
     paddingTop: 20, // Ajusta el valor según sea necesario
   },
   titleContainer: {
-    marginTop: -150,
+    marginTop: -10,
     marginBottom:100, // Ajusta el valor según sea necesario
   },
   title: {
     color: '#396593',
     fontSize: 24,
+    marginTop: 100,
   },
   imageContainer: {
     width: 152,
     height: 127,
-    marginTop: 10,
+    marginTop: -40,
   },
   image: {
     width: '100%',
