@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Alert, Linking } from 'react-native';
 import Modal from 'react-native-modal';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackNavigation } from '../../types/navigation';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -39,7 +38,19 @@ const MenuSuperior = () => {
   const handleItemPress = (item: { id: number; name: string }) => {
     setModalVisible(false);
 
-    if (item.id === 5) {
+    if (item.id === 1) {
+      Linking.openURL('https://onetap.com.co/categoria-producto/planes-personales/');
+    }else if (item.id === 2) {
+      Linking.openURL('https://onetap.com.co/plan-corporativo/');
+    }else if (item.id === 3) {
+      Linking.openURL('https://onetap.com.co/categoria-producto/tarjetas/');
+    }else if (item.id === 4) {
+      Linking.openURL('https://onetap.com.co/tienda-one-tap/');
+    }else if (item.id === 8) {
+      Linking.openURL('https://onetap.com.co/reembolso_devoluciones/');
+    }else if (item.id === 9) {
+      Linking.openURL('https://onetap.com.co/preguntas-frecuentes/');
+    }else if (item.id === 5) {
       navigation.navigate('AcercaDe');
     } else if (item.id === 7) {
       navigation.navigate('Terminos');
@@ -88,18 +99,18 @@ const MenuSuperior = () => {
 
   const renderModalContent = () => {
     const items = [
-      { id: 1, name: 'Comprar planes personales', icon: 'shopping-cart' },//Feather
-      { id: 2, name: 'Comprar plan corporativo', icon: 'shopping-cart' },//Feather
-      { id: 3, name: 'Cambiar material de la tarjeta', icon: 'restore' },//MaterialCommunityIcons
-      { id: 4, name: 'Ver tienda', icon: 'storefront-outline' },//MaterialCommunityIcons
-      { id: 5, name: 'Acerca de ', icon: 'information-outline' },//MaterialCommunityIcons
-      { id: 6, name: 'Politicas de privacidad', icon: 'file-present' },//MaterialIcons
-      { id: 7, name: 'Terminos y condiciones', icon: 'file-present' },//MaterialIcons
-      { id: 8, name: 'Politicas de devolucion', icon: 'file-present' },//MaterialIcons
+      { id: 1, name: 'Comprar planes personales', icon: 'shopping-cart' },
+      { id: 2, name: 'Comprar plan corporativo', icon: 'shopping-cart' },
+      { id: 3, name: 'Cambiar material de la tarjeta', icon: 'restore' },
+      { id: 4, name: 'Ver tienda', icon: 'storefront-outline' },
+      { id: 5, name: 'Acerca de ', icon: 'information-outline' },
+      { id: 6, name: 'Politicas de privacidad', icon: 'file-present' },
+      { id: 7, name: 'Terminos y condiciones', icon: 'file-present' },
+      { id: 8, name: 'Politicas de devolucion', icon: 'file-present' },
       { id: 9, name: 'Preguntas Frecuentes', icon: 'chat-question-outline' },
-      { id: 10, name: 'Cambiar Contraseña', icon: 'password' },//MaterialIcons
-      { id: 11, name: 'Eliminar cuenta', icon: 'deleteuser' },//AntDesign
-      { id: 12, name: 'Cerrar Sesion', icon: 'logout' }//MaterialIcons
+      { id: 10, name: 'Cambiar Contraseña', icon: 'password' },
+      { id: 11, name: 'Eliminar cuenta', icon: 'deleteuser' },
+      { id: 12, name: 'Cerrar Sesion', icon: 'logout' }
     ];
 
     return (
@@ -109,10 +120,10 @@ const MenuSuperior = () => {
             key={item.id}
             onPress={() => handleItemPress(item)}
             style={styles.item}>
-            {item.icon == 'shopping-cart' ? <Feather name={item.icon} size={24} color="black" /> : null}
-            {item.icon == 'restore' || item.icon == 'storefront-outline' || item.icon == 'information-outline' || item.icon == 'chat-question-outline' ? <MaterialCommunityIcons name={item.icon} size={24} color="black" /> : null}
-            {item.icon == 'file-present' || item.icon == 'password' || item.icon == 'logout' ? <MaterialIcons name={item.icon} size={24} color="black" /> : null}
-            {item.icon == 'deleteuser' ? <AntDesign name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'shopping-cart' ? <Feather name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'restore' || item.icon === 'storefront-outline' || item.icon === 'information-outline' || item.icon === 'chat-question-outline' ? <MaterialCommunityIcons name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'file-present' || item.icon === 'password' || item.icon === 'logout' ? <MaterialIcons name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'deleteuser' ? <AntDesign name={item.icon} size={24} color="black" /> : null}
             <Text style={{ color: 'black', paddingLeft: 12 }}> {item.name}</Text>
           </TouchableOpacity>
         ))}
