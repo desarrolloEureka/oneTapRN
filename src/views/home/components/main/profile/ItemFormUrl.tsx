@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome6Brands from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5Brands from 'react-native-vector-icons/FontAwesome5';
+
 import {
     CareerDataFormValues,
     IndexDataForm,
@@ -14,6 +20,11 @@ import {
 } from '../../../../../types/profile';
 import ProfileHook from './hooks/ProfileHook';
 import FormUrl from './FormUrl';
+import IconVSCO from './icons/IconVSCO';
+import IconZoom from './icons/IconZoom';
+import IconWhatsAppB from './icons/IconWhatsAppB';
+import IconBooking from './icons/IconBooking';
+import IconOnlyFans from './icons/IconOnlyFans';
 
 const ItemFormUrl = ({
     dataForm,
@@ -145,72 +156,383 @@ const ItemFormUrl = ({
                                 <View style={{ height: "100%", width: "85%", justifyContent: 'center', alignItems: 'center' }}>
                                     {showUrls ?
                                         <View style={{ height: "50%", width: "98%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 14, flexDirection: 'row' }}>
+                                            <ScrollView
+                                                horizontal={true}
+                                            >
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'facebook' ? "#d9dce0" : "transparent", borderRadius: 5 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'facebook',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <Ionicons name="logo-facebook" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'facebook' ? "#d9dce0" : "transparent", borderRadius: 10 }}
-                                                onPress={(text: any) =>
-                                                    handleDataNetworks({
-                                                        name: value[0],
-                                                        text: 'facebook',
-                                                        subindex: 'icon',
-                                                        key,
-                                                    })}>
-                                                <Ionicons name="logo-facebook" size={23} color="#02AF9B" />
-                                            </TouchableOpacity>
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'threads' ? "#d9dce0" : "transparent", borderRadius: 5 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'threads',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="square-threads" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'twitter' ? "#d9dce0" : "transparent", borderRadius: 10 }}
-                                                onPress={(text: any) =>
-                                                    handleDataNetworks({
-                                                        name: value[0],
-                                                        text: 'twitter',
-                                                        subindex: 'icon',
-                                                        key,
-                                                    })}>
-                                                <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
-                                            </TouchableOpacity>
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'linkedin' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'linkedin',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <Ionicons name="logo-linkedin" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'pending' ? "#d9dce0" : "transparent", borderRadius: 10 }}
-                                                onPress={(text: any) =>
-                                                    handleDataNetworks({
-                                                        name: value[0],
-                                                        text: 'pending',
-                                                        subindex: 'icon',
-                                                        key,
-                                                    })}>
-                                                <Ionicons name="logo-twitter" size={23} color="#02AF9B" />
-                                            </TouchableOpacity>
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'messenger' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'messenger',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <Fontisto name="messenger" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'instagram' ? "#d9dce0" : "transparent", borderRadius: 10 }}
-                                                onPress={(text: any) =>
-                                                    handleDataNetworks({
-                                                        name: value[0],
-                                                        text: 'instagram',
-                                                        subindex: 'icon',
-                                                        key,
-                                                    })}>
-                                                <Ionicons name="logo-instagram" size={23} color="#02AF9B" />
-                                            </TouchableOpacity>
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'instagram' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'instagram',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <Ionicons name="logo-instagram" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'linkedin' ? "#d9dce0" : "transparent", borderRadius: 10 }}
-                                                onPress={(text: any) =>
-                                                    handleDataNetworks({
-                                                        name: value[0],
-                                                        text: 'linkedin',
-                                                        subindex: 'icon',
-                                                        key,
-                                                    })}>
-                                                <Ionicons name="logo-linkedin" size={23} color="#02AF9B" />
-                                            </TouchableOpacity>
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'snapchat' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'snapchat',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome name="snapchat-square" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
 
-                                            <TouchableOpacity style={{ height: "95%", width: "14%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tikTok' ? "#d9dce0" : "transparent", borderRadius: 10 }}
-                                                onPress={(text: any) =>
-                                                    handleDataNetworks({
-                                                        name: value[0],
-                                                        text: 'tikTok',
-                                                        subindex: 'icon',
-                                                        key,
-                                                    })}>
-                                                <MaterialIcons name="tiktok" size={23} color="#02AF9B" />
-                                            </TouchableOpacity>
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'twitter' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'twitter',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="square-x-twitter" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'twitch' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'twitch',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="twitch" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'youtube' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'youtube',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="youtube" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'whatsapp' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'whatsapp',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="whatsapp" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'zoom' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'zoom',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <IconZoom />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'line' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'line',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="line" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'gmail' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'gmail',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <MaterialCommunityIcons name="gmail" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'email' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'email',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <MaterialCommunityIcons name="email" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'phone' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'phone',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome name="phone" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'telegram' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'telegram',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="telegram" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'whatsAppBusiness' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'whatsAppBusiness',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <IconWhatsAppB />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'skype' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'skype',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="skype" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'wechat' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'wechat',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <AntDesign name="wechat" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'paypal' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'paypal',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="paypal" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'paypal' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'paypal',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <IconVSCO />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tumblr' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'tumblr',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="square-tumblr" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'vimeo' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'vimeo',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="vimeo-v" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'spotify' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'spotify',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="spotify" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'deezer' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'deezer',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="deezer" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'appleMusic' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'appleMusic',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <Fontisto name="applemusic" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'googleMaps' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'googleMaps',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <MaterialCommunityIcons name="google-maps" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tripAdvisor' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'tripAdvisor',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome5Brands name="tripadvisor" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'booking' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'booking',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <IconBooking />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tinder' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'tinder',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <Fontisto name="tinder" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'amazon' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'amazon',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="amazon" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'onlyFans' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'onlyFans',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <IconOnlyFans />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'airbnb' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'airbnb',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="airbnb" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'pinterest' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'pinterest',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands name="pinterest" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+                                            </ScrollView>
                                         </View>
                                         :
                                         null
