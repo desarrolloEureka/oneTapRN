@@ -22,6 +22,25 @@ const Politicas = () => {
 
   return (
     <View style={styles.container}>
+   <View style={styles.titleContainer}>
+      <TouchableOpacity style={styles.backButton} onPress={goBack}>
+        <Icon name="arrow-left" size={24} color="black" />
+      </TouchableOpacity>
+        <Text style={styles.title}>Políticas de privacidad</Text>
+        <View style={styles.titleLine} />
+      </View>
+      <View style={styles.background}>
+        <View style={styles.innerContainer}>
+          <ScrollView>
+            <View style={styles.versionTextContainer}>
+              <Text style={styles.versionText}>
+                Política de Administración y Manejo de Datos Personales De la
+               
+              </Text>
+            </View>
+          </ScrollView>
+        </View>
+      </View>
       <Pdf
         source={source}
         onLoadComplete={(numberOfPages, filePath) => {
