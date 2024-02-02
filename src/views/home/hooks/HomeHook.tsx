@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 const HomeHook = () => {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState('social');
   return {tab, setTab};
 };
 

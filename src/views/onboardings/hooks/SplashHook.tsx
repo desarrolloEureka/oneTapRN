@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {useEffect} from 'react';
-import {BackHandler} from 'react-native';
-import {StackNavigation} from '../../../types/navigation';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useEffect } from 'react';
+import { BackHandler } from 'react-native';
+import { StackNavigation } from '../../../types/navigation';
 
 const SplashHook = () => {
   const navigation = useNavigation<StackNavigation>();
@@ -15,8 +15,14 @@ const SplashHook = () => {
         await AsyncStorage.setItem('firstTime', 'false');
       } else {
         const isUser = await AsyncStorage.getItem('@user');
+
         if (isUser) {
-          navigation.push('Home');
+          const user = JSON.parse(isUser);
+          if (user?.isActive) {
+            navigation.push('Home');
+          } else {
+            navigation.push('Login');
+          }
         } else {
           navigation.push('Login');
         }

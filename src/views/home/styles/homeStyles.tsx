@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const homeStyles = StyleSheet.create({
   head: {
@@ -8,7 +8,7 @@ export const homeStyles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: '#CCCCCC', // Fondo gris
-    padding:3,
+    padding: 3,
   },
   body: {
     height: 400
@@ -17,7 +17,7 @@ export const homeStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: '#396593',
-    marginLeft:160,
+    marginLeft: 160,
     marginTop: 120
   },
   columnContainer: {
@@ -36,7 +36,7 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
   },
-  
+
   buttonContainer: {
     position: 'absolute',
     top: 0,
@@ -49,7 +49,7 @@ export const homeStyles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
     justifyContent: 'center',
-        marginRight: 10,
+    marginRight: 10,
     marginLeft: 10,
   },
   icon: {
@@ -74,7 +74,7 @@ export const homeStyles = StyleSheet.create({
   tabContainer: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   tabSeparator: {
     borderBottomWidth: 1,
@@ -82,7 +82,7 @@ export const homeStyles = StyleSheet.create({
     marginVertical: 5, // Puedes ajustar el espacio vertical según tus preferencias
     width: '100%', // O ajusta el ancho según sea necesario
   },
-  
+
 
   switchContainer: {
     position: 'absolute',
@@ -94,7 +94,6 @@ export const homeStyles = StyleSheet.create({
     justifyContent: 'space-between', // Espacio uniforme entre los elementos
     paddingHorizontal: 10,
     marginTop: 10,
-    
   },
   switchWrapper: {
     marginVertical: 10,
@@ -104,7 +103,7 @@ export const homeStyles = StyleSheet.create({
     backgroundColor: '#e74c3c', // Cambia el color de fondo según tus preferencias
     borderRadius: 20,
     padding: 20,
-    
+
   },
   switchWrapper2: {
     backgroundColor: '#3498db', // Cambia el color de fondo según tus preferencias
@@ -112,25 +111,28 @@ export const homeStyles = StyleSheet.create({
     padding: 10
   },
   switch: {
-    transform: [{scale: 1.5}]
+    transform: [{ scale: 1.5 }]
   },
   switchText: {
     fontSize: 11,
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
   },
   button: {
-    
     borderRadius: 10, // Radio para hacer el botón redondeado
-    paddingVertical: 15, // Ajusta el espaciado vertical según tus necesidades
-    paddingHorizontal: 20, // Ajusta el espaciado horizontal según tus necesidades
+    paddingVertical: 10, // Ajusta el espaciado vertical según tus necesidades
+    paddingHorizontal: 30, // Ajusta el espaciado horizontal según tus necesidades
     alignItems: 'center', // Alinea el contenido al centro
-    marginTop: 80,
-
+    marginTop: 85,
   },
 
   buttonText: {
-    color: 'blue', // Color del texto
-    fontSize: 18, // Tamaño del texto
+    fontFamily: 'Ubuntu',
+    fontSize: 18,
+    fontWeight: '500',
+    lineHeight: 28,
+    letterSpacing: 0.03,
+    textAlign: 'left',
+    color: '#396593'
   },
 
   container: {
@@ -148,8 +150,8 @@ export const homeStyles = StyleSheet.create({
     backgroundColor: '#02AF9B',
     marginTop: 300,
     justifyContent: 'center',
-     alignItems: 'center',
-     marginRight: 5,
+    alignItems: 'center',
+    marginRight: 5,
   },
   image: {
     width: '100%',
@@ -161,7 +163,7 @@ export const homeStyles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 10
 
-  }, 
+  },
   buttonT: {
     height: "45%",
     width: "40%",

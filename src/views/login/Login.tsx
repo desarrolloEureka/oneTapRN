@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
-import {signInWithEmailAndPassword} from 'firebase/auth';
-import React, {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -14,46 +13,75 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {authFire} from '../../firebase/firebaseConfig';
-import {StackNavigation} from '../../types/navigation';
+import { StackNavigation } from '../../types/navigation';
+import { LoginError } from '../../types/login';
+import { GetLoginQuery } from '../../reactQuery/users';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorForm, setErrorForm] = useState<LoginError | null>(null);
+  const [sendLogin, setSendLogin] = useState(false);
+
   const navigation = useNavigation<StackNavigation>();
+
   const handleForgotPassword = () => {
     navigation.navigate('RecoveryPassword');
   };
 
-  const handleLogin = async () => {
-    try {
-      if (email && password) {
-        const res = await signInWithEmailAndPassword(authFire, email, password);
-        console.log(res);
-        // Navegar a la pantalla 'Main' después de iniciar sesión exitosamente
-        AsyncStorage.setItem('@user', JSON.stringify(res));
-        navigation.navigate('Home');
-      } else {
-        Alert.alert('Error', 'Por favor, completa todos los campos.');
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Error to login:', error.message);
-        Alert.alert(
-          'Error',
-          'Error al iniciar sesión. Verifica tus credenciales.'
-        );
+  const { data, isLoading, isRefetching } = GetLoginQuery({
+    user: email,
+    password,
+    sendLogin,
+  });
+
+  const loginHandle = async () => {
+    if (email && password) {
+      setErrorForm(null);
+      setSendLogin(true);
+    } else {
+      setSendLogin(false);
+      if (!email) {
+        setErrorForm({
+          errorType: 1,
+          errorMessage: "El correo es obligatorio",
+        })
+      } else if (!password) {
+        setErrorForm({
+          errorType: 2,
+          errorMessage: "La contraseña es obligatoria",
+        })
       }
     }
   };
 
+  const userIsLogged = useCallback(() => {
+    setSendLogin(false);
+    if (data && data?.isActive) {
+      if (data.isAdmin) {
+        navigation.navigate('Home');
+      } else {
+        navigation.navigate('Home');
+      }
+    } else if (sendLogin) {
+      setErrorForm({
+        errorType: 3,
+        errorMessage: "Usuario no Encontrado",
+      });
+    }
+  }, [data, navigation, sendLogin]);
+
+  useEffect(() => {
+    userIsLogged();
+  }, [userIsLogged]);
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       {/* <ScrollView style={{flex:1}}> */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{flex: 1}}>
+        style={{ flex: 1 }}>
         <View style={styles.container}>
           {/* Vista de inicio de sesión */}
           <View>
@@ -71,6 +99,13 @@ const Login = () => {
               keyboardType="email-address"
               onChangeText={text => setEmail(text)}
             />
+
+            {errorForm?.errorType === 1 &&
+              <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 12 }}>
+                {errorForm?.errorMessage}
+              </Text>
+            }
+
             <Text style={styles.label}>Contraseña</Text>
             <View style={styles.passwordContainer}>
               <TextInput
@@ -85,18 +120,32 @@ const Login = () => {
                 style={styles.eyeIcon}
                 onPress={() => setShowPassword(!showPassword)}>
                 <Icon
-                  name={showPassword ? 'eye-slash' : 'eye'}
+                  name={showPassword ? 'eye' : 'eye-slash'}
                   size={20}
                   color="#396593"
                 />
               </TouchableOpacity>
             </View>
+
+            {errorForm?.errorType === 2 &&
+              <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 20 }}>
+                {errorForm?.errorMessage}
+              </Text>
+            }
+
             <TouchableOpacity
               style={styles.forgotPassword}
               onPress={handleForgotPassword}>
-              <Text>Recuperar Contraseña</Text>
+              <Text style={{ color: "black" }}>Recuperar Contraseña</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+
+            {errorForm?.errorType === 3 &&
+              <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 20 }}>
+                {errorForm?.errorMessage}.
+              </Text>
+            }
+
+            <TouchableOpacity style={styles.button} onPress={loginHandle}>
               <Text style={styles.buttonText}>Siguiente</Text>
             </TouchableOpacity>
           </View>
@@ -123,8 +172,8 @@ const styles = StyleSheet.create({
     marginLeft: 130
   },
   titleLine: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#396593',
+    //borderBottomWidth: 1,
+    //borderBottomColor: '#396593',
     marginBottom: 10,
     alignSelf: 'center',
     width: 150,
@@ -149,7 +198,7 @@ const styles = StyleSheet.create({
     width: 265,
     height: 45,
     backgroundColor: '#02AF9B',
-    marginLeft: 70,
+    marginLeft: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,

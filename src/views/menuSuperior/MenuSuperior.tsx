@@ -1,22 +1,56 @@
-import React, {useState} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet, Alert, Linking } from 'react-native';
 import Modal from 'react-native-modal';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {StackNavigation} from '../../types/navigation';
+import { StackNavigation } from '../../types/navigation';
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { GetUser, SendInactiveUser } from '../../reactQuery/users';
+import LogOut from '../../hooks/logOut/LogOut';
 
 const MenuSuperior = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation<StackNavigation>();
+  const { data } = GetUser();
+  const { logOut } = LogOut();
+
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleItemPress = (item: {id: number; name: string}) => {
+  const handleDeleteUser = async () => {
+    const userId = data?.uid;
+    if (userId) {
+      const resUpdate = await SendInactiveUser(userId);
+      if (resUpdate === true) {
+        Alert.alert('Éxito', 'Se eliminó correctamente la cuenta');
+        logOut();
+      } else {
+        Alert.alert('Error', 'Ocurrió un error y no fue posible eliminar la cuenta. Por favor, inténtalo de nuevo.');
+      }
+    }
+  };
+
+  const handleItemPress = (item: { id: number; name: string }) => {
     setModalVisible(false);
 
-    if (item.id === 5) {
+    if (item.id === 1) {
+      Linking.openURL('https://onetap.com.co/categoria-producto/planes-personales/');
+    }else if (item.id === 2) {
+      Linking.openURL('https://onetap.com.co/plan-corporativo/');
+    }else if (item.id === 3) {
+      Linking.openURL('https://onetap.com.co/categoria-producto/tarjetas/');
+    }else if (item.id === 4) {
+      Linking.openURL('https://onetap.com.co/tienda-one-tap/');
+    }else if (item.id === 8) {
+      Linking.openURL('https://onetap.com.co/reembolso_devoluciones/');
+    }else if (item.id === 9) {
+      Linking.openURL('https://onetap.com.co/preguntas-frecuentes/');
+    }else if (item.id === 5) {
       navigation.navigate('AcercaDe');
     } else if (item.id === 7) {
       navigation.navigate('Terminos');
@@ -24,12 +58,10 @@ const MenuSuperior = () => {
       navigation.navigate('Politicas');
     } else if (item.id === 10) {
       navigation.navigate('ChangePassword');
-    } else if (item.id === 11 || item.id === 12) {
+    } else if (item.id === 11) {
       Alert.alert(
         'Alerta',
-        item.id === 11
-          ? '¿Estás seguro de que deseas eliminar tu cuenta?'
-          : '¿Estás seguro de que deseas cerrar sesión?',
+        '¿Estás seguro de que deseas eliminar tu cuenta?',
         [
           {
             text: 'NO',
@@ -38,31 +70,47 @@ const MenuSuperior = () => {
           {
             text: 'SI',
             onPress: async () => {
-              // Lógica adicional de cerrar sesión...
-              await AsyncStorage.removeItem('@user');
-              navigation.navigate('Login'); // Navegar a la pantalla de login
+              handleDeleteUser();
             }
           }
         ],
-        {cancelable: false}
+        { cancelable: false }
+      );
+    } else if (item.id === 12) {
+      Alert.alert(
+        'Alerta',
+        '¿Estás seguro de que deseas cerrar sesión?',
+        [
+          {
+            text: 'NO',
+            style: 'cancel'
+          },
+          {
+            text: 'SI',
+            onPress: async () => {
+              logOut();
+            }
+          }
+        ],
+        { cancelable: false }
       );
     }
   };
 
   const renderModalContent = () => {
     const items = [
-      {id: 1, name: 'Comprar planes personales'},
-      {id: 2, name: 'Comprar plan corporativo'},
-      {id: 3, name: 'Cambiar material de la tarjeta'},
-      {id: 4, name: 'Ver tienda'},
-      {id: 5, name: 'Acerca de '},
-      {id: 6, name: 'Politicas de privacidad'},
-      {id: 7, name: 'Terminos y condiciones'},
-      {id: 8, name: 'Politicas de devolucion'},
-      {id: 9, name: 'Preguntas Frecuentes'},
-      {id: 10, name: 'Cambiar Contraseña'},
-      {id: 11, name: 'Eliminar cuenta'},
-      {id: 12, name: 'Cerrar Sesion'}
+      { id: 1, name: 'Comprar planes personales', icon: 'shopping-cart' },
+      { id: 2, name: 'Comprar plan corporativo', icon: 'shopping-cart' },
+      { id: 3, name: 'Cambiar material de la tarjeta', icon: 'restore' },
+      { id: 4, name: 'Ver tienda', icon: 'storefront-outline' },
+      { id: 5, name: 'Acerca de ', icon: 'information-outline' },
+      { id: 6, name: 'Politicas de privacidad', icon: 'file-present' },
+      { id: 7, name: 'Terminos y condiciones', icon: 'file-present' },
+      { id: 8, name: 'Politicas de devolucion', icon: 'file-present' },
+      { id: 9, name: 'Preguntas Frecuentes', icon: 'chat-question-outline' },
+      { id: 10, name: 'Cambiar Contraseña', icon: 'password' },
+      { id: 11, name: 'Eliminar cuenta', icon: 'deleteuser' },
+      { id: 12, name: 'Cerrar Sesion', icon: 'logout' }
     ];
 
     return (
@@ -72,7 +120,11 @@ const MenuSuperior = () => {
             key={item.id}
             onPress={() => handleItemPress(item)}
             style={styles.item}>
-            <Text>{item.name}</Text>
+            {item.icon === 'shopping-cart' ? <Feather name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'restore' || item.icon === 'storefront-outline' || item.icon === 'information-outline' || item.icon === 'chat-question-outline' ? <MaterialCommunityIcons name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'file-present' || item.icon === 'password' || item.icon === 'logout' ? <MaterialIcons name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'deleteuser' ? <AntDesign name={item.icon} size={24} color="black" /> : null}
+            <Text style={{ color: 'black', paddingLeft: 12 }}> {item.name}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -117,7 +169,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    width: '100%'
+    width: '100%',
+    flexDirection: 'row'
   }
 });
 
