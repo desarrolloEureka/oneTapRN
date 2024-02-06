@@ -28,8 +28,6 @@ const ItemForm = ({
   const [inputText, setInputText] = useState('');
 
   const value = () => {
-
-    console.log("Value Entre <<<<>>>>");
     const i = subindex as any;
     if (
       index != 'phones' &&
@@ -38,14 +36,10 @@ const ItemForm = ({
       index != 'urls' &&
       index != 'professional_career'
     ) {
-      console.log("Value Entre Iffffffffffff <<<<>>>>", myValue?.text);
       return dataRef?.current?.text ?? myValue?.text;
     } else {
-      console.log("dataRef ", dataRef)
       if (dataRef.current && typeof dataRef.current === 'object') {
-        console.log("Entre 1 if <<<<<>>>>>");
         if (dataRef.current[i]) {
-          console.log("Entre 2 if <<<<<>>>>>");
           return dataRef?.current[i]?.text;
         }
       }
@@ -55,18 +49,13 @@ const ItemForm = ({
   const isChecked = () => {
     const i = subindex as any;
     if (index == 'phones' || index == 'emails') {
-      //console.log("dataRef isChecked ", dataRef);
       if (dataRef.current) {
         return dataRef?.current[i]?.checked;
-      } else {
-        console.log("No existe la referencia");
       }
     }
   };
 
   useEffect(() => {
-    console.log("dataRef ---------------------<> ", dataRef);
-    console.log("myValue ---------------------<_-- ", myValue);
     if (dataRef.current && myValue) {
       dataRef.current = myValue;
       value();

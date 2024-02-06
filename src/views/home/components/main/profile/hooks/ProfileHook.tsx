@@ -81,8 +81,6 @@ const ProfileHook = ({
   }: handleDataProps) => {
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
-    console.log("text -----> ", text);
-
     if (
       index != 'phones' &&
       index != 'education' &&
@@ -99,26 +97,37 @@ const ProfileHook = ({
         const dataAux = dataFormClone[index];
         if (dataAux && key != undefined) {
           dataAux[key]!.text = text;
-          console.log(" dataAux[key].text ", dataAux[key].text);
           await dataAux && handleDataSet && handleDataSet(dataFormClone);
         }
+      } else if (
+        index == 'education' &&
+        (subindex == 'title' ||
+          subindex == 'year' ||
+          subindex == 'institution') &&
+        key != undefined
+      ) {
+        currentDataRef.current[key][subindex] = await text;
+        await fillFields(index, key, text, subindex);
+      } else if (
+        index == 'professional_career' &&
+        (subindex == 'company' ||
+          subindex == 'data_end' ||
+          subindex == 'data_init' ||
+          subindex == 'position') &&
+        key != undefined
+      ) {
+        currentDataRef.current[key][subindex] = await text;
+        await fillFields(index, key, text, undefined, subindex);
+      } else if (
+        index == 'urls' &&
+        (subindex == 'name' || subindex == 'url' || subindex == 'icon') &&
+        key != undefined
+      ) {
+        currentDataRef.current[key][subindex] = await text;
+        await fillFields(index, key, text, undefined, undefined, subindex);
       }
-
-      /* 
-      if (index == 'phones' || index == 'emails') {
-        const dataAux = dataFormClone[index];
-        if (dataAux && key != undefined) {
-          dataAux[key].text = text;
-          currentDataRef.current[key].text = text;
-          dataAux && handleDataSet && handleDataSet(dataFormClone);
-        }
-        setIsDataLoad(true);
-      } 
-      */
     }
-
   };
-
 
   const handleSendProfile = async () => {
     const userId = data?.uid;

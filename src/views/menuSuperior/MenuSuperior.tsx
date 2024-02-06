@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Alert, Linking } from 'react-native';
 import Modal from 'react-native-modal';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackNavigation } from '../../types/navigation';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';

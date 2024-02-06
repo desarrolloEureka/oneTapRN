@@ -1,5 +1,5 @@
 import { EducationSubIndexDataForm, ItemFormParams } from '../../../../../types/profile';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { profileStyles } from '../../../styles/profileStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -24,11 +24,12 @@ const FormUrl = ({
   subLabel,
 }: ItemFormParams) => {
   const dataRef = useRef<any>(null);
+  const [inputText, setInputText] = useState('');
 
   const value = () => {
     const i = subindex as any;
     if (dataRef.current && typeof dataRef.current === 'object') {
-      if (dataRef.current[i] && typeof dataRef.current[i] === 'object') {
+      if (dataRef.current[i]) {
         if (subLabel) {
           return dataRef.current[i][subLabel];
         }
@@ -48,8 +49,9 @@ const FormUrl = ({
   useEffect(() => {
     if (dataRef.current && myValue) {
       dataRef.current = myValue;
+      value();
     }
-  }, [dataRef, myValue]);
+  }, [dataRef, myValue, inputText]);
 
   return (
     <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
@@ -78,6 +80,7 @@ const FormUrl = ({
             placeholderTextColor="#000000"
             underlineColorAndroid="transparent"
             onChangeText={(text: any) => {
+              setInputText(text);
               handleData({
                 name: name,
                 text: text,

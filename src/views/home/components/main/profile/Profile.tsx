@@ -55,8 +55,6 @@ const Profile = () => {
         setDataForm(data);
     };
 
-    //const [switchValue, setSwitchValue] = useState(false);
-
     return (
         <SafeAreaView>
             <ScrollView contentContainerStyle={profileStyles.scrollViewContainer}>

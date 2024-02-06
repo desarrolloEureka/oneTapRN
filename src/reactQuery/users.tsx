@@ -89,7 +89,10 @@ const reBuildUserData = async (userData: UserData) => {
 };
 
 const SendSwitchProfile = async (userId: string, switchState: boolean) => {
-  await updateSwitchProfileFirebase(userId, { switch_profile: switchState });
+  await updateSwitchProfileFirebase(userId, {
+    switch_profile: switchState,
+    preview: "http://localhost:3000/es/views/cardView?uid=" + userId + "&type=" + (switchState ? "professional" : "social")
+  });
   const updatedUser = await getUserById(userId);
   if (updatedUser.exists()) {
     const userData = updatedUser.data() as UserData;

@@ -90,7 +90,7 @@ const Main = () => {
   };
 
   const handleNavigatePreview = () => {
-    navigation.navigate('PreviewTemplate');
+    navigation.navigate('PreviewTemplate', { tab: tab });
   };
 
   const onBackPress = () => {
@@ -146,7 +146,7 @@ const Main = () => {
                 profile={false}
               />
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
-                ON | OFF
+                OFF | ON
               </Text>
             </View>
           </View>
@@ -228,7 +228,7 @@ const Main = () => {
                           <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-start' }}>
                             <View style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }}>
                               <Text style={{ fontSize: 10, color: "white" }}>
-                                Plantilla {index + 1}
+
                               </Text>
                             </View>
                           </View>

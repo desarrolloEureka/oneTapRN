@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, Modal, FlatList, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { BackgroundImages, TemplateTypes, Templates } from '../../../../../types/home';
-import { RadioButton } from 'react-native-paper';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { BackgroundImages, TemplateTypes } from '../../../../../types/home';
 import CustomCheckbox from './CustomCheckbox';
 
 const ModalBackground = ({
@@ -49,7 +47,7 @@ const ModalBackground = ({
                             keyExtractor={item => item.id}
                             numColumns={2}
                             renderItem={({ item, index }) => {
-                                const x = data?.templateData?.find((val) => {
+                                const x = data?.templateData?.find((val: any) => {
                                     return (
                                         val.type === optionSelected &&
                                         val.background_id === item.id
@@ -88,7 +86,6 @@ const ModalBackground = ({
                                                 </View>
                                             </View>
                                             <View style={{ height: "15%", width: "98%", justifyContent: 'center' }}>
-                                                <Text style={{ paddingLeft: 10 }}>Fondo {index + 1}</Text>
                                             </View>
 
                                         </View>

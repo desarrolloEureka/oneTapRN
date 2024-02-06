@@ -1,19 +1,28 @@
-import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, TouchableOpacity, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 import { GetUser } from '../../../../../reactQuery/users';
 import { domain } from '../../../../../initialData/globals';
+import { useRoute } from '@react-navigation/native';
 
 const PreviewTemplate = () => {
   const navigation = useNavigation();
   const { data } = GetUser();
-  console.log("uid ", data?.uid);
+  const route = useRoute();
+  const [tab, setTab] = useState('social');
 
   const handleBackPress = () => {
     navigation.goBack();
   };
+
+  useEffect(() => {
+    const isProUser = route.params && route?.params?.tab;
+    if (isProUser !== undefined) {
+      setTab(isProUser)
+    }
+  }, []);
 
   return (
     <SafeAreaView>
@@ -26,7 +35,7 @@ const PreviewTemplate = () => {
       <View style={{ height: "92%", width: "100%", backgroundColor: "yellow" }}>
         {data && data?.uid &&
           <WebView
-            source={{ uri: `${domain}/es/views/cardView?uid=${data.uid}` }}
+            source={{ uri: `${domain}/es/views/cardView?uid=${data.uid}&type=${tab}` }}
             style={{ flex: 1 }}
             onLoad={() => console.log('Cargado')}
             scalesPageToFit
@@ -37,9 +46,5 @@ const PreviewTemplate = () => {
 
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default PreviewTemplate;

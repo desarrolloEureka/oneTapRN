@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import ItemForm from './ItemForm';
-import { profileStyles } from '../../../styles/profileStyles';
-import SwitchGeneral from './SwitchGeneral';
+
 import {
     CareerDataFormValues,
     IndexDataForm,
