@@ -150,7 +150,7 @@ const Login = () => {
 
 
               <TouchableOpacity style={{ height: "100%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }} onPress={handleGoTerms}>
-                <Text style={{ color: "black" }}>Acepta los términos y condiciones</Text>
+                <Text style={{ color: "black" }}>Términos y Condiciones</Text>
               </TouchableOpacity>
 
             </View>

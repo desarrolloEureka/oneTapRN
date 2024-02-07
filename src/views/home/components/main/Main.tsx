@@ -153,10 +153,10 @@ const Main = () => {
 
         <View style={homeStyles.tab}>
           <TouchableOpacity onPress={() => handleChangeTab('social')}>
-            <Text>Social</Text>
+            <Text style={{ color: "#396593" }}>Social</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleChangeTab('professional')}>
-            <Text>Profesional</Text>
+            <Text style={{ color: "#396593" }}>Profesional</Text>
           </TouchableOpacity>
         </View>
 

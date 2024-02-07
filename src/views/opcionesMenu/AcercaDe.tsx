@@ -25,7 +25,6 @@ const AcercaDe = () => {
         <Text style={styles.versionText}>Todos los derechos reservados</Text>
         <Text style={styles.versionText}>REDACOL S.A.S</Text>
         <Text style={styles.versionText}>POWERED BY:</Text>
-        <Text style={styles.versionText}>EUREKA DREAMS</Text>
       </View>
       <View style={styles.imageContainer}>
         <Image source={require('../../images/logoEureka.png')} style={styles.image} />
@@ -43,8 +42,8 @@ const styles = StyleSheet.create({
     paddingTop: 20, // Ajusta el valor según sea necesario
   },
   titleContainer: {
-    marginTop: -10,
-    marginBottom:100, // Ajusta el valor según sea necesario
+    marginTop: -100,
+    marginBottom: 100, // Ajusta el valor según sea necesario
   },
   title: {
     color: '#396593',
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: 152,
     height: 127,
-    marginTop: -40,
+    marginTop: -20,
   },
   image: {
     width: '100%',
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   versionText: {
-    color: '#black',
+    color: 'black',
     fontSize: 18,
     marginTop: 20, // Ajusta el valor según sea necesario
   },

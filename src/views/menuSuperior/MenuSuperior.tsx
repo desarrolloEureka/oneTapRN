@@ -39,17 +39,17 @@ const MenuSuperior = () => {
 
     if (item.id === 1) {
       Linking.openURL('https://onetap.com.co/categoria-producto/planes-personales/');
-    }else if (item.id === 2) {
+    } else if (item.id === 2) {
       Linking.openURL('https://onetap.com.co/plan-corporativo/');
-    }else if (item.id === 3) {
+    } else if (item.id === 3) {
       Linking.openURL('https://onetap.com.co/categoria-producto/tarjetas/');
-    }else if (item.id === 4) {
+    } else if (item.id === 4) {
       Linking.openURL('https://onetap.com.co/tienda-one-tap/');
-    }else if (item.id === 8) {
+    } else if (item.id === 8) {
       Linking.openURL('https://onetap.com.co/reembolso_devoluciones/');
-    }else if (item.id === 9) {
+    } else if (item.id === 9) {
       Linking.openURL('https://onetap.com.co/preguntas-frecuentes/');
-    }else if (item.id === 5) {
+    } else if (item.id === 5) {
       navigation.navigate('AcercaDe');
     } else if (item.id === 7) {
       navigation.navigate('Terminos');
@@ -162,7 +162,8 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, 0.1)'
   },
   iconText: {
-    fontSize: 30 // Tamaño del texto ajustado según tu preferencia
+    fontSize: 30, // Tamaño del texto ajustado según tu preferencia
+    color: "#396593"
   },
   item: {
     padding: 10,
