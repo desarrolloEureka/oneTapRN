@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import { ItemFormParams } from '../../../../../types/profile';
+import { DataFormValues, ItemFormParams } from '../../../../../types/profile';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 
@@ -28,7 +28,7 @@ const ItemForm = ({
   const [inputText, setInputText] = useState('');
 
   const value = () => {
-    const i = subindex as any;
+    // const i = subindex as any;
     if (
       index != 'phones' &&
       index != 'education' &&
@@ -38,19 +38,16 @@ const ItemForm = ({
     ) {
       return dataRef?.current?.text ?? myValue?.text;
     } else {
-      if (dataRef.current && typeof dataRef.current === 'object') {
-        if (dataRef.current[i]) {
-          return dataRef?.current[i]?.text;
-        }
+      if (dataRef.current && dataRef.current.length) {
+        return dataRef?.current[subindex as any]?.text;
       }
     }
   };
-
   const isChecked = () => {
     const i = subindex as any;
     if (index == 'phones' || index == 'emails') {
       if (dataRef.current) {
-        return dataRef?.current[i]?.checked;
+        return dataRef.current[i].checked;
       }
     }
   };
@@ -61,6 +58,7 @@ const ItemForm = ({
       value();
     }
   }, [dataRef, myValue, inputText]);
+
 
   return (
     <View style={{ height: 115, justifyContent: 'center', flexDirection: 'row' }}>
@@ -124,7 +122,11 @@ const ItemForm = ({
                   setInputText(text);
                   handleData({ name: name, text: text, currentDataRef: dataRef, key: subindex });
                 }}
-                value={value()}
+                value={
+                  myValue && !Array.isArray(myValue)
+                    ? myValue?.text
+                    : myValue && myValue[subindex as number]?.text
+                }
               />
             </View>
           </View>
@@ -142,7 +144,7 @@ const ItemForm = ({
               name={name}
               subindex={subindex}
               handleSwitch={(e: any) => handleSwitch({ checked, name, subindex, currentDataRef: dataRef })}
-              checked={isChecked() ?? false}
+              checked={myValue && !Array.isArray(myValue) ? myValue?.checked : myValue && myValue[subindex as number]?.checked}
             />
           </View>
           <TouchableOpacity

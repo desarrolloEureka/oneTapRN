@@ -27,14 +27,9 @@ const ProfileHook = ({
   );
 
   const objectDataSort = Object.entries(dataForm).sort((a, b) => {
-    if (!Array.isArray(a[1]) && !Array.isArray(b[1])) {
-      const data = a[1].order - b[1].order;
-      return data;
-    } else if (Array.isArray(a[1]) && Array.isArray(b[1])) {
-      const data = a[1][0]?.order - b[1][0]?.order;
-      return data;
-    }
-    return 0;
+    const aa = a[1].length ? a[1][0].order : a[1].order;
+    const bb = b[1].length ? b[1][0].order : b[1].order;
+    return aa - bb;
   });
 
   const [allChecked, setAllChecked] = useState(false);
@@ -49,6 +44,82 @@ const ProfileHook = ({
   const [isDataError, setIsDataError] = useState(false);
   const [isDataLoad, setIsDataLoad] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
+
+  const handleSendProfile = async () => {
+    const userId = data?.uid;
+    if (userId) {
+      const isSendDataProfile = await SendDataUserProfile(userId, dataForm);
+      if (isSendDataProfile?.success) {
+        setIsDataError(false);
+        setIsDataSuccess(true);
+      } else {
+        setIsDataError(true);
+        setIsDataSuccess(false);
+      }
+    }
+  };
+
+  const handleModalAlertLimit = (isOpen: boolean) => {
+    setIsModalAlertLimit(isOpen);
+  };
+
+  const handleModalAlert = (itemDelete: { index: string; subindex: string }) => {
+    if (!isModalAlert) {
+      setItemDelete(itemDelete);
+    } else {
+      setItemDelete('');
+    }
+    setIsModalAlert(!isModalAlert);
+  };
+
+  const handleSuccessDelete = () => {
+    setSuccessDelete(!isSuccessDelete);
+  };
+
+  const handleModalAux = () => {
+    setIsModalAlert(!isModalAlert);
+  };
+
+  const handleSeeMore = (numItem: number) => {
+    if (itemDetail != 0) {
+      setItemDetail(0);
+    } else {
+      setItemDetail(numItem);
+    }
+  };
+
+  const handleSwitch = ({
+    currentDataRef,
+    checked,
+    name,
+    subindex
+  }: {
+    currentDataRef?: any;
+    checked?: boolean;
+    name?: string
+    subindex?: number
+  }) => {
+    const isChecked = checked;
+    const dataFormClone = { ...dataForm };
+    const index = name as keyof typeof dataFormClone;
+    if (
+      index != 'phones' &&
+      index != 'education' &&
+      index != 'emails' &&
+      index != 'professional_career' &&
+      index != 'urls'
+    ) {
+      dataFormClone[index]!.checked = !isChecked;
+      handleDataSet && handleDataSet(dataFormClone);
+    } else {
+      let dataAux = dataFormClone[index];
+      if (dataAux && subindex != undefined && dataAux[subindex].checked != undefined) {
+        dataAux[subindex].checked = !isChecked;
+        currentDataRef.current[subindex].checked = !isChecked;
+        handleDataSet && handleDataSet(dataFormClone);
+      }
+    }
+  };
 
   const fillFields = (
     index: IndexDataForm,
@@ -71,6 +142,18 @@ const ProfileHook = ({
     setIsDataLoad(true);
   };
 
+  const handleDataNetworks = ({
+    name,
+    text,
+    subindex,
+    key,
+  }: handleDataNetworksProps) => {
+    const dataFormClone = { ...dataForm };
+    const index = name as keyof typeof dataFormClone;
+    key != undefined &&
+      subindex &&
+      fillFields(index, key, text, undefined, undefined, subindex);
+  };
 
   const handleData = async ({
     name,
@@ -127,129 +210,6 @@ const ProfileHook = ({
         await fillFields(index, key, text, undefined, undefined, subindex);
       }
     }
-  };
-
-  const handleSendProfile = async () => {
-    const userId = data?.uid;
-    if (userId) {
-      const isSendDataProfile = await SendDataUserProfile(userId, dataForm);
-      if (isSendDataProfile?.success) {
-        setIsDataError(false);
-        setIsDataSuccess(true);
-      } else {
-        setIsDataError(true);
-        setIsDataSuccess(false);
-      }
-    }
-  };
-
-  const handleModalAlertLimit = (isOpen: boolean) => {
-    setIsModalAlertLimit(isOpen);
-  };
-
-  const handleModal = () => {
-  };
-
-  const handleModalAlert = (itemDelete: { index: string; subindex: string }) => {
-    if (!isModalAlert) {
-      setItemDelete(itemDelete);
-    } else {
-      setItemDelete('');
-    }
-    setIsModalAlert(!isModalAlert);
-  };
-
-  const handleSuccessDelete = () => {
-    setSuccessDelete(!isSuccessDelete);
-  };
-
-  const handleModalAux = () => {
-    setIsModalAlert(!isModalAlert);
-  };
-
-  const handleSeeMore = (numItem: number) => {
-    if (itemDetail != 0) {
-      setItemDetail(0);
-    } else {
-      setItemDetail(numItem);
-    }
-  };
-
-  const handleSwitchAll = (val: any) => {
-    setSwitchValue(!switchValue);
-
-    const isChecked = val?.checked;
-    const dataFormClone = { ...dataForm };
-    const items = Object.entries(dataFormClone);
-
-    const newData = items.map((value) => {
-      if (value[0] == 'phones' || value[0] == 'emails') {
-        const data = value[1] as DataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
-      } else if (value[0] == 'education') {
-        const data = value[1] as EducationDataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
-      } else if (value[0] == 'professional_career') {
-        const data = value[1] as CareerDataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
-      } else if (value[0] == 'urls') {
-        const data = value[1] as UrlDataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
-      } else {
-        const data = value[1] as DataFormValues;
-        return checkedItem(data, value[0], !isChecked);
-      }
-    });
-
-    const dataFormChecked = Object.fromEntries(newData);
-    handleDataSet && handleDataSet(dataFormChecked);
-    setAllChecked(true);
-  };
-
-  const handleSwitch = ({
-    currentDataRef,
-    checked,
-    name,
-    subindex
-  }: {
-    currentDataRef?: any;
-    checked?: boolean;
-    name?: string
-    subindex?: number
-  }) => {
-    const isChecked = checked;
-    const dataFormClone = { ...dataForm };
-    const index = name as keyof typeof dataFormClone;
-    if (
-      index != 'phones' &&
-      index != 'education' &&
-      index != 'emails' &&
-      index != 'professional_career' &&
-      index != 'urls'
-    ) {
-      dataFormClone[index]!.checked = !isChecked;
-      handleDataSet && handleDataSet(dataFormClone);
-    } else {
-      let dataAux = dataFormClone[index];
-      if (dataAux && subindex != undefined && dataAux[subindex].checked != undefined) {
-        dataAux[subindex].checked = !isChecked;
-        currentDataRef.current[subindex].checked = !isChecked;
-        handleDataSet && handleDataSet(dataFormClone);
-      }
-    }
-  };
-
-  const handleDataNetworks = ({
-    name,
-    text,
-    subindex,
-    key,
-  }: handleDataNetworksProps) => {
-    const dataFormClone = { ...dataForm };
-    const index = name as keyof typeof dataFormClone;
-    key != undefined &&
-      subindex &&
-      fillFields(index, key, text, undefined, undefined, subindex);
   };
 
   const handleDeleteData = () => {
@@ -404,6 +364,37 @@ const ProfileHook = ({
     return [value, data];
   };
 
+  const handleSwitchAll = (val: any) => {
+    setSwitchValue(!switchValue);
+
+    const isChecked = val?.checked;
+    const dataFormClone = { ...dataForm };
+    const items = Object.entries(dataFormClone);
+
+    const newData = items.map((value) => {
+      if (value[0] == 'phones' || value[0] == 'emails') {
+        const data = value[1] as DataFormValues[];
+        return checkedItems(data, value[0], !isChecked);
+      } else if (value[0] == 'education') {
+        const data = value[1] as EducationDataFormValues[];
+        return checkedItems(data, value[0], !isChecked);
+      } else if (value[0] == 'professional_career') {
+        const data = value[1] as CareerDataFormValues[];
+        return checkedItems(data, value[0], !isChecked);
+      } else if (value[0] == 'urls') {
+        const data = value[1] as UrlDataFormValues[];
+        return checkedItems(data, value[0], !isChecked);
+      } else {
+        const data = value[1] as DataFormValues;
+        return checkedItem(data, value[0], !isChecked);
+      }
+    });
+
+    const dataFormChecked = Object.fromEntries(newData);
+    handleDataSet && handleDataSet(dataFormChecked);
+    setAllChecked(true);
+  };
+
   const validLabel = useCallback(
     (key: string) => {
       let label = '';
@@ -512,7 +503,7 @@ const ProfileHook = ({
       handleDataSet && handleDataSet(dataFormClone);
       setAllChecked(false);
     }
-  }, [allChecked, dataForm, handleDataSet, itemDetail]);
+  }, [allChecked, dataForm, handleDataSet]);
 
   return {
     handleSwitch,
@@ -523,7 +514,6 @@ const ProfileHook = ({
     data: objectDataSort,
     handleDeleteData,
     handleModalAux,
-    handleModal,
     handleModalAlert,
     handleSeeMore,
     isDetailOpen,

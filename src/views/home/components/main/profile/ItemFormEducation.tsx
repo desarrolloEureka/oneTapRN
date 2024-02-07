@@ -41,7 +41,13 @@ const ItemFormEducation = ({
     isDetailOpen: boolean;
     icon?: string;
     social: boolean;
-    handleModalAlert: ({ index, subindex }: { index: string, subindex: string }) => void;
+    handleModalAlert: ({
+        index,
+        subindex,
+    }: {
+        index: string;
+        subindex: string;
+    }) => void;
 }) => {
     const {
         handleSwitch,
@@ -70,82 +76,81 @@ const ItemFormEducation = ({
                     </TouchableOpacity>
                 </View>
 
-                {
-                    labelArray.map((val, key) => {
-                        const myValue = (user && index == value[0]
-                            ? user.profile[index]
-                            : undefined) as unknown as DataFormValues;
-                        return (
-                            <View key={key} style={{ height: 200, justifyContent: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "85%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
-                                    <View style={{ height: "30%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-                                        <FormEducation
-                                            label={'°Titulo: '}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={false}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                            withCheck={true}
-                                            subLabel={'title' as EducationSubIndexDataForm}
-                                        />
-                                    </View>
-
-                                    <View style={{ height: "30%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-                                        <FormEducation
-                                            label={'°Instituto: '}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={true}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                            withCheck={false}
-                                            subLabel={'institution' as EducationSubIndexDataForm}
-                                        />
-                                    </View>
-
-                                    <View style={{ height: "30%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-                                        <FormEducation
-                                            label={'°Año: '}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={false}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                            withCheck={false}
-                                            subLabel={'year' as EducationSubIndexDataForm}
-                                        />
-                                    </View>
-
-                                    <View style={{ height: "10%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
-                                        <Text style={{ color: "#02AF9B" }}>Educación y formación académica</Text>
-                                    </View>
+                {labelArray.map((val, key) => {
+                    const myValue = (user && index == value[0]
+                        ? user.profile[index]
+                        : undefined) as unknown as DataFormValues;
+                    return (
+                        <View key={key} style={{ height: 200, justifyContent: 'center', flexDirection: 'row' }}>
+                            <View style={{ height: "85%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ height: "30%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
+                                    <FormEducation
+                                        label={'°Titulo: '}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={val.checked}
+                                        subindex={key}
+                                        icon={val.icon}
+                                        deleteAction={false}
+                                        handleDeleteData={handleDeleteData}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        myValue={myValue}
+                                        dataForm={dataForm}
+                                        index={index}
+                                        withCheck={true}
+                                        subLabel={'title' as EducationSubIndexDataForm}
+                                    />
                                 </View>
 
+                                <View style={{ height: "30%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
+                                    <FormEducation
+                                        label={'°Instituto: '}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={val.checked}
+                                        subindex={key}
+                                        icon={val.icon}
+                                        deleteAction={true}
+                                        handleDeleteData={handleDeleteData}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        myValue={myValue}
+                                        dataForm={dataForm}
+                                        index={index}
+                                        withCheck={false}
+                                        subLabel={'institution' as EducationSubIndexDataForm}
+                                    />
+                                </View>
+
+                                <View style={{ height: "30%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
+                                    <FormEducation
+                                        label={'°Año: '}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={val.checked}
+                                        subindex={key}
+                                        icon={val.icon}
+                                        deleteAction={false}
+                                        handleDeleteData={handleDeleteData}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        myValue={myValue}
+                                        dataForm={dataForm}
+                                        index={index}
+                                        withCheck={false}
+                                        subLabel={'year' as EducationSubIndexDataForm}
+                                    />
+                                </View>
+
+                                <View style={{ height: "10%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
+                                    <Text style={{ color: "#02AF9B" }}>Educación y formación académica</Text>
+                                </View>
                             </View>
-                        );
-                    })
+
+                        </View>
+                    );
+                })
                 }
 
                 <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(3)}>

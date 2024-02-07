@@ -1,8 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
@@ -23,12 +21,15 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errorForm, setErrorForm] = useState<LoginError | null>(null);
   const [sendLogin, setSendLogin] = useState(false);
-
   const navigation = useNavigation<StackNavigation>();
 
   const handleForgotPassword = () => {
     navigation.navigate('RecoveryPassword');
   };
+
+  const handleGoTerms = () => {
+    navigation.navigate('Terminos');
+  }
 
   const { data, isLoading, isRefetching } = GetLoginQuery({
     user: email,
@@ -145,9 +146,19 @@ const Login = () => {
               </Text>
             }
 
+            <View style={{ height: 30, width: "90%", flexDirection: 'row' }}>
+
+
+              <TouchableOpacity style={{ height: "100%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }} onPress={handleGoTerms}>
+                <Text style={{ color: "black" }}>Acepta los términos y condiciones</Text>
+              </TouchableOpacity>
+
+            </View>
+
             <TouchableOpacity style={styles.button} onPress={loginHandle}>
               <Text style={styles.buttonText}>Siguiente</Text>
             </TouchableOpacity>
+
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -227,7 +238,7 @@ const styles = StyleSheet.create({
     padding: 10
   },
   forgotPassword: {
-    marginLeft: 20,
+    marginLeft: 0,
     marginBottom: 20
   }
 });

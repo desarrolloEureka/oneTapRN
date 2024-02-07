@@ -2,20 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Switch, View } from 'react-native';
 import { GetUser, SendSwitchActivateCard, SendSwitchProfile } from '../../../../../reactQuery/users';
 
-const CustomSwitch = ({ profile }: { profile: boolean }) => {
+const CustomSwitch = ({ profile, handleModalAlert }: { profile: boolean; handleModalAlert?: () => void; }) => {
     const { data } = GetUser();
     const [switchProfile, setSwitchProfile] = useState(false);
     const [switchCard, setSwitchCard] = useState(false);
 
     const handleSwitchChange = async () => {
         const userId = data?.uid;
+        const plan = data?.plan;
+
         if (userId) {
-            if (profile) {
-                setSwitchProfile(!switchProfile);
-                await SendSwitchProfile(userId, !switchProfile);
+            if (profile && plan === 'basic') {
+                setSwitchProfile(switchProfile);
+                handleModalAlert && handleModalAlert();
             } else {
-                setSwitchCard(!switchCard);
-                await SendSwitchActivateCard(userId, !switchCard);
+                if (profile) {
+                    setSwitchProfile(!switchProfile);
+                    await SendSwitchProfile(userId, !switchProfile);
+                } else {
+                    setSwitchCard(!switchCard);
+                    await SendSwitchActivateCard(userId, !switchCard);
+                }
             }
         }
     };
@@ -35,7 +42,7 @@ const CustomSwitch = ({ profile }: { profile: boolean }) => {
             <Switch
                 value={profile ? switchProfile : switchCard}
                 onValueChange={handleSwitchChange}
-                trackColor={{ false: '#ABA9A6', true: '#02AF9B' }}
+                trackColor={profile ? { false: '#02AF9B', true: '#02AF9B' } : { false: '#ABA9A6', true: '#02AF9B' }}
                 thumbColor={'#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"
                 style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}

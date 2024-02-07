@@ -72,9 +72,9 @@ const SendDataImage = async (userId: string, base64String: string) => {
   await updateUserData(userId, { image: base64String });
   const updatedUser = await getUserById(userId);
   if (updatedUser.exists()) {
-    const userData = updatedUser.data() as UserData;
-    const getUser = reBuildUserData(userData);
-    AsyncStorage.setItem('@user', JSON.stringify(getUser));
+    const userData = await updatedUser.data() as UserData;
+    const getUser = await reBuildUserData(userData);
+    await AsyncStorage.setItem('@user', JSON.stringify(getUser));
   }
 };
 
@@ -95,9 +95,9 @@ const SendSwitchProfile = async (userId: string, switchState: boolean) => {
   });
   const updatedUser = await getUserById(userId);
   if (updatedUser.exists()) {
-    const userData = updatedUser.data() as UserData;
-    const getUser = reBuildUserData(userData);
-    AsyncStorage.setItem('@user', JSON.stringify(getUser));
+    const userData = await updatedUser.data() as UserData;
+    const getUser = await reBuildUserData(userData);
+    await AsyncStorage.setItem('@user', JSON.stringify(getUser));
   }
 };
 
@@ -105,9 +105,9 @@ const SendSwitchActivateCard = async (userId: string, switchState: boolean) => {
   await updateSwitchActivateCard(userId, { switch_activateCard: switchState });
   const updatedUser = await getUserById(userId);
   if (updatedUser.exists()) {
-    const userData = updatedUser.data() as UserData;
-    const getUser = reBuildUserData(userData);
-    AsyncStorage.setItem('@user', JSON.stringify(getUser));
+    const userData = await updatedUser.data() as UserData;
+    const getUser = await reBuildUserData(userData);
+    await AsyncStorage.setItem('@user', JSON.stringify(getUser));
   }
 };
 
@@ -154,11 +154,9 @@ const SendDataUserProfile = async (userId: string, data: DataForm) => {
     .then(async (response) => {
       const updatedUser = await getUserById(userId);
       if (updatedUser.exists()) {
-        const userData = updatedUser.data() as UserData;
-
-        const getUser = reBuildUserData(userData);
-
-        AsyncStorage.setItem('@user', JSON.stringify(getUser));
+        const userData = await updatedUser.data() as UserData;
+        const getUser = await reBuildUserData(userData);
+        await AsyncStorage.setItem('@user', JSON.stringify(getUser));
         return { success: true, error: false };
       }
     })

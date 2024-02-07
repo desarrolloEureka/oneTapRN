@@ -14,10 +14,10 @@ import CustomSwitch from './home/CustomSwitch';
 import CustomCheckbox from './home/CustomCheckbox';
 import ModalBackground from './home/ModalBackground';
 import { BackgroundImages, TemplateTypes, Templates } from '../../../../types/home';
-import { SendSwitchActivateCard, SendSwitchProfile, } from '../../../../reactQuery/users';
 import { GetAllBackgroundImages, GetAllTemplates } from '../../../../reactQuery/home';
 import { GetUser } from '../../../../reactQuery/users';
 import HomeHook from '../../hooks/HomeHook';
+import CustomModalAlert from './profile/CustomModalAlert';
 
 interface BackgroundType {
   id: string;
@@ -32,8 +32,6 @@ interface TemplateType {
 
 const Main = () => {
   const { tab, setTab } = HomeHook();
-  const [isSwitchOn1, setSwitchOn1] = useState(false);
-  const [isSwitchOn2, setSwitchOn2] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const templates = GetAllTemplates();
   const dataBackgrounds = GetAllBackgroundImages();
@@ -47,6 +45,9 @@ const Main = () => {
     image: '',
   });
 
+  const [isModalAlert, setIsModalAlert] = useState(false);
+  const handleModalAlert = () => setIsModalAlert(!isModalAlert);
+
   const navigation =
     useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
 
@@ -55,37 +56,17 @@ const Main = () => {
     setIsModalOpen(!isModalOpen);
   }
 
-  const handleSwitchToggle1 = () => {
-    handleUpdateSwitch();
-  }
-
-  const handleSwitchToggle2 = () => {
-    handleUpdateSwitchCard();
-  }
-
-  const handleUpdateSwitch = async () => {
-    setSwitchOn1(!isSwitchOn1);
-    const userId = data?.uid;
-    if (userId) {
-      await SendSwitchProfile(userId, isSwitchOn1);
-    }
-  };
-
-  const handleUpdateSwitchCard = async () => {
-    setSwitchOn2(!isSwitchOn2);
-    const userId = data?.uid;
-    if (userId) {
-      await SendSwitchActivateCard(userId, isSwitchOn2);
-    }
-  };
-
   const handleTabPress = (tabName: string) => {
-    if (tabName === 'Social') {
-      navigation.navigate('Profile', { isProUser: false });
-    } else if (tabName === 'Professional') {
-      navigation.navigate('Profile', { isProUser: true });
+    if (tabName === "Professional" && data?.plan === "basic") {
+      setIsModalAlert(true);
     } else {
-      navigation.navigate('Home');
+      if (tabName === 'Social') {
+        navigation.navigate('Profile', { isProUser: false });
+      } else if (tabName === 'Professional') {
+        navigation.navigate('Profile', { isProUser: true });
+      } else {
+        navigation.navigate('Home');
+      }
     }
   };
 
@@ -115,7 +96,14 @@ const Main = () => {
     const data = {
       id: item.id,
     };
-    //setBackgroundSelect(data);
+  };
+
+  const handleChangeTab = (option: string) => {
+    if (option === "professional" && data?.plan === "basic") {
+      setIsModalAlert(true);
+    } else {
+      setTab(option);
+    }
   };
 
   return (
@@ -132,6 +120,7 @@ const Main = () => {
               </Text>
               <CustomSwitch
                 profile={true}
+                handleModalAlert={handleModalAlert}
               />
 
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
@@ -163,10 +152,10 @@ const Main = () => {
         <Text style={homeStyles.titleBody}>Plantillas</Text>
 
         <View style={homeStyles.tab}>
-          <TouchableOpacity onPress={() => setTab('social')}>
+          <TouchableOpacity onPress={() => handleChangeTab('social')}>
             <Text>Social</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setTab('professional')}>
+          <TouchableOpacity onPress={() => handleChangeTab('professional')}>
             <Text>Profesional</Text>
           </TouchableOpacity>
         </View>
@@ -285,6 +274,13 @@ const Main = () => {
           selectedTemplate={selectedTemplate}
         />
       }
+
+      <CustomModalAlert
+        isModalAlert={isModalAlert}
+        handleModalAlert={setIsModalAlert}
+        title="Acceso Restringido"
+        description="Actualmente no tienes acceso a las opciones de profesional porque estás utilizando un plan básico."
+      />
 
     </SafeAreaView >
   );

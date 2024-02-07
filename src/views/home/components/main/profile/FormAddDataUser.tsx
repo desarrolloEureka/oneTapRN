@@ -27,7 +27,13 @@ const FormAddDataUser = ({
     isProUser: boolean;
     dataForm: DataForm;
     handleDataSet: (e: DataForm) => void;
-    handleModalAlert: ({ index, subindex }: { index: string, subindex: string }) => void;
+    handleModalAlert: ({
+        index,
+        subindex,
+    }: {
+        index: string;
+        subindex: string;
+    }) => void;
 }) => {
     const { data } = ProfileHook({
         handleDataSet,
@@ -65,55 +71,50 @@ const FormAddDataUser = ({
                                 social={false}
                                 handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                             />
-                        )
-                            : (
-                                value[0] == 'education' ? (
-                                    <ItemFormEducation
-                                        key={key}
-                                        dataForm={dataForm}
-                                        handleDataSet={(e) => handleDataSet(e)}
-                                        handleSeeMore={handleSeeMore}
-                                        index={index}
-                                        labelArray={labelArray}
-                                        value={value}
-                                        itemDetail={itemDetail}
-                                        isDetailOpen={isDetailOpen}
-                                        social={false}
-                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                    />
+                        ) : value[0] == 'education' ? (
+                            <ItemFormEducation
+                                key={key}
+                                dataForm={dataForm}
+                                handleDataSet={(e) => handleDataSet(e)}
+                                handleSeeMore={handleSeeMore}
+                                index={index}
+                                labelArray={labelArray}
+                                value={value}
+                                itemDetail={itemDetail}
+                                isDetailOpen={isDetailOpen}
+                                social={false}
+                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                            />
 
-                                ) :
-                                    value[0] == 'professional_career' ?
-                                        (
-                                            <ItemFormProfessional
-                                                key={key}
-                                                dataForm={dataForm}
-                                                handleDataSet={(e) => handleDataSet(e)}
-                                                handleSeeMore={handleSeeMore}
-                                                index={index}
-                                                labelArray={labelArray}
-                                                value={value}
-                                                itemDetail={itemDetail}
-                                                isDetailOpen={isDetailOpen}
-                                                social={false}
-                                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            />
-                                        )
-                                        :
-                                        <ItemFormUrl
-                                            key={key}
-                                            dataForm={dataForm}
-                                            handleDataSet={(e) => handleDataSet(e)}
-                                            handleSeeMore={handleSeeMore}
-                                            index={index}
-                                            labelArray={labelArray}
-                                            value={value}
-                                            itemDetail={itemDetail}
-                                            isDetailOpen={isDetailOpen}
-                                            social={false}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                        />
-                            );
+                        ) : value[0] == 'professional_career' ? (
+                            <ItemFormProfessional
+                                key={key}
+                                dataForm={dataForm}
+                                handleDataSet={(e) => handleDataSet(e)}
+                                handleSeeMore={handleSeeMore}
+                                index={index}
+                                labelArray={labelArray}
+                                value={value}
+                                itemDetail={itemDetail}
+                                isDetailOpen={isDetailOpen}
+                                social={false}
+                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                            />
+                        ) : (
+                            <ItemFormUrl
+                                key={key}
+                                dataForm={dataForm}
+                                handleDataSet={(e) => handleDataSet(e)}
+                                handleSeeMore={handleSeeMore}
+                                index={index}
+                                labelArray={labelArray}
+                                value={value}
+                                itemDetail={itemDetail}
+                                isDetailOpen={isDetailOpen}
+                                social={false}
+                                handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                            />
+                        );
                     } else {
                         return value[0] == 'phones' || value[0] == 'emails' ? (
                             <ItemFormBasicInfo

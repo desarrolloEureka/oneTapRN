@@ -6,7 +6,7 @@ import FormDataUser from './FormDataUser';
 import FormAddDataUser from './FormAddDataUser';
 import { DataForm } from '../../../../../types/profile';
 import ProfileHook from './hooks/ProfileHook';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import { Text } from 'react-native-paper';
 import ModalAlert from './ModalAlert';
 import ModalSuccessDelete from './ModalSuccessDelete';
@@ -14,12 +14,10 @@ import CustomModalAlert from './CustomModalAlert';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 
 const Profile = () => {
-    const navigation = useNavigation();
     const route = useRoute();
     const [isProUser, setIsProUser] = useState(false);
 
     const {
-        handleModal,
         handleModalAlert,
         handleSeeMore,
         handleDeleteData,

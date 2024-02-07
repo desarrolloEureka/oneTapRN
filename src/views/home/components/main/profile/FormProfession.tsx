@@ -75,7 +75,6 @@ const FormProfession = ({
         <View style={{ height: "100%", width: withCheck ? "65%" : "70%", alignItems: 'center', justifyContent: 'center' }}>
           <TextInput
             ref={dataRef}
-            value={value() ?? ''}
             style={profileStyles.inputBox}
             placeholderTextColor="#000000"
             underlineColorAndroid="transparent"
@@ -89,6 +88,9 @@ const FormProfession = ({
                 subindex: subLabel as EducationSubIndexDataForm,
               });
             }}
+            value={
+              myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number][subLabel]
+            }
           />
         </View>
       </View>
@@ -101,7 +103,10 @@ const FormProfession = ({
             handleSwitch={(e: any) => handleSwitch({
               checked, name, subindex, currentDataRef: dataRef,
             })}
-            checked={checked}
+            //checked={checked}
+            checked={
+              myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number]?.checked
+            }
           />
         ) : (
           deleteAction === true && handleModalAlert ?
