@@ -12,6 +12,9 @@ import ModalAlert from './ModalAlert';
 import ModalSuccessDelete from './ModalSuccessDelete';
 import CustomModalAlert from './CustomModalAlert';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
+
 
 const Profile = () => {
     const route = useRoute();
@@ -42,8 +45,11 @@ const Profile = () => {
     } = ProfileHook({
     });
 
+    const navigation = useNavigation();
+
     useEffect(() => {
         const isProUser = route.params && route?.params?.isProUser;
+
         if (isProUser !== undefined) {
             setIsProUser(isProUser)
         }
@@ -53,9 +59,20 @@ const Profile = () => {
         setDataForm(data);
     };
 
+    const handleBackPress = () => {
+        navigation.goBack();
+    };
+
     return (
         <SafeAreaView>
             <ScrollView contentContainerStyle={profileStyles.scrollViewContainer}>
+
+                <View style={{ height: 50, width: "100%" }}>
+                    <TouchableOpacity style={{ height: "100%", width: "18%", alignItems: 'center', justifyContent: 'center' }} onPress={handleBackPress}>
+                        <Icon name="arrow-back-ios" size={27} color="black" />
+                    </TouchableOpacity>
+                </View>
+
                 <PhotoUser />
 
                 <View style={{ height: 100, width: "100%", justifyContent: 'center', alignItems: 'center', marginTop: 12 }}>
@@ -96,7 +113,18 @@ const Profile = () => {
                     handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                 />
 
-                <View style={{ height: 130, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ height: 100, width: "100%", justifyContent: 'center', alignItems: 'center', marginTop: isProUser ? 120 : 30 }}>
+                    <TouchableOpacity style={{
+                        backgroundColor: '#02AF9B',
+                        height: '45%',
+                        width: '40%',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 22,
+                        shadowColor: '#000',
+                    }} onPress={handleSendProfile} >
+                        <Text style={{ color: "white" }}>Guardar</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <ModalAlert

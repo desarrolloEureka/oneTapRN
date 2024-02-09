@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, TextInput, Alert, SafeAreaView, ScrollView } from 'react-native';
 import { Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { UpdatePassword } from '../../../../../reactQuery/users';
@@ -29,7 +29,7 @@ const ChangePassword = () => {
             const resUpdate = await UpdatePassword(password);
             setStateUpdate(resUpdate);
             if (resUpdate === true) {
-                Alert.alert('Éxito', 'La contraseña se cambió correctamente.');
+                Alert.alert('Alerta', 'La contraseña se cambió correctamente.');
             } else {
                 Alert.alert('Error', 'Ocurrió un error y no fue posible cambiar la contraseña. Por favor, inténtalo de nuevo.');
             }
@@ -49,118 +49,138 @@ const ChangePassword = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={{ height: 100, width: "100%" }}>
-                <TouchableOpacity style={{ height: "100%", width: "18%", alignItems: 'center', justifyContent: 'center' }} onPress={handleBackPress}>
-                    <Icon name="arrow-back-ios" size={27} color="black" />
-                </TouchableOpacity>
-            </View>
-            <View>
-                <Text style={styles.title}>
-                    Cambiar Contraseña
-                </Text>
-            </View>
-            <Text style={styles.labelPassword}>
-                Contraseña
-            </Text>
+        <SafeAreaView style={{ backgroundColor: '#e8e8e8', flex: 1 }}>
+            <ScrollView>
 
-            <View style={{ height: 65, width: "95%" }}>
-                <View style={{ height: "80%", width: "100%", borderBottomWidth: 1, borderBottomColor: '#396593', flexDirection: 'row' }}>
-                    <View style={{ height: "100%", width: "85%" }}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Contraseña"
-                            placeholderTextColor="#396593"
-                            underlineColorAndroid="transparent"
-                            secureTextEntry={!showPasswordOne}
-                            onChangeText={(text) => setPassword(text)}
-                        />
-                    </View>
-                    <TouchableOpacity style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }} onPress={handleSeePassword}>
-                        {showPasswordOne ?
-                            <MaterialCommunityIcons name="eye-outline" size={30} color="#02AF9B" />
-                            :
-                            <MaterialCommunityIcons name="eye-off-outline" size={30} color="#02AF9B" />
-                        }
+                <View style={{ flex: 1, aspectRatio: 1 / 0.15, width: "100%" }}>
+                    <TouchableOpacity style={{ height: "100%", width: "18%", alignItems: 'center', justifyContent: 'center' }} onPress={handleBackPress}>
+                        <Icon name="arrow-back-ios" size={27} color="black" />
                     </TouchableOpacity>
                 </View>
-
-            </View>
-
-            {errorForm === 1 &&
-                <Text style={{ color: 'red', marginTop: 3, marginRight: 200, marginBottom: 12 }}>
-                    La contraseña está vacía.
-                </Text>
-            }
-
-            <Text style={styles.label}>
-                Confirmar Contraseña
-            </Text>
-
-            <View style={{ height: 65, width: "95%" }}>
-                <View style={{ height: "80%", width: "100%", borderBottomWidth: 1, borderBottomColor: '#396593', flexDirection: 'row' }}>
-                    <View style={{ height: "100%", width: "85%" }}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Contraseña"
-                            placeholderTextColor="#396593"
-                            underlineColorAndroid="transparent"
-                            secureTextEntry={!showPasswordTwo}
-                            onChangeText={(text) => setPasswordConfirm(text)}
-                        />
-                    </View>
-                    <TouchableOpacity style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }} onPress={handleSeePasswordTwo}>
-                        {showPasswordTwo ?
-                            <MaterialCommunityIcons name="eye-outline" size={30} color="#02AF9B" />
-                            :
-                            <MaterialCommunityIcons name="eye-off-outline" size={30} color="#02AF9B" />
-                        }
-                    </TouchableOpacity>
+                <View style={{ flex: 1, aspectRatio: 1 / 0.20, width: "100%", alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={styles.title}>
+                        Cambiar Contraseña
+                    </Text>
                 </View>
 
-            </View>
+                <View style={{ flex: 1, aspectRatio: 1 / 0.05, width: "100%", alignItems: 'center' }}>
+                    <View style={{ height: '100%', width: "95%" }}>
+                        <Text style={styles.labelPassword}>
+                            Contraseña
+                        </Text>
+                    </View>
+                </View>
 
-            {errorForm === 2 &&
-                <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 12 }}>
-                    La confirmación de contraseña está vacía.
-                </Text>
-            }
+                <View style={{ flex: 1, aspectRatio: 1 / 0.20, width: "100%", alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ height: '100%', width: "95%" }}>
+                        <View style={{ height: "80%", width: "100%", borderBottomWidth: 1, borderBottomColor: '#396593', flexDirection: 'row' }}>
+                            <View style={{ height: "100%", width: "85%" }}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Contraseña"
+                                    placeholderTextColor="#396593"
+                                    underlineColorAndroid="transparent"
+                                    secureTextEntry={!showPasswordOne}
+                                    onChangeText={(text) => setPassword(text)}
+                                />
+                            </View>
+                            <TouchableOpacity style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }} onPress={handleSeePassword}>
+                                {showPasswordOne ?
+                                    <MaterialCommunityIcons name="eye-outline" size={30} color="#02AF9B" />
+                                    :
+                                    <MaterialCommunityIcons name="eye-off-outline" size={30} color="#02AF9B" />
+                                }
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
 
-            {errorForm === 3 &&
-                <Text style={{ color: 'red', marginTop: 3, marginRight: 155, marginBottom: 12 }}>
-                    Las contraseñas no coinciden.
-                </Text>
-            }
+                {errorForm === 1 &&
+                    <View style={{ flex: 1, aspectRatio: 1 / 0.08, width: "100%", alignItems: 'center' }}>
+                        <View style={{ height: '100%', width: "95%" }}>
+                            <Text style={{ color: 'red' }}>
+                                La contraseña está vacía.
+                            </Text>
+                        </View>
+                    </View>
+                }
 
-            <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
-                <Text style={styles.buttonText}>
-                    Continuar
-                </Text>
-            </TouchableOpacity>
-        </View>
+                <View style={{ flex: 1, aspectRatio: 1 / 0.05, width: "100%", alignItems: 'center' }}>
+                    <View style={{ height: '100%', width: "95%" }}>
+                        <Text style={styles.label}>
+                            Confirmar Contraseña
+                        </Text>
+                    </View>
+                </View>
+
+                <View style={{ flex: 1, aspectRatio: 1 / 0.20, width: "100%", alignItems: 'center', justifyContent: 'center' }}>
+
+                    <View style={{ height: '100%', width: "95%" }}>
+                        <View style={{ height: "80%", width: "100%", borderBottomWidth: 1, borderBottomColor: '#396593', flexDirection: 'row' }}>
+                            <View style={{ height: "100%", width: "85%" }}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Contraseña"
+                                    placeholderTextColor="#396593"
+                                    underlineColorAndroid="transparent"
+                                    secureTextEntry={!showPasswordTwo}
+                                    onChangeText={(text) => setPasswordConfirm(text)}
+                                />
+                            </View>
+                            <TouchableOpacity style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }} onPress={handleSeePasswordTwo}>
+                                {showPasswordTwo ?
+                                    <MaterialCommunityIcons name="eye-outline" size={30} color="#02AF9B" />
+                                    :
+                                    <MaterialCommunityIcons name="eye-off-outline" size={30} color="#02AF9B" />
+                                }
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                </View>
+
+                {errorForm === 2 &&
+                    <View style={{ flex: 1, aspectRatio: 1 / 0.05, width: "100%", alignItems: 'center' }}>
+                        <View style={{ height: '100%', width: "95%" }}>
+                            <Text style={{ color: 'red' }}>
+                                La confirmación de contraseña está vacía.
+                            </Text>
+                        </View>
+                    </View>
+                }
+
+                {errorForm === 3 &&
+                    <View style={{ flex: 1, aspectRatio: 1 / 0.05, width: "100%", alignItems: 'center' }}>
+                        <View style={{ height: '100%', width: "95%" }}>
+                            <Text style={{ color: 'red' }}>
+                                Las contraseñas no coinciden.
+                            </Text>
+                        </View>
+                    </View>
+                }
+                <View style={{ flex: 1, aspectRatio: 1 / 0.90, width: "100%", alignItems: 'center', justifyContent: 'flex-end'}}>
+                    <TouchableOpacity style={{ height: '15%', width: "55%", backgroundColor: '#02AF9B', justifyContent: 'center', alignItems: 'center', borderRadius: 100 }} onPress={handleChangePassword}>
+                        <Text style={styles.buttonText}>
+                            Continuar
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        </SafeAreaView >
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        //paddingTop: 50,
-    },
     title: {
         color: '#396593',
         fontSize: 24,
-        marginTop: 10,
-        marginBottom: 50,
+
     },
     input: {
         height: 52,
         width: 386,
         fontSize: 16,
         color: '#396593',
-        marginBottom: 10,
-        paddingLeft: 10,
     },
     label: {
         color: '#008F9E',
@@ -169,17 +189,7 @@ const styles = StyleSheet.create({
     },
     labelPassword: {
         color: '#008F9E',
-        marginTop: 3,
-        marginRight: 280,
-    },
-    button: {
-        width: 265,
-        height: 45,
-        backgroundColor: '#02AF9B',
-        marginTop: 300,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 100,
+
     },
     buttonText: {
         color: 'white',

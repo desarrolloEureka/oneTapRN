@@ -169,6 +169,17 @@ const ItemFormUrl = ({
                                                         })}>
                                                     <Ionicons name="logo-facebook" size={23} color="#02AF9B" />
                                                 </TouchableOpacity>
+                                                
+                                                <TouchableOpacity style={{ height: "100%", width: 38, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'www' ? "#d9dce0" : "transparent", borderRadius: 5 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'www',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome5 name="link" size={20} color="#02AF9B" />
+                                                </TouchableOpacity>
 
                                                 <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'threads' ? "#d9dce0" : "transparent", borderRadius: 5 }}
                                                     onPress={(text: any) =>
@@ -212,6 +223,18 @@ const ItemFormUrl = ({
                                                             key,
                                                         })}>
                                                     <Ionicons name="logo-instagram" size={23} color="#02AF9B" />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tiktok' ? "#d9dce0" : "transparent", borderRadius: 10 }}
+                                                    onPress={(text: any) =>
+                                                        handleDataNetworks({
+                                                            name: value[0],
+                                                            text: 'tiktok',
+                                                            subindex: 'icon',
+                                                            key,
+                                                        })}>
+                                                    <FontAwesome6Brands
+                                                        name="tiktok" size={21} color="#02AF9B" />
                                                 </TouchableOpacity>
 
                                                 <TouchableOpacity style={{ height: "100%", width: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'snapchat' ? "#d9dce0" : "transparent", borderRadius: 10 }}

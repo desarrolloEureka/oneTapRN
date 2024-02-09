@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
-import { BackHandler } from 'react-native';
 import { StackNavigation } from '../../../types/navigation';
 
 const SplashHook = () => {

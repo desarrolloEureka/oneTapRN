@@ -56,6 +56,7 @@ const FormAddDataUser = ({
                         : null;
 
                 if (labelArray) {
+                    //console.log("isProUser ", isProUser);
                     if (isProUser) {
                         return value[0] == 'phones' || value[0] == 'emails' ? (
                             <ItemFormBasicInfo
@@ -116,6 +117,7 @@ const FormAddDataUser = ({
                             />
                         );
                     } else {
+                        //console.log("Entre social")
                         return value[0] == 'phones' || value[0] == 'emails' ? (
                             <ItemFormBasicInfo
                                 key={key}
@@ -127,7 +129,7 @@ const FormAddDataUser = ({
                                 value={value}
                                 itemDetail={itemDetail}
                                 isDetailOpen={isDetailOpen}
-                                social={false}
+                                social={true}
                                 handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                             />
                         ) : value[0] == 'urls' ? (
@@ -141,7 +143,7 @@ const FormAddDataUser = ({
                                 value={value}
                                 itemDetail={itemDetail}
                                 isDetailOpen={isDetailOpen}
-                                social={false}
+                                social={true}
                                 handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                             />
                         ) : null;

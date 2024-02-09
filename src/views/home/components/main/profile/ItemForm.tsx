@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import { DataFormValues, ItemFormParams } from '../../../../../types/profile';
+import { ItemFormParams } from '../../../../../types/profile';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 

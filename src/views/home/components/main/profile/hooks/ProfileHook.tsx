@@ -231,8 +231,8 @@ const ProfileHook = ({
     }
   };
 
-  const handleAddData = (index: keyof typeof dataForm, social: boolean) => {
-    const dataFormClone = { ...dataForm };
+  const handleAddData = async (index: keyof typeof dataForm, social: boolean) => {
+    const dataFormClone = await { ...dataForm };
 
     if (
       index == 'phones' ||
@@ -241,13 +241,15 @@ const ProfileHook = ({
       index == 'urls' ||
       index == 'professional_career'
     ) {
-      const countProfessional = dataFormClone[index]?.filter(
+      /* const countProfessional = await dataFormClone[index]?.filter(
         (item: any) => item.professional
       ).length;
-      const countSocial = dataFormClone[index]?.filter(
+      const countSocial = await dataFormClone[index]?.filter(
         (item: any) => item.social
       ).length;
-      const count = social ? countSocial : countProfessional;
+      const count = await social ? countSocial : countProfessional; */
+
+      const count = await dataFormClone?.[index]?.length;
 
       if (index === 'phones') {
         if (count && count < 3) {
@@ -258,7 +260,7 @@ const ProfileHook = ({
             principal: false,
             social: social,
             professional: !social,
-            icon: 'phone',
+            icon: 'LocalPhoneOutlinedIcon',
             order: 9,
           });
         } else {
@@ -266,7 +268,7 @@ const ProfileHook = ({
         }
       }
       if (index === 'emails') {
-        if (count && count < 3) {
+        if (count === 0 || count && count < 3) {
           dataFormClone[index]?.push({
             label: dataFormClone[index]![0].label,
             text: '',
@@ -274,7 +276,7 @@ const ProfileHook = ({
             principal: false,
             social: social,
             professional: !social,
-            icon: 'email-outline',
+            icon: 'EmailOutlinedIcon',
             order: 10,
           });
         } else {
@@ -319,21 +321,17 @@ const ProfileHook = ({
         }
       }
       if (index === 'urls') {
-        if (count && count < 9) {
-          dataFormClone[index]?.push({
-            label: dataFormClone[index]![0].label,
-            name: '',
-            url: '',
-            icon: '',
-            checked: false,
-            principal: false,
-            social: social,
-            professional: !social,
-            order: 13,
-          });
-        } else {
-          handleModalAlertLimit(true);
-        }
+        dataFormClone[index]?.push({
+          label: dataFormClone[index]![0].label,
+          name: '',
+          url: '',
+          icon: '',
+          checked: false,
+          principal: false,
+          social: social,
+          professional: !social,
+          order: 13,
+        });
       }
 
       handleDataSet && handleDataSet(dataFormClone);

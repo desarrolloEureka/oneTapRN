@@ -20,7 +20,7 @@ const RecoveryPassword = () => {
     try {
       await resetPasswordFirebase(email);
       Alert.alert(
-        'Éxito',
+        'Alerta',
         'Si el correo existe en nuestra base de datos, un email será entregado para reestablecer tu contraseña'
       );
     } catch (error) {

@@ -26,7 +26,7 @@ const MenuSuperior = () => {
     if (userId) {
       const resUpdate = await SendInactiveUser(userId);
       if (resUpdate === true) {
-        Alert.alert('Éxito', 'Se eliminó correctamente la cuenta');
+        Alert.alert('Alerta', 'Se eliminó correctamente la cuenta');
         logOut();
       } else {
         Alert.alert('Error', 'Ocurrió un error y no fue posible eliminar la cuenta. Por favor, inténtalo de nuevo.');
@@ -98,18 +98,18 @@ const MenuSuperior = () => {
 
   const renderModalContent = () => {
     const items = [
-      { id: 1, name: 'Comprar planes personales', icon: 'shopping-cart' },
-      { id: 2, name: 'Comprar plan corporativo', icon: 'shopping-cart' },
-      { id: 3, name: 'Cambiar material de la tarjeta', icon: 'restore' },
-      { id: 4, name: 'Ver tienda', icon: 'storefront-outline' },
-      { id: 5, name: 'Acerca de ', icon: 'information-outline' },
-      { id: 6, name: 'Politicas de privacidad', icon: 'file-present' },
-      { id: 7, name: 'Terminos y condiciones', icon: 'file-present' },
-      { id: 8, name: 'Politicas de devolucion', icon: 'file-present' },
+      { id: 1, name: 'Comprar Planes Personales', icon: 'shopping-cart' },
+      { id: 2, name: 'Comprar Plan Corporativo', icon: 'shopping-cart' },
+      { id: 3, name: 'Cambiar Material de la Tarjeta', icon: 'restore' },
+      { id: 4, name: 'Ver Tienda', icon: 'storefront-outline' },
+      { id: 5, name: 'Acerca De', icon: 'information-outline' },
+      { id: 6, name: 'Políticas de Privacidad', icon: 'file-present' },
+      { id: 7, name: 'Términos y Condiciones', icon: 'file-present' },
+      { id: 8, name: 'Políticas de Devolución', icon: 'file-present' },
       { id: 9, name: 'Preguntas Frecuentes', icon: 'chat-question-outline' },
       { id: 10, name: 'Cambiar Contraseña', icon: 'password' },
-      { id: 11, name: 'Eliminar cuenta', icon: 'deleteuser' },
-      { id: 12, name: 'Cerrar Sesion', icon: 'logout' }
+      { id: 11, name: 'Eliminar Cuenta', icon: 'deleteuser' },
+      { id: 12, name: 'Cerrar Sesión', icon: 'logout' }
     ];
 
     return (

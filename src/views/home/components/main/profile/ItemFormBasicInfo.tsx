@@ -83,7 +83,7 @@ const ItemFormBasicInfo = ({
                 </View>
 
                 {data.map((val, key) => {
-                    if (social === true) {
+                    if (social == true) {
                         if (val.principal === true || val.social === true) {
                             const myValue = (user && index == value[0]
                                 ? user.profile[index]

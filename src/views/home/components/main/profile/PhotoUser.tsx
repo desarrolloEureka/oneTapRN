@@ -63,17 +63,13 @@ const PhotoUser: React.FC = () => {
       }
 
       const asset = result.assets && result.assets[0];
-      if (asset && asset.uri && asset.base64) {
+      if (asset && asset.uri && asset.base64 && data && data?.uid) {
+
         setSelectedImage(asset.uri);
-
-        // Almacenar la ruta de la imagen seleccionada en AsyncStorage
         await AsyncStorage.setItem('selectedImage', asset.uri);
-
-        // Verificar si base64 es válido antes de guardarlo en Firestore
-        SendDataImage(data?.uid, `data:${asset.type};base64,${asset.base64}`);
-
-        // Guardar la imagen en Firestore
+        await SendDataImage(data?.uid, `data:${asset.type};base64,${asset.base64}`);
         await saveImageToFirestore(data?.uid, asset.base64);
+
       } else {
         Alert.alert(
           'Error',
@@ -97,8 +93,6 @@ const PhotoUser: React.FC = () => {
       }
 
       const userRef = firestore().collection('users').doc(userId);
-
-      // Agrega el prefijo al base64
       const formattedBase64Image = `data:${base64Image}`;
 
       // Guardar la información de la imagen en Firestore
@@ -152,6 +146,7 @@ const PhotoUser: React.FC = () => {
             <View style={profileStyles.borderTargetName}>
               <Text style={profileStyles.textName}>
                 Hola {data && data?.user_name}
+                {/* Hola {data && data?.profile?.name?.text ? data?.profile?.name?.text : ''} */}
               </Text>
             </View>
           </View>

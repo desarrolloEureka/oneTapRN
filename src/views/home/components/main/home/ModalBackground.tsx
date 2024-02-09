@@ -41,7 +41,7 @@ const ModalBackground = ({
                             <Icon name="close" size={25} color="white" />
                         </TouchableOpacity>
                     </View>
-                    <View style={{ height: "80%", width: "90%", justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ height: "88%", width: "90%", justifyContent: 'center', alignItems: 'center' }}>
                         <FlatList
                             data={dataBackgrounds}
                             keyExtractor={item => item.id}
@@ -93,14 +93,6 @@ const ModalBackground = ({
                                 )
                             }}
                         />
-                    </View>
-                    <View style={{ height: "10%", width: "100%", justifyContent: 'center', alignItems: 'center', borderTopWidth: 1 }}>
-                        <View style={{ height: "98%", width: "90%", justifyContent: 'center', alignItems: 'flex-start' }}>
-                            <TouchableOpacity style={{ height: "100%", width: "35%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <Icon name="pluscircle" size={25} color="white" />
-                                <Text style={{ paddingLeft: 10 }}>Guardar</Text>
-                            </TouchableOpacity>
-                        </View>
                     </View>
 
                 </View>

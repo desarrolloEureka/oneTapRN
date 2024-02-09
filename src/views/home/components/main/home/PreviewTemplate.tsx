@@ -26,13 +26,13 @@ const PreviewTemplate = () => {
 
   return (
     <SafeAreaView>
-      <View style={{ height: "8%", width: "100%" }}>
-        <TouchableOpacity style={{ height: "100%", width: "18%", alignItems: 'center', justifyContent: 'center' }} onPress={handleBackPress}>
+      <View style={{ height: "7%", width: "100%", position: 'absolute', zIndex: 1, paddingLeft: 5 }}>
+        <TouchableOpacity style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center', backgroundColor: "white", paddingLeft: 10, borderRadius: 100 }} onPress={handleBackPress}>
           <Icon name="arrow-back-ios" size={28} color="black" />
         </TouchableOpacity>
       </View>
 
-      <View style={{ height: "92%", width: "100%", backgroundColor: "yellow" }}>
+      <View style={{ height: "100%", width: "100%" }}>
         {data && data?.uid &&
           <WebView
             source={{ uri: `${domain}/es/views/cardView?uid=${data.uid}&type=${tab}` }}

@@ -88,7 +88,8 @@ const FormEducation = ({
               });
             }}
             value={
-              myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number][subLabel]
+              myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number] && myValue[subindex as number][subLabel]
+              //myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number][subLabel]
             }
           />
         </View>
