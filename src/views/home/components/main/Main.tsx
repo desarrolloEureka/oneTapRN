@@ -15,9 +15,11 @@ import CustomCheckbox from './home/CustomCheckbox';
 import ModalBackground from './home/ModalBackground';
 import { BackgroundImages, TemplateTypes, Templates } from '../../../../types/home';
 import { GetAllBackgroundImages, GetAllTemplates } from '../../../../reactQuery/home';
-import { GetUser } from '../../../../reactQuery/users';
+import { GetUser, SendTemplateSelected } from '../../../../reactQuery/users';
 import HomeHook from '../../hooks/HomeHook';
 import CustomModalAlert from './profile/CustomModalAlert';
+import { useQueryClient } from '@tanstack/react-query';
+import CustomModalLoading from './profile/CustomModalLoading';
 
 interface BackgroundType {
   id: string;
@@ -32,6 +34,7 @@ interface TemplateType {
 
 const Main = () => {
   const { tab, setTab } = HomeHook();
+  const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const templates = GetAllTemplates();
   const dataBackgrounds = GetAllBackgroundImages();
@@ -39,6 +42,7 @@ const Main = () => {
   const dataTemplateFilter = templates.data?.filter(elemento => elemento.type === tab);
   const { data, error } = GetUser();
   const [selectedTemplate, setSelectedTemplate] = useState<string>();
+  const [isLoadingSendData, setIsLoadingSendData] = useState(false);
   const [templateSelect, setTemplateSelect] = useState<TemplateType>({
     id: '',
     name: '',
@@ -103,6 +107,26 @@ const Main = () => {
       setIsModalAlert(true);
     } else {
       setTab(option);
+    }
+  };
+
+  const handleSelectTemplate = async (background_id: string) => {
+    setIsLoadingSendData(true);
+    const uid = data?.uid
+
+    if (uid && selectedTemplate && templates) {
+      const updatedTemplates = data?.templateData.map(template => {
+        if (template.id === selectedTemplate) {
+          return { ...template, background_id };
+        }
+        return template;
+      });
+
+      await SendTemplateSelected(uid, updatedTemplates, queryClient);
+      await setIsLoadingSendData(false);
+
+    } else {
+      setIsLoadingSendData(false);
     }
   };
 
@@ -222,7 +246,7 @@ const Main = () => {
                             </View>
                           </View>
                           <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-end' }}>
-                            <TouchableOpacity style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleModalBackground(item)}>
+                            <TouchableOpacity disabled={itemData ? !itemData?.checked : true} style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleModalBackground(item)}>
                               <MaterialCommunityIcons name="cards" size={15} color="white" />
                               <Text style={{ fontSize: 9, color: "white" }}>
                                 Cambiar {'\n'}  fondo
@@ -272,6 +296,7 @@ const Main = () => {
           optionSelected={tab}
           handleSelectBackground={() => handleSelectBackground}
           selectedTemplate={selectedTemplate}
+          handleSelectTemplate={handleSelectTemplate}
         />
       }
 
@@ -280,6 +305,10 @@ const Main = () => {
         handleModalAlert={setIsModalAlert}
         title="Acceso Restringido"
         description="Actualmente no tienes acceso a las opciones de profesional porque estás utilizando un plan básico."
+      />
+
+      <CustomModalLoading
+        isLoadingSendData={isLoadingSendData}
       />
 
     </SafeAreaView >

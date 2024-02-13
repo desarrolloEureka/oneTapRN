@@ -60,23 +60,38 @@ const Login = () => {
     }
   };
 
-  const userIsLogged = useCallback(() => {
-    console.log("sendLogin  ", sendLogin);
-    console.log("data  ", data);
-    console.log("isLoading  ", isLoading);
+  /*   const userIsLogged = useCallback(() => {
+      console.log("sendLogin  ", sendLogin);
+      console.log("data  ", data);
+      console.log("isLoading  ", isLoading);
+  
+      if (data && data.isActive) {
+        navigation.navigate('Home');
+        setPassword('');
+        setEmail('');
+        setErrorForm(null);
+      } else if (!data && isLoading) {
+        setErrorForm({
+          errorType: 3,
+          errorMessage: "Usuario no encontrado",
+        });
+      }
+    }, [data, isLoading, navigation, sendLogin]); */
 
-    if (data && data.isActive) {
+  const userIsLogged = useCallback(() => {
+    setSendLogin(false);
+    if (data && data?.isActive) {
+      setErrorForm(null);
       navigation.navigate('Home');
       setPassword('');
       setEmail('');
-      setErrorForm(null);
-    } else if (!data && isLoading) {
+    } else if (sendLogin && !data && isLoading) {
       setErrorForm({
         errorType: 3,
-        errorMessage: "Usuario no encontrado",
+        errorMessage: "Credenciales incorrectas. Por favor, inténtelo de nuevo.",
       });
     }
-  }, [data, isLoading, navigation, sendLogin]);
+  }, [data, navigation, sendLogin]);
 
   useEffect(() => {
     userIsLogged();
@@ -86,9 +101,6 @@ const Login = () => {
     <SafeAreaView style={{ backgroundColor: '#e8e8e8', flex: 1 }}>
       <ScrollView>
         <View style={styles.headerContainer}>
-          {/*  <TouchableOpacity>
-            <Icon name="arrow-back-ios" size={27} color="black" />
-          </TouchableOpacity> */}
         </View>
 
         <View style={{ flex: 1, aspectRatio: 1 / 1.3, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -157,9 +169,9 @@ const Login = () => {
             }
 
             {errorForm?.errorType === 3 &&
-              <View style={{ height: "10%", width: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
+              <View style={{ height: "14%", width: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
                 <View style={{ height: '100%', width: '90%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                  <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 12 }}>
+                  <Text style={{ color: 'red', marginTop: 0, marginRight: 30, marginBottom: 4 }}>
                     {errorForm?.errorMessage}*
                   </Text>
                 </View>

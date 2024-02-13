@@ -44,17 +44,21 @@ const ProfileHook = ({
   const [isDataError, setIsDataError] = useState(false);
   const [isDataLoad, setIsDataLoad] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
+  const [isLoadingSendData, setIsLoadingSendData] = useState(false);
 
   const handleSendProfile = async () => {
+    setIsLoadingSendData(true);
     const userId = data?.uid;
     if (userId) {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm);
       if (isSendDataProfile?.success) {
         setIsDataError(false);
         setIsDataSuccess(true);
+        setIsLoadingSendData(false);
       } else {
         setIsDataError(true);
         setIsDataSuccess(false);
+        setIsLoadingSendData(false);
       }
     }
   };
@@ -534,7 +538,9 @@ const ProfileHook = ({
     setIsModalAlert,
     handleSuccessDelete,
     switchValue,
-    setSwitchValue
+    setSwitchValue,
+    isLoadingSendData,
+    setIsLoadingSendData
   };
 };
 

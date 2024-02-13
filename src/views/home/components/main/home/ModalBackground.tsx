@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Modal, FlatList, Image } from 'react-native';
+import { View, TouchableOpacity, Modal, FlatList, Image, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { BackgroundImages, TemplateTypes } from '../../../../../types/home';
@@ -12,7 +12,8 @@ const ModalBackground = ({
     data,
     optionSelected,
     handleSelectBackground,
-    selectedTemplate
+    selectedTemplate,
+    handleSelectTemplate
 }: {
     isModalOpen: boolean;
     handleModalBackground: () => void;
@@ -20,6 +21,7 @@ const ModalBackground = ({
     data?: any;
     optionSelected?: string;
     handleSelectBackground: () => void;
+    handleSelectTemplate: (e: string) => void;
     selectedTemplate?: string;
 }) => {
     return (
@@ -53,12 +55,12 @@ const ModalBackground = ({
                                         val.background_id === item.id
                                     );
                                 });
+
                                 return (
-                                    <View style={{ height: 240, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
-                                        <View style={{ height: "90%", width: "90%", backgroundColor: "white", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+                                    <View style={[{ height: 240, width: "50%", justifyContent: 'center', alignItems: 'center' }]}>
 
+                                        <TouchableOpacity disabled={x ? x.checked : false} style={[{ height: "85%", width: "85%", backgroundColor: "white", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }, x?.background_id === item.id && styles.shadow]} onPress={() => handleSelectTemplate(item.id)}>
                                             <View style={{ height: "15%", width: "100%", alignItems: 'flex-end' }}>
-
                                                 <View style={{ height: "100%", width: "30%", justifyContent: 'center', alignItems: 'center' }}>
                                                     {data && (
                                                         <CustomCheckbox
@@ -82,13 +84,12 @@ const ModalBackground = ({
                                                         source={{ uri: `${item.image}` }}
                                                         style={{ flex: 1, resizeMode: 'contain' }}
                                                     />
-
                                                 </View>
                                             </View>
                                             <View style={{ height: "15%", width: "98%", justifyContent: 'center' }}>
                                             </View>
+                                        </TouchableOpacity>
 
-                                        </View>
                                     </View>
                                 )
                             }}
@@ -100,5 +101,20 @@ const ModalBackground = ({
         </Modal>
     );
 };
+
+
+const styles = StyleSheet.create({
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 5,
+            height: 1,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 16,
+    },
+});
 
 export default ModalBackground;

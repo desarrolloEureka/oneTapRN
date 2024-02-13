@@ -5,6 +5,7 @@ import { TemplateTypes } from '../../../../../types/home';
 import { SendTemplateSelected } from '../../../../../reactQuery/users';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useQueryClient } from '@tanstack/react-query';
+import CustomModalLoading from '../profile/CustomModalLoading';
 
 interface TemplateType {
     id: string;
@@ -42,6 +43,7 @@ const CustomCheckbox = ({
     const queryClient = useQueryClient();
     const [isUpdate, setIsUpdate] = useState(false);
     const [fakeData, setFakeData] = useState(templates || []);
+    const [isLoadingSendData, setIsLoadingSendData] = useState(false);
 
     const handleSaveTemplate = async (background_id: string) => {
         if (!uid || !selectedTemplate || !templates) {
@@ -56,9 +58,11 @@ const CustomCheckbox = ({
         });
 
         await SendTemplateSelected(uid, updatedTemplates, queryClient);
+        await setIsLoadingSendData(false);
     };
 
     const handleSelectTemplate = async () => {
+        setIsLoadingSendData(true);
         if (handleSelectBackground) {
             await handleSaveTemplate(value.id);
         } else {
@@ -88,21 +92,27 @@ const CustomCheckbox = ({
                     (await SendTemplateSelected(userId, fakeDataClone, queryClient));
                 await setIsUpdate(!isUpdate);
             }
+            await setIsLoadingSendData(false);
         }
     };
 
     return (
-        <TouchableOpacity
-            onPress={handleSelectTemplate}
-            disabled={checked}
-            style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
-        >
-            <Ionicons
-                name={checked ? 'radio-button-on-outline' : 'radio-button-off-outline'}
-                size={19}
-                color={handleSelectBackground ? '#5278a0' : 'white'}
+        <>
+            <TouchableOpacity
+                onPress={handleSelectTemplate}
+                disabled={!handleSelectBackground ? checked : true}
+                style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
+            >
+                <Ionicons
+                    name={checked ? 'radio-button-on-outline' : 'radio-button-off-outline'}
+                    size={19}
+                    color={handleSelectBackground ? '#5278a0' : 'white'}
+                />
+            </TouchableOpacity>
+            <CustomModalLoading
+                isLoadingSendData={isLoadingSendData}
             />
-        </TouchableOpacity>
+        </>
     );
 };
 

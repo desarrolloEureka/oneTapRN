@@ -14,6 +14,7 @@ import CustomModalAlert from './CustomModalAlert';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import CustomModalLoading from './CustomModalLoading';
 
 
 const Profile = () => {
@@ -41,7 +42,9 @@ const Profile = () => {
         setIsDataSuccess,
         handleSwitchAll,
         switchValue,
-        setSwitchValue
+        setSwitchValue,
+        isLoadingSendData,
+        setIsLoadingSendData
     } = ProfileHook({
     });
 
@@ -149,6 +152,10 @@ const Profile = () => {
                     handleModalAlert={setIsDataSuccess}
                     title={"One Tap dice!"}
                     description={"La información del usuario ha sido registrada con éxito."}
+                />
+
+                <CustomModalLoading
+                    isLoadingSendData={isLoadingSendData}
                 />
 
             </ScrollView>

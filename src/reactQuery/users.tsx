@@ -48,8 +48,8 @@ const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
       if (resultUser && resultUser.user) {
         const docSnap = await getUserById(resultUser.user.uid);
         if (docSnap.exists()) {
-          const user = docSnap.data() as UserData;
-          const getUser = userDataToSend(user, resultUser);
+          const user = await docSnap.data() as UserData;
+          const getUser = await userDataToSend(user, resultUser);
           await AsyncStorage.setItem('@user', JSON.stringify(getUser));
           const userLogged = await AsyncStorage.getItem('@user');
           return getUser;
@@ -125,7 +125,6 @@ const SendBackgroundSelected = async (
     template_id: templateSelect,
     background_id: backgroundSelect,
   };
-
   await updateTemplateSelectedFirebase(userId, { templateData });
 };
 
