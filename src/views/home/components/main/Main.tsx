@@ -48,7 +48,6 @@ const Main = () => {
     name: '',
     image: '',
   });
-
   const [isModalAlert, setIsModalAlert] = useState(false);
   const handleModalAlert = () => setIsModalAlert(!isModalAlert);
 
@@ -140,7 +139,7 @@ const Main = () => {
             <View style={[homeStyles.switchWrapper, { margin: 15 }]}>
 
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
-                Perfil a Mostrar{' '}
+                Modo{' '}
               </Text>
               <CustomSwitch
                 profile={true}
@@ -153,7 +152,7 @@ const Main = () => {
             </View>
             <View style={homeStyles.switchWrapper}>
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
-                Activar Tarjeta
+                Inactivar Perfil
               </Text>
               <CustomSwitch
                 profile={false}
@@ -175,16 +174,19 @@ const Main = () => {
       <View style={homeStyles.body}>
         <Text style={homeStyles.titleBody}>Plantillas</Text>
 
-        <View style={homeStyles.tab}>
-          <TouchableOpacity onPress={() => handleChangeTab('social')}>
-            <Text style={{ color: "#396593" }}>Social</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleChangeTab('professional')}>
-            <Text style={{ color: "#396593" }}>Profesional</Text>
-          </TouchableOpacity>
+        <View style={{ height: 40, marginBottom: 15, justifyContent: 'center', alignItems: 'center', }}>
+          <View style={{ height: "100%", width: "95%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+            <TouchableOpacity style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'center', borderBottomWidth: tab === 'social' ? 4 : 2, borderColor: tab === 'social' ? '#396593' : '#7a7a7a' }} onPress={() => handleChangeTab('social')}>
+              <Text style={{ color: tab === 'social' ? "#396593" : "#7a7a7a", fontWeight: tab === 'social' ? 'bold' : undefined }}>Social</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'center', borderBottomWidth: tab === 'professional' ? 4 : 2, borderColor: tab === 'professional' ? '#396593' : '#7a7a7a' }} onPress={() => handleChangeTab('professional')}>
+              <Text style={{ color: tab === 'professional' ? "#396593" : "#7a7a7a", fontWeight: tab === 'professional' ? 'bold' : undefined }}>Profesional</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
-        <View style={homeStyles.tabSeparator} />
+        {/*    <View style={homeStyles.tabSeparator} /> */}
 
         <View style={{ height: 480, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ height: "98%", width: "95%" }}>
@@ -265,25 +267,25 @@ const Main = () => {
 
       </View>
 
-      <View style={homeStyles.navbar}>
-        <TouchableOpacity
-          onPress={() => handleTabPress('Home')}
-          style={homeStyles.tabnav}>
+      <View style={{
+        flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#E9E9E9', height: 80, position: 'absolute', bottom: 0, width: '100%'
+      }}>
+
+        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Home')}>
           <Icon name="home" size={25} color="black" />
           <Text style={{ color: 'black' }}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleTabPress('Social')}
-          style={homeStyles.tabnav}>
+
+        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Social')}>
           <Icon name="users" size={25} color="black" />
           <Text style={{ color: 'black' }}>Social</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleTabPress('Professional')}
-          style={homeStyles.tabnav}>
+
+        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Professional')}>
           <Icon name="briefcase" size={25} color="black" />
           <Text style={{ color: 'black' }}>PRO</Text>
         </TouchableOpacity>
+
       </View>
 
       {

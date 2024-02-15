@@ -10,7 +10,7 @@ const CustomSwitchGeneral = ({ handleSwitch, name, checked, subindex }: { handle
       <View style={{ height: "100%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
         {name === 'all_true' &&
           <View style={{ height: "25%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: "black", fontWeight: '700' }}>Switch Padre</Text>
+            <Text style={{ color: "black", fontWeight: '700' }}>Compartir Todo</Text>
           </View>
         }
 

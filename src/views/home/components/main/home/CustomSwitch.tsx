@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, View } from 'react-native';
+import { Switch, View, Alert } from 'react-native';
 import { GetUser, SendSwitchActivateCard, SendSwitchProfile } from '../../../../../reactQuery/users';
 
 const CustomSwitch = ({ profile, handleModalAlert }: { profile: boolean; handleModalAlert?: () => void; }) => {
@@ -27,6 +27,15 @@ const CustomSwitch = ({ profile, handleModalAlert }: { profile: boolean; handleM
         }
     };
 
+    const handleSwitchToggle1 = () => {
+        Alert.alert(
+            'Alerta',
+            "Su perfil no se va a mostrar",
+            [{ text: 'Cancelar' },
+            { text: 'OK', onPress: handleSwitchChange }],
+        );
+    };
+
     useEffect(() => {
         if (data) {
             if (profile) {
@@ -41,7 +50,7 @@ const CustomSwitch = ({ profile, handleModalAlert }: { profile: boolean; handleM
         <View>
             <Switch
                 value={profile ? switchProfile : switchCard}
-                onValueChange={handleSwitchChange}
+                onValueChange={!profile ? !switchCard ? handleSwitchChange : handleSwitchToggle1 : handleSwitchChange}
                 trackColor={profile ? { false: '#02AF9B', true: '#02AF9B' } : { false: '#ABA9A6', true: '#02AF9B' }}
                 thumbColor={'#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"

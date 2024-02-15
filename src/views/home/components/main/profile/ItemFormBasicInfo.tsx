@@ -63,8 +63,8 @@ const ItemFormBasicInfo = ({
     const data = itemDetail === 1 && value[0] === 'phones' || itemDetail === 2 && value[0] === 'emails' ? arrayData : labelArray;
 
     return (
-        <View style={{ height: labelArray.length > 1 ? 'auto' : 280, minHeight: 280, width: "100%", justifyContent: 'center', paddingTop: 20 }}>
-            <View style={{ minHeight: 230, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
+        <View style={{ height: labelArray.length > 1 ? 'auto' : 240, minHeight: 240, width: "100%", justifyContent: 'center', paddingTop: 20, paddingBottom: 20 }}>
+            <View style={{ minHeight: 190, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
                 <View style={{ height: 40, width: "100%", alignItems: 'flex-end' }}>
                     <TouchableOpacity style={{ height: "100%", width: "40%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => {
                         if (value[0] === 'phones') {
@@ -134,7 +134,7 @@ const ItemFormBasicInfo = ({
                     }
                 })}
 
-                <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }}
+                {/*  <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }}
                     onPress={() => {
                         if (value[0] === 'phones') {
                             handleSeeMore(1);
@@ -150,7 +150,7 @@ const ItemFormBasicInfo = ({
                             <Icon name="angle-down" size={35} color="#396593" />
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
         </View>

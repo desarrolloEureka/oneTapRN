@@ -59,10 +59,10 @@ const FormUrl = ({
 
         {withCheck ?
           <>
-            <View style={{ height: "100%", width: "10%", alignItems: 'flex-start', justifyContent: 'center' }}>
+            <View style={{ height: "100%", width: "11%", alignItems: 'flex-start', justifyContent: 'center' }}>
               <Ionicons name="library-outline" size={25} color="#02AF9B" />
             </View>
-            <View style={{ height: "100%", width: "45%", alignItems: 'flex-start', justifyContent: 'center' }}>
+            <View style={{ height: "100%", width: "23%", alignItems: 'flex-start', justifyContent: 'center' }}>
               <Text style={{ color: "black" }}>{label}</Text>
             </View>
           </>
@@ -72,7 +72,7 @@ const FormUrl = ({
           </View>
         }
 
-        <View style={{ height: "100%", width: withCheck ? "45%" : "60%", alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ height: "100%", width: withCheck ? "61%" : "54%", alignItems: 'center', justifyContent: 'center' }}>
           <TextInput
             ref={dataRef}
             style={profileStyles.inputBox}
@@ -89,11 +89,17 @@ const FormUrl = ({
               });
             }}
             value={
-              //myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number][subLabel]
               myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number] && myValue[subindex as number][subLabel]
             }
           />
         </View>
+
+        <View style={{ height: "100%", width: "7%", alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: 16 }}>
+            {myValue && subLabel && subLabel === 'url' && Array.isArray(myValue) && myValue[subindex as number] && myValue[subindex as number][subLabel] && myValue[subindex as number][subLabel].length > 15 ? ' ...' : null}
+          </Text>
+        </View>
+
       </View>
       <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
 
