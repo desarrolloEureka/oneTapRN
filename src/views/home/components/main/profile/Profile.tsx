@@ -47,7 +47,11 @@ const Profile = () => {
         switchValue,
         setSwitchValue,
         isLoadingSendData,
-        setIsLoadingSendData
+        setIsLoadingSendData,
+        status,
+        isEmailPhoneRight,
+        setisEmailPhoneRight,
+        noDeleted
     } = ProfileHook({
     });
 
@@ -155,6 +159,7 @@ const Profile = () => {
                     isModalAlert={isModalAlert}
                     handleModalAlert={handleModalAux}
                     handleDeleteData={handleDeleteData}
+                    noDeleted={noDeleted}
                 />
 
                 <ModalSuccessDelete
@@ -173,6 +178,13 @@ const Profile = () => {
                     handleModalAlert={setIsDataSuccess}
                     title={"One Tap dice!"}
                     description={"La información del usuario ha sido registrada con éxito."}
+                />
+
+                <CustomModalAlert
+                    isModalAlert={isEmailPhoneRight}
+                    handleModalAlert={setisEmailPhoneRight}
+                    title={"One Tap dice!"}
+                    description={status}
                 />
 
                 <CustomModalLoading

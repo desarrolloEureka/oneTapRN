@@ -14,6 +14,7 @@ import {
 } from '../../../../../../types/profile';
 import { profile } from '../../../../../../initialData/profileInitialData';
 import { GetUser, SendDataUserProfile } from '../../../../../../reactQuery/users';
+import { validateEmail, validatePhoneNumber } from '../../../../../../globals/validateData';
 
 const ProfileHook = ({
   handleDataSet,
@@ -49,10 +50,65 @@ const ProfileHook = ({
   const [isModalIcons, setModalIcons] = useState(false);
   const [itemUrlSelected, setItemUrlSelected] = useState([]);
   const [itemUrlKey, setItemUrlKey] = useState(0);
+  // Errores
+  const [isEmailPhoneRight, setisEmailPhoneRight] = useState(false);
+  const [status, setStatus] = useState<string>('');
+  const [noDeleted, setNoDeleted] = useState(false);
 
   const handleSendProfile = async () => {
-    setIsLoadingSendData(true);
     const userId = data?.uid;
+    const emails = dataForm?.emails?.map((email) => email.text);
+    const phones = dataForm?.phones?.map((phone) => phone.text);
+    const urls = dataForm?.urls?.map((urls) => urls);
+    const education = dataForm?.education?.map((education) => education);
+    const professionalCareer = dataForm?.professional_career?.map((proCareer) => proCareer);
+
+    if (emails) {
+      const isEmailValid = emails.every((email) => validateEmail(email as string));
+      if (!isEmailValid) {
+        setStatus("El correo no es valido ó no se pueden dejar espacios en blanco");
+        setisEmailPhoneRight(true);
+        return;
+      }
+    }
+    if (phones) {
+      const isPhoneValid = phones.every((phone) => validatePhoneNumber(phone as string));
+      if (!isPhoneValid) {
+        setStatus("El teléfono no es valido ó no se pueden dejar espacios en blanco");
+        setisEmailPhoneRight(true);
+        return;
+      }
+    }
+
+
+    if (urls) {
+      const allObjectsFilled = dataForm?.urls?.every(obj => obj.name !== "" && obj.url !== "" && obj.icon !== "");
+      if (!allObjectsFilled) {
+        setStatus("No se pueden dejar espacios en blanco en urls");
+        setisEmailPhoneRight(true);
+        return;
+      }
+    }
+
+    if (education) {
+      const allObjectsFilled = dataForm?.education?.every(obj => obj.title !== "" && obj.institution !== "" && obj.year !== "");
+      if (!allObjectsFilled) {
+        setStatus("No se pueden dejar espacios en blanco en educación");
+        setisEmailPhoneRight(true);
+        return;
+      }
+    }
+
+    if (professionalCareer) {
+      const allObjectsFilled = dataForm?.professional_career?.every(obj => obj.company !== "" && obj.position !== "" && obj.data_init !== "" && obj.data_end !== "");
+      if (!allObjectsFilled) {
+        setStatus("No se pueden dejar espacios en blanco en trayectoria");
+        setisEmailPhoneRight(true);
+        return;
+      }
+    }
+
+    setIsLoadingSendData(true);
     if (userId) {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm);
       if (isSendDataProfile?.success) {
@@ -92,6 +148,7 @@ const ProfileHook = ({
 
   const handleModalAux = () => {
     setIsModalAlert(!isModalAlert);
+    setNoDeleted(!noDeleted);
   };
 
   const handleSeeMore = (numItem: number) => {
@@ -234,7 +291,7 @@ const ProfileHook = ({
     const dataFormClone = { ...dataForm };
     const dataAux = dataFormClone[index as keyof typeof dataForm];
 
-    if (Array.isArray(dataAux) && subindex !== undefined) {
+    if (dataAux && dataAux?.length > 1 && Array.isArray(dataAux) && subindex !== undefined) {
       dataAux.splice(parseInt(subindex, 10), 1);
       handleDataSet && handleDataSet(dataFormClone);
 
@@ -242,6 +299,8 @@ const ProfileHook = ({
         setIsModalAlert(false);
         setSuccessDelete(true);
       }, 300);
+    } else {
+      setNoDeleted(true);
     }
   };
 
@@ -270,7 +329,7 @@ const ProfileHook = ({
           dataFormClone[index]?.push({
             label: dataFormClone[index]![0].label,
             text: '',
-            checked: false,
+            checked: true,
             principal: false,
             social: social,
             professional: !social,
@@ -286,7 +345,7 @@ const ProfileHook = ({
           dataFormClone[index]?.push({
             label: dataFormClone[index]![0].label,
             text: '',
-            checked: false,
+            checked: true,
             principal: false,
             social: social,
             professional: !social,
@@ -304,7 +363,7 @@ const ProfileHook = ({
             title: '',
             institution: '',
             year: '',
-            checked: false,
+            checked: true,
             principal: false,
             social: social,
             professional: !social,
@@ -323,7 +382,7 @@ const ProfileHook = ({
             position: '',
             data_init: '',
             data_end: '',
-            checked: false,
+            checked: true,
             principal: false,
             social: social,
             professional: !social,
@@ -340,7 +399,7 @@ const ProfileHook = ({
           name: '',
           url: '',
           icon: '',
-          checked: false,
+          checked: true,
           principal: false,
           social: social,
           professional: !social,
@@ -555,7 +614,11 @@ const ProfileHook = ({
     setModalIcons,
     handleModalIcons,
     itemUrlSelected,
-    itemUrlKey
+    itemUrlKey,
+    status,
+    isEmailPhoneRight,
+    setisEmailPhoneRight,
+    noDeleted
   };
 };
 
