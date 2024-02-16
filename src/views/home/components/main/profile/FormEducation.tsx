@@ -65,12 +65,12 @@ const FormEducation = ({
             </View>
           </>
           :
-          <View style={{ height: "100%", width: "25%", alignItems: 'flex-start', justifyContent: 'center' }}>
+          <View style={{ height: "100%", width: "30%", alignItems: 'flex-start', justifyContent: 'center' }}>
             <Text style={{ color: "black" }}>{label}</Text>
           </View>
         }
 
-        <View style={{ height: "100%", width: withCheck ? "70%" : "75%", alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ height: "100%", width: withCheck ? "70%" : "70%", alignItems: 'center', justifyContent: 'center' }}>
           <TextInput
             ref={dataRef}
             id={`${name}-input`}

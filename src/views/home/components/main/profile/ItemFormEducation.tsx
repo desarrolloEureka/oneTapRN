@@ -62,7 +62,7 @@ const ItemFormEducation = ({
     });
 
     return (
-        <View style={{ height: labelArray.length > 1 ? 'auto' : 280, minHeight: 280, width: "100%", justifyContent: 'center', paddingTop: 20 }}>
+        <View style={{ height: labelArray.length > 1 ? 'auto' : 280, minHeight: 280, width: "100%", justifyContent: 'center', paddingTop: 20, paddingBottom: 20 }}>
             <View style={{ minHeight: 230, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
 
                 <View style={{ height: 40, width: "100%", alignItems: 'flex-end' }}>
@@ -105,7 +105,7 @@ const ItemFormEducation = ({
 
                                 <View style={{ height: "30%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
                                     <FormEducation
-                                        label={'°Instituto: '}
+                                        label={'Institución: '}
                                         handleSwitch={(e: any) => handleSwitch(e)}
                                         handleData={handleData}
                                         name={index}
@@ -144,7 +144,7 @@ const ItemFormEducation = ({
                                 </View>
 
                                 <View style={{ height: "10%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
-                                    <Text style={{ color: "#02AF9B" }}>Educación y formación académica</Text>
+                                    <Text style={{ color: "#02AF9B" }}>Formación académica</Text>
                                 </View>
                             </View>
 
@@ -153,7 +153,7 @@ const ItemFormEducation = ({
                 })
                 }
 
-                <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(3)}>
+                {/* <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(3)}>
                     <View style={{ height: "100%", width: "30%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                         <View style={{ height: "100%", width: "75%", alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 12, color: "#396593" }}>Ver más (2)</Text>
@@ -162,7 +162,7 @@ const ItemFormEducation = ({
                             <Icon name="angle-down" size={35} color="#396593" />
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
         </View>

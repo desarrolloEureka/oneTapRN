@@ -25,6 +25,7 @@ import IconZoom from './icons/IconZoom';
 import IconWhatsAppB from './icons/IconWhatsAppB';
 import IconBooking from './icons/IconBooking';
 import IconOnlyFans from './icons/IconOnlyFans';
+import ModalIcons from './ModalIcons';
 
 const ItemFormUrl = ({
     dataForm,
@@ -65,6 +66,11 @@ const ItemFormUrl = ({
         handleDeleteData,
         handleData,
         user,
+        isModalIcons,
+        setModalIcons,
+        itemUrlSelected,
+        itemUrlKey,
+        handleModalIcons
     } = ProfileHook({
         handleDataSet,
     });
@@ -87,8 +93,8 @@ const ItemFormUrl = ({
                         <View style={{ height: "100%", width: "20%", alignItems: 'center', justifyContent: 'center' }}>
                             <Icon name="plus-circle" size={20} color="#02AF9B" />
                         </View>
-                        <View style={{ height: "100%", width: "75%", justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 11, color: "black" }}>Agregar otra URL</Text>
+                        <View style={{ height: "100%", width: "50%", justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 11, color: "black" }}>Agregar URL</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -104,7 +110,7 @@ const ItemFormUrl = ({
                                 <View style={{ height: "100%", width: "98%", alignItems: 'center', justifyContent: 'center' }}>
                                     <View style={{ height: "40%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
                                         <FormUrl
-                                            label={'Nombre del dato: '}
+                                            label={'Nombre: '}
                                             handleSwitch={(e: any) => handleSwitch(e)}
                                             handleData={handleData}
                                             name={index}
@@ -126,7 +132,7 @@ const ItemFormUrl = ({
                                         <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
 
                                             <FormUrl
-                                                label={'URL opcional: '}
+                                                label={'Sitio Web/URL: '}
                                                 handleSwitch={(e: any) => handleSwitch(e)}
                                                 handleData={handleData}
                                                 name={index}
@@ -148,13 +154,15 @@ const ItemFormUrl = ({
                             </View>
 
                             <View style={{ height: "40%", width: "100%", justifyContent: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "100%", width: "15%", justifyContent: 'center', alignItems: 'center' }}>
-                                    <TouchableOpacity style={{ height: "60%", width: "85%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 100 }} onPress={handleOpenUrl}>
+
+                                <View style={{ height: "100%", width: "15%", justifyContent: 'center', alignItems: 'center', paddingLeft: 1 }}>
+                                    <TouchableOpacity style={{ height: "55%", width: "90%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 80 }} onPress={() => handleModalIcons(val, key)}>
                                         <FontAwesome5 name="shopping-cart" size={23} color="#396593" />
                                     </TouchableOpacity>
                                 </View>
+
                                 <View style={{ height: "100%", width: "85%", justifyContent: 'center', alignItems: 'center' }}>
-                                    {showUrls ?
+                                    {/*   {showUrls ?
                                         <View style={{ height: "50%", width: "98%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 14, flexDirection: 'row' }}>
                                             <ScrollView
                                                 horizontal={true}
@@ -559,14 +567,15 @@ const ItemFormUrl = ({
                                         </View>
                                         :
                                         null
-                                    }
+                                    } */}
                                 </View>
+
                             </View>
                         </View>
                     );
                 })
                 }
-                <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(5)}>
+                {/*   <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(5)}>
                     <View style={{ height: "100%", width: "30%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                         <View style={{ height: "100%", width: "75%", alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 12, color: "#396593" }}>{itemDetail === 5 && value[0] === 'urls' ? "Ver más (2)" : "Ver Menos"}</Text>
@@ -575,9 +584,18 @@ const ItemFormUrl = ({
                             <Icon name="angle-down" size={35} color="#396593" />
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
+
+            <ModalIcons
+                isModalIcons={isModalIcons}
+                setModalIcons={setModalIcons}
+                value={value}
+                val={itemUrlSelected}
+                keyItem={itemUrlKey}
+                handleDataNetworks={handleDataNetworks}
+            />
         </View >
     );
 };

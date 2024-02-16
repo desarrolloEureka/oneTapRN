@@ -45,6 +45,10 @@ const ProfileHook = ({
   const [isDataLoad, setIsDataLoad] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
   const [isLoadingSendData, setIsLoadingSendData] = useState(false);
+  //Modal Iconos
+  const [isModalIcons, setModalIcons] = useState(false);
+  const [itemUrlSelected, setItemUrlSelected] = useState([]);
+  const [itemUrlKey, setItemUrlKey] = useState(0);
 
   const handleSendProfile = async () => {
     setIsLoadingSendData(true);
@@ -78,6 +82,12 @@ const ProfileHook = ({
 
   const handleSuccessDelete = () => {
     setSuccessDelete(!isSuccessDelete);
+  };
+
+  const handleModalIcons = (item: any, key: any) => {
+    setItemUrlSelected(item ? item : []);
+    setItemUrlKey(key);
+    setModalIcons(!isModalIcons);
   };
 
   const handleModalAux = () => {
@@ -540,7 +550,12 @@ const ProfileHook = ({
     switchValue,
     setSwitchValue,
     isLoadingSendData,
-    setIsLoadingSendData
+    setIsLoadingSendData,
+    isModalIcons,
+    setModalIcons,
+    handleModalIcons,
+    itemUrlSelected,
+    itemUrlKey
   };
 };
 

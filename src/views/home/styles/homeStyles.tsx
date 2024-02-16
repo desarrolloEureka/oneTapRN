@@ -8,7 +8,6 @@ export const homeStyles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: '#CCCCCC', // Fondo gris
-    padding: 3,
   },
   body: {
     height: 400
@@ -97,7 +96,7 @@ export const homeStyles = StyleSheet.create({
   },
   switchWrapper: {
     marginVertical: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   switchWrapper1: {
     backgroundColor: '#e74c3c', // Cambia el color de fondo según tus preferencias
@@ -179,9 +178,9 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#E9E9E9',
     height: 80,
-    position: 'absolute', // Asegúrate de que la barra de navegación sea absoluta
-    bottom: 0, // La posición en la parte inferior para superponerse al contenido
-    width: '100%', // O ajusta el ancho según sea necesario
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
   tabnav: {
     flex: 1,

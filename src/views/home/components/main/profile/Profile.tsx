@@ -15,7 +15,10 @@ import CustomSwitchGeneral from './CustomSwitchGeneral';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import CustomModalLoading from './CustomModalLoading';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { GetUser } from '../../../../../reactQuery/users';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteStackParamList } from '../../../../../types/navigation';
 
 const Profile = () => {
     const route = useRoute();
@@ -48,8 +51,10 @@ const Profile = () => {
     } = ProfileHook({
     });
 
-    const navigation = useNavigation();
+    const navigation =
+        useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
 
+    const { data, error } = GetUser();
     useEffect(() => {
         const isProUser = route.params && route?.params?.isProUser;
 
@@ -64,6 +69,20 @@ const Profile = () => {
 
     const handleBackPress = () => {
         navigation.goBack();
+    };
+
+    const handleTabPress = (tabName: string) => {
+        if (tabName === "Professional" && data?.plan === "basic") {
+            setIsModalAlert(true);
+        } else {
+            if (tabName === 'Social') {
+                setIsProUser(false);
+            } else if (tabName === 'Professional') {
+                setIsProUser(true);
+            } else {
+                navigation.navigate('Home');
+            }
+        }
     };
 
     return (
@@ -116,18 +135,20 @@ const Profile = () => {
                     handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
                 />
 
-                <View style={{ height: 100, width: "100%", justifyContent: 'center', alignItems: 'center', marginTop: isProUser ? 120 : 30 }}>
-                    <TouchableOpacity style={{
-                        backgroundColor: '#02AF9B',
-                        height: '45%',
-                        width: '40%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: 22,
-                        shadowColor: '#000',
-                    }} onPress={handleSendProfile} >
-                        <Text style={{ color: "white" }}>Guardar</Text>
-                    </TouchableOpacity>
+                <View style={{ height: 210, width: "100%", justifyContent: 'flex-start', alignItems: 'center', marginTop: isProUser ? 30 : 30 }}>
+                    <View style={{ height: "50%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableOpacity style={{
+                            backgroundColor: '#02AF9B',
+                            height: '45%',
+                            width: '40%',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: 22,
+                            shadowColor: '#000',
+                        }} onPress={handleSendProfile} >
+                            <Text style={{ color: "white" }}>Guardar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <ModalAlert
@@ -159,6 +180,27 @@ const Profile = () => {
                 />
 
             </ScrollView>
+
+            <View style={{
+                flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#E9E9E9', height: 80, position: 'absolute', bottom: 0, width: '100%'
+            }}>
+
+                <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Home')}>
+                    <FontAwesome name="home" size={25} color="black" />
+                    <Text style={{ color: 'black' }}>Home</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center', borderTopWidth: !isProUser ? 3.5 : undefined, borderColor: !isProUser ? '#396593' : undefined }} onPress={() => handleTabPress('Social')}>
+                    <FontAwesome name="users" size={25} color="black" />
+                    <Text style={{ color: 'black' }}>Social</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center', borderTopWidth: isProUser ? 3.5 : undefined, borderColor: isProUser ? '#396593' : undefined }} onPress={() => handleTabPress('Professional')}>
+                    <FontAwesome name="briefcase" size={25} color="black" />
+                    <Text style={{ color: 'black' }}>PRO</Text>
+                </TouchableOpacity>
+
+            </View>
         </SafeAreaView>
     );
 };
