@@ -117,7 +117,6 @@ const FormAddDataUser = ({
                             />
                         );
                     } else {
-                        //console.log("Entre social")
                         return value[0] == 'phones' || value[0] == 'emails' ? (
                             <ItemFormBasicInfo
                                 key={key}
