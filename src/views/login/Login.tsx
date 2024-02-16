@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -11,9 +11,9 @@ import {
   View,
   ScrollView
 } from 'react-native';
-import { StackNavigation } from '../../types/navigation';
-import { LoginError } from '../../types/login';
-import { GetLoginQuery } from '../../reactQuery/users';
+import {StackNavigation} from '../../types/navigation';
+import {LoginError} from '../../types/login';
+import {GetLoginQuery} from '../../reactQuery/users';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -31,12 +31,12 @@ const Login = () => {
 
   const handleGoTerms = () => {
     navigation.navigate('Terminos');
-  }
+  };
 
-  const { data, isLoading, isRefetching } = GetLoginQuery({
+  const {data, isLoading, isRefetching} = GetLoginQuery({
     user: email,
     password,
-    sendLogin,
+    sendLogin
   });
 
   const loginHandle = async () => {
@@ -49,13 +49,13 @@ const Login = () => {
       if (!email) {
         setErrorForm({
           errorType: 1,
-          errorMessage: "El correo es obligatorio",
-        })
+          errorMessage: 'El correo es obligatorio'
+        });
       } else if (!password) {
         setErrorForm({
           errorType: 2,
-          errorMessage: "La contraseña es obligatoria",
-        })
+          errorMessage: 'La contraseña es obligatoria'
+        });
       }
     }
   };
@@ -79,37 +79,58 @@ const Login = () => {
     }, [data, isLoading, navigation, sendLogin]); */
 
   const userIsLogged = useCallback(() => {
-    setSendLogin(false);
     if (data && data?.isActive) {
       setErrorForm(null);
       navigation.navigate('Home');
       setPassword('');
       setEmail('');
-    } else if (sendLogin && !data && isLoading) {
+    } else if (sendLogin) {
       setErrorForm({
         errorType: 3,
-        errorMessage: "Credenciales incorrectas. Por favor, inténtelo de nuevo.",
+        errorMessage: 'Credenciales incorrectas. Por favor, inténtelo de nuevo.'
       });
+      setTimeout(() => {
+        setErrorForm(null);
+        setSendLogin(false);
+      }, 2000);
     }
   }, [data, navigation, sendLogin]);
 
   useEffect(() => {
     userIsLogged();
-  }, [userIsLogged, isLoading]);
+  }, [userIsLogged]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: '#e8e8e8', flex: 1 }}>
+    <SafeAreaView style={{backgroundColor: '#e8e8e8', flex: 1}}>
       <ScrollView>
-        <View style={styles.headerContainer}>
-        </View>
+        <View style={styles.headerContainer}></View>
 
-        <View style={{ flex: 1, aspectRatio: 1 / 1.3, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+        <View
+          style={{
+            flex: 1,
+            aspectRatio: 1 / 1.3,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
           <View style={styles.titleContainer}>
             <Text style={styles.heading}>Iniciar Sesión</Text>
           </View>
-          <View style={{ height: "85%", width: "100%" }}>
-            <View style={{ height: "20%", width: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
-              <View style={{ height: '100%', width: '90%', alignItems: 'flex-start', justifyContent: 'center' }}>
+          <View style={{height: '85%', width: '100%'}}>
+            <View
+              style={{
+                height: '20%',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'flex-start'
+              }}>
+              <View
+                style={{
+                  height: '100%',
+                  width: '90%',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center'
+                }}>
                 <Text style={styles.label}>Correo Electrónico</Text>
                 <TextInput
                   style={styles.input}
@@ -117,24 +138,54 @@ const Login = () => {
                   underlineColorAndroid="transparent"
                   value={email}
                   keyboardType="email-address"
-                  autoCapitalize='none'
+                  autoCapitalize="none"
                   onChangeText={text => setEmail(text)}
                 />
               </View>
             </View>
 
-            {errorForm?.errorType === 1 &&
-              <View style={{ height: "10%", width: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
-                <View style={{ height: '100%', width: '90%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                  <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 12 }}>
+            {errorForm?.errorType === 1 && (
+              <View
+                style={{
+                  height: '10%',
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start'
+                }}>
+                <View
+                  style={{
+                    height: '100%',
+                    width: '90%',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center'
+                  }}>
+                  <Text
+                    style={{
+                      color: 'red',
+                      marginTop: 3,
+                      marginRight: 70,
+                      marginBottom: 12
+                    }}>
                     {errorForm?.errorMessage}*
                   </Text>
                 </View>
               </View>
-            }
+            )}
 
-            <View style={{ height: "20%", width: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
-              <View style={{ height: '100%', width: '90%', alignItems: 'flex-start', justifyContent: 'center', }}>
+            <View
+              style={{
+                height: '20%',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'flex-start'
+              }}>
+              <View
+                style={{
+                  height: '100%',
+                  width: '90%',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center'
+                }}>
                 <Text style={styles.label}>Contraseña</Text>
                 <View style={styles.passwordContainer}>
                   <TextInput
@@ -158,40 +209,109 @@ const Login = () => {
               </View>
             </View>
 
-            {errorForm?.errorType === 2 &&
-              <View style={{ height: "10%", width: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
-                <View style={{ height: '100%', width: '90%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                  <Text style={{ color: 'red', marginTop: 3, marginRight: 70, marginBottom: 12 }}>
+            {errorForm?.errorType === 2 && (
+              <View
+                style={{
+                  height: '10%',
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start'
+                }}>
+                <View
+                  style={{
+                    height: '100%',
+                    width: '90%',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center'
+                  }}>
+                  <Text
+                    style={{
+                      color: 'red',
+                      marginTop: 3,
+                      marginRight: 70,
+                      marginBottom: 12
+                    }}>
                     {errorForm?.errorMessage}*
                   </Text>
                 </View>
               </View>
-            }
+            )}
 
-            {errorForm?.errorType === 3 &&
-              <View style={{ height: "14%", width: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
-                <View style={{ height: '100%', width: '90%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                  <Text style={{ color: 'red', marginTop: 0, marginRight: 30, marginBottom: 4 }}>
+            {errorForm?.errorType === 3 && (
+              <View
+                style={{
+                  height: '14%',
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start'
+                }}>
+                <View
+                  style={{
+                    height: '100%',
+                    width: '90%',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center'
+                  }}>
+                  <Text
+                    style={{
+                      color: 'red',
+                      marginTop: 0,
+                      marginRight: 30,
+                      marginBottom: 4
+                    }}>
                     {errorForm?.errorMessage}*
                   </Text>
                 </View>
               </View>
-            }
+            )}
 
-            <View style={{ height: "10%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
-              <TouchableOpacity style={{ height: "100%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }} onPress={handleForgotPassword}>
-                <Text style={{ color: "black" }}>Recuperar Contraseña</Text>
+            <View
+              style={{
+                height: '10%',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+              <TouchableOpacity
+                style={{
+                  height: '100%',
+                  width: '90%',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center'
+                }}
+                onPress={handleForgotPassword}>
+                <Text style={{color: 'black'}}>Recuperar Contraseña</Text>
               </TouchableOpacity>
             </View>
-            <View style={{ height: "10%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
-              <TouchableOpacity style={{ height: "100%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }} onPress={handleGoTerms}>
-                <Text style={{ color: "black" }}>Términos y Condiciones</Text>
+            <View
+              style={{
+                height: '10%',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+              <TouchableOpacity
+                style={{
+                  height: '100%',
+                  width: '90%',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center'
+                }}
+                onPress={handleGoTerms}>
+                <Text style={{color: 'black'}}>Términos y Condiciones</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
 
-        <View style={{ flex: 1, aspectRatio: 1 / 0.40, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+        <View
+          style={{
+            flex: 1,
+            aspectRatio: 1 / 0.4,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
           <TouchableOpacity style={styles.button} onPress={loginHandle}>
             <Text style={styles.buttonText}>Siguiente</Text>
           </TouchableOpacity>
@@ -203,17 +323,18 @@ const Login = () => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flex: 1, aspectRatio: 1 / 0.15,
+    flex: 1,
+    aspectRatio: 1 / 0.15,
     width: '100%',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    paddingLeft: 15,
+    paddingLeft: 15
   },
   titleContainer: {
     height: '15%',
     width: '60%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   heading: {
     color: '#396593',
@@ -222,13 +343,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingBottom: 10,
     borderBottomWidth: 1,
-    borderColor: "#396593"
+    borderColor: '#396593'
   },
   label: {
     fontFamily: 'Open Sans',
     fontSize: 15,
     fontWeight: '400',
-    color: '#008F9E',
+    color: '#008F9E'
   },
   input: {
     height: 52,
@@ -238,7 +359,7 @@ const styles = StyleSheet.create({
     color: '#030124',
     fontFamily: 'Open Sans',
     fontSize: 17,
-    fontWeight: '300',
+    fontWeight: '300'
   },
   button: {
     backgroundColor: '#02AF9B',
@@ -247,7 +368,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 30,
-    shadowColor: '#000',
+    shadowColor: '#000'
   },
   buttonText: {
     color: '#FFFFFF',
@@ -256,7 +377,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     lineHeight: 19,
     letterSpacing: 0.08,
-    textAlign: 'left',
+    textAlign: 'left'
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -274,7 +395,7 @@ const styles = StyleSheet.create({
   },
   eyeIcon: {
     padding: 10
-  },
+  }
 });
 
 export default Login;
