@@ -28,7 +28,6 @@ const ItemForm = ({
   const [inputText, setInputText] = useState('');
 
   const value = () => {
-    // const i = subindex as any;
     if (
       index != 'phones' &&
       index != 'education' &&
@@ -58,7 +57,6 @@ const ItemForm = ({
       value();
     }
   }, [dataRef, myValue, inputText]);
-
 
   return (
     <View style={{ height: 115, justifyContent: 'center', flexDirection: 'row' }}>

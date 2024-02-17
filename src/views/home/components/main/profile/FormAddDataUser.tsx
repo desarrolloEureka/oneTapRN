@@ -39,6 +39,12 @@ const FormAddDataUser = ({
         handleDataSet,
     });
 
+/*     data.map((value, key) => {
+        if (value[0] === 'phones') {
+            console.log("value ---------> ", value);
+        }
+    }) */
+
     return (
         <SafeAreaView>
             {data.map((value, key) => {
@@ -56,7 +62,6 @@ const FormAddDataUser = ({
                         : null;
 
                 if (labelArray) {
-                    //console.log("isProUser ", isProUser);
                     if (isProUser) {
                         return value[0] == 'phones' || value[0] == 'emails' ? (
                             <ItemFormBasicInfo

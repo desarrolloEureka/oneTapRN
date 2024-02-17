@@ -5,7 +5,7 @@ const dataPrincipalProfileEmail = {
   principal: true,
   social: true,
   professional: true,
-  icon: 'email-outline',
+  icon: 'EmailOutlinedIcon',
   order: 10,
 };
 const dataPrincipalProfilePhone = {
@@ -15,7 +15,7 @@ const dataPrincipalProfilePhone = {
   principal: true,
   social: true,
   professional: true,
-  icon: 'phone',
+  icon: 'LocalPhoneOutlinedIcon',
   order: 9,
 };
 const dataPrincipalEducations = {
@@ -61,7 +61,7 @@ export const profile = {
     checked: false,
     social: true,
     professional: true,
-    icon: 'person-outline',
+    icon: 'PersonOutlinedIcon',
     order: 1,
   },
   last_name: {
@@ -70,7 +70,7 @@ export const profile = {
     checked: false,
     social: true,
     professional: true,
-    icon: 'person-outline',
+    icon: 'PersonOutlinedIcon',
     order: 2,
   },
   profession: {
@@ -79,7 +79,7 @@ export const profile = {
     checked: false,
     social: true,
     professional: true,
-    icon: 'file-present',
+    icon: 'FilePresentOutlinedIcon',
     order: 3,
   },
   occupation: {
@@ -88,7 +88,7 @@ export const profile = {
     checked: false,
     social: true,
     professional: true,
-    icon: 'work-outline',
+    icon: 'WorkOutlineOutlinedIcon',
     order: 4,
   },
   address: {
@@ -97,7 +97,7 @@ export const profile = {
     checked: false,
     social: true,
     professional: true,
-    icon: 'explore',
+    icon: 'ExploreOutlinedIcon',
     order: 5,
   },
   company: {
@@ -106,7 +106,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'work-outline',
+    icon: 'WorkOutlineOutlinedIcon',
     order: 6,
   },
   position: {
@@ -115,7 +115,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'paperclip',
+    icon: 'AttachFileOutlinedIcon',
     order: 7,
   },
   professional_profile: {
@@ -124,7 +124,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'person-outline',
+    icon: 'PersonOutlinedIcon',
     order: 8,
   },
   phones: [dataPrincipalProfilePhone],
@@ -138,7 +138,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'person',
+    icon: 'AccessibilityOutlinedIcon',
     order: 14,
   },
   skills: {
@@ -147,7 +147,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'person',
+    icon: 'AccessibilityOutlinedIcon',
     order: 15,
   },
   languages: {
@@ -156,7 +156,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'translate',
+    icon: 'TranslateIcon',
     order: 16,
   },
   achievements_recognitions: {
@@ -165,7 +165,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'person',
+    icon: 'AccessibilityOutlinedIcon',
     order: 17,
   },
 };
