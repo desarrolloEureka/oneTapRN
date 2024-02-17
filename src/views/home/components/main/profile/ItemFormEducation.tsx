@@ -77,9 +77,9 @@ const ItemFormEducation = ({
                 </View>
 
                 {labelArray.map((val, key) => {
-                    const myValue = (user && index == value[0]
+                    const myValue = (user && user.profile && index == value[0]
                         ? user.profile[index]
-                        : undefined) as unknown as DataFormValues;
+                        : value[1]) as unknown as DataFormValues;
                     return (
                         <View key={key} style={{ height: 200, justifyContent: 'center', flexDirection: 'row' }}>
                             <View style={{ height: "85%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>

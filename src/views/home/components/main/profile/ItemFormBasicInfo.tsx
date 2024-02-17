@@ -59,9 +59,6 @@ const ItemFormBasicInfo = ({
         handleDataSet,
     });
 
-    const arrayData = [labelArray[0]];
-    const data = itemDetail === 1 && value[0] === 'phones' || itemDetail === 2 && value[0] === 'emails' ? arrayData : labelArray;
-
     return (
         <View style={{ height: labelArray.length > 1 ? 'auto' : 240, minHeight: 240, width: "100%", justifyContent: 'center', paddingTop: 20, paddingBottom: 20 }}>
             <View style={{ minHeight: 190, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
@@ -82,12 +79,12 @@ const ItemFormBasicInfo = ({
                     </TouchableOpacity>
                 </View>
 
-                {data.map((val, key) => {
-                    if (social == true) {
+                {labelArray.map((val, key) => {
+                    if (social === true) {
                         if (val.principal === true || val.social === true) {
-                            const myValue = (user && index == value[0]
+                            const myValue = (user && user.profile && index == value[0]
                                 ? user.profile[index]
-                                : undefined) as unknown as DataFormValues;
+                                : value[1]) as unknown as DataFormValues;
                             return (
                                 <>
                                     <ItemForm
@@ -110,9 +107,9 @@ const ItemFormBasicInfo = ({
                             );
                         }
                     } else {
-                        const myValue = (user && index == value[0]
+                        const myValue = (user && user.profile && index == value[0]
                             ? user.profile[index]
-                            : undefined) as unknown as DataFormValues;
+                            : value[1]) as unknown as DataFormValues;
                         return (
                             <ItemForm
                                 key={key}
@@ -133,25 +130,6 @@ const ItemFormBasicInfo = ({
                         );
                     }
                 })}
-
-                {/*  <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }}
-                    onPress={() => {
-                        if (value[0] === 'phones') {
-                            handleSeeMore(1);
-                        } else if (value[0] === 'emails') {
-                            handleSeeMore(2);
-                        }
-                    }}>
-                    <View style={{ height: "100%", width: "30%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                        <View style={{ height: "100%", width: "75%", alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 12, color: "#396593" }}>{itemDetail === 1 && value[0] === 'phones' ? "Ver más (2)" : itemDetail === 2 && value[0] === 'emails' ? "Ver más (2)" : "Ver Menos"} </Text>
-                        </View>
-                        <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
-                            <Icon name="angle-down" size={35} color="#396593" />
-                        </View>
-                    </View>
-                </TouchableOpacity> */}
-
             </View>
         </View>
     );

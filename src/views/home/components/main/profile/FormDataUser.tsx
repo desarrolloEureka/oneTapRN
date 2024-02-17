@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { View, SafeAreaView } from 'react-native';
-import { profileStyles } from '../../../styles/profileStyles';
+import React from 'react';
+import { SafeAreaView } from 'react-native';
 import ItemForm from './ItemForm';
 import ProfileHook from './hooks/ProfileHook';
 import {
@@ -8,8 +7,6 @@ import {
     DataForm,
     DataFormValues,
     EducationDataFormValues,
-    UrlDataFormValues,
-    handleDataProps
 } from '../../../../../types/profile';
 import TextAreaForm from './TextAreaForm';
 
@@ -51,10 +48,10 @@ const FormDataUser = ({
                             value[0] == 'achievements_recognitions'
                         ) {
                             const myValue =
-                                user && index == value[0]
+                                user && user.profile && index == value[0]
                                     ? user.profile[index]?.text
                                     : undefined;
-                            const myValue1 = (user && index == value[0]
+                            const myValue1 = (user && user.profile && index == value[0]
                                 ? user.profile[index]
                                 : undefined) as unknown as DataFormValues;
                             return (
@@ -73,7 +70,7 @@ const FormDataUser = ({
                                 />
                             );
                         } else {
-                            const myValue = (user && index == value[0]
+                            const myValue = (user && user.profile && index == value[0]
                                 ? user.profile[index]
                                 : undefined) as unknown as DataFormValues;
                             return (
@@ -93,9 +90,10 @@ const FormDataUser = ({
                             );
                         }
                     } else {
-                        const myValue = (user && index == value[0]
+                        const myValue = (user && user.profile && index == value[0]
                             ? user.profile[index]
                             : undefined) as unknown as DataFormValues;
+
                         return value[1].social == true ? (
                             <ItemForm
                                 label={value[1].label}

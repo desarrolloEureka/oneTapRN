@@ -70,102 +70,100 @@ const ItemFormProfessional = ({
                     </TouchableOpacity>
                 </View>
 
-
-                {
-                    labelArray.map((val, key) => {
-                        const myValue = (user && index == value[0]
-                            ? user.profile[index]
-                            : undefined) as unknown as DataFormValues;
-                        return (
-                            <View key={key} style={{ height: 245, justifyContent: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "95%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
-                                    <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-                                        <FormProfession
-                                            label={'Empresa: '}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={false}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                            withCheck={true}
-                                            subLabel={'company' as CareerSubIndexDataForm}
-                                        />
-                                    </View>
-                                    <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-
-                                        <FormProfession
-                                            label={'Cargo: '}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={true}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                            withCheck={false}
-                                            subLabel={'position' as CareerSubIndexDataForm}
-                                        />
-                                    </View>
-                                    <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-
-                                        <FormProfession
-                                            label={'Fecha de inicio: '}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={false}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                            withCheck={false}
-                                            subLabel={'data_init' as CareerSubIndexDataForm}
-                                        />
-                                    </View>
-                                    <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-
-                                        <FormProfession
-                                            label={'Fecha finalización: '}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={false}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                            withCheck={false}
-                                            subLabel={'data_end' as CareerSubIndexDataForm}
-                                        />
-                                    </View>
-                                    <View style={{ height: "20%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
-                                        <Text style={{ color: "#02AF9B" }}>Trayectoria profesional</Text>
-                                    </View>
+                {labelArray.map((val, key) => {
+                    const myValue = (user && user.profile && index == value[0]
+                        ? user.profile[index]
+                        : value[1]) as unknown as DataFormValues;
+                    return (
+                        <View key={key} style={{ height: 245, justifyContent: 'center', flexDirection: 'row' }}>
+                            <View style={{ height: "95%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
+                                    <FormProfession
+                                        label={'Empresa: '}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={val.checked}
+                                        subindex={key}
+                                        icon={val.icon}
+                                        deleteAction={false}
+                                        handleDeleteData={handleDeleteData}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        myValue={myValue}
+                                        dataForm={dataForm}
+                                        index={index}
+                                        withCheck={true}
+                                        subLabel={'company' as CareerSubIndexDataForm}
+                                    />
                                 </View>
+                                <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
 
+                                    <FormProfession
+                                        label={'Cargo: '}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={val.checked}
+                                        subindex={key}
+                                        icon={val.icon}
+                                        deleteAction={true}
+                                        handleDeleteData={handleDeleteData}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        myValue={myValue}
+                                        dataForm={dataForm}
+                                        index={index}
+                                        withCheck={false}
+                                        subLabel={'position' as CareerSubIndexDataForm}
+                                    />
+                                </View>
+                                <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
+
+                                    <FormProfession
+                                        label={'Fecha de inicio: '}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={val.checked}
+                                        subindex={key}
+                                        icon={val.icon}
+                                        deleteAction={false}
+                                        handleDeleteData={handleDeleteData}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        myValue={myValue}
+                                        dataForm={dataForm}
+                                        index={index}
+                                        withCheck={false}
+                                        subLabel={'data_init' as CareerSubIndexDataForm}
+                                    />
+                                </View>
+                                <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
+
+                                    <FormProfession
+                                        label={'Fecha finalización: '}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={val.checked}
+                                        subindex={key}
+                                        icon={val.icon}
+                                        deleteAction={false}
+                                        handleDeleteData={handleDeleteData}
+                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        myValue={myValue}
+                                        dataForm={dataForm}
+                                        index={index}
+                                        withCheck={false}
+                                        subLabel={'data_end' as CareerSubIndexDataForm}
+                                    />
+                                </View>
+                                <View style={{ height: "20%", width: "90%", alignItems: 'flex-start', justifyContent: 'center' }}>
+                                    <Text style={{ color: "#02AF9B" }}>Trayectoria profesional</Text>
+                                </View>
                             </View>
-                        );
-                    })
+
+                        </View>
+                    );
+                })
                 }
                 {/* <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(3)}>
                     <View style={{ height: "100%", width: "30%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
