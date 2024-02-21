@@ -20,6 +20,7 @@ const FormAddDataUser = ({
     dataForm,
     handleDataSet,
     handleModalAlert,
+
 }: {
     isDetailOpen: boolean;
     itemDetail: number;
@@ -38,12 +39,6 @@ const FormAddDataUser = ({
     const { data } = ProfileHook({
         handleDataSet,
     });
-
-/*     data.map((value, key) => {
-        if (value[0] === 'phones') {
-            console.log("value ---------> ", value);
-        }
-    }) */
 
     return (
         <SafeAreaView>

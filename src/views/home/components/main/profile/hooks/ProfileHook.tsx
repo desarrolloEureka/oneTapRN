@@ -55,7 +55,7 @@ const ProfileHook = ({
   const [status, setStatus] = useState<string>('');
   const [noDeleted, setNoDeleted] = useState(false);
 
-  const handleSendProfile = async () => {
+  const handleSendProfile = async (isProUser: boolean) => {
     const userId = data?.uid;
     const emails = dataForm?.emails?.map((email) => email.text);
     const phones = dataForm?.phones?.map((phone) => phone.text);
@@ -80,7 +80,6 @@ const ProfileHook = ({
       }
     }
 
-
     if (urls) {
       const allObjectsFilled = dataForm?.urls?.every(obj => obj.name !== "" && obj.url !== "" && obj.icon !== "");
       if (!allObjectsFilled) {
@@ -90,7 +89,7 @@ const ProfileHook = ({
       }
     }
 
-    if (education) {
+    if (isProUser && education) {
       const allObjectsFilled = dataForm?.education?.every(obj => obj.title !== "" && obj.institution !== "" && obj.year !== "");
       if (!allObjectsFilled) {
         setStatus("No se pueden dejar espacios en blanco en educación");
@@ -99,7 +98,7 @@ const ProfileHook = ({
       }
     }
 
-    if (professionalCareer) {
+    if (isProUser && professionalCareer) {
       const allObjectsFilled = dataForm?.professional_career?.every(obj => obj.company !== "" && obj.position !== "" && obj.data_init !== "" && obj.data_end !== "");
       if (!allObjectsFilled) {
         setStatus("No se pueden dejar espacios en blanco en trayectoria");
@@ -120,11 +119,9 @@ const ProfileHook = ({
         setIsDataSuccess(false);
         setIsLoadingSendData(false);
       }
+    } else {
+      setIsLoadingSendData(false);
     }
-  };
-
-  const handleModalAlertLimit = (isOpen: boolean) => {
-    setIsModalAlertLimit(isOpen);
   };
 
   const handleModalAlert = (itemDelete: { index: string; subindex: string }) => {
@@ -305,7 +302,7 @@ const ProfileHook = ({
   };
 
   const handleAddData = async (index: keyof typeof dataForm, social: boolean) => {
-    const dataFormClone = await { ...dataForm };
+    const dataFormClone = { ...dataForm };
 
     if (
       index == 'phones' ||
@@ -314,6 +311,7 @@ const ProfileHook = ({
       index == 'urls' ||
       index == 'professional_career'
     ) {
+
       /* const countProfessional = await dataFormClone[index]?.filter(
         (item: any) => item.professional
       ).length;
@@ -322,79 +320,59 @@ const ProfileHook = ({
       ).length;
       const count = await social ? countSocial : countProfessional; */
 
-      const count = await dataFormClone?.[index]?.length;
+      const count = dataFormClone?.[index]?.length;
 
-      if (index === 'phones') {
-        if (count && count < 3) {
-          dataFormClone[index]?.push({
-            label: dataFormClone[index]![0].label,
-            text: '',
-            checked: true,
-            principal: false,
-            social: social,
-            professional: !social,
-            icon: 'LocalPhoneOutlinedIcon',
-            order: 9,
-          });
-        } else {
-          handleModalAlertLimit(true);
-        }
-      }
-      if (index === 'emails') {
-        if (count === 0 || count && count < 3) {
-          dataFormClone[index]?.push({
-            label: dataFormClone[index]![0].label,
-            text: '',
-            checked: true,
-            principal: false,
-            social: social,
-            professional: !social,
-            icon: 'EmailOutlinedIcon',
-            order: 10,
-          });
-        } else {
-          handleModalAlertLimit(true);
-        }
-      }
-      if (index === 'education') {
-        if (count && count < 3) {
-          dataFormClone[index]?.push({
-            label: dataFormClone[index]![0].label,
-            title: '',
-            institution: '',
-            year: '',
-            checked: true,
-            principal: false,
-            social: social,
-            professional: !social,
-            icon: '',
-            order: 11,
-          });
-        } else {
-          handleModalAlertLimit(true);
-        }
-      }
-      if (index === 'professional_career') {
-        if (count && count < 3) {
-          dataFormClone[index]?.push({
-            label: dataFormClone[index]![0].label,
-            company: '',
-            position: '',
-            data_init: '',
-            data_end: '',
-            checked: true,
-            principal: false,
-            social: social,
-            professional: !social,
-            icon: '',
-            order: 12,
-          });
-        } else {
-          handleModalAlertLimit(true);
-        }
-      }
-      if (index === 'urls') {
-        dataFormClone[index]?.push({
+      if (index === 'phones' && (!count || count < 3)) {
+        dataFormClone[index]?.unshift({
+          label: dataFormClone[index]![0].label,
+          text: '',
+          checked: true,
+          principal: false,
+          social: social,
+          professional: !social,
+          icon: 'LocalPhoneOutlinedIcon',
+          order: 9,
+        });
+      } else if (index === 'emails' && (!count || count < 3)) {
+        dataFormClone[index]?.unshift({
+          label: dataFormClone[index]![0].label,
+          text: '',
+          checked: true,
+          principal: false,
+          social: social,
+          professional: !social,
+          icon: 'EmailOutlinedIcon',
+          order: 10,
+        });
+      } else if (index === 'education' && (!count || count < 3)) {
+        dataFormClone[index]?.unshift({
+          label: dataFormClone[index]![0].label,
+          title: '',
+          institution: '',
+          year: '',
+          checked: true,
+          principal: false,
+          social: social,
+          professional: !social,
+          icon: '',
+          order: 11,
+        });
+      } else if (index === 'professional_career' && (!count || count < 3)) {
+        dataFormClone[index]?.unshift({
+          label: dataFormClone[index]![0].label,
+          company: '',
+          position: '',
+          data_init: '',
+          data_end: '',
+          checked: true,
+          principal: false,
+          social: social,
+          professional: !social,
+          icon: '',
+          order: 12,
+        });
+      } else if (index === 'urls') {
+        dataFormClone[index]?.unshift({
           label: dataFormClone[index]![0].label,
           name: '',
           url: '',
@@ -405,11 +383,17 @@ const ProfileHook = ({
           professional: !social,
           order: 13,
         });
+      } else {
+        setIsModalAlertLimit(true);
       }
 
       handleDataSet && handleDataSet(dataFormClone);
     }
   };
+
+  const handleModalAlertLimit = () => {
+    setIsModalAlertLimit(false);
+  }
 
   const checkedItems = (
     data: DataFormValues[] | EducationDataFormValues[] | CareerDataFormValues[],
@@ -587,14 +571,13 @@ const ProfileHook = ({
     handleModalAux,
     handleModalAlert,
     handleSeeMore,
+    isModalAlertLimit,
     isDetailOpen,
     itemDetail,
     isModalOpen,
     isModalAlert,
     isSuccessDelete,
     itemDelete,
-    isModalAlertLimit,
-    handleModalAlertLimit,
     isDataSuccess,
     setIsDataSuccess,
     isDataError,
@@ -618,7 +601,8 @@ const ProfileHook = ({
     status,
     isEmailPhoneRight,
     setisEmailPhoneRight,
-    noDeleted
+    noDeleted,
+    handleModalAlertLimit
   };
 };
 

@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Octicons from 'react-native-vector-icons/Octicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+
 import {
     CareerDataFormValues,
     IndexDataForm,
@@ -48,8 +53,6 @@ const ItemFormUrl = ({
         handleSwitch,
         handleDataNetworks,
         handleAddData,
-        isModalAlertLimit,
-        handleModalAlertLimit,
         handleDeleteData,
         handleData,
         user,
@@ -63,7 +66,7 @@ const ItemFormUrl = ({
     });
 
     return (
-        <View style={{ height: labelArray.length > 1 ? 'auto' : 280, minHeight: 280, width: "100%", justifyContent: 'center', paddingTop: 20 }}>
+        <View style={{ height: 'auto', minHeight: 280, width: "100%", justifyContent: 'center', paddingTop: 20, marginBottom: 20 }}>
             <View style={{ minHeight: 230, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
 
                 <View style={{ height: 40, width: "100%", alignItems: 'flex-end' }}>
@@ -82,8 +85,7 @@ const ItemFormUrl = ({
                         ? user.profile[index]
                         : value[1]) as unknown as DataFormValues;
                     return (
-                        <View key={key} style={{ height: 230, justifyContent: 'center' }}>
-
+                        <View key={key} style={{ height: 230, justifyContent: 'center', borderBottomWidth: key !== labelArray.length - 1 ? 2 : undefined, borderBlockColor: key !== labelArray.length - 1 ? '#d4d4d4' : undefined, marginTop: 10 }}>
                             <View style={{ height: "60%", width: "100%", justifyContent: 'center', flexDirection: 'row' }}>
                                 <View style={{ height: "100%", width: "98%", alignItems: 'center', justifyContent: 'center' }}>
                                     <View style={{ height: "40%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
@@ -108,7 +110,6 @@ const ItemFormUrl = ({
 
                                     <View style={{ height: "40%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
                                         <View style={{ height: "100%", width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-
                                             <FormUrl
                                                 label={'Sitio Web/URL: '}
                                                 handleSwitch={(e: any) => handleSwitch(e)}
@@ -132,12 +133,17 @@ const ItemFormUrl = ({
                             </View>
 
                             <View style={{ height: "40%", width: "100%", justifyContent: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "100%", width: "15%", justifyContent: 'center', alignItems: 'center', paddingLeft: 1 }}>
-                                    <TouchableOpacity style={{ height: "55%", width: "90%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 80 }} onPress={() => handleModalIcons(val, key)}>
-                                        <FontAwesome5 name="shopping-cart" size={23} color="#396593" />
+                                <View style={{ height: "100%", width: "20%", justifyContent: 'center', alignItems: 'center', paddingLeft: 1 }}>
+                                    <TouchableOpacity style={{ height: "55%", width: "68%", justifyContent: 'center', alignItems: 'center', backgroundColor: "white", borderRadius: 80 }} onPress={() => handleModalIcons(val, key)}>
+                                        {/* <FontAwesome5 name="shopping-cart" size={23} color="#396593" /> */}
+                                        {/* <Ionicons name="apps-sharp" size={23} color="#396593" /> */}
+                                        {/* <Octicons name="apps" size={23} color="#396593" /> */}
+                                        {/* <MaterialIcons name="app-registration" size={27} color="#396593" /> */}
+                                        <Fontisto name="world-o" size={27} color="#396593" />
                                     </TouchableOpacity>
+                                    <Text style={{ fontSize: 12, textAlign: 'center' }}>Seleccionar Icono</Text>
                                 </View>
-                                <View style={{ height: "100%", width: "85%", justifyContent: 'center', alignItems: 'center' }}>
+                                <View style={{ height: "100%", width: "80%", justifyContent: 'center', alignItems: 'center' }}>
                                 </View>
                             </View>
                         </View>

@@ -4,6 +4,8 @@ import { profileStyles } from '../../../styles/profileStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ItemFormParams } from '../../../../../types/profile';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 
@@ -32,6 +34,11 @@ const TextAreaForm = ({
         <View style={{ height: 110, justifyContent: 'center', flexDirection: 'row' }}>
             <View style={{ flexDirection: 'column', alignItems: 'center', height: "90%", width: "80%" }}>
                 <View style={{ flexDirection: 'column', alignItems: 'flex-start', height: "100%", width: "100%", paddingLeft: 10 }}>
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center', height: "20%", width: "100%" }}>
+                        <Text style={profileStyles.label}>{label}</Text>
+                    </View>
+
                     <View style={{ flexDirection: 'row', alignItems: 'center', height: "80%", width: "90%", borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
                         {icon === 'PersonOutlinedIcon' ?
                             <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
@@ -45,10 +52,18 @@ const TextAreaForm = ({
                                 :
                                 icon === 'AccessibilityOutlinedIcon' ?
                                     <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                        <FontAwesome6 name="person" size={28} color="#02AF9B" />
+                                      {/*   <FontAwesome6 name="person" size={28} color="#02AF9B" /> */}
+                                        {/* <MaterialCommunityIcons name="head-lightbulb-outline" size={28} color="#02AF9B" /> */}
+                                        <FontAwesome5 name="medal" size={28} color="#02AF9B" />
+
                                     </View>
                                     :
-                                    null
+                                    icon === 'competenias' ?
+                                        <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
+                                            <MaterialCommunityIcons name="head-lightbulb-outline" size={28} color="#02AF9B" />
+                                        </View>
+                                        :
+                                        null
 
                         }
                         <View style={{ height: "100%", width: "85%", alignItems: 'center', justifyContent: 'center' }}>
@@ -64,10 +79,6 @@ const TextAreaForm = ({
                             />
                         </View>
                     </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', height: "20%", width: "100%" }}>
-                        <Text style={profileStyles.label}>{label}</Text>
-                    </View>
-
                 </View>
             </View>
 

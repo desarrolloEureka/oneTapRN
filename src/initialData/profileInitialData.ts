@@ -106,7 +106,7 @@ export const profile = {
     checked: false,
     social: false,
     professional: true,
-    icon: 'WorkOutlineOutlinedIcon',
+    icon: 'factory',
     order: 6,
   },
   position: {

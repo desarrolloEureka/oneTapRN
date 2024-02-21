@@ -7,6 +7,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import { GetUser, SendInactiveUser } from '../../reactQuery/users';
 import LogOut from '../../hooks/logOut/LogOut';
 
@@ -104,8 +107,8 @@ const MenuSuperior = () => {
       { id: 4, name: 'Ver Tienda', icon: 'storefront-outline' },
       { id: 5, name: 'Acerca De', icon: 'information-outline' },
       { id: 6, name: 'Políticas de Privacidad', icon: 'file-present' },
-      { id: 7, name: 'Términos y Condiciones', icon: 'file-present' },
-      { id: 8, name: 'Políticas de Devolución', icon: 'file-present' },
+      { id: 7, name: 'Términos y Condiciones', icon: 'file-contract' },
+      { id: 8, name: 'Políticas de Devolución', icon: 'shopping-basket-remove' },
       { id: 9, name: 'Preguntas Frecuentes', icon: 'chat-question-outline' },
       { id: 10, name: 'Cambiar Contraseña', icon: 'password' },
       { id: 11, name: 'Eliminar Cuenta', icon: 'deleteuser' },
@@ -123,6 +126,9 @@ const MenuSuperior = () => {
             {item.icon === 'restore' || item.icon === 'storefront-outline' || item.icon === 'information-outline' || item.icon === 'chat-question-outline' ? <MaterialCommunityIcons name={item.icon} size={24} color="black" /> : null}
             {item.icon === 'file-present' || item.icon === 'password' || item.icon === 'logout' ? <MaterialIcons name={item.icon} size={24} color="black" /> : null}
             {item.icon === 'deleteuser' ? <AntDesign name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'lock' ? <FontAwesome name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'file-contract' ? <FontAwesome5 name={item.icon} size={24} color="black" /> : null}
+            {item.icon === 'shopping-basket-remove' ? <Fontisto name={item.icon} size={24} color="black" /> : null}
             <Text style={{ color: 'black', paddingLeft: 12 }}> {item.name}</Text>
           </TouchableOpacity>
         ))}
@@ -131,7 +137,7 @@ const MenuSuperior = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <TouchableOpacity onPress={toggleModal} style={styles.button}>
         <Text style={styles.iconText}>☰</Text>
       </TouchableOpacity>
@@ -145,13 +151,12 @@ const MenuSuperior = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    padding: 10
+    padding: 10,
+    marginTop: 5,
+    marginRight: 10
   },
   button: {
-    padding: 10
+    //padding: 10
   },
   modalContent: {
     backgroundColor: 'white',

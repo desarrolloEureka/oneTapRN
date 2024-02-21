@@ -7,7 +7,7 @@ export const homeStyles = StyleSheet.create({
   },
   rootContainer: {
     flex: 1,
-    backgroundColor: '#CCCCCC', // Fondo gris
+    backgroundColor: '#CCCCCC',
   },
   body: {
     height: 400
@@ -16,8 +16,6 @@ export const homeStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: '#396593',
-    marginLeft: 160,
-    marginTop: 120
   },
   columnContainer: {
     flexDirection: 'column',
