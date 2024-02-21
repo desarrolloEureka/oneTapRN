@@ -37,7 +37,7 @@ const ModalBackground = ({
                 <View style={{ height: "75%", width: "90%", justifyContent: 'center', alignItems: 'center', backgroundColor: "#02AF9B", borderRadius: 25 }}>
                     <View style={{ height: "10%", width: "100%", justifyContent: 'center', alignItems: 'flex-end' }}>
                         <View style={{ height: "100%", width: "90%", justifyContent: 'center', alignItems: 'flex-start' }}>
-                            <Text>Seleccionar fondo</Text>
+                            <Text>Seleccionar Fondo</Text>
                         </View>
                         <TouchableOpacity style={{ height: "100%", width: "20%", justifyContent: 'center', alignItems: 'center', position: 'absolute' }} onPress={handleModalBackground}>
                             <Icon name="close" size={25} color="white" />

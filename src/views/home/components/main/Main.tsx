@@ -60,7 +60,7 @@ const Main = () => {
   }
 
   const handleTabPress = (tabName: string) => {
-    if (tabName === "Professional" && data?.plan === "basic") {
+    if (tabName === "Professional" && data?.plan === "standard") {
       setIsModalAlert(true);
     } else {
       if (tabName === 'Social') {
@@ -102,7 +102,7 @@ const Main = () => {
   };
 
   const handleChangeTab = (option: string) => {
-    if (option === "professional" && data?.plan === "basic") {
+    if (option === "professional" && data?.plan === "standard") {
       setIsModalAlert(true);
     } else {
       setTab(option);
@@ -131,13 +131,35 @@ const Main = () => {
 
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
-      <MenuSuperior />
 
-      <View style={globalStyles.container}>
-        <View style={homeStyles.switchContainer}>
-          <View style={homeStyles.switchContainer}>
-            <View style={[homeStyles.switchWrapper, { margin: 15 }]}>
+      <View style={{ height: 145, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ height: '50%', width: '100%', flexDirection: 'row' }}>
+          <View style={{ height: '100%', width: '50%' }}>
+            <View style={{ height: '85%', width: '25%', justifyContent: 'center', alignItems: 'flex-end', marginLeft: 7 }}>
+              <Image
+                resizeMode='contain'
+                style={{ width: '85%', height: '80%' }}
+                source={require('../../../../images/logo_inicio.png')}
+              />
+            </View>
 
+          </View>
+          <View style={{ height: '100%', width: '50%', alignItems: 'flex-end' }}>
+            <MenuSuperior />
+          </View>
+        </View>
+
+        <View style={{ height: '50%', width: '90%', flexDirection: 'row' }}>
+          <View style={{ height: '100%', width: '50%', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: 'white', height: '60%', width: '65%', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={homeStyles.buttonText}>
+                <Icon name="eye" size={20} color="#396593" />   {data && data?.views}
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ height: '100%', width: '50%', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end' }}>
+            <View style={[homeStyles.switchWrapper, { margin: 10 }]}>
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
                 Modo{' '}
               </Text>
@@ -145,7 +167,6 @@ const Main = () => {
                 profile={true}
                 handleModalAlert={handleModalAlert}
               />
-
               <Text style={[homeStyles.switchText, { color: '#030124' }]}>
                 Social | PRO
               </Text>
@@ -162,19 +183,14 @@ const Main = () => {
               </Text>
             </View>
           </View>
-          <View style={[homeStyles.button, { backgroundColor: 'white' }]}>
-            <Text style={homeStyles.buttonText}>
-              <Icon name="eye" size={20} color="#396593" />  {data && data?.views}
-            </Text>
-          </View>
         </View>
       </View>
 
-
-      <View style={homeStyles.body}>
-        <Text style={homeStyles.titleBody}>Plantillas</Text>
-
-        <View style={{ height: 40, marginBottom: 15, justifyContent: 'center', alignItems: 'center', }}>
+      <View style={{ height: 80, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ height: "50%", width: '100%', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <Text style={{ fontSize: 20, fontWeight: '700', color: '#396593', }}>Plantillas</Text>
+        </View>
+        <View style={{ height: "50%", justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ height: "100%", width: "95%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
             <TouchableOpacity style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'center', borderBottomWidth: tab === 'social' ? 4 : 2, borderColor: tab === 'social' ? '#396593' : '#7a7a7a' }} onPress={() => handleChangeTab('social')}>
               <Text style={{ color: tab === 'social' ? "#396593" : "#7a7a7a", fontWeight: tab === 'social' ? 'bold' : undefined }}>Social</Text>
@@ -185,86 +201,83 @@ const Main = () => {
             </TouchableOpacity>
           </View>
         </View>
+      </View>
 
-        {/*    <View style={homeStyles.tabSeparator} /> */}
+      <View style={{ height: 475, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ height: "95%", width: "95%" }}>
+          {dataTemplateFilter &&
+            <FlatList
+              data={dataTemplateFilter}
+              keyExtractor={item => item.id.toString()}
+              numColumns={2}
+              renderItem={({ item, index }) => {
+                const i = item.id;
+                const itemData = data?.templateData?.find((val) => val.id === i);
+                return (
+                  <View style={{ height: 280, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ height: "95%", width: "95%", backgroundColor: "#02AF9B", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+                      <View style={{ height: "20%", width: "100%", alignItems: 'flex-end', flexDirection: 'row' }}>
+                        <View style={{ height: "100%", width: "50%", justifyContent: 'center' }}>
+                          <TouchableOpacity style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={handleNavigatePreview}>
+                            <Ionicons name="eye-sharp" size={15} color="white" />
+                            <Text style={{ fontSize: 10, color: "white" }}>
+                              Vista{'\n'}Previa
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                        <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-end' }}>
+                          <View style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }}>
 
-        <View style={{ height: 480, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ height: "98%", width: "95%" }}>
-            {dataTemplateFilter &&
-              <FlatList
-                data={dataTemplateFilter}
-                keyExtractor={item => item.id.toString()}
-                numColumns={2}
-                renderItem={({ item, index }) => {
-                  const i = item.id;
-                  const itemData = data?.templateData?.find((val) => val.id === i);
-                  return (
-                    <View style={{ height: 280, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
-                      <View style={{ height: "95%", width: "95%", backgroundColor: "#02AF9B", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ height: "20%", width: "100%", alignItems: 'flex-end', flexDirection: 'row' }}>
-                          <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-start' }}>
-                            <TouchableOpacity style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={handleNavigatePreview}>
-                              <Ionicons name="eye-sharp" size={15} color="white" />
-                              <Text style={{ fontSize: 10, color: "white" }}>
-                                Vista{'\n'}Previa
-                              </Text>
-                            </TouchableOpacity>
+                            {data && (
+                              <CustomCheckbox
+                                uid={data?.uid}
+                                optionSelected={tab as TemplateTypes}
+                                value={item}
+                                setTemplateSelect={setTemplateSelect}
+                                templates={data?.templateData}
+                                checked={itemData != undefined ? itemData ? itemData?.checked : false : false}
+                              />
+                            )}
+
+                            <Text style={{ fontSize: 9, color: "white" }}>
+                              Seleccionar {'\n'}  plantilla
+                            </Text>
                           </View>
-                          <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-end' }}>
-                            <View style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }}>
 
-                              {data && (
-                                <CustomCheckbox
-                                  uid={data?.uid}
-                                  optionSelected={tab as TemplateTypes}
-                                  value={item}
-                                  setTemplateSelect={setTemplateSelect}
-                                  templates={data?.templateData}
-                                  checked={itemData != undefined ? itemData ? itemData?.checked : false : false}
-                                />
-                              )}
+                        </View>
+                      </View>
+                      <View style={{ height: "65%", width: "98%", justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ height: "98%", width: "98%" }}>
+                          <Image
+                            source={{ uri: `${item.image}` }}
+                            style={{ flex: 1, resizeMode: 'contain' }}
+                          />
+                        </View>
+                      </View>
+                      <View style={{ height: "15%", width: "100%", alignItems: 'flex-end', flexDirection: 'row' }}>
+                        <View style={{ height: "100%", width: "50%", justifyContent: 'center' }}>
+                          <View style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 10, color: "white" }}>
 
-                              <Text style={{ fontSize: 9, color: "white" }}>
-                                Seleccionar {'\n'}  plantilla
-                              </Text>
-                            </View>
-
+                            </Text>
                           </View>
                         </View>
-                        <View style={{ height: "65%", width: "98%", justifyContent: 'center', alignItems: 'center' }}>
-                          <View style={{ height: "98%", width: "98%" }}>
-                            <Image
-                              source={{ uri: `${item.image}` }}
-                              style={{ flex: 1, resizeMode: 'contain' }}
-                            />
-                          </View>
-                        </View>
-                        <View style={{ height: "15%", width: "100%", alignItems: 'flex-end', flexDirection: 'row' }}>
-                          <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-start' }}>
-                            <View style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }}>
-                              <Text style={{ fontSize: 10, color: "white" }}>
-
-                              </Text>
-                            </View>
-                          </View>
-                          <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-end' }}>
-                            <TouchableOpacity disabled={itemData ? !itemData?.checked : true} style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleModalBackground(item)}>
-                              <MaterialCommunityIcons name="cards" size={15} color="white" />
-                              <Text style={{ fontSize: 9, color: "white" }}>
-                                Cambiar {'\n'}  fondo
-                              </Text>
-                            </TouchableOpacity>
-                          </View>
+                        <View style={{ height: "100%", width: "50%", justifyContent: 'center', alignItems: 'flex-end' }}>
+                          <TouchableOpacity disabled={itemData ? !itemData?.checked : true} style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleModalBackground(item)}>
+                            <MaterialCommunityIcons name="cards" size={15} color="white" />
+                            <Text style={{ fontSize: 9, color: "white" }}>
+                              Cambiar {'\n'}  fondo
+                            </Text>
+                          </TouchableOpacity>
                         </View>
                       </View>
                     </View>
-                  );
-                }}
-              />
-            }
-          </View>
+                  </View>
+                );
+              }}
+            />
+          }
         </View>
-
       </View>
 
       <View style={{
@@ -282,7 +295,7 @@ const Main = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Professional')}>
-          <Icon name="briefcase" size={25} color="black" />
+          <Ionicons name="newspaper-sharp" size={28} color="black" />
           <Text style={{ color: 'black' }}>PRO</Text>
         </TouchableOpacity>
 

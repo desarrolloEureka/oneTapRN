@@ -158,7 +158,7 @@ const ChangePassword = () => {
                         </View>
                     </View>
                 }
-                <View style={{ flex: 1, aspectRatio: 1 / 0.90, width: "100%", alignItems: 'center', justifyContent: 'flex-end'}}>
+                <View style={{ flex: 1, aspectRatio: 1 / 0.90, width: "100%", alignItems: 'center', justifyContent: 'flex-end' }}>
                     <TouchableOpacity style={{ height: '15%', width: "55%", backgroundColor: '#02AF9B', justifyContent: 'center', alignItems: 'center', borderRadius: 100 }} onPress={handleChangePassword}>
                         <Text style={styles.buttonText}>
                             Continuar

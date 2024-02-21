@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { ItemFormParams } from '../../../../../types/profile';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 
 const ItemForm = ({
@@ -62,8 +62,12 @@ const ItemForm = ({
     <View style={{ height: 115, justifyContent: 'center', flexDirection: 'row' }}>
       <View style={{ flexDirection: 'column', alignItems: 'center', height: "90%", width: "80%" }}>
         <View style={{ flexDirection: 'column', alignItems: 'flex-start', height: "100%", width: "100%", paddingLeft: 10 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', height: "65%", width: "90%", borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
 
+          <View style={{ flexDirection: 'row', alignItems: 'center', height: "20%", width: "90%" }}>
+            <Text style={profileStyles.label}>{label}</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', height: "55%", width: "90%", borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
             {icon === 'PersonOutlinedIcon' ?
               <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
                 <Ionicons name="person-outline" size={28} color="#02AF9B" />
@@ -71,40 +75,45 @@ const ItemForm = ({
               :
               icon === 'FilePresentOutlinedIcon' ?
                 <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                  <MaterialIcons name="file-present" size={28} color="#02AF9B" />
+                  <FontAwesome name="graduation-cap" size={28} color="#02AF9B" />
                 </View>
                 :
-                icon === 'WorkOutlineOutlinedIcon' ?
+                icon === 'factory' ?/* Cambiar por icono */
                   <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                    <MaterialIcons name="work-outline" size={28} color="#02AF9B" />
+                    <MaterialIcons name="factory" size={28} color="#02AF9B" />
                   </View>
                   :
-                  icon === 'ExploreOutlinedIcon' ?
+                  icon === 'WorkOutlineOutlinedIcon' ?
                     <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                      <MaterialIcons name="explore" size={28} color="#02AF9B" />
+                      <MaterialCommunityIcons name="tie" size={28} color="#02AF9B" />
                     </View>
                     :
-                    icon === 'translate' ?
+                    icon === 'ExploreOutlinedIcon' ?
                       <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                        <MaterialIcons name="translate" size={28} color="#02AF9B" />
+                        <MaterialIcons name="explore" size={28} color="#02AF9B" />
                       </View>
                       :
-                      icon === 'AttachFileOutlinedIcon' ?
+                      icon === 'translate' ?
                         <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                          <MaterialCommunityIcons name="paperclip" size={28} color="#02AF9B" />
+                          <MaterialIcons name="translate" size={28} color="#02AF9B" />
                         </View>
                         :
-                        icon === 'EmailOutlinedIcon' ?
+                        icon === 'AttachFileOutlinedIcon' ?
                           <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                            <MaterialCommunityIcons name="email-outline" size={28} color="#02AF9B" />
+                            <MaterialCommunityIcons name="paperclip" size={28} color="#02AF9B" />
                           </View>
                           :
-                          icon === 'LocalPhoneOutlinedIcon' ?
+                          icon === 'EmailOutlinedIcon' ?
                             <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                              <SimpleLineIcons name="phone" size={28} color="#02AF9B" />
+                              <MaterialCommunityIcons name="email-outline" size={28} color="#02AF9B" />
                             </View>
                             :
-                            null
+                            icon === 'LocalPhoneOutlinedIcon' ?
+                              <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
+                                <SimpleLineIcons name="phone" size={28} color="#02AF9B" />
+                              </View>
+                              :
+                              null
             }
 
             <View style={{ height: "100%", width: "85%", alignItems: 'center', justifyContent: 'center' }}>
@@ -128,12 +137,8 @@ const ItemForm = ({
               />
             </View>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', height: "20%", width: "90%" }}>
-            <Text style={profileStyles.label}>{label}</Text>
-          </View>
         </View>
       </View>
-
 
       {deleteAction === true && handleModalAlert ?
         <View style={{ flexDirection: 'column', alignItems: 'center', height: "100%", width: "20%" }}>
@@ -149,7 +154,7 @@ const ItemForm = ({
             style={{ alignItems: 'center', height: "50%", width: "100%" }}
             onPress={() => handleModalAlert({ index: index, subindex: "" + subindex })}
           >
-            <Icon name="trash-o" size={25} color="#02AF9B" />
+            <FontAwesome name="trash-o" size={25} color="#02AF9B" />
           </TouchableOpacity>
         </View>
         :

@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { profileStyles } from '../../../styles/profileStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 
 const FormUrl = ({
@@ -60,7 +61,7 @@ const FormUrl = ({
         {withCheck ?
           <>
             <View style={{ height: "100%", width: "11%", alignItems: 'flex-start', justifyContent: 'center' }}>
-              <Ionicons name="library-outline" size={25} color="#02AF9B" />
+              <FontAwesome5 name="pencil-alt" size={21} color="#02AF9B" />
             </View>
             <View style={{ height: "100%", width: "23%", alignItems: 'flex-start', justifyContent: 'center' }}>
               <Text style={{ color: "black" }}>{label}</Text>
@@ -95,7 +96,7 @@ const FormUrl = ({
         </View>
 
         <View style={{ height: "100%", width: "7%", alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontSize: 16 }}>
+          <Text style={{ fontSize: 16, color: "black" }}>
             {myValue && subLabel && subLabel === 'url' && Array.isArray(myValue) && myValue[subindex as number] && myValue[subindex as number][subLabel] && myValue[subindex as number][subLabel].length > 15 ? ' ...' : null}
           </Text>
         </View>

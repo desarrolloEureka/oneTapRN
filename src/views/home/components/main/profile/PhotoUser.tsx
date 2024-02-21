@@ -145,8 +145,8 @@ const PhotoUser: React.FC = () => {
           <View style={{ height: '25%', width: '45%' }}>
             <View style={profileStyles.borderTargetName}>
               <Text style={profileStyles.textName}>
-                Hola {data && data?.user_name}
-                {/* Hola {data && data?.profile?.name?.text ? data?.profile?.name?.text : ''} */}
+                {/* Hola {data && data?.user_name} */}
+                Hola {data && data?.profile?.name?.text ? data?.profile?.name?.text : ''}
               </Text>
             </View>
           </View>

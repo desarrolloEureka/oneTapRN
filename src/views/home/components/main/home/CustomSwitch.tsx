@@ -12,7 +12,7 @@ const CustomSwitch = ({ profile, handleModalAlert }: { profile: boolean; handleM
         const plan = data?.plan;
 
         if (userId) {
-            if (profile && plan === 'basic') {
+            if (profile && plan === 'standard') {
                 setSwitchProfile(switchProfile);
                 handleModalAlert && handleModalAlert();
             } else {
