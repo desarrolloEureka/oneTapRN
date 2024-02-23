@@ -1,118 +1,69 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import HomeScreen from './src/views/home/Home';
+import Plantillas from './src/views/home/components/main/home/Plantillas';
+import PreviewTemplate from './src/views/home/components/main/home/PreviewTemplate';
+import ChangePassword from './src/views/home/components/main/profile/ChangePassword';
+import ProfileScreen from './src/views/home/components/main/profile/Profile';
+import Login from './src/views/login/Login';
+import OnboardingOne from './src/views/onboardings/OnboardigndOne';
+import OnboardingInicioSesion from './src/views/onboardings/OnboardingInicioSesion';
+import OnboardingThree from './src/views/onboardings/OnboardingThree';
+import OnboardingTwo from './src/views/onboardings/OnboargindTwo';
+import Splash from './src/views/onboardings/Splash';
+import AcercaDe from './src/views/opcionesMenu/AcercaDe';
+import Politicas from './src/views/opcionesMenu/Politicas';
+import Terminos from './src/views/opcionesMenu/Terminos';
+import CreateNewPassword from './src/views/recovery/components/main/CreateNewPassword';
+import PasswordChanged from './src/views/recovery/components/main/PasswordChanged';
+import RecoveryCode from './src/views/recovery/components/main/RecoveryCode';
+import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassword';
+import {RouteStackParamList} from './src/types/navigation';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const Stack = createNativeStackNavigator<RouteStackParamList>();
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+// Crea una instancia de QueryClient
+const queryClient = new QueryClient();
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+          initialRouteName="Splash">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="PreviewTemplate" component={PreviewTemplate} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="ChangePassword" component={ChangePassword} />
+          <Stack.Screen name="OnboardingOne" component={OnboardingOne} />
+          <Stack.Screen name="OnboardingTwo" component={OnboardingTwo} />
+          <Stack.Screen name="OnboardingThree" component={OnboardingThree} />
+          <Stack.Screen
+            name="OnboardingInicioSesion"
+            component={OnboardingInicioSesion}
+          />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="RecoveryPassword" component={RecoveryPassword} />
+          <Stack.Screen name="RecoveryCode" component={RecoveryCode} />
+          <Stack.Screen
+            name="CreateNewPassword"
+            component={CreateNewPassword}
+          />
+          <Stack.Screen name="PasswordChanged" component={PasswordChanged} />
+          <Stack.Screen name="AcercaDe" component={AcercaDe} />
+          <Stack.Screen name="Terminos" component={Terminos} />
+          <Stack.Screen name="Politicas" component={Politicas} />
+          <Stack.Screen name="Plantillas" component={Plantillas} />
+          <Stack.Screen name="Splash" component={Splash} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+};
 
 export default App;
