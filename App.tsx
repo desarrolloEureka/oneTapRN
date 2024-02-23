@@ -1,6 +1,6 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import HomeScreen from './src/views/home/Home';
 import Plantillas from './src/views/home/components/main/home/Plantillas';
@@ -20,7 +20,7 @@ import CreateNewPassword from './src/views/recovery/components/main/CreateNewPas
 import PasswordChanged from './src/views/recovery/components/main/PasswordChanged';
 import RecoveryCode from './src/views/recovery/components/main/RecoveryCode';
 import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassword';
-import { RouteStackParamList } from './src/types/navigation';
+import {RouteStackParamList} from './src/types/navigation';
 
 const Stack = createNativeStackNavigator<RouteStackParamList>();
 

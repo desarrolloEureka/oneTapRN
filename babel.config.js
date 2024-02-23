@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: ['module:@react-native/babel-preset'],
   plugins: [
     [
       'module-resolver',
@@ -14,20 +14,20 @@ module.exports = {
           '.jsx',
           '.json',
           '.ts',
-          '.tsx'
+          '.tsx',
         ],
         root: '.',
         alias: {
           '@src': './src/',
-          '@assets': './src/assets/'
-        }
-      }
+          '@assets': './src/assets/',
+        },
+      },
     ],
-    'react-native-reanimated/plugin'
+    'react-native-reanimated/plugin',
   ],
   env: {
     production: {
-      plugins: ['react-native-paper/babel', 'transform-remove-console']
-    }
-  }
+      plugins: ['transform-remove-console'],
+    },
+  },
 };
