@@ -13,6 +13,8 @@ const FormProfession = ({
   handleData,
   checked,
   deleteAction,
+  icon,
+  handleDeleteData,
   handleModalAlert,
   myValue,
   index,
@@ -101,7 +103,6 @@ const FormProfession = ({
             handleSwitch={(e: any) => handleSwitch({
               checked, name, subindex, currentDataRef: dataRef,
             })}
-            //checked={checked}
             checked={
               myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number]?.checked
             }

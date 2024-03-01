@@ -7,61 +7,69 @@ import {
     DataFormValues,
     EducationDataFormValues,
     DataForm,
-    CareerSubIndexDataForm
+    CareerSubIndexDataForm,
+    ProfessionalDataForm,
+    handleDataProps
 } from '../../../../../types/profile';
-import ProfileHook from './hooks/ProfileHook';
 import FormProfession from './FormProfession';
 import CustomModalAlert from './CustomModalAlert';
+import { UserData } from '../../../../../types/user';
 
 const ItemFormProfessional = ({
     dataForm,
     handleDataSet,
-    handleSeeMore,
     index,
-    label,
     labelArray,
-    value,
-    itemDetail,
-    isDetailOpen,
-    icon,
-    social,
     handleModalAlert,
+    isProUser,
+    handleData,
+    user,
+    handleSwitch,
+    handleAddData,
+    handleModalAlertLimit,
+    isModalAlertLimit,
+    handleDeleteData,
 }: {
-    dataForm: DataForm;
-    handleDataSet: (e: DataForm) => void;
-    handleSeeMore: (e: number) => void;
+    dataForm: ProfessionalDataForm;
+    handleDataSet: (e: ProfessionalDataForm) => void;
     index: IndexDataForm;
-    label?: string;
     labelArray:
     | DataFormValues[]
     | EducationDataFormValues[]
     | CareerDataFormValues[];
-    value: any;
-    itemDetail: number;
-    isDetailOpen: boolean;
-    icon?: string;
-    social: boolean;
-    handleModalAlert: ({ index, subindex }: { index: string, subindex: string }) => void;
+    handleModalAlert: ({
+        index,
+        subindex,
+    }: {
+        index: string;
+        subindex: string;
+    }) => void;
+    isProUser: boolean;
+    handleData: ({
+        name,
+        text,
+        subindex,
+        key,
+        currentDataRef,
+    }: handleDataProps) => void;
+    user: UserData;
+    handleSwitch: (e: any) => void;
+    handleAddData: (index: any) => void;
+    handleModalAlertLimit: () => void;
+    isModalAlertLimit: boolean;
+    handleDeleteData: () => void;
 }) => {
-    const {
-        handleSwitch,
-        handleData,
-        handleAddData,
-        handleDeleteData,
-        user,
-        isModalAlertLimit,
-        handleModalAlertLimit
-    } = ProfileHook({
-        handleDataSet,
-    });
-
     return (
         <>
             <View style={{ height: labelArray.length > 1 ? 'auto' : 280, minHeight: 380, width: "100%", justifyContent: 'center', paddingTop: 20, paddingBottom: 20 }}>
-                <View style={{ minHeight: 230, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
-
-                    <View style={{ height: 40, width: "100%", alignItems: 'flex-end' }}>
-                        <TouchableOpacity style={{ height: "100%", width: "55%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => { handleAddData('professional_career', social) }} >
+                <View style={{ minHeight: 230, width: "100%", justifyContent: 'center', alignItems: 'center', backgroundColor: "#e9e9e9" }}>
+                    <View style={{ height: 50, width: "95%", alignItems: 'flex-end', flexDirection: 'row' }}>
+                        <View style={{ height: "100%", width: "40%", justifyContent: 'flex-start', alignItems: 'flex-end', flexDirection: 'row' }}>
+                            <View style={{ height: "75%", width: "98%", justifyContent: 'center', alignItems: 'center', backgroundColor: '#02af9b', borderRadius: 5 }}>
+                                <Text style={{ fontSize: 13, color: 'white' }}>Trayectoria Profesional</Text>
+                            </View>
+                        </View>
+                        <TouchableOpacity style={{ height: "100%", width: "60%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => { handleAddData('professional_career'); }} >
                             <View style={{ height: "100%", width: "20%", alignItems: 'center', justifyContent: 'center' }}>
                                 <Icon name="plus-circle" size={20} color="#02AF9B" />
                             </View>
@@ -72,9 +80,13 @@ const ItemFormProfessional = ({
                     </View>
 
                     {labelArray.map((val, key) => {
-                        const myValue = (user && user.profile && index == value[0]
-                            ? user.profile[index]
-                            : value[1]) as unknown as DataFormValues;
+                        const myValue = (user && user.profile
+                            ? isProUser
+                                ? user.profile.professional
+                                    ? user.profile.professional?.[index]
+                                    : dataForm && dataForm[index]
+                                : dataForm && dataForm[index]
+                            : dataForm && dataForm[index]) as unknown as DataFormValues;
                         return (
                             <View key={key} style={{ height: 245, justifyContent: 'center', flexDirection: 'row', borderBottomWidth: key !== labelArray.length - 1 ? 2 : undefined, borderBlockColor: key !== labelArray.length - 1 ? '#d4d4d4' : undefined, marginTop: 10 }}>
                                 <View style={{ height: "95%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
@@ -89,16 +101,16 @@ const ItemFormProfessional = ({
                                             icon={val.icon}
                                             deleteAction={false}
                                             handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                            handleModalAlert={({ index, subindex }) =>
+                                                handleModalAlert({ index, subindex })
+                                            }
                                             myValue={myValue}
-                                            dataForm={dataForm}
                                             index={index}
                                             withCheck={true}
                                             subLabel={'company' as CareerSubIndexDataForm}
                                         />
                                     </View>
                                     <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-
                                         <FormProfession
                                             label={'Cargo: '}
                                             handleSwitch={(e: any) => handleSwitch(e)}
@@ -109,16 +121,16 @@ const ItemFormProfessional = ({
                                             icon={val.icon}
                                             deleteAction={true}
                                             handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                            handleModalAlert={({ index, subindex }) =>
+                                                handleModalAlert({ index, subindex })
+                                            }
                                             myValue={myValue}
-                                            dataForm={dataForm}
                                             index={index}
                                             withCheck={false}
                                             subLabel={'position' as CareerSubIndexDataForm}
                                         />
                                     </View>
                                     <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-
                                         <FormProfession
                                             label={'Fecha de inicio: '}
                                             handleSwitch={(e: any) => handleSwitch(e)}
@@ -129,16 +141,16 @@ const ItemFormProfessional = ({
                                             icon={val.icon}
                                             deleteAction={false}
                                             handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                            handleModalAlert={({ index, subindex }) =>
+                                                handleModalAlert({ index, subindex })
+                                            }
                                             myValue={myValue}
-                                            dataForm={dataForm}
                                             index={index}
                                             withCheck={false}
                                             subLabel={'data_init' as CareerSubIndexDataForm}
                                         />
                                     </View>
                                     <View style={{ height: "20%", width: "90%", alignItems: 'center', justifyContent: 'center' }}>
-
                                         <FormProfession
                                             label={'Fecha finalización: '}
                                             handleSwitch={(e: any) => handleSwitch(e)}
@@ -149,9 +161,10 @@ const ItemFormProfessional = ({
                                             icon={val.icon}
                                             deleteAction={false}
                                             handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                            handleModalAlert={({ index, subindex }) =>
+                                                handleModalAlert({ index, subindex })
+                                            }
                                             myValue={myValue}
-                                            dataForm={dataForm}
                                             index={index}
                                             withCheck={false}
                                             subLabel={'data_end' as CareerSubIndexDataForm}
@@ -166,16 +179,6 @@ const ItemFormProfessional = ({
                         );
                     })
                     }
-                    {/* <TouchableOpacity style={{ height: 45, width: "100%", alignItems: 'center', justifyContent: 'center', borderTopColor: '#396593', borderTopWidth: 2 }} onPress={() => handleSeeMore(3)}>
-                    <View style={{ height: "100%", width: "30%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                        <View style={{ height: "100%", width: "75%", alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 12, color: "#396593" }}>Ver más (2)</Text>
-                        </View>
-                        <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
-                            <Icon name="angle-down" size={35} color="#396593" />
-                        </View>
-                    </View>
-                </TouchableOpacity> */}
                 </View>
             </View>
             <CustomModalAlert

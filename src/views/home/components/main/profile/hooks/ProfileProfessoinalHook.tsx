@@ -1,30 +1,35 @@
-import { useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
   CareerDataFormValues,
+  CareerSubIndexDataForm,
   DataFormSorted,
   DataFormValues,
   EducationDataFormValues,
+  EducationSubIndexDataForm,
   IndexDataForm,
-  UrlDataFormValues,
-  handleDataProps,
-  handleDataNetworksProps,
   NetworksSubIndexDataForm,
-  SocialDataForm,
+  ProfessionalDataForm,
+  UrlDataFormValues,
+  handleDataNetworksProps,
+  handleDataProps,
 } from '../../../../../../types/profile';
 import { profile } from '../../../../../../initialData/profileInitialData';
 import { GetUser, SendDataUserProfile } from '../../../../../../reactQuery/users';
 import { validateEmail, validatePhoneNumber } from '../../../../../../globals/validateData';
 
-const ProfileHook = ({
+const ProfileProfessionalHook = ({
   handleDataSet,
-  isProUser
+  isProUser,
 }: {
-  handleDataSet?: (e: SocialDataForm) => void;
+  handleDataSet?: (e: ProfessionalDataForm) => void;
   isProUser: boolean;
 }) => {
   const { data, error } = GetUser();
-  const [dataForm, setDataForm] = useState<SocialDataForm>(profile.social);
+  const [dataForm, setDataForm] = useState<ProfessionalDataForm>(
+    profile.professional
+  );
   const [objectDataSort, setObjectDataSort] = useState<[string, any][]>([]);
+
   const [allChecked, setAllChecked] = useState(false);
   const [isModalAlertLimit, setIsModalAlertLimit] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +40,6 @@ const ProfileHook = ({
   const [itemUrlKey, setItemUrlKey] = useState(0);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [itemDetail, setItemDetail] = useState(0);
-
   /* Delete items */
   const [itemDelete, setItemDelete] = useState<
     { index: string; subindex: string } | {}
@@ -58,6 +62,10 @@ const ProfileHook = ({
     const emails = dataForm?.emails?.map((email) => email.text);
     const phones = dataForm?.phones?.map((phone) => phone.text);
     const urls = dataForm?.urls?.map((urls) => urls);
+    const education = dataForm?.education?.map((education) => education);
+    const professionalCareer = dataForm?.professional_career?.map(
+      (proCareer) => proCareer
+    );
 
     if (emails) {
       const isEmailValid = emails.every((email) => validateEmail(email as string));
@@ -85,6 +93,24 @@ const ProfileHook = ({
       }
     }
 
+    if (isProUser && education) {
+      const allObjectsFilled = dataForm?.education?.every(obj => obj.title !== "" && obj.institution !== "" && obj.year !== "");
+      if (!allObjectsFilled) {
+        setStatus("No se pueden dejar espacios en blanco en educación");
+        setisEmailPhoneRight(true);
+        return;
+      }
+    }
+
+    if (isProUser && professionalCareer) {
+      const allObjectsFilled = dataForm?.professional_career?.every(obj => obj.company !== "" && obj.position !== "" && obj.data_init !== "" && obj.data_end !== "");
+      if (!allObjectsFilled) {
+        setStatus("No se pueden dejar espacios en blanco en trayectoria");
+        setisEmailPhoneRight(true);
+        return;
+      }
+    }
+
     setIsLoadingSendData(true);
     if (userId) {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm, isProUser);
@@ -102,7 +128,18 @@ const ProfileHook = ({
     }
   };
 
-  const handleModalAlert = (itemDelete: { index: string; subindex: string }) => {
+  const handleModalAlertLimit = () => {
+    setIsModalAlertLimit(!isModalAlertLimit);
+  };
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleModalAlert = (itemDelete: {
+    index: string;
+    subindex: string;
+  }) => {
     if (!isModalAlert) {
       setItemDelete(itemDelete);
     } else {
@@ -126,6 +163,14 @@ const ProfileHook = ({
     setNoDeleted(!noDeleted);
   };
 
+  const handleSeeMore = (numItem: number) => {
+    if (itemDetail != 0) {
+      setItemDetail(0);
+    } else {
+      setItemDetail(numItem);
+    }
+  };
+
   const handleSwitch = ({
     currentDataRef,
     checked,
@@ -142,7 +187,9 @@ const ProfileHook = ({
     const index = name as keyof typeof dataFormClone;
     if (
       index != 'phones' &&
+      index != 'education' &&
       index != 'emails' &&
+      index != 'professional_career' &&
       index != 'urls' &&
       (dataFormClone[index]?.label != 'phones' ||
         dataFormClone[index]?.label != 'education' ||
@@ -167,13 +214,18 @@ const ProfileHook = ({
     index: IndexDataForm,
     key: number,
     text: string,
+    subindexEducation?: EducationSubIndexDataForm,
+    subindexCareer?: CareerSubIndexDataForm,
     subindexUrl?: NetworksSubIndexDataForm
   ) => {
     const dataFormClone = { ...dataForm };
-    dataFormClone &&
-      index == 'urls' &&
-      subindexUrl &&
-      (dataFormClone[index]![key][subindexUrl] = text);
+    dataFormClone && index == 'education' && subindexEducation
+      ? (dataFormClone[index]![key][subindexEducation] = text)
+      : index == 'professional_career'
+        ? subindexCareer && (dataFormClone[index]![key][subindexCareer] = text)
+        : index == 'urls' &&
+        subindexUrl &&
+        (dataFormClone[index]![key][subindexUrl] = text);
 
     setDataForm(dataFormClone);
     setIsDataLoad(true);
@@ -187,7 +239,9 @@ const ProfileHook = ({
   }: handleDataNetworksProps) => {
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
-    key != undefined && subindex && fillFields(index, key, text, subindex);
+    key != undefined &&
+      subindex &&
+      fillFields(index, key, text, undefined, undefined, subindex);
   };
 
   const handleData = ({
@@ -200,11 +254,11 @@ const ProfileHook = ({
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
     if (
-      index == 'name' ||
-      index == 'last_name' ||
-      index == 'profession' ||
-      index == 'occupation' ||
-      index == 'address'
+      index != 'phones' &&
+      index != 'emails' &&
+      index != 'education' &&
+      index != 'professional_career' &&
+      index != 'urls'
     ) {
       dataFormClone[index]!.text = text;
       currentDataRef.current.text = text;
@@ -221,12 +275,31 @@ const ProfileHook = ({
         }
         setIsDataLoad(true);
       } else if (
+        index == 'education' &&
+        (subindex == 'title' ||
+          subindex == 'year' ||
+          subindex == 'institution') &&
+        key != undefined
+      ) {
+        currentDataRef.current[key][subindex] = text;
+        fillFields(index, key, text, subindex);
+      } else if (
+        index == 'professional_career' &&
+        (subindex == 'company' ||
+          subindex == 'data_end' ||
+          subindex == 'data_init' ||
+          subindex == 'position') &&
+        key != undefined
+      ) {
+        currentDataRef.current[key][subindex] = text;
+        fillFields(index, key, text, undefined, subindex);
+      } else if (
         index == 'urls' &&
         (subindex == 'name' || subindex == 'url' || subindex == 'icon') &&
         key != undefined
       ) {
         currentDataRef.current[key][subindex] = text;
-        fillFields(index, key, text, subindex);
+        fillFields(index, key, text, undefined, undefined, subindex);
       }
     }
   };
@@ -260,14 +333,21 @@ const ProfileHook = ({
 
   const handleAddData = (index: string) => {
     const dataFormClone = { ...dataForm };
-    if (index == 'phones' || index == 'emails' || index == 'urls') {
+    if (
+      index == 'phones' ||
+      index == 'education' ||
+      index == 'emails' ||
+      index == 'urls' ||
+      index == 'professional_career'
+    ) {
       const count = dataFormClone?.[index]?.length;
+
       if (index === 'phones') {
         if ((count != null || count != undefined) && count < 3) {
           if (count === 0) {
             dataFormClone.phones = [
               {
-                label: "Teléfono",
+                label: "labelPhone",
                 text: '',
                 checked: true,
                 principal: false,
@@ -293,7 +373,6 @@ const ProfileHook = ({
           setIsModalAlertLimit(true);
         }
       }
-
       if (index === 'emails') {
         if ((count != null || count != undefined) && count < 3) {
           if (count === 0) {
@@ -325,6 +404,78 @@ const ProfileHook = ({
           setIsModalAlertLimit(true);
         }
       }
+      if (index === 'education') {
+        if ((count != null || count != undefined) && count < 3) {
+          if (count === 0) {
+            dataFormClone.education = [
+              {
+                label: "Formación académica",
+                title: '',
+                institution: '',
+                year: '',
+                checked: true,
+                principal: false,
+                social: false,
+                professional: true,
+                icon: '',
+                order: 11,
+              },
+            ];
+          } else {
+            dataFormClone[index]?.unshift({
+              label: dataFormClone[index]![0].label,
+              title: '',
+              institution: '',
+              year: '',
+              checked: true,
+              principal: false,
+              social: false,
+              professional: true,
+              icon: '',
+              order: 11,
+            });
+          }
+        } else {
+          setIsModalAlertLimit(true);
+        }
+      }
+      if (index === 'professional_career') {
+        if ((count != null || count != undefined) && count < 3) {
+          if (count === 0) {
+            dataFormClone.professional_career = [
+              {
+                label: "Carrera profesional",
+                company: '',
+                position: '',
+                data_init: '',
+                data_end: '',
+                checked: true,
+                principal: false,
+                social: false,
+                professional: true,
+                icon: '',
+                order: 12,
+              },
+            ];
+          } else {
+            dataFormClone[index]?.unshift({
+              label: dataFormClone[index]![0].label,
+              company: '',
+              position: '',
+              data_init: '',
+              data_end: '',
+              checked: true,
+              principal: false,
+              social: false,
+              professional: true,
+              icon: '',
+              order: 12,
+            });
+          }
+        } else {
+          setIsModalAlertLimit(true);
+        }
+      }
       if (index === 'urls') {
         //if ((count != null || count != undefined) && count < 3) {
         if (count === 0) {
@@ -336,7 +487,7 @@ const ProfileHook = ({
               icon: '',
               checked: true,
               principal: false,
-              social: true,
+              social: false,
               professional: true,
               order: 13,
             },
@@ -349,7 +500,7 @@ const ProfileHook = ({
             icon: '',
             checked: true,
             principal: false,
-            social: true,
+            social: false,
             professional: true,
             order: 13,
           });
@@ -358,10 +509,6 @@ const ProfileHook = ({
       setDataForm(dataFormClone);
     }
   };
-
-  const handleModalAlertLimit = () => {
-    setIsModalAlertLimit(false);
-  }
 
   const checkedItems = (
     data: DataFormValues[] | EducationDataFormValues[] | CareerDataFormValues[],
@@ -473,26 +620,15 @@ const ProfileHook = ({
   }, [dataForm, isProUser]);
 
   useEffect(() => {
+    //this flag rerender the main component to show the data on fields
     setFlag(true);
     setTimeout(() => {
       setFlag(false);
-    }, 1000);
+    }, 200);
   }, [dataForm]);
 
   useEffect(() => {
-    let myDataForm = null;
-    if (data?.profile) {
-      myDataForm = data.profile.social ?? profile.social;
-    } else {
-      myDataForm = profile.social;
-    }
-    myDataForm && setDataForm(myDataForm);
-  }, [data, isProUser]);
-
-
-
-  useEffect(() => {
-    if (dataForm?.name?.label == '') {
+    if (dataForm.name?.label == '') {
       const dataFormClone = { ...dataForm };
       const items = Object.entries(dataFormClone);
       const newData = items.map((value) => {
@@ -502,7 +638,7 @@ const ProfileHook = ({
             data,
             value[0],
             false,
-            "Telefono"
+            "Teléfono"
           );
         } else if (value[0] == 'emails') {
           const data = value[1] as DataFormValues[];
@@ -518,7 +654,7 @@ const ProfileHook = ({
             data,
             value[0],
             false,
-            "Educacion"
+            "Formación académica"
           );
         } else if (value[0] == 'professional_career') {
           const data = value[1] as CareerDataFormValues[];
@@ -526,16 +662,11 @@ const ProfileHook = ({
             data,
             value[0],
             false,
-            "Profesion"
+            "Carrera profesional"
           );
         } else if (value[0] == 'urls') {
           const data = value[1] as UrlDataFormValues[];
-          return checkedItems(
-            data,
-            value[0],
-            false,
-            "urls"
-          );
+          return checkedItems(data, value[0], false, 'urls');
         } else {
           const data = value[1] as DataFormValues;
           const label = validLabel(value[0]);
@@ -546,6 +677,17 @@ const ProfileHook = ({
       handleDataSet && handleDataSet(dataFormChecked);
     }
   }, [dataForm, handleDataSet, validLabel]);
+
+
+  useEffect(() => {
+    let myDataForm = null;
+    if (data?.profile) {
+      myDataForm = data.profile.professional ?? profile.professional;
+    } else {
+      myDataForm = profile.professional;
+    }
+    myDataForm && setDataForm(myDataForm);
+  }, [data, isProUser]);
 
   useEffect(() => {
     if (allChecked && dataForm) {
@@ -564,14 +706,19 @@ const ProfileHook = ({
     data: objectDataSort,
     handleDeleteData,
     handleModalAux,
+    handleModal,
     handleModalAlert,
-    isModalAlertLimit,
+    handleSuccessDelete,
+    handleSeeMore,
     isDetailOpen,
     itemDetail,
     isModalOpen,
     isModalAlert,
     isSuccessDelete,
     itemDelete,
+    isModalAlertLimit,
+    handleModalAlertLimit,
+    handleSendProfile,
     isDataSuccess,
     setIsDataSuccess,
     isDataError,
@@ -580,13 +727,7 @@ const ProfileHook = ({
     isDataLoad,
     dataForm,
     setDataForm,
-    handleSendProfile,
-    setIsModalAlert,
-    handleSuccessDelete,
-    switchValue,
-    setSwitchValue,
-    isLoadingSendData,
-    setIsLoadingSendData,
+    noDeleted,
     isModalIcons,
     setModalIcons,
     handleModalIcons,
@@ -595,9 +736,11 @@ const ProfileHook = ({
     status,
     isEmailPhoneRight,
     setisEmailPhoneRight,
-    noDeleted,
-    handleModalAlertLimit
+    isLoadingSendData,
+    setIsLoadingSendData,
+    switchValue,
+    setSwitchValue
   };
 };
 
-export default ProfileHook;
+export default ProfileProfessionalHook;

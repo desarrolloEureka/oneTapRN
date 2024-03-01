@@ -68,7 +68,6 @@ const PhotoUser: React.FC = () => {
         setSelectedImage(asset.uri);
         await AsyncStorage.setItem('selectedImage', asset.uri);
         await SendDataImage(data?.uid, `data:${asset.type};base64,${asset.base64}`);
-        await saveImageToFirestore(data?.uid, asset.base64);
 
       } else {
         Alert.alert(
@@ -79,35 +78,6 @@ const PhotoUser: React.FC = () => {
     } catch (error: any) {
       console.error('Error al abrir la galería:', error.message);
       Alert.alert('Error', 'Error al abrir la galería. Inténtalo de nuevo.');
-    }
-  };
-
-  const saveImageToFirestore = async (
-    userId: string | undefined,
-    base64Image: string
-  ) => {
-    try {
-      if (!userId) {
-        console.error('ID de usuario no válido.');
-        return;
-      }
-
-      const userRef = firestore().collection('users').doc(userId);
-      const formattedBase64Image = `data:${base64Image}`;
-
-      // Guardar la información de la imagen en Firestore
-      await userRef.set(
-        {
-          profileImage: formattedBase64Image
-        },
-        { merge: true }
-      ); // Usamos merge para actualizar solo el campo que estamos cambiando
-    } catch (error: any) {
-      console.error('Error al guardar la imagen en Firestore:', error.message);
-      Alert.alert(
-        'Error',
-        'Error al guardar la imagen en Firestore. Inténtalo de nuevo.'
-      );
     }
   };
 
@@ -146,7 +116,7 @@ const PhotoUser: React.FC = () => {
             <View style={profileStyles.borderTargetName}>
               <Text style={profileStyles.textName}>
                 {/* Hola {data && data?.user_name} */}
-                Hola {data && data?.profile?.name?.text ? data?.profile?.name?.text : ''}
+                Hola {data && data.name ? data.name : ''}
               </Text>
             </View>
           </View>

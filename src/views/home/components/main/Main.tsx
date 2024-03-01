@@ -4,10 +4,10 @@ import { BackHandler } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteStackParamList } from '../../../../types/navigation';
-import { globalStyles } from '../../../../globalStyles/globalStyles';
 import { homeStyles } from '../../styles/homeStyles';
 import MenuSuperior from '../../../menuSuperior/MenuSuperior';
 import CustomSwitch from './home/CustomSwitch';
@@ -20,6 +20,8 @@ import HomeHook from '../../hooks/HomeHook';
 import CustomModalAlert from './profile/CustomModalAlert';
 import { useQueryClient } from '@tanstack/react-query';
 import CustomModalLoading from './profile/CustomModalLoading';
+import Clipboard from '@react-native-clipboard/clipboard';
+import { TemplateData } from '../../../../types/user';
 
 interface BackgroundType {
   id: string;
@@ -50,6 +52,9 @@ const Main = () => {
   });
   const [isModalAlert, setIsModalAlert] = useState(false);
   const handleModalAlert = () => setIsModalAlert(!isModalAlert);
+  const [copiedText, setIscopiedText] = useState(false);
+  const [isModalAlertBg, setIsModalAlertBg] = useState(false);
+  const handleModalAlertBg = (status: boolean) => setIsModalAlertBg(!isModalAlertBg);
 
   const navigation =
     useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
@@ -64,17 +69,21 @@ const Main = () => {
       setIsModalAlert(true);
     } else {
       if (tabName === 'Social') {
-        navigation.navigate('Profile', { isProUser: false });
+        navigation.navigate('Profile');
       } else if (tabName === 'Professional') {
-        navigation.navigate('Profile', { isProUser: true });
+        navigation.navigate('ProfileProfessional');
       } else {
         navigation.navigate('Home');
       }
     }
   };
 
-  const handleNavigatePreview = () => {
-    navigation.navigate('PreviewTemplate', { tab: tab });
+  const handleNavigatePreview = async (background: TemplateData | undefined) => {
+    if (background) {
+      navigation.navigate('PreviewTemplate', { tab: tab });
+    } else {
+      setIsModalAlertBg(true);
+    }
   };
 
   const onBackPress = () => {
@@ -129,9 +138,14 @@ const Main = () => {
     }
   };
 
+  const copyToClipboard = () => {
+    const url = data?.preview
+    Clipboard.setString("" + url);
+    setIscopiedText(true);
+  };
+
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
-
       <View style={{ height: 145, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ height: '50%', width: '100%', flexDirection: 'row' }}>
           <View style={{ height: '100%', width: '50%' }}>
@@ -142,10 +156,21 @@ const Main = () => {
                 source={require('../../../../images/logo_inicio.png')}
               />
             </View>
-
           </View>
-          <View style={{ height: '100%', width: '50%', alignItems: 'flex-end' }}>
-            <MenuSuperior />
+
+          <View style={{ height: '100%', width: '50%', alignItems: 'flex-end', flexDirection: 'row' }}>
+            <View style={{ height: '100%', width: '65%', justifyContent: 'center', alignItems: 'flex-end' }}>
+              <TouchableOpacity style={{ height: '94%', width: '55%', justifyContent: 'center', alignItems: 'center' }} onPress={copyToClipboard}>
+                <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>Copiar URL</Text>
+                <Feather name="copy" size={23} color="#396593" />
+                {copiedText === true &&
+                  <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>Copiado!</Text>
+                }
+              </TouchableOpacity>
+            </View>
+            <View style={{ height: '100%', width: '35%', justifyContent: 'center', alignItems: 'flex-end' }}>
+              <MenuSuperior />
+            </View>
           </View>
         </View>
 
@@ -213,12 +238,14 @@ const Main = () => {
               renderItem={({ item, index }) => {
                 const i = item.id;
                 const itemData = data?.templateData?.find((val) => val.id === i);
+                const background = data?.templateData?.find((val) => val.id === i && val.background_id);
+
                 return (
                   <View style={{ height: 280, width: "50%", justifyContent: 'center', alignItems: 'center' }}>
                     <View style={{ height: "95%", width: "95%", backgroundColor: "#02AF9B", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
                       <View style={{ height: "20%", width: "100%", alignItems: 'flex-end', flexDirection: 'row' }}>
                         <View style={{ height: "100%", width: "50%", justifyContent: 'center' }}>
-                          <TouchableOpacity style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={handleNavigatePreview}>
+                          <TouchableOpacity disabled={itemData ? !itemData?.checked : true} style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleNavigatePreview(background)}>
                             <Ionicons name="eye-sharp" size={15} color="white" />
                             <Text style={{ fontSize: 10, color: "white" }}>
                               Vista{'\n'}Previa
@@ -320,6 +347,13 @@ const Main = () => {
         handleModalAlert={setIsModalAlert}
         title="Acceso Restringido"
         description="Actualmente no tienes acceso a las opciones de profesional porque estás utilizando un plan básico."
+      />
+
+      <CustomModalAlert
+        isModalAlert={isModalAlertBg}
+        handleModalAlert={handleModalAlertBg}
+        title="One Tap dice!"
+        description={"No se ha seleccionado un fondo para la plantilla"}
       />
 
       <CustomModalLoading

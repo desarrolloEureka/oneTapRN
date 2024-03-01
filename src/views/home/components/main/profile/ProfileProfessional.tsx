@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView, ScrollView, TouchableOpacity, Text, } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { profileStyles } from '../../../styles/profileStyles';
+import {
+  View,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import PhotoUser from './PhotoUser';
+import { profileStyles } from '../../../styles/profileStyles';
 import FormDataUser from './FormDataUser';
 import FormAddDataUser from './FormAddDataUser';
-import ProfileHook from './hooks/ProfileHook';
+import { SocialDataForm } from '../../../../../types/profile';
 import ModalAlert from './ModalAlert';
 import ModalSuccessDelete from './ModalSuccessDelete';
 import CustomModalAlert from './CustomModalAlert';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
-import CustomModalLoading from './CustomModalLoading';
-import { SocialDataForm } from '../../../../../types/profile';
-import { GetUser } from '../../../../../reactQuery/users';
-import { RouteStackParamList } from '../../../../../types/navigation';
-// Iconos
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
+import CustomModalLoading from './CustomModalLoading';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { GetUser } from '../../../../../reactQuery/users';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteStackParamList } from '../../../../../types/navigation';
+import ProfileProfessionalHook from './hooks/ProfileProfessoinalHook';
 
-const Profile = () => {
+const ProfileProfessional = () => {
   const {
     handleModalAlert,
+    handleSeeMore,
     handleDeleteData,
     isDetailOpen,
     itemDetail,
@@ -38,8 +44,6 @@ const Profile = () => {
     setIsDataError,
     setIsDataSuccess,
     handleSwitchAll,
-    switchValue,
-    isLoadingSendData,
     status,
     isEmailPhoneRight,
     setisEmailPhoneRight,
@@ -57,9 +61,11 @@ const Profile = () => {
     itemUrlSelected,
     handleModalIcons,
     isModalIcons,
-
-  } = ProfileHook({
-    isProUser: false,
+    isLoadingSendData,
+    setIsLoadingSendData,
+    switchValue
+  } = ProfileProfessionalHook({
+    isProUser: true,
   });
 
   const [isModalAlertNavigation, setIsModalAlertNavigation] = useState(false);
@@ -108,7 +114,7 @@ const Profile = () => {
         <PhotoUser />
 
         <View
-          style={{ height: 100, width: '100%', justifyContent: 'center', alignItems: 'center', marginTop: 9 }}>
+          style={{ height: 100, width: '100%', justifyContent: 'center', alignItems: 'center', marginTop: 12, }}>
           <CustomSwitchGeneral
             name="all_true"
             handleSwitch={(e: any) => handleSwitchAll(e)}
@@ -120,13 +126,13 @@ const Profile = () => {
           style={{ height: 100, width: '100%', justifyContent: 'center', alignItems: 'center', }}>
           <TouchableOpacity
             style={{ backgroundColor: '#02AF9B', height: '45%', width: '40%', alignItems: 'center', justifyContent: 'center', borderRadius: 22, shadowColor: '#000' }}
-            onPress={() => handleSendProfile(false)}>
+            onPress={() => handleSendProfile(true)}>
             <Text style={{ color: 'white' }}>Guardar</Text>
           </TouchableOpacity>
         </View>
 
         <FormDataUser
-          isProUser={false}
+          isProUser={true}
           dataForm={dataForm}
           handleDataSet={(e) => handleDataSet(e)}
           data={data}
@@ -134,9 +140,8 @@ const Profile = () => {
           user={user}
           handleSwitch={handleSwitch}
         />
-
         <FormAddDataUser
-          isProUser={false}
+          isProUser={true}
           dataForm={dataForm}
           handleDataSet={(e) => handleDataSet(e)}
           isDetailOpen={isDetailOpen}
@@ -160,10 +165,10 @@ const Profile = () => {
           handleDeleteData={handleDeleteData}
         />
 
-        <View style={{ height: 210, width: '100%', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20 }}>
+        <View style={{ height: 210, width: '100%', justifyContent: 'flex-start', alignItems: 'center', marginTop: 90 }}>
           <View style={{ height: '50%', width: '100%', justifyContent: 'center', alignItems: 'center', }}>
             <TouchableOpacity style={{ backgroundColor: '#02AF9B', height: '45%', width: '40%', alignItems: 'center', justifyContent: 'center', borderRadius: 22, shadowColor: '#000' }}
-              onPress={() => handleSendProfile(false)}>
+              onPress={() => handleSendProfile(true)}>
               <Text style={{ color: 'white' }}>Guardar</Text>
             </TouchableOpacity>
           </View>
@@ -224,19 +229,21 @@ const Profile = () => {
           <Text style={{ color: 'black' }}>Home</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Social')}>
+        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Social')}>
           <FontAwesome name="users" size={25} color="black" />
           <Text style={{ color: 'black' }}>Social</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Professional')}>
+        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Professional')}>
           <Ionicons name="newspaper-sharp" size={28} color="black" />
           <Text style={{ color: 'black' }}>PRO</Text>
         </TouchableOpacity>
 
       </View>
     </SafeAreaView >
+
   );
 };
 
-export default Profile;
+export default ProfileProfessional;
+

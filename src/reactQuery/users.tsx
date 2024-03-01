@@ -1,7 +1,7 @@
 import { loginFirebase } from '../firebase/auth';
 import {
   getAllUsers,
-  getUserById,
+  getUserByIdFireStore,
   updateDataUserProfile,
   updatePasswordFirebase,
   updateSwitchActivateCard,
@@ -9,13 +9,18 @@ import {
   updateSwitchProfileFirebase,
   updateTemplateSelectedFirebase,
   updateUserData,
-  updateInactiveUser
+  updateViewsUser,
+  updateInactiveUser,
+  updatePreView,
 } from '../firebase/user';
-import { useQuery } from '@tanstack/react-query';
-import { UserData, TemplateData } from '../types/user';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  ProfessionalDataForm,
+  SocialDataForm,
+} from '../types/profile';
+import { TemplateData, UserData } from '../types/user';
 import { GetLoginQueryProps } from '../types/userQuery';
-import { DataForm } from '../types/profile';
+import { useQuery } from '@tanstack/react-query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const GetAllUserQuery = () => {
@@ -46,12 +51,11 @@ const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
       });
 
       if (resultUser && resultUser.user) {
-        const docSnap = await getUserById(resultUser.user.uid);
+        const docSnap = await getUserByIdFireStore(resultUser.user.uid);
         if (docSnap.exists()) {
-          const user = await docSnap.data() as UserData;
-          const getUser = await userDataToSend(user, resultUser);
+          const user = docSnap.data() as UserData;
+          const getUser = userDataToSend(user, resultUser);
           await AsyncStorage.setItem('@user', JSON.stringify(getUser));
-          const userLogged = await AsyncStorage.getItem('@user');
           return getUser;
         } else {
           return null;
@@ -70,7 +74,7 @@ const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
 /* Actualizar react query*/
 const SendDataImage = async (userId: string, base64String: string) => {
   await updateUserData(userId, { image: base64String });
-  const updatedUser = await getUserById(userId);
+  const updatedUser = await getUserByIdFireStore(userId);
   if (updatedUser.exists()) {
     const userData = await updatedUser.data() as UserData;
     const getUser = await reBuildUserData(userData);
@@ -81,7 +85,7 @@ const SendDataImage = async (userId: string, base64String: string) => {
 const reBuildUserData = async (userData: UserData) => {
   const userStorage = await AsyncStorage.getItem('@user');
   if (userStorage) {
-    const user = JSON.parse(userStorage);
+    const user = await JSON.parse(userStorage);
     return userDataToSend(userData, { user });
   } else {
     return userData;
@@ -91,9 +95,9 @@ const reBuildUserData = async (userData: UserData) => {
 const SendSwitchProfile = async (userId: string, switchState: boolean) => {
   await updateSwitchProfileFirebase(userId, {
     switch_profile: switchState,
-    preview: "http://localhost:3000/es/views/cardView?uid=" + userId + "&type=" + (switchState ? "professional" : "social")
+    preview: "https://backoffice.onetap.com.co/es/views/cardView?uid=" + userId
   });
-  const updatedUser = await getUserById(userId);
+  const updatedUser = await getUserByIdFireStore(userId);
   if (updatedUser.exists()) {
     const userData = await updatedUser.data() as UserData;
     const getUser = await reBuildUserData(userData);
@@ -103,7 +107,7 @@ const SendSwitchProfile = async (userId: string, switchState: boolean) => {
 
 const SendSwitchActivateCard = async (userId: string, switchState: boolean) => {
   await updateSwitchActivateCard(userId, { switch_activateCard: switchState });
-  const updatedUser = await getUserById(userId);
+  const updatedUser = await getUserByIdFireStore(userId);
   if (updatedUser.exists()) {
     const userData = await updatedUser.data() as UserData;
     const getUser = await reBuildUserData(userData);
@@ -125,6 +129,7 @@ const SendBackgroundSelected = async (
     template_id: templateSelect,
     background_id: backgroundSelect,
   };
+
   await updateTemplateSelectedFirebase(userId, { templateData });
 };
 
@@ -135,7 +140,7 @@ const SendTemplateSelected = async (
 ) => {
   const templateData = data;
   await updateTemplateSelectedFirebase(userId, { templateData });
-  const updatedUser = await getUserById(userId);
+  const updatedUser = await getUserByIdFireStore(userId);
   if (updatedUser.exists()) {
     const userData = await updatedUser.data() as UserData;
     const getUser = await reBuildUserData(userData);
@@ -148,10 +153,10 @@ const SendSwitchAllForm = async (userId: string, dataForm: any) => {
   await updateSwitchAllFirebase(userId, { switchAllForm: dataForm });
 };
 
-const SendDataUserProfile = async (userId: string, data: DataForm) => {
-  return updateDataUserProfile(userId, data)
+const SendDataUserProfile = async (userId: string, data: SocialDataForm | ProfessionalDataForm, isProUser: boolean) => {
+  return await updateDataUserProfile(userId, data, isProUser)
     .then(async (response) => {
-      const updatedUser = await getUserById(userId);
+      const updatedUser = await getUserByIdFireStore(userId);
       if (updatedUser.exists()) {
         const userData = await updatedUser.data() as UserData;
         const getUser = await reBuildUserData(userData);
@@ -165,19 +170,41 @@ const SendDataUserProfile = async (userId: string, data: DataForm) => {
     });
 };
 
+const SendViewUser = async (userId: string, numViewsNew: number) => {
+  await updateViewsUser(userId, { views: numViewsNew });
+};
+
+const GetUserById = (userUid: string) => {
+  return useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
+      const updatedUser = await getUserByIdFireStore(userUid);
+      if (updatedUser.exists()) {
+        const userData = await updatedUser.data() as UserData;
+        const getUser = await reBuildUserData(userData);
+        await AsyncStorage.setItem('@user', JSON.stringify(getUser));
+        return getUser;
+      } else {
+        return null;
+      }
+    },
+    enabled: !!userUid,
+  });
+};
+
 const SendInactiveUser = async (userId: string) => {
   const res = await updateInactiveUser(userId, { isActive: false });
   return res;
 };
 
-const GetUser = () =>
+const GetUser = (refetch?: boolean) =>
   useQuery({
     queryKey: ['user'],
     queryFn: async () => {
       const userLogged = await AsyncStorage.getItem('@user');
       if (userLogged) {
         const user = await JSON.parse(userLogged) as UserData;
-        const updatedUser = await getUserById(user.uid);
+        const updatedUser = await getUserByIdFireStore(user.uid);
         if (updatedUser.exists()) {
           const userData = await updatedUser.data() as UserData;
           const getUser = await reBuildUserData(userData);
@@ -190,7 +217,13 @@ const GetUser = () =>
         return null;
       }
     },
+    refetchOnWindowFocus: refetch ?? false,
   });
+
+const SendPreView = async (userId: string, url: string) => {
+  const res = await updatePreView(userId, { preview: url });
+  return res;
+};
 
 export {
   GetAllUserQuery,
@@ -204,5 +237,8 @@ export {
   SendTemplateSelected,
   UpdatePassword,
   SendBackgroundSelected,
-  SendInactiveUser
+  GetUserById,
+  SendViewUser,
+  SendInactiveUser,
+  SendPreView,
 };

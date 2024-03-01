@@ -1,10 +1,11 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackNavigationProp} from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export type RouteStackParamList = {
   Home: undefined;
-  PreviewTemplate: undefined;
-  Profile: {isProUser: boolean};
+  PreviewTemplate: { tab: string };
+  Profile: undefined;
+  ProfileProfessional: undefined;
   ChangePassword: undefined;
   OnboardingOne: undefined;
   OnboardingTwo: undefined;

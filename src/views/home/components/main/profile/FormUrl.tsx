@@ -18,7 +18,6 @@ const FormUrl = ({
   handleDeleteData,
   handleModalAlert,
   myValue,
-  dataForm,
   index,
   subindex,
   withCheck,
