@@ -7,28 +7,31 @@ import {
     IndexDataForm,
     DataFormValues,
     EducationDataFormValues,
-    DataForm
+    handleDataProps,
+    SocialDataForm,
+    ProfessionalDataForm
 } from '../../../../../types/profile';
-import ProfileHook from './hooks/ProfileHook';
 import CustomModalAlert from './CustomModalAlert';
+import { UserData } from '../../../../../types/user';
 
 const ItemFormBasicInfo = ({
     dataForm,
     handleDataSet,
-    handleSeeMore,
     index,
-    label,
     labelArray,
     value,
-    itemDetail,
-    isDetailOpen,
-    icon,
-    social,
     handleModalAlert,
+    isProUser,
+    handleData,
+    user,
+    handleSwitch,
+    handleAddData,
+    handleModalAlertLimit,
+    isModalAlertLimit,
+    handleDeleteData,
 }: {
-    dataForm: DataForm;
-    handleDataSet: (e: DataForm) => void;
-    handleSeeMore: (e: number) => void;
+    dataForm: SocialDataForm | ProfessionalDataForm;
+    handleDataSet: (e: SocialDataForm | ProfessionalDataForm) => void;
     index: IndexDataForm;
     label?: string;
     labelArray:
@@ -47,33 +50,36 @@ const ItemFormBasicInfo = ({
         index: string;
         subindex: string;
     }) => void;
+    isProUser: boolean;
+    handleData: ({
+        name,
+        text,
+        subindex,
+        key,
+        currentDataRef,
+    }: handleDataProps) => void;
+    user: UserData;
+    handleSwitch: (e: any) => void;
+    handleAddData: (index: any) => void;
+    handleModalAlertLimit: () => void;
+    isModalAlertLimit: boolean;
+    handleDeleteData: () => void;
 }) => {
-    const {
-        handleSwitch,
-        handleData,
-        handleAddData,
-        handleDeleteData,
-        user,
-        isModalAlertLimit,
-        handleModalAlertLimit
-    } = ProfileHook({
-        handleDataSet
-    });
-
-    console.log(" ");
-    console.log("labelArray ", labelArray);
-    console.log(" ");
-
     return (
         <>
             <View style={{ height: labelArray.length > 1 ? 'auto' : 240, minHeight: 240, width: "100%", justifyContent: 'center', paddingTop: 20, paddingBottom: 20 }}>
-                <View style={{ minHeight: 190, width: "100%", justifyContent: 'center', backgroundColor: "#e9e9e9" }}>
-                    <View style={{ height: 40, width: "100%", alignItems: 'flex-end' }}>
+                <View style={{ minHeight: 190, width: "100%", justifyContent: 'center', alignItems: 'center', backgroundColor: "#e9e9e9" }}>
+                    <View style={{ height: 50, width: "95%", alignItems: 'flex-end', flexDirection: 'row' }}>
+                        <View style={{ height: "100%", width: "60%", justifyContent: 'flex-start', alignItems: 'flex-end', flexDirection: 'row' }}>
+                            <View style={{ height: "75%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: '#02af9b', borderRadius: 5 }}>
+                                <Text style={{ fontSize: 13, color: 'white' }}>{value[0] === 'phones' ? "Teléfonos de Contacto" : 'Correos de Contacto'}</Text>
+                            </View>
+                        </View>
                         <TouchableOpacity style={{ height: "100%", width: "40%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => {
                             if (value[0] === 'phones') {
-                                handleAddData('phones', social);
+                                handleAddData('phones');
                             } else if (value[0] === 'emails') {
-                                handleAddData('emails', social);
+                                handleAddData('emails');
                             }
                         }}>
                             <View style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }}>
@@ -86,40 +92,20 @@ const ItemFormBasicInfo = ({
                     </View>
 
                     {labelArray.map((val, key) => {
-                        if (social === true) {
-                            if (val.principal === true || val.social === true) {
-                                const myValue = (user && user.profile && index == value[0]
-                                    ? user.profile[index]
-                                    : value[1]) as unknown as DataFormValues;
-                                return (
-                                    <View key={key} style={{ height: 120, justifyContent: 'center', borderBottomWidth: key !== labelArray.length - 1 ? 2 : undefined, borderBlockColor: key !== labelArray.length - 1 ? '#d4d4d4' : undefined, marginTop: 10 }}>
-                                        <ItemForm
-                                            key={key}
-                                            label={val.label!}
-                                            handleSwitch={(e: any) => handleSwitch(e)}
-                                            handleData={handleData}
-                                            name={index}
-                                            checked={val.checked}
-                                            subindex={key}
-                                            icon={val.icon}
-                                            deleteAction={true}
-                                            handleDeleteData={handleDeleteData}
-                                            handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
-                                            myValue={myValue}
-                                            dataForm={dataForm}
-                                            index={index}
-                                        />
-                                    </View>
-                                );
-                            }
-                        } else {
-                            const myValue = (user && user.profile && index == value[0]
-                                ? user.profile[index]
-                                : value[1]) as unknown as DataFormValues;
+                        if (index == 'phones' || index == 'emails') {
+                            const myValue = (user && user.profile
+                                ? isProUser
+                                    ? user.profile.professional
+                                        ? user.profile.professional?.[index]
+                                        : dataForm && dataForm[index]
+                                    : user.profile.social
+                                        ? user.profile?.social?.[index]
+                                        : dataForm && dataForm[index]
+                                : dataForm && dataForm[index]) as unknown as DataFormValues;
+
                             return (
                                 <View key={key} style={{ height: 120, justifyContent: 'center', borderBottomWidth: key !== labelArray.length - 1 ? 2 : undefined, borderBlockColor: key !== labelArray.length - 1 ? '#d4d4d4' : undefined, marginTop: 10 }}>
                                     <ItemForm
-                                        key={key}
                                         label={val.label!}
                                         handleSwitch={(e: any) => handleSwitch(e)}
                                         handleData={handleData}
@@ -129,9 +115,10 @@ const ItemFormBasicInfo = ({
                                         icon={val.icon}
                                         deleteAction={true}
                                         handleDeleteData={handleDeleteData}
-                                        handleModalAlert={({ index, subindex }) => handleModalAlert({ index, subindex })}
+                                        handleModalAlert={({ index, subindex }) =>
+                                            handleModalAlert({ index, subindex })
+                                        }
                                         myValue={myValue}
-                                        dataForm={dataForm}
                                         index={index}
                                     />
                                 </View>
@@ -140,7 +127,6 @@ const ItemFormBasicInfo = ({
                     })}
                 </View>
             </View>
-
             <CustomModalAlert
                 isModalAlert={isModalAlertLimit}
                 handleModalAlert={() => handleModalAlertLimit()}

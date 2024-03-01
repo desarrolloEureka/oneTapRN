@@ -24,6 +24,9 @@ export interface UserData {
   views: number;
   isActive: boolean;
   plan: string;
+  gif: boolean;
+  dni: string;
+  preview: string;
 }
 export interface User {
   uid: string;
@@ -31,6 +34,7 @@ export interface User {
   emailVerified: boolean;
   displayName: string;
   isAdmin: boolean;
+  isActive: boolean;
 }
 
 export interface UserDb {

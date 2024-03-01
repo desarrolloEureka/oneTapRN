@@ -7,6 +7,7 @@ import Plantillas from './src/views/home/components/main/home/Plantillas';
 import PreviewTemplate from './src/views/home/components/main/home/PreviewTemplate';
 import ChangePassword from './src/views/home/components/main/profile/ChangePassword';
 import ProfileScreen from './src/views/home/components/main/profile/Profile';
+import ProfileProfessionalScreen from './src/views/home/components/main/profile/ProfileProfessional';
 import Login from './src/views/login/Login';
 import OnboardingOne from './src/views/onboardings/OnboardigndOne';
 import OnboardingInicioSesion from './src/views/onboardings/OnboardingInicioSesion';
@@ -16,9 +17,6 @@ import Splash from './src/views/onboardings/Splash';
 import AcercaDe from './src/views/opcionesMenu/AcercaDe';
 import Politicas from './src/views/opcionesMenu/Politicas';
 import Terminos from './src/views/opcionesMenu/Terminos';
-import CreateNewPassword from './src/views/recovery/components/main/CreateNewPassword';
-import PasswordChanged from './src/views/recovery/components/main/PasswordChanged';
-import RecoveryCode from './src/views/recovery/components/main/RecoveryCode';
 import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassword';
 import {RouteStackParamList} from './src/types/navigation';
 
@@ -39,6 +37,7 @@ const App = () => {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="PreviewTemplate" component={PreviewTemplate} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="ProfileProfessional" component={ProfileProfessionalScreen} />
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
           <Stack.Screen name="OnboardingOne" component={OnboardingOne} />
           <Stack.Screen name="OnboardingTwo" component={OnboardingTwo} />
@@ -49,12 +48,6 @@ const App = () => {
           />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="RecoveryPassword" component={RecoveryPassword} />
-          <Stack.Screen name="RecoveryCode" component={RecoveryCode} />
-          <Stack.Screen
-            name="CreateNewPassword"
-            component={CreateNewPassword}
-          />
-          <Stack.Screen name="PasswordChanged" component={PasswordChanged} />
           <Stack.Screen name="AcercaDe" component={AcercaDe} />
           <Stack.Screen name="Terminos" component={Terminos} />
           <Stack.Screen name="Politicas" component={Politicas} />

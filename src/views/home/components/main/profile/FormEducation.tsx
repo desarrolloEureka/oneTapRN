@@ -13,6 +13,8 @@ const FormEducation = ({
   handleData,
   checked,
   deleteAction,
+  icon,
+  handleDeleteData,
   handleModalAlert,
   myValue,
   index,

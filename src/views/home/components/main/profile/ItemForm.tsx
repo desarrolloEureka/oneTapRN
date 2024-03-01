@@ -1,13 +1,14 @@
-import React, {useRef, useEffect, useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import {profileStyles} from '../../../styles/profileStyles';
+import React, { useRef, useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { profileStyles } from '../../../styles/profileStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import {ItemFormParams} from '../../../../../types/profile';
+import { ItemFormParams } from '../../../../../types/profile';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const ItemForm = ({
   label,
@@ -17,10 +18,8 @@ const ItemForm = ({
   checked,
   deleteAction,
   icon,
-  handleDeleteData,
   handleModalAlert,
   myValue,
-  dataForm,
   index,
   subindex,
 }: ItemFormParams) => {
@@ -42,14 +41,6 @@ const ItemForm = ({
       }
     }
   };
-  const isChecked = () => {
-    const i = subindex as any;
-    if (index == 'phones' || index == 'emails') {
-      if (dataRef.current) {
-        return dataRef.current[i].checked;
-      }
-    }
-  };
 
   useEffect(() => {
     if (dataRef.current && myValue) {
@@ -59,49 +50,16 @@ const ItemForm = ({
   }, [dataRef, myValue, inputText]);
 
   return (
-    <View style={{height: 115, justifyContent: 'center', flexDirection: 'row'}}>
-      <View
-        style={{
-          flexDirection: 'column',
-          alignItems: 'center',
-          height: '90%',
-          width: '80%',
-        }}>
-        <View
-          style={{
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            height: '100%',
-            width: '100%',
-            paddingLeft: 10,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              height: '20%',
-              width: '90%',
-            }}>
+    <View style={{ height: 115, justifyContent: 'center', flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'column', alignItems: 'center', height: '90%', width: '80%' }}>
+        <View style={{ flexDirection: 'column', alignItems: 'flex-start', height: '100%', width: '100%', paddingLeft: 10, }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', height: '20%', width: '90%', }}>
             <Text style={profileStyles.label}>{label}</Text>
           </View>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              height: '55%',
-              width: '90%',
-              borderBottomWidth: 1,
-              borderBottomColor: '#9b9db3',
-            }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', height: '55%', width: '90%', borderBottomWidth: 1, borderBottomColor: '#9b9db3', }}>
             {icon === 'PersonOutlinedIcon' ? (
-              <View
-                style={{
-                  height: '100%',
-                  width: '15%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
+              <View style={{ height: '100%', width: '15%', alignItems: 'center', justifyContent: 'center' }}>
                 <Ionicons name="person-outline" size={28} color="#02AF9B" />
               </View>
             ) : icon === 'FilePresentOutlinedIcon' ? (
@@ -114,7 +72,7 @@ const ItemForm = ({
                 }}>
                 <FontAwesome name="graduation-cap" size={28} color="#02AF9B" />
               </View>
-            ) : icon === 'factory' /* Cambiar por icono */ ? (
+            ) : icon === 'factory' ? (
               <View
                 style={{
                   height: '100%',
@@ -192,6 +150,17 @@ const ItemForm = ({
                 }}>
                 <SimpleLineIcons name="phone" size={28} color="#02AF9B" />
               </View>
+            ) : icon === 'TranslateIcon' ? (
+              <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
+                <MaterialIcons name="translate" size={28} color="#02AF9B" />
+              </View>
+            ) : icon === 'AccessibilityOutlinedIcon' ? (
+              <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
+                {/*   <FontAwesome6 name="person" size={28} color="#02AF9B" /> */}
+                {/* <MaterialCommunityIcons name="head-lightbulb-outline" size={28} color="#02AF9B" /> */}
+                <FontAwesome5 name="medal" size={28} color="#02AF9B" />
+
+              </View>
             ) : null}
 
             <View
@@ -208,8 +177,8 @@ const ItemForm = ({
                   name === 'phones'
                     ? 'numeric'
                     : name === 'emails'
-                    ? 'email-address'
-                    : 'default'
+                      ? 'email-address'
+                      : 'default'
                 }
                 style={profileStyles.inputBox}
                 placeholderTextColor="#000000"
@@ -243,12 +212,12 @@ const ItemForm = ({
             height: '100%',
             width: '20%',
           }}>
-          <View style={{alignItems: 'center', height: '50%', width: '100%'}}>
+          <View style={{ alignItems: 'center', height: '50%', width: '100%' }}>
             <CustomSwitchGeneral
               name={name}
               subindex={subindex}
               handleSwitch={(e: any) =>
-                handleSwitch({checked, name, subindex, currentDataRef: dataRef})
+                handleSwitch({ checked, name, subindex, currentDataRef: dataRef })
               }
               checked={
                 myValue && !Array.isArray(myValue)
@@ -258,9 +227,9 @@ const ItemForm = ({
             />
           </View>
           <TouchableOpacity
-            style={{alignItems: 'center', height: '50%', width: '100%'}}
+            style={{ alignItems: 'center', height: '50%', width: '100%' }}
             onPress={() =>
-              handleModalAlert({index: index, subindex: '' + subindex})
+              handleModalAlert({ index: index, subindex: '' + subindex })
             }>
             <FontAwesome name="trash-o" size={25} color="#02AF9B" />
           </TouchableOpacity>
@@ -273,11 +242,11 @@ const ItemForm = ({
             height: '100%',
             width: '20%',
           }}>
-          {/* No se pueden borrar */}
+
           <CustomSwitchGeneral
             name={name}
             subindex={subindex}
-            handleSwitch={(e: any) => handleSwitch({checked, name, subindex})}
+            handleSwitch={(e: any) => handleSwitch({ checked, name, subindex })}
             checked={checked}
           />
         </View>

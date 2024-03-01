@@ -1,71 +1,51 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native';
+import { StackNavigation } from '../../types/navigation';
 
 const OnboardingOne = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
 
   const handleNextPress = () => {
-    // Navegar a la pantalla OnboardingTwo
     navigation.navigate('OnboardingTwo');
   };
 
+  const handlePressOmit = () => {
+    navigation.navigate('OnboardingInicioSesion');
+  };
+
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../images/onboarding_1.png')}
-        style={styles.image}
-      />
-      <View style={styles.overlayTextContainer}>
-        <Text style={styles.overlayText}>Elige tu tarjeta y plantilla</Text>
+    <SafeAreaView>
+      <View style={{ height: "100%", width: "100%" }}>
+        <Image
+          resizeMode='cover'
+          source={require('../../images/onboarding_1.png')}
+          style={{ width: "100%" }}
+        />
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleNextPress}
-        activeOpacity={0.8} // Este valor puede ajustarse según tus preferencias
-      >
-        <Text style={styles.buttonText}>Siguiente</Text>
-      </TouchableOpacity>
-    </View>
+      <View style={{ height: "100%", width: "100%", position: 'absolute' }}>
+        <View style={{ height: "70%", width: "100%", alignItems: 'flex-end' }}>
+          <TouchableOpacity style={{ height: "12%", width: "25%", justifyContent: 'center', alignItems: 'center' }} onPress={handlePressOmit}>
+            <Text style={{ fontSize: 15, color: 'black' }}>Omitir</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ height: "30%", width: "100%", alignItems: 'center' }}>
+          <View style={{ height: "15%", width: "90%", justifyContent: 'center' }}>
+            <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>Elige tu tarjeta y plantilla</Text>
+          </View>
+          <View style={{ height: "35%", width: "90%", justifyContent: 'flex-start', paddingTop: 2 }}>
+            <Text style={{ fontSize: 16, color: 'black' }}>consectetur adipiscing elit. Cras facilisis a leo ut finibus. Mauris at sapien et nisl accumsan congue.</Text>
+          </View>
+          <View style={{ height: "50%", width: "90%", justifyContent: 'flex-start', alignItems: 'center', paddingTop: 15 }}>
+            <TouchableOpacity style={{ height: "45%", width: "90%", backgroundColor: '#02AF9B', borderRadius: 100, justifyContent: 'center', alignItems: 'center' }} onPress={handleNextPress}>
+              <Text style={{ color: 'white', fontSize: 16 }}>Siguiente</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView >
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'relative',
-  },
-  image: {
-    flex: 1,  // Asegura que la imagen se expanda para ocupar todo el espacio disponible
-    resizeMode: 'cover',
-  },
-  overlayTextContainer: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 200,
-  },
-  overlayText: {
-    fontSize: 24,
-    color: 'black',
-    // Otros estilos de texto aquí
-  },
-  button: {
-    position: 'absolute',
-    bottom: 50,
-    width: 265,
-    height: 45,
-    borderRadius: 100,
-    backgroundColor: '#02AF9B',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 70,
-    borderWidth: 0, // Quita el borde
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-});
 
 export default OnboardingOne;

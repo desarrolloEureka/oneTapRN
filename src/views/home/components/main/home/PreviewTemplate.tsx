@@ -35,10 +35,10 @@ const PreviewTemplate = () => {
       <View style={{ height: "100%", width: "100%" }}>
         {data && data?.uid &&
           <WebView
-            source={{ uri: `${domain}/es/views/cardView?uid=${data.uid}&type=${tab}` }}
+            source={{ uri: `https://backoffice.onetap.com.co/es/views/cardView?uid=${data.uid}&type=${tab}` }}
             style={{ flex: 1 }}
-            onLoad={() => console.log('Cargado')}
             scalesPageToFit
+            useWebKit={true}
           />
         }
       </View>
