@@ -8,6 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
+    "ios-devices": "react-native run-ios --list-devices",
     "create-appicon": "iconset create ./src/images/logo_OT.png"
   },
   "dependencies": {

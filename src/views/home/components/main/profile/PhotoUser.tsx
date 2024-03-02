@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -13,15 +13,15 @@ import {
   MediaType
 } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { profileStyles } from '../../../styles/profileStyles';
+import {profileStyles} from '../../../styles/profileStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
-import { SendDataImage } from '../../../../../reactQuery/users';
-import { GetUser } from '../../../../../reactQuery/users';
-import { UserData } from '../../../../../types/user';
+import {SendDataImage} from '../../../../../reactQuery/users';
+import {GetUser} from '../../../../../reactQuery/users';
+import {UserData} from '../../../../../types/user';
 
-const PhotoUser: React.FC = () => {
+const PhotoUser = ({name}: {name?: string}) => {
   const user = GetUser();
   const data = user.data as unknown as UserData;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -49,7 +49,10 @@ const PhotoUser: React.FC = () => {
     try {
       const options: ImageLibraryOptions = {
         mediaType: 'photo' as MediaType,
-        includeBase64: true
+        includeBase64: true,
+        quality: 1,
+        maxWidth: 300,
+        maxHeight: 300
       };
 
       const result = await launchImageLibrary(options);
@@ -64,11 +67,12 @@ const PhotoUser: React.FC = () => {
 
       const asset = result.assets && result.assets[0];
       if (asset && asset.uri && asset.base64 && data && data?.uid) {
-
         setSelectedImage(asset.uri);
         await AsyncStorage.setItem('selectedImage', asset.uri);
-        await SendDataImage(data?.uid, `data:${asset.type};base64,${asset.base64}`);
-
+        await SendDataImage(
+          data?.uid,
+          `data:${asset.type};base64,${asset.base64}`
+        );
       } else {
         Alert.alert(
           'Error',
@@ -89,20 +93,20 @@ const PhotoUser: React.FC = () => {
             <View style={profileStyles.containerPhotoCircle}>
               {selectedImage ? (
                 <Image
-                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
-                  source={{ uri: selectedImage }}
+                  style={{borderRadius: 100, width: '85%', height: '85%'}}
+                  source={{uri: selectedImage}}
                 />
-              ) : data?.image ?
+              ) : data?.image ? (
                 <Image
-                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
-                  source={{ uri: `${data?.image}` }}
+                  style={{borderRadius: 100, width: '85%', height: '85%'}}
+                  source={{uri: `${data?.image}`}}
                 />
-                :
+              ) : (
                 <Image
-                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
+                  style={{borderRadius: 100, width: '85%', height: '85%'}}
                   source={require('./../../../../../images/profilePhoto.png')}
                 />
-              }
+              )}
             </View>
             <View style={profileStyles.containerEdit}>
               <TouchableOpacity
@@ -112,11 +116,11 @@ const PhotoUser: React.FC = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ height: '25%', width: '45%' }}>
+          <View style={{height: '25%', width: '45%'}}>
             <View style={profileStyles.borderTargetName}>
               <Text style={profileStyles.textName}>
                 {/* Hola {data && data?.user_name} */}
-                Hola {data && data.name ? data.name : ''}
+                Hola {name ?? ''}
               </Text>
             </View>
           </View>
