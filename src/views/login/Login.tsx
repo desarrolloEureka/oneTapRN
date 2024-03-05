@@ -1,21 +1,18 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {
-  KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  ScrollView
+  View
 } from 'react-native';
-import {StackNavigation} from '../../types/navigation';
-import {LoginError} from '../../types/login';
-import {GetLoginQuery} from '../../reactQuery/users';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {GetLoginQuery} from '../../reactQuery/users';
+import {LoginError} from '../../types/login';
+import {StackNavigation} from '../../types/navigation';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -85,10 +82,14 @@ const Login = () => {
       setPassword('');
       setEmail('');
     } else if (sendLogin) {
-      setErrorForm({
-        errorType: 3,
-        errorMessage: 'Credenciales incorrectas. Por favor, inténtelo de nuevo.'
-      });
+      setTimeout(() => {
+        setErrorForm({
+          errorType: 3,
+          errorMessage:
+            'Credenciales incorrectas. Por favor, inténtelo de nuevo.'
+        });
+      }, 3000);
+
       setTimeout(() => {
         setErrorForm(null);
         setSendLogin(false);

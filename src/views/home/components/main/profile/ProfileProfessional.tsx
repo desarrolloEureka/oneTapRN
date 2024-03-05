@@ -107,42 +107,105 @@ const ProfileProfessional = () => {
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{flex: 1}}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View>
-              <ScrollView
-                contentContainerStyle={profileStyles.scrollViewContainer}>
-                <View style={{height: 50, width: '100%'}}>
-                  <TouchableOpacity
-                    style={{
-                      height: '100%',
-                      width: '18%',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    onPress={handleBackPress}>
-                    <Icon name="arrow-back-ios" size={27} color="black" />
-                  </TouchableOpacity>
-                </View>
-
-                <PhotoUser name={user.profile.professional?.name?.text} />
-
-                <View
+            <ScrollView
+              contentContainerStyle={profileStyles.scrollViewContainer}>
+              <View style={{height: 50, width: '100%'}}>
+                <TouchableOpacity
                   style={{
-                    height: 100,
-                    width: '100%',
-                    justifyContent: 'center',
+                    height: '100%',
+                    width: '18%',
                     alignItems: 'center',
-                    marginTop: 12
-                  }}>
-                  <CustomSwitchGeneral
-                    name="all_true"
-                    handleSwitch={(e: any) => handleSwitchAll(e)}
-                    checked={switchValue}
-                  />
-                </View>
+                    justifyContent: 'center'
+                  }}
+                  onPress={handleBackPress}>
+                  <Icon name="arrow-back-ios" size={27} color="black" />
+                </TouchableOpacity>
+              </View>
 
+              <PhotoUser name={user.profile.professional?.name?.text} />
+
+              <View
+                style={{
+                  height: 100,
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: 12
+                }}>
+                <CustomSwitchGeneral
+                  name="all_true"
+                  handleSwitch={(e: any) => handleSwitchAll(e)}
+                  checked={switchValue}
+                />
+              </View>
+
+              <View
+                style={{
+                  height: 100,
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#02AF9B',
+                    height: '45%',
+                    width: '40%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: 22,
+                    shadowColor: '#000'
+                  }}
+                  onPress={() => handleSendProfile(true)}>
+                  <Text style={{color: 'white'}}>Guardar</Text>
+                </TouchableOpacity>
+              </View>
+
+              <FormDataUser
+                isProUser={true}
+                dataForm={dataForm}
+                handleDataSet={e => handleDataSet(e)}
+                data={data}
+                handleData={handleData}
+                user={user}
+                handleSwitch={handleSwitch}
+              />
+              <FormAddDataUser
+                isProUser={true}
+                dataForm={dataForm}
+                handleDataSet={e => handleDataSet(e)}
+                isDetailOpen={isDetailOpen}
+                itemDetail={itemDetail}
+                handleModalAlert={({index, subindex}) =>
+                  handleModalAlert({index, subindex})
+                }
+                data={data}
+                handleData={handleData}
+                user={user}
+                handleSwitch={handleSwitch}
+                handleAddData={handleAddData}
+                handleModalAlertLimit={handleModalAlertLimit}
+                isModalAlertLimit={isModalAlertLimit}
+                handleDataNetworks={handleDataNetworks}
+                setModalIcons={setModalIcons}
+                itemUrlKey={itemUrlKey}
+                itemUrlSelected={itemUrlSelected}
+                handleModalIcons={handleModalIcons}
+                isModalIcons={isModalIcons}
+                handleDeleteData={handleDeleteData}
+              />
+
+              <View
+                style={{
+                  height: 210,
+                  width: '100%',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  marginTop: 90
+                }}>
                 <View
                   style={{
-                    height: 100,
+                    height: '50%',
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center'
@@ -161,118 +224,53 @@ const ProfileProfessional = () => {
                     <Text style={{color: 'white'}}>Guardar</Text>
                   </TouchableOpacity>
                 </View>
+              </View>
 
-                <FormDataUser
-                  isProUser={true}
-                  dataForm={dataForm}
-                  handleDataSet={e => handleDataSet(e)}
-                  data={data}
-                  handleData={handleData}
-                  user={user}
-                  handleSwitch={handleSwitch}
-                />
-                <FormAddDataUser
-                  isProUser={true}
-                  dataForm={dataForm}
-                  handleDataSet={e => handleDataSet(e)}
-                  isDetailOpen={isDetailOpen}
-                  itemDetail={itemDetail}
-                  handleModalAlert={({index, subindex}) =>
-                    handleModalAlert({index, subindex})
-                  }
-                  data={data}
-                  handleData={handleData}
-                  user={user}
-                  handleSwitch={handleSwitch}
-                  handleAddData={handleAddData}
-                  handleModalAlertLimit={handleModalAlertLimit}
-                  isModalAlertLimit={isModalAlertLimit}
-                  handleDataNetworks={handleDataNetworks}
-                  setModalIcons={setModalIcons}
-                  itemUrlKey={itemUrlKey}
-                  itemUrlSelected={itemUrlSelected}
-                  handleModalIcons={handleModalIcons}
-                  isModalIcons={isModalIcons}
-                  handleDeleteData={handleDeleteData}
-                />
+              <ModalAlert
+                isModalAlert={isModalAlert}
+                handleModalAlert={handleModalAux}
+                handleDeleteData={handleDeleteData}
+                noDeleted={noDeleted}
+              />
 
-                <View
-                  style={{
-                    height: 210,
-                    width: '100%',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    marginTop: 90
-                  }}>
-                  <View
-                    style={{
-                      height: '50%',
-                      width: '100%',
-                      justifyContent: 'center',
-                      alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                      style={{
-                        backgroundColor: '#02AF9B',
-                        height: '45%',
-                        width: '40%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: 22,
-                        shadowColor: '#000'
-                      }}
-                      onPress={() => handleSendProfile(true)}>
-                      <Text style={{color: 'white'}}>Guardar</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
+              <CustomModalAlert
+                isModalAlert={isModalAlertNavigation}
+                handleModalAlert={setIsModalAlertNavigation}
+                title="Acceso Restringido"
+                description="Actualmente no tienes acceso a las opciones de profesional porque estás utilizando un plan básico."
+              />
 
-                <ModalAlert
-                  isModalAlert={isModalAlert}
-                  handleModalAlert={handleModalAux}
-                  handleDeleteData={handleDeleteData}
-                  noDeleted={noDeleted}
-                />
+              <ModalSuccessDelete
+                isSuccessDelete={isSuccessDelete}
+                handleSuccessDelete={handleSuccessDelete}
+              />
 
-                <CustomModalAlert
-                  isModalAlert={isModalAlertNavigation}
-                  handleModalAlert={setIsModalAlertNavigation}
-                  title="Acceso Restringido"
-                  description="Actualmente no tienes acceso a las opciones de profesional porque estás utilizando un plan básico."
-                />
+              <CustomModalAlert
+                isModalAlert={isDataError}
+                handleModalAlert={setIsDataError}
+                title={'One Tap dice!'}
+                description={
+                  'La información del usuario no pudo ser registrada, por favor intenta de nuevo.'
+                }
+              />
+              <CustomModalAlert
+                isModalAlert={isDataSuccess}
+                handleModalAlert={setIsDataSuccess}
+                title={'One Tap dice!'}
+                description={
+                  'La información del usuario ha sido registrada con éxito.'
+                }
+              />
 
-                <ModalSuccessDelete
-                  isSuccessDelete={isSuccessDelete}
-                  handleSuccessDelete={handleSuccessDelete}
-                />
+              <CustomModalAlert
+                isModalAlert={isEmailPhoneRight}
+                handleModalAlert={setisEmailPhoneRight}
+                title={'One Tap dice!'}
+                description={status}
+              />
 
-                <CustomModalAlert
-                  isModalAlert={isDataError}
-                  handleModalAlert={setIsDataError}
-                  title={'One Tap dice!'}
-                  description={
-                    'La información del usuario no pudo ser registrada, por favor intenta de nuevo.'
-                  }
-                />
-                <CustomModalAlert
-                  isModalAlert={isDataSuccess}
-                  handleModalAlert={setIsDataSuccess}
-                  title={'One Tap dice!'}
-                  description={
-                    'La información del usuario ha sido registrada con éxito.'
-                  }
-                />
-
-                <CustomModalAlert
-                  isModalAlert={isEmailPhoneRight}
-                  handleModalAlert={setisEmailPhoneRight}
-                  title={'One Tap dice!'}
-                  description={status}
-                />
-
-                <CustomModalLoading isLoadingSendData={isLoadingSendData} />
-              </ScrollView>
-            </View>
+              <CustomModalLoading isLoadingSendData={isLoadingSendData} />
+            </ScrollView>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
         <View
