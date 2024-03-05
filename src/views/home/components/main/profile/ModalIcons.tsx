@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, Modal, ScrollView, Text} from 'react-native';
+import { View, TouchableOpacity, Modal, ScrollView, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -111,7 +111,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Url</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Url</Text>
                     </View>
                     <View
                       style={{
@@ -159,7 +159,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Facebook
                       </Text>
                     </View>
@@ -213,7 +213,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Threads
                       </Text>
                     </View>
@@ -267,7 +267,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Linkedin
                       </Text>
                     </View>
@@ -331,7 +331,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white'}}>Messenger</Text>
+                      <Text style={{ color: 'white' }}>Messenger</Text>
                     </View>
                     <View
                       style={{
@@ -379,7 +379,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Instagram
                       </Text>
                     </View>
@@ -433,7 +433,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Tiktok</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Tiktok</Text>
                     </View>
                     <View
                       style={{
@@ -485,7 +485,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Snapchat
                       </Text>
                     </View>
@@ -549,7 +549,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white'}}>X</Text>
+                      <Text style={{ color: 'white' }}>X</Text>
                     </View>
                     <View
                       style={{
@@ -601,7 +601,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Twitch</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Twitch</Text>
                     </View>
                     <View
                       style={{
@@ -653,7 +653,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Youtube
                       </Text>
                     </View>
@@ -707,7 +707,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Whatsapp
                       </Text>
                     </View>
@@ -771,7 +771,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white'}}>Zoom</Text>
+                      <Text style={{ color: 'white' }}>Zoom</Text>
                     </View>
                     <View
                       style={{
@@ -819,7 +819,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Line</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Line</Text>
                     </View>
                     <View
                       style={{
@@ -871,7 +871,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Gmail</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Gmail</Text>
                     </View>
                     <View
                       style={{
@@ -923,7 +923,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Email</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Email</Text>
                     </View>
                     <View
                       style={{
@@ -985,7 +985,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white'}}>Phone</Text>
+                      <Text style={{ color: 'white' }}>Phone</Text>
                     </View>
                     <View
                       style={{
@@ -1033,7 +1033,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Telegram
                       </Text>
                     </View>
@@ -1087,7 +1087,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 12}}>
+                      <Text style={{ color: 'white', fontSize: 12 }}>
                         WhatsApp Business
                       </Text>
                     </View>
@@ -1105,7 +1105,7 @@ const ModalIcons = ({
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor:
-                            val.icon === 'whatsAppBusiness'
+                            val.icon === 'whatsappbusiness'
                               ? '#babcbf'
                               : 'white',
                           flexDirection: 'row',
@@ -1114,7 +1114,7 @@ const ModalIcons = ({
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
-                            text: 'whatsAppBusiness',
+                            text: 'whatsappbusiness',
                             subindex: 'icon',
                             key: keyItem
                           })
@@ -1139,7 +1139,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Skype</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Skype</Text>
                     </View>
                     <View
                       style={{
@@ -1201,7 +1201,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white'}}>We Chat</Text>
+                      <Text style={{ color: 'white' }}>We Chat</Text>
                     </View>
                     <View
                       style={{
@@ -1249,7 +1249,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Paypal</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Paypal</Text>
                     </View>
                     <View
                       style={{
@@ -1301,7 +1301,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>VSCO</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>VSCO</Text>
                     </View>
                     <View
                       style={{
@@ -1349,7 +1349,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Tumblr</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Tumblr</Text>
                     </View>
                     <View
                       style={{
@@ -1411,7 +1411,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white'}}>Vimeo</Text>
+                      <Text style={{ color: 'white' }}>Vimeo</Text>
                     </View>
                     <View
                       style={{
@@ -1463,7 +1463,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Spotify
                       </Text>
                     </View>
@@ -1517,7 +1517,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Deezer</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Deezer</Text>
                     </View>
                     <View
                       style={{
@@ -1569,7 +1569,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Apple Music
                       </Text>
                     </View>
@@ -1587,14 +1587,14 @@ const ModalIcons = ({
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor:
-                            val.icon === 'appleMusic' ? '#babcbf' : 'white',
+                            val.icon === 'applemusic' ? '#babcbf' : 'white',
                           flexDirection: 'row',
                           borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
-                            text: 'appleMusic',
+                            text: 'applemusic',
                             subindex: 'icon',
                             key: keyItem
                           })
@@ -1629,7 +1629,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 12}}>
+                      <Text style={{ color: 'white', fontSize: 12 }}>
                         Google Maps
                       </Text>
                     </View>
@@ -1647,14 +1647,14 @@ const ModalIcons = ({
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor:
-                            val.icon === 'googleMaps' ? '#babcbf' : 'white',
+                            val.icon === 'googlemaps' ? '#babcbf' : 'white',
                           flexDirection: 'row',
                           borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
-                            text: 'googleMaps',
+                            text: 'googlemaps',
                             subindex: 'icon',
                             key: keyItem
                           })
@@ -1683,7 +1683,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Trip Advisor
                       </Text>
                     </View>
@@ -1701,14 +1701,14 @@ const ModalIcons = ({
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor:
-                            val.icon === 'tripAdvisor' ? '#babcbf' : 'white',
+                            val.icon === 'tripadvisor' ? '#babcbf' : 'white',
                           flexDirection: 'row',
                           borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
-                            text: 'tripAdvisor',
+                            text: 'tripadvisor',
                             subindex: 'icon',
                             key: keyItem
                           })
@@ -1737,7 +1737,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Booking
                       </Text>
                     </View>
@@ -1787,7 +1787,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>Tinder</Text>
+                      <Text style={{ color: 'white', fontSize: 13 }}>Tinder</Text>
                     </View>
                     <View
                       style={{
@@ -1845,7 +1845,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white'}}>Amazon</Text>
+                      <Text style={{ color: 'white' }}>Amazon</Text>
                     </View>
                     <View
                       style={{
@@ -1897,7 +1897,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Only Fans
                       </Text>
                     </View>
@@ -1947,7 +1947,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Air Bnb
                       </Text>
                     </View>
@@ -2001,7 +2001,7 @@ const ModalIcons = ({
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}>
-                      <Text style={{color: 'white', fontSize: 13}}>
+                      <Text style={{ color: 'white', fontSize: 13 }}>
                         Pinterest
                       </Text>
                     </View>
@@ -2041,454 +2041,6 @@ const ModalIcons = ({
                   </View>
                 </View>
               </ScrollView>
-
-              {/*
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'messenger' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'messenger',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <Fontisto name="messenger" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'instagram' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'instagram',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <Ionicons name="logo-instagram" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tiktok' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'tiktok',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands
-                                            name="tiktok" size={21} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'snapchat' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'snapchat',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome name="snapchat-square" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'twitter' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'twitter',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="square-x-twitter" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'twitch' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'twitch',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="twitch" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'youtube' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'youtube',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="youtube" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'whatsapp' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'whatsapp',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="whatsapp" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-
-
-
-
-
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'zoom' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'zoom',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <IconZoom />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'line' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'line',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="line" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'gmail' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'gmail',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <MaterialCommunityIcons name="gmail" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'email' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'email',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <MaterialCommunityIcons name="email" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'phone' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'phone',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome name="phone" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'telegram' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'telegram',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="telegram" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'whatsAppBusiness' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'whatsAppBusiness',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <IconWhatsAppB />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'skype' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'skype',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="skype" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-
-
-
-
-
-
-
-
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'wechat' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'wechat',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <AntDesign name="wechat" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'paypal' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'paypal',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="paypal" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'vsco' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'vsco',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <IconVSCO />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tumblr' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'tumblr',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="square-tumblr" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-
-
-
-
-
-
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'vimeo' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'vimeo',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="vimeo-v" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'spotify' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'spotify',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="spotify" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'deezer' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'deezer',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="deezer" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'appleMusic' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'appleMusic',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <Fontisto name="applemusic" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'googleMaps' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'googleMaps',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <MaterialCommunityIcons name="google-maps" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tripAdvisor' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'tripAdvisor',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome5Brands name="tripadvisor" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'booking' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'booking',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <IconBooking />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'tinder' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'tinder',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <Fontisto name="tinder" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-
-
-
-
-
-
-
-
-                            <View style={{ height: "11%", width: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'amazon' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'amazon',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="amazon" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'onlyFans' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'onlyFans',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <IconOnlyFans />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'airbnb' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'airbnb',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="airbnb" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={{ height: "90%", width: "25%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ height: "85%", width: "65%", justifyContent: 'center', alignItems: 'center', backgroundColor: val.icon === 'pinterest' ? "#babcbf" : "white", flexDirection: 'row', borderRadius: 10 }} onPress={(text: any) =>
-                                        handleDataNetworks({
-                                            name: value[0],
-                                            text: 'pinterest',
-                                            subindex: 'icon',
-                                            key: keyItem,
-                                        })}>
-                                        <FontAwesome6Brands name="pinterest" size={25} color="#02AF9B" />
-                                    </TouchableOpacity>
-                                </View>
-                            </View> */}
             </View>
           </View>
         </View>
