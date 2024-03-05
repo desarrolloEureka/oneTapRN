@@ -31,10 +31,10 @@ const OnboardingTwo = () => {
         </View>
         <View style={{ height: "30%", width: "100%", alignItems: 'center' }}>
           <View style={{ height: "15%", width: "90%", justifyContent: 'center' }}>
-            <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>Elige tu tarjeta y plantilla</Text>
+            <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}></Text>
           </View>
           <View style={{ height: "35%", width: "90%", justifyContent: 'flex-start', paddingTop: 2 }}>
-            <Text style={{ fontSize: 16, color: 'white' }}>consectetur adipiscing elit. Cras facilisis a leo ut finibus. Mauris at sapien et nisl accumsan congue.</Text>
+            <Text style={{ fontSize: 16, color: 'white' }}>Activa y desactiva tu tarjeta en el momento que quieras, tú decides quiénes visitan tu perfil.</Text>
           </View>
           <View style={{ height: "50%", width: "90%", justifyContent: 'flex-start', alignItems: 'center', paddingTop: 15 }}>
             <TouchableOpacity style={{ height: "45%", width: "90%", backgroundColor: '#02AF9B', borderRadius: 100, justifyContent: 'center', alignItems: 'center' }} onPress={handleNextPress}>

@@ -1915,14 +1915,14 @@ const ModalIcons = ({
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor:
-                            val.icon === 'onlyFans' ? '#babcbf' : 'white',
+                            val.icon === 'onlyfans' ? '#babcbf' : 'white',
                           flexDirection: 'row',
                           borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
-                            text: 'onlyFans',
+                            text: 'onlyfans',
                             subindex: 'icon',
                             key: keyItem
                           })

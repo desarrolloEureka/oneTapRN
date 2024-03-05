@@ -21,9 +21,9 @@ const OnboardingInicioSesion = () => {
       <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>¿Aún no tienes tapcard?</Text>
-      </TouchableOpacity>
+      {/*  <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>¿Aún no tienes OneTap?</Text>
+      </TouchableOpacity> */}
     </View>
   );
 };
