@@ -21,7 +21,7 @@ const ModalIcons = ({
   value,
   val,
   keyItem,
-  handleDataNetworks,
+  handleDataNetworks
 }: {
   isModalIcons: boolean;
   setModalIcons: (e: boolean) => void;
@@ -43,7 +43,7 @@ const ModalIcons = ({
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'rgba(128, 128, 128, 0.7)',
+          backgroundColor: 'rgba(128, 128, 128, 0.7)'
         }}>
         <View
           style={{
@@ -52,21 +52,21 @@ const ModalIcons = ({
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: '#02AF9B',
-            borderRadius: 25,
+            borderRadius: 25
           }}>
           <View
             style={{
               height: '8%',
               width: '100%',
               justifyContent: 'center',
-              alignItems: 'flex-end',
+              alignItems: 'flex-end'
             }}>
             <TouchableOpacity
               style={{
                 height: '100%',
                 width: '20%',
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: 'center'
               }}
               onPress={() => setModalIcons(false)}>
               <Icon name="close" size={25} color="white" />
@@ -77,14 +77,14 @@ const ModalIcons = ({
               height: '92%',
               width: '98%',
               justifyContent: 'center',
-              alignItems: 'center',
+              alignItems: 'center'
             }}>
             <View
               style={{
                 height: '95%',
                 width: '95%',
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: 'center'
               }}>
               <ScrollView>
                 <View
@@ -94,7 +94,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -102,14 +102,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Url</Text>
                     </View>
@@ -118,7 +118,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -129,14 +129,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'www' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'www',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome5 name="link" size={20} color="#02AF9B" />
@@ -150,14 +150,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Facebook
@@ -168,7 +168,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -179,14 +179,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'facebook' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'facebook',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <Ionicons
@@ -204,14 +204,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Threads
@@ -222,7 +222,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -233,14 +233,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'threads' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'threads',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -258,14 +258,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Linkedin
@@ -276,7 +276,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -287,14 +287,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'linkedin' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'linkedin',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <Ionicons
@@ -314,7 +314,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -322,14 +322,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white'}}>Messenger</Text>
                     </View>
@@ -338,7 +338,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -349,14 +349,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'messenger' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'messenger',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <Fontisto name="messenger" size={25} color="#02AF9B" />
@@ -370,14 +370,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Instagram
@@ -388,7 +388,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -399,14 +399,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'instagram' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'instagram',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <Ionicons
@@ -424,14 +424,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Tiktok</Text>
                     </View>
@@ -440,7 +440,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -451,14 +451,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'tiktok' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'tiktok',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -476,14 +476,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Snapchat
@@ -494,7 +494,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -505,14 +505,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'snapchat' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'snapchat',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome
@@ -532,7 +532,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -540,14 +540,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white'}}>X</Text>
                     </View>
@@ -556,7 +556,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -567,14 +567,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'twitter' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'twitter',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -592,14 +592,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Twitch</Text>
                     </View>
@@ -608,7 +608,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -619,14 +619,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'twitch' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'twitch',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -644,14 +644,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Youtube
@@ -662,7 +662,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -673,14 +673,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'youtube' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'youtube',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -698,14 +698,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Whatsapp
@@ -716,7 +716,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -727,14 +727,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'whatsapp' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'whatsapp',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -754,7 +754,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -762,14 +762,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white'}}>Zoom</Text>
                     </View>
@@ -778,7 +778,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -789,14 +789,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'zoom' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'zoom',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <IconZoom />
@@ -810,14 +810,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Line</Text>
                     </View>
@@ -826,7 +826,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -837,14 +837,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'line' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'line',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -862,14 +862,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Gmail</Text>
                     </View>
@@ -878,7 +878,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -889,14 +889,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'gmail' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'gmail',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <MaterialCommunityIcons
@@ -914,14 +914,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Email</Text>
                     </View>
@@ -930,7 +930,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -941,14 +941,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'email' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'email',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <MaterialCommunityIcons
@@ -968,7 +968,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -976,14 +976,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white'}}>Phone</Text>
                     </View>
@@ -992,7 +992,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1003,14 +1003,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'phone' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'phone',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome name="phone" size={25} color="#02AF9B" />
@@ -1024,14 +1024,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Telegram
@@ -1042,7 +1042,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1053,14 +1053,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'telegram' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'telegram',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1078,14 +1078,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 12}}>
                         WhatsApp Business
@@ -1096,7 +1096,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1109,14 +1109,14 @@ const ModalIcons = ({
                               ? '#babcbf'
                               : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'whatsAppBusiness',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <IconWhatsAppB />
@@ -1130,14 +1130,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Skype</Text>
                     </View>
@@ -1146,7 +1146,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1157,14 +1157,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'skype' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'skype',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1184,7 +1184,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -1192,14 +1192,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white'}}>We Chat</Text>
                     </View>
@@ -1208,7 +1208,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1219,14 +1219,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'wechat' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'wechat',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <AntDesign name="wechat" size={25} color="#02AF9B" />
@@ -1240,14 +1240,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Paypal</Text>
                     </View>
@@ -1256,7 +1256,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1267,14 +1267,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'paypal' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'paypal',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1292,14 +1292,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>VSCO</Text>
                     </View>
@@ -1308,7 +1308,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1319,14 +1319,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'vsco' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'vsco',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <IconVSCO />
@@ -1340,14 +1340,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Tumblr</Text>
                     </View>
@@ -1356,7 +1356,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1367,14 +1367,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'tumblr' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'tumblr',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1394,7 +1394,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -1402,14 +1402,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white'}}>Vimeo</Text>
                     </View>
@@ -1418,7 +1418,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1429,14 +1429,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'vimeo' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'vimeo',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1454,14 +1454,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Spotify
@@ -1472,7 +1472,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1483,14 +1483,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'spotify' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'spotify',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1508,14 +1508,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Deezer</Text>
                     </View>
@@ -1524,7 +1524,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1535,14 +1535,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'deezer' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'deezer',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1560,14 +1560,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Apple Music
@@ -1578,7 +1578,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1589,14 +1589,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'appleMusic' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'appleMusic',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <Fontisto name="applemusic" size={25} color="#02AF9B" />
@@ -1612,7 +1612,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -1620,14 +1620,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 12}}>
                         Google Maps
@@ -1638,7 +1638,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1649,14 +1649,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'googleMaps' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'googleMaps',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <MaterialCommunityIcons
@@ -1674,14 +1674,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Trip Advisor
@@ -1692,7 +1692,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1703,14 +1703,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'tripAdvisor' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'tripAdvisor',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome5Brands
@@ -1728,14 +1728,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Booking
@@ -1746,7 +1746,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1757,14 +1757,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'booking' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'booking',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <IconBooking />
@@ -1778,14 +1778,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>Tinder</Text>
                     </View>
@@ -1794,7 +1794,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1805,14 +1805,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'tinder' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'tinder',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <Fontisto name="tinder" size={25} color="#02AF9B" />
@@ -1828,7 +1828,7 @@ const ModalIcons = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'row',
+                    flexDirection: 'row'
                   }}>
                   <View
                     style={{
@@ -1836,14 +1836,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white'}}>Amazon</Text>
                     </View>
@@ -1852,7 +1852,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1863,14 +1863,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'amazon' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'amazon',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1888,14 +1888,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Only Fans
@@ -1906,7 +1906,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1917,14 +1917,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'onlyFans' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'onlyFans',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <IconOnlyFans />
@@ -1938,14 +1938,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Air Bnb
@@ -1956,7 +1956,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1967,14 +1967,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'airbnb' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'airbnb',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
@@ -1992,14 +1992,14 @@ const ModalIcons = ({
                       width: '25%',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: 'column',
+                      flexDirection: 'column'
                     }}>
                     <View
                       style={{
                         height: '30%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <Text style={{color: 'white', fontSize: 13}}>
                         Pinterest
@@ -2010,7 +2010,7 @@ const ModalIcons = ({
                         height: '60%',
                         width: '95%',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}>
                       <TouchableOpacity
                         style={{
@@ -2021,14 +2021,14 @@ const ModalIcons = ({
                           backgroundColor:
                             val.icon === 'pinterest' ? '#babcbf' : 'white',
                           flexDirection: 'row',
-                          borderRadius: 10,
+                          borderRadius: 10
                         }}
                         onPress={(text: any) =>
                           handleDataNetworks({
                             name: value[0],
                             text: 'pinterest',
                             subindex: 'icon',
-                            key: keyItem,
+                            key: keyItem
                           })
                         }>
                         <FontAwesome6Brands
