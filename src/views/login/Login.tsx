@@ -88,7 +88,7 @@ const Login = () => {
           errorMessage:
             'Credenciales incorrectas. Por favor, inténtelo de nuevo.'
         });
-      }, 3000);
+      }, 4500);
 
       setTimeout(() => {
         setErrorForm(null);
