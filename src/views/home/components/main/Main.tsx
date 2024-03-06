@@ -54,7 +54,12 @@ const Main = () => {
   const handleModalAlert = () => setIsModalAlert(!isModalAlert);
   const [copiedText, setIscopiedText] = useState(false);
   const [isModalAlertBg, setIsModalAlertBg] = useState(false);
+  const [isAlertProfileSocial, setIsAlertProfileSocial] = useState(false);
+  const [isAlertProfilePro, setIsAlertProfilePro] = useState(false);
+
   const handleModalAlertBg = (status: boolean) => setIsModalAlertBg(!isModalAlertBg);
+  const handleAlertProfileSocial = (status: boolean) => setIsAlertProfileSocial(!isAlertProfileSocial);
+  const handleAlertProfilePro = (status: boolean) => setIsAlertProfilePro(!isAlertProfilePro);
 
   const navigation =
     useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
@@ -79,10 +84,26 @@ const Main = () => {
   };
 
   const handleNavigatePreview = async (background: TemplateData | undefined) => {
-    if (background) {
-      navigation.navigate('PreviewTemplate', { tab: tab });
+    if (tab === 'social') {
+      if (data?.profile?.social) {
+        if (background) {
+          navigation.navigate('PreviewTemplate', { tab: tab });
+        } else {
+          setIsModalAlertBg(true);
+        }
+      } else {
+        setIsAlertProfileSocial(true);
+      }
     } else {
-      setIsModalAlertBg(true);
+      if (data?.profile?.professional) {
+        if (background) {
+          navigation.navigate('PreviewTemplate', { tab: tab });
+        } else {
+          setIsModalAlertBg(true);
+        }
+      } else {
+        setIsAlertProfilePro(true);
+      }
     }
   };
 
@@ -354,6 +375,22 @@ const Main = () => {
         handleModalAlert={handleModalAlertBg}
         title="One Tap dice!"
         description={"No se ha seleccionado un fondo para la plantilla"}
+        isClosed={true}
+      />
+
+      <CustomModalAlert
+        handleModalAlert={handleAlertProfileSocial}
+        title="One Tap dice!"
+        description={"Debes registrar los datos en el perfil social"}
+        isModalAlert={isAlertProfileSocial}
+        isClosed={true}
+      />
+      <CustomModalAlert
+        handleModalAlert={handleAlertProfilePro}
+        title="One Tap dice!"
+        description={"Debes registrar los datos en el perfil profesional"}
+        isModalAlert={isAlertProfilePro}
+        isClosed={true}
       />
 
       <CustomModalLoading

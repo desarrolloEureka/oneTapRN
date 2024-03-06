@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, Modal, Text} from 'react-native';
+import { View, TouchableOpacity, Modal, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 function CustomModalAlert({
@@ -7,20 +7,21 @@ function CustomModalAlert({
   handleModalAlert,
   title,
   description,
+  isClosed
 }: {
   isModalAlert: boolean;
   handleModalAlert: (e: boolean) => void;
   description: string;
   title: string;
+  isClosed?: boolean;
 }) {
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={isModalAlert}
-      onRequestClose={() => {
-        handleModalAlert(false);
-      }}>
+      onRequestClose={() => (isClosed ? handleModalAlert(false) : null)}
+    >
       <View
         style={{
           flex: 1,
@@ -63,7 +64,7 @@ function CustomModalAlert({
               alignItems: 'center',
               paddingBottom: 40,
             }}>
-            <Text style={{color: 'white', fontSize: 19, paddingBottom: 15}}>
+            <Text style={{ color: 'white', fontSize: 19, paddingBottom: 15 }}>
               {title}
             </Text>
             <Text

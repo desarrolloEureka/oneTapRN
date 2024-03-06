@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   SafeAreaView,
@@ -10,9 +10,9 @@ import {
   Platform,
   Keyboard
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {profileStyles} from '../../../styles/profileStyles';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { profileStyles } from '../../../styles/profileStyles';
 import PhotoUser from './PhotoUser';
 import FormDataUser from './FormDataUser';
 import FormAddDataUser from './FormAddDataUser';
@@ -22,14 +22,14 @@ import ModalSuccessDelete from './ModalSuccessDelete';
 import CustomModalAlert from './CustomModalAlert';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 import CustomModalLoading from './CustomModalLoading';
-import {SocialDataForm} from '../../../../../types/profile';
-import {GetUser} from '../../../../../reactQuery/users';
-import {RouteStackParamList} from '../../../../../types/navigation';
+import { SocialDataForm } from '../../../../../types/profile';
+import { GetUser } from '../../../../../reactQuery/users';
+import { RouteStackParamList } from '../../../../../types/navigation';
 // Iconos
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {profile} from '../../../../../initialData/profileInitialData';
+import { profile } from '../../../../../initialData/profileInitialData';
 
 const Profile = () => {
   const {
@@ -103,14 +103,14 @@ const Profile = () => {
     data &&
     user &&
     dataForm && (
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{flex: 1}}>
+          style={{ flex: 1 }}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <ScrollView
               contentContainerStyle={profileStyles.scrollViewContainer}>
-              <View style={{height: 50, width: '100%'}}>
+              <View style={{ height: 50, width: '100%' }}>
                 <TouchableOpacity
                   style={{
                     height: '100%',
@@ -123,7 +123,9 @@ const Profile = () => {
                 </TouchableOpacity>
               </View>
 
-              <PhotoUser name={user.profile.social?.name?.text} />
+              <PhotoUser
+                name={user.profile && user.profile.social ? user.profile.social?.name?.text || '' : ''}
+              />
 
               <View
                 style={{
@@ -158,7 +160,7 @@ const Profile = () => {
                     shadowColor: '#000'
                   }}
                   onPress={() => handleSendProfile(false)}>
-                  <Text style={{color: 'white'}}>Guardar</Text>
+                  <Text style={{ color: 'white' }}>Guardar</Text>
                 </TouchableOpacity>
               </View>
 
@@ -178,8 +180,8 @@ const Profile = () => {
                 handleDataSet={e => handleDataSet(e)}
                 isDetailOpen={isDetailOpen}
                 itemDetail={itemDetail}
-                handleModalAlert={({index, subindex}) =>
-                  handleModalAlert({index, subindex})
+                handleModalAlert={({ index, subindex }) =>
+                  handleModalAlert({ index, subindex })
                 }
                 data={data}
                 handleData={handleData}
@@ -223,7 +225,7 @@ const Profile = () => {
                       shadowColor: '#000'
                     }}
                     onPress={() => handleSendProfile(false)}>
-                    <Text style={{color: 'white'}}>Guardar</Text>
+                    <Text style={{ color: 'white' }}>Guardar</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -247,7 +249,7 @@ const Profile = () => {
                   }}
                   onPress={() => handleTabPress('Home')}>
                   <Icon name="home" size={25} color="black" />
-                  <Text style={{color: 'black'}}>Home</Text>
+                  <Text style={{ color: 'black' }}>Home</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -261,7 +263,7 @@ const Profile = () => {
                   }}
                   onPress={() => handleTabPress('Social')}>
                   <FontAwesome name="users" size={25} color="black" />
-                  <Text style={{color: 'black'}}>Social</Text>
+                  <Text style={{ color: 'black' }}>Social</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -273,7 +275,7 @@ const Profile = () => {
                   }}
                   onPress={() => handleTabPress('Professional')}>
                   <Ionicons name="newspaper-sharp" size={28} color="black" />
-                  <Text style={{color: 'black'}}>PRO</Text>
+                  <Text style={{ color: 'black' }}>PRO</Text>
                 </TouchableOpacity>
               </View>
               <ModalAlert

@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useCallback, useEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,9 +10,9 @@ import {
   View
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {GetLoginQuery} from '../../reactQuery/users';
-import {LoginError} from '../../types/login';
-import {StackNavigation} from '../../types/navigation';
+import { GetLoginQuery } from '../../reactQuery/users';
+import { LoginError } from '../../types/login';
+import { StackNavigation } from '../../types/navigation';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +30,7 @@ const Login = () => {
     navigation.navigate('Terminos');
   };
 
-  const {data, isLoading, isRefetching} = GetLoginQuery({
+  const { data, isLoading, isRefetching } = GetLoginQuery({
     user: email,
     password,
     sendLogin
@@ -56,24 +56,6 @@ const Login = () => {
       }
     }
   };
-
-  /*   const userIsLogged = useCallback(() => {
-      console.log("sendLogin  ", sendLogin);
-      console.log("data  ", data);
-      console.log("isLoading  ", isLoading);
-  
-      if (data && data.isActive) {
-        navigation.navigate('Home');
-        setPassword('');
-        setEmail('');
-        setErrorForm(null);
-      } else if (!data && isLoading) {
-        setErrorForm({
-          errorType: 3,
-          errorMessage: "Usuario no encontrado",
-        });
-      }
-    }, [data, isLoading, navigation, sendLogin]); */
 
   const userIsLogged = useCallback(() => {
     if (data && data?.isActive) {
@@ -102,7 +84,7 @@ const Login = () => {
   }, [userIsLogged]);
 
   return (
-    <SafeAreaView style={{backgroundColor: '#e8e8e8', flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: '#e8e8e8', flex: 1 }}>
       <ScrollView>
         <View style={styles.headerContainer}></View>
 
@@ -117,7 +99,7 @@ const Login = () => {
           <View style={styles.titleContainer}>
             <Text style={styles.heading}>Iniciar Sesión</Text>
           </View>
-          <View style={{height: '85%', width: '100%'}}>
+          <View style={{ height: '85%', width: '100%' }}>
             <View
               style={{
                 height: '20%',
@@ -281,7 +263,7 @@ const Login = () => {
                   justifyContent: 'center'
                 }}
                 onPress={handleForgotPassword}>
-                <Text style={{color: 'black'}}>Recuperar Contraseña</Text>
+                <Text style={{ color: 'black' }}>Recuperar Contraseña</Text>
               </TouchableOpacity>
             </View>
             <View
@@ -299,7 +281,7 @@ const Login = () => {
                   justifyContent: 'center'
                 }}
                 onPress={handleGoTerms}>
-                <Text style={{color: 'black'}}>Términos y Condiciones</Text>
+                <Text style={{ color: 'black' }}>Términos y Condiciones</Text>
               </TouchableOpacity>
             </View>
           </View>

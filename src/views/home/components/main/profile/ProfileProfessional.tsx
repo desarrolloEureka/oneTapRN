@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   SafeAreaView,
@@ -11,22 +11,22 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import PhotoUser from './PhotoUser';
-import {profileStyles} from '../../../styles/profileStyles';
+import { profileStyles } from '../../../styles/profileStyles';
 import FormDataUser from './FormDataUser';
 import FormAddDataUser from './FormAddDataUser';
-import {SocialDataForm} from '../../../../../types/profile';
+import { SocialDataForm } from '../../../../../types/profile';
 import ModalAlert from './ModalAlert';
 import ModalSuccessDelete from './ModalSuccessDelete';
 import CustomModalAlert from './CustomModalAlert';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import CustomModalLoading from './CustomModalLoading';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {GetUser} from '../../../../../reactQuery/users';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteStackParamList} from '../../../../../types/navigation';
+import { GetUser } from '../../../../../reactQuery/users';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteStackParamList } from '../../../../../types/navigation';
 import ProfileProfessionalHook from './hooks/ProfileProfessoinalHook';
 
 const ProfileProfessional = () => {
@@ -102,14 +102,14 @@ const ProfileProfessional = () => {
   return (
     data &&
     user && (
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{flex: 1}}>
+          style={{ flex: 1 }}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <ScrollView
               contentContainerStyle={profileStyles.scrollViewContainer}>
-              <View style={{height: 50, width: '100%'}}>
+              <View style={{ height: 50, width: '100%' }}>
                 <TouchableOpacity
                   style={{
                     height: '100%',
@@ -122,7 +122,9 @@ const ProfileProfessional = () => {
                 </TouchableOpacity>
               </View>
 
-              <PhotoUser name={user.profile.professional?.name?.text} />
+              <PhotoUser
+                name={user.profile && user?.profile?.professional ? user?.profile?.professional?.name?.text || '' : ''}
+              />
 
               <View
                 style={{
@@ -157,7 +159,7 @@ const ProfileProfessional = () => {
                     shadowColor: '#000'
                   }}
                   onPress={() => handleSendProfile(true)}>
-                  <Text style={{color: 'white'}}>Guardar</Text>
+                  <Text style={{ color: 'white' }}>Guardar</Text>
                 </TouchableOpacity>
               </View>
 
@@ -176,8 +178,8 @@ const ProfileProfessional = () => {
                 handleDataSet={e => handleDataSet(e)}
                 isDetailOpen={isDetailOpen}
                 itemDetail={itemDetail}
-                handleModalAlert={({index, subindex}) =>
-                  handleModalAlert({index, subindex})
+                handleModalAlert={({ index, subindex }) =>
+                  handleModalAlert({ index, subindex })
                 }
                 data={data}
                 handleData={handleData}
@@ -221,7 +223,7 @@ const ProfileProfessional = () => {
                       shadowColor: '#000'
                     }}
                     onPress={() => handleSendProfile(true)}>
-                    <Text style={{color: 'white'}}>Guardar</Text>
+                    <Text style={{ color: 'white' }}>Guardar</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -293,7 +295,7 @@ const ProfileProfessional = () => {
             }}
             onPress={() => handleTabPress('Home')}>
             <Icon name="home" size={25} color="black" />
-            <Text style={{color: 'black'}}>Home</Text>
+            <Text style={{ color: 'black' }}>Home</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -305,7 +307,7 @@ const ProfileProfessional = () => {
             }}
             onPress={() => handleTabPress('Social')}>
             <FontAwesome name="users" size={25} color="black" />
-            <Text style={{color: 'black'}}>Social</Text>
+            <Text style={{ color: 'black' }}>Social</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -319,7 +321,7 @@ const ProfileProfessional = () => {
             }}
             onPress={() => handleTabPress('Professional')}>
             <Ionicons name="newspaper-sharp" size={28} color="black" />
-            <Text style={{color: 'black'}}>PRO</Text>
+            <Text style={{ color: 'black' }}>PRO</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

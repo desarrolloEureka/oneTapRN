@@ -19,8 +19,6 @@ const PreviewTemplate = () => {
 
   useEffect(() => {
     const isProUser = route.params && route?.params?.tab;
-    console.log('isProUser', isProUser);
-
     if (isProUser !== undefined) {
       setTab(isProUser);
     }

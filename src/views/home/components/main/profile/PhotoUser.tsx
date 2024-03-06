@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,15 +13,15 @@ import {
   MediaType
 } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {profileStyles} from '../../../styles/profileStyles';
+import { profileStyles } from '../../../styles/profileStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
-import {SendDataImage} from '../../../../../reactQuery/users';
-import {GetUser} from '../../../../../reactQuery/users';
-import {UserData} from '../../../../../types/user';
+import { SendDataImage } from '../../../../../reactQuery/users';
+import { GetUser } from '../../../../../reactQuery/users';
+import { UserData } from '../../../../../types/user';
 
-const PhotoUser = ({name}: {name?: string}) => {
+const PhotoUser = ({ name }: { name?: string }) => {
   const user = GetUser();
   const data = user.data as unknown as UserData;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -93,17 +93,17 @@ const PhotoUser = ({name}: {name?: string}) => {
             <View style={profileStyles.containerPhotoCircle}>
               {selectedImage ? (
                 <Image
-                  style={{borderRadius: 100, width: '85%', height: '85%'}}
-                  source={{uri: selectedImage}}
+                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
+                  source={{ uri: selectedImage }}
                 />
               ) : data?.image ? (
                 <Image
-                  style={{borderRadius: 100, width: '85%', height: '85%'}}
-                  source={{uri: `${data?.image}`}}
+                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
+                  source={{ uri: `${data?.image}` }}
                 />
               ) : (
                 <Image
-                  style={{borderRadius: 100, width: '85%', height: '85%'}}
+                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
                   source={require('./../../../../../images/profilePhoto.png')}
                 />
               )}
@@ -116,7 +116,7 @@ const PhotoUser = ({name}: {name?: string}) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{height: '25%', width: '45%'}}>
+          <View style={{ height: '25%', width: '45%' }}>
             <View style={profileStyles.borderTargetName}>
               <Text style={profileStyles.textName}>
                 {/* Hola {data && data?.user_name} */}
