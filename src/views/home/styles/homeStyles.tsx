@@ -124,7 +124,7 @@ export const homeStyles = StyleSheet.create({
 
   buttonText: {
     fontFamily: 'Ubuntu',
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: '500',
     lineHeight: 28,
     letterSpacing: 0.03,

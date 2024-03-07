@@ -160,46 +160,52 @@ const Main = () => {
   };
 
   const copyToClipboard = () => {
-    const url = data?.preview
+    const url = data?.preview;
     Clipboard.setString("" + url);
     setIscopiedText(true);
+
+    // Después de 5 segundos, cambiar el estado de copiedText a false
+    setTimeout(() => {
+      setIscopiedText(false);
+    }, 5000);
   };
+
 
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
       <View style={{ height: 145, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ height: '50%', width: '100%', flexDirection: 'row' }}>
-          <View style={{ height: '100%', width: '50%' }}>
-            <View style={{ height: '85%', width: '25%', justifyContent: 'center', alignItems: 'flex-end', marginLeft: 7 }}>
+          <View style={{ height: '100%', width: '50%', flexDirection: 'row' }}>
+            <View style={{ height: '95%', width: '25%', justifyContent: 'center', alignItems: 'flex-end', marginLeft: 7 }}>
               <Image
                 resizeMode='contain'
-                style={{ width: '85%', height: '80%' }}
+                style={{ width: '85%', height: '85%' }}
                 source={require('../../../../images/logo_inicio.png')}
               />
             </View>
-          </View>
-
-          <View style={{ height: '100%', width: '50%', alignItems: 'flex-end', flexDirection: 'row' }}>
-            <View style={{ height: '100%', width: '65%', justifyContent: 'center', alignItems: 'flex-end' }}>
-              <TouchableOpacity style={{ height: '94%', width: '55%', justifyContent: 'center', alignItems: 'center' }} onPress={copyToClipboard}>
+            <View style={{ height: '90%', width: '40%', justifyContent: 'center', alignItems: 'flex-end', marginLeft: 4 }}>
+              <TouchableOpacity style={{ height: '94%', width: '95%', justifyContent: 'center', alignItems: 'center' }} onPress={copyToClipboard}>
                 <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>Copiar URL</Text>
                 <Feather name="copy" size={23} color="#396593" />
                 {copiedText === true &&
-                  <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>Copiado!</Text>
+                  <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>¡Copiado!</Text>
                 }
               </TouchableOpacity>
             </View>
+          </View>
+          <View style={{ height: '100%', width: '50%', alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row' }}>
             <View style={{ height: '100%', width: '35%', justifyContent: 'center', alignItems: 'flex-end' }}>
               <MenuSuperior />
             </View>
           </View>
+
         </View>
 
         <View style={{ height: '50%', width: '90%', flexDirection: 'row' }}>
           <View style={{ height: '100%', width: '50%', justifyContent: 'center' }}>
-            <View style={{ backgroundColor: 'white', height: '60%', width: '65%', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ backgroundColor: 'white', height: '55%', width: '58%', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
               <Text style={homeStyles.buttonText}>
-                <Icon name="eye" size={20} color="#396593" />   {data && data?.views}
+                <Icon name="eye" size={19} color="#396593" />  {data && data?.views}
               </Text>
             </View>
           </View>

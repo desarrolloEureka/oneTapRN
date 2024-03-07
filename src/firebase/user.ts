@@ -222,12 +222,12 @@ export const updateSwitchAllFirebase = async (userId: string, newData: any) => {
   await updateDoc(userDocRef, newData);
 };
 
-export const updatePasswordFirebase = (newPassword: string) => {
-  const auth = getAuth();
-  const user = auth.currentUser;
+export const updatePasswordFirebase = async (newPassword: string) => {
+  const auth = await getAuth();
+  const user = await auth.currentUser;
 
   if (user) {
-    return updatePassword(user, newPassword)
+    return await updatePassword(user, newPassword)
       .then(() => {
         console.debug('Contraseña actualizada correctamente');
         return true;
