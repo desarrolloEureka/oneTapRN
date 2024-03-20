@@ -59,31 +59,32 @@ const ProfileHook = ({
     const phones = dataForm?.phones?.map((phone) => phone.text);
     const urls = dataForm?.urls?.map((urls) => urls);
 
-    if (emails) {
-      const isEmailValid = emails.every((email) => validateEmail(email as string));
-      if (!isEmailValid) {
-        setStatus("El correo no es valido ó no se pueden dejar espacios en blanco");
-        setisEmailPhoneRight(true);
-        return;
+    /*   if (emails) {
+        const isEmailValid = emails.every((email) => validateEmail(email as string));
+        if (!isEmailValid) {
+          setStatus("El correo no es valido ó no se pueden dejar espacios en blanco");
+          setisEmailPhoneRight(true);
+          return;
+        }
+      } 
+      if (phones) {
+        const isPhoneValid = phones.every((phone) => validatePhoneNumber(phone as string));
+        if (!isPhoneValid) {
+          setStatus("El teléfono no es valido ó no se pueden dejar espacios en blanco");
+          setisEmailPhoneRight(true);
+          return;
+        }
       }
-    }
-    if (phones) {
-      const isPhoneValid = phones.every((phone) => validatePhoneNumber(phone as string));
-      if (!isPhoneValid) {
-        setStatus("El teléfono no es valido ó no se pueden dejar espacios en blanco");
-        setisEmailPhoneRight(true);
-        return;
+  
+      if (urls) {
+        const allObjectsFilled = dataForm?.urls?.every(obj => obj.name !== "" && obj.url !== "" && obj.icon !== "");
+        if (!allObjectsFilled) {
+          setStatus("No se pueden dejar espacios en blanco en urls");
+          setisEmailPhoneRight(true);
+          return;
+        }
       }
-    }
-
-    if (urls) {
-      const allObjectsFilled = dataForm?.urls?.every(obj => obj.name !== "" && obj.url !== "" && obj.icon !== "");
-      if (!allObjectsFilled) {
-        setStatus("No se pueden dejar espacios en blanco en urls");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
+      */
 
     setIsLoadingSendData(true);
     if (userId) {
@@ -188,6 +189,9 @@ const ProfileHook = ({
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
     key != undefined && subindex && fillFields(index, key, text, subindex);
+    setTimeout(() => {
+      setModalIcons(!isModalIcons);
+    }, 500);
   };
 
   const handleData = ({

@@ -101,8 +101,8 @@ const FormDataUser = ({
                                     {key === 5 ?
                                         <View style={{ height: 60, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
                                             <View style={{ height: "100%", width: "96%", justifyContent: 'center' }}>
-                                                <View style={{ height: "65%", width: "35%", justifyContent: 'center', backgroundColor: '#02af9b', borderRadius: 5 }}>
-                                                    <Text style={{ color: 'white' }}> Datos Adicionales</Text>
+                                                <View style={{ height: "65%", width: "40%", justifyContent: 'center', backgroundColor: '#02af9b', borderRadius: 5 }}>
+                                                    <Text style={{ color: 'white' }}> Datos Profesionales</Text>
                                                 </View>
                                             </View>
                                         </View>

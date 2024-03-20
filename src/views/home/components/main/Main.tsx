@@ -153,7 +153,7 @@ const Main = () => {
 
       await SendTemplateSelected(uid, updatedTemplates, queryClient);
       await setIsLoadingSendData(false);
-
+      setIsModalOpen(!isModalOpen);
     } else {
       setIsLoadingSendData(false);
     }

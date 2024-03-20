@@ -125,6 +125,7 @@ const Profile = () => {
 
               <PhotoUser
                 name={user.profile && user.profile.social ? user.profile.social?.name?.text || '' : ''}
+                isProUser={false}
               />
 
               <View
@@ -229,7 +230,56 @@ const Profile = () => {
                   </TouchableOpacity>
                 </View>
               </View>
-              <View
+
+              <ModalAlert
+                isModalAlert={isModalAlert}
+                handleModalAlert={handleModalAux}
+                handleDeleteData={handleDeleteData}
+                noDeleted={noDeleted}
+              />
+
+              <CustomModalAlert
+                isModalAlert={isModalAlertNavigation}
+                handleModalAlert={setIsModalAlertNavigation}
+                title="Acceso Restringido"
+                description="Actualmente no tienes acceso a las opciones de profesional porque estás utilizando un plan básico."
+              />
+
+              <ModalSuccessDelete
+                isSuccessDelete={isSuccessDelete}
+                handleSuccessDelete={handleSuccessDelete}
+              />
+
+              <CustomModalAlert
+                isModalAlert={isDataError}
+                handleModalAlert={setIsDataError}
+                title={'One Tap dice!'}
+                description={
+                  'La información del usuario no pudo ser registrada, por favor intenta de nuevo.'
+                }
+              />
+              <CustomModalAlert
+                isModalAlert={isDataSuccess}
+                handleModalAlert={setIsDataSuccess}
+                title={'One Tap dice!'}
+                description={
+                  'La información del usuario ha sido registrada con éxito.'
+                }
+              />
+
+              <CustomModalAlert
+                isModalAlert={isEmailPhoneRight}
+                handleModalAlert={setisEmailPhoneRight}
+                title={'One Tap dice!'}
+                description={status}
+              />
+
+              <CustomModalLoading isLoadingSendData={isLoadingSendData} />
+            </ScrollView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+
+        <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-around',
@@ -278,53 +328,7 @@ const Profile = () => {
                   <Text style={{ color: 'black' }}>PRO</Text>
                 </TouchableOpacity>
               </View>
-              <ModalAlert
-                isModalAlert={isModalAlert}
-                handleModalAlert={handleModalAux}
-                handleDeleteData={handleDeleteData}
-                noDeleted={noDeleted}
-              />
-
-              <CustomModalAlert
-                isModalAlert={isModalAlertNavigation}
-                handleModalAlert={setIsModalAlertNavigation}
-                title="Acceso Restringido"
-                description="Actualmente no tienes acceso a las opciones de profesional porque estás utilizando un plan básico."
-              />
-
-              <ModalSuccessDelete
-                isSuccessDelete={isSuccessDelete}
-                handleSuccessDelete={handleSuccessDelete}
-              />
-
-              <CustomModalAlert
-                isModalAlert={isDataError}
-                handleModalAlert={setIsDataError}
-                title={'One Tap dice!'}
-                description={
-                  'La información del usuario no pudo ser registrada, por favor intenta de nuevo.'
-                }
-              />
-              <CustomModalAlert
-                isModalAlert={isDataSuccess}
-                handleModalAlert={setIsDataSuccess}
-                title={'One Tap dice!'}
-                description={
-                  'La información del usuario ha sido registrada con éxito.'
-                }
-              />
-
-              <CustomModalAlert
-                isModalAlert={isEmailPhoneRight}
-                handleModalAlert={setisEmailPhoneRight}
-                title={'One Tap dice!'}
-                description={status}
-              />
-
-              <CustomModalLoading isLoadingSendData={isLoadingSendData} />
-            </ScrollView>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+              
       </SafeAreaView>
     )
   );
