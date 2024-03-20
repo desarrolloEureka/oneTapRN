@@ -124,6 +124,7 @@ const ProfileProfessional = () => {
 
               <PhotoUser
                 name={user.profile && user?.profile?.professional ? user?.profile?.professional?.name?.text || '' : ''}
+                isProUser={true}
               />
 
               <View

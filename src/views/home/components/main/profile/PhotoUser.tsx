@@ -16,23 +16,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { profileStyles } from '../../../styles/profileStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import firestore from '@react-native-firebase/firestore';
 import { SendDataImage } from '../../../../../reactQuery/users';
 import { GetUser } from '../../../../../reactQuery/users';
 import { UserData } from '../../../../../types/user';
 
-const PhotoUser = ({ name }: { name?: string }) => {
+const PhotoUser = ({ name, isProUser }: { name?: string; isProUser: boolean; }) => {
   const user = GetUser();
   const data = user.data as unknown as UserData;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImagePro, setSelectedImagePro] = useState<string | null>(null);
 
   useEffect(() => {
     // Recuperar la imagen almacenada en AsyncStorage al cargar el componente
     const fetchAsyncStorageImage = async () => {
       try {
         const storedImage = await AsyncStorage.getItem('selectedImage');
+        const storedImagePro = await AsyncStorage.getItem('selectedImagePro');
         if (storedImage) {
           setSelectedImage(storedImage);
+        }
+        if (storedImagePro) {
+          setSelectedImagePro(storedImagePro);
         }
       } catch (error: any) {
         console.error(
@@ -67,9 +71,17 @@ const PhotoUser = ({ name }: { name?: string }) => {
 
       const asset = result.assets && result.assets[0];
       if (asset && asset.uri && asset.base64 && data && data?.uid) {
-        setSelectedImage(asset.uri);
-        await AsyncStorage.setItem('selectedImage', asset.uri);
+
+        if (isProUser === true) {
+          setSelectedImagePro(asset.uri);
+          await AsyncStorage.setItem('selectedImagePro', asset.uri);
+        } else {
+          setSelectedImage(asset.uri);
+          await AsyncStorage.setItem('selectedImage', asset.uri);
+        }
+
         await SendDataImage(
+          isProUser,
           data?.uid,
           `data:${asset.type};base64,${asset.base64}`
         );
@@ -91,15 +103,25 @@ const PhotoUser = ({ name }: { name?: string }) => {
         <View style={profileStyles.containerPhoto}>
           <View style={profileStyles.container}>
             <View style={profileStyles.containerPhotoCircle}>
-              {selectedImage ? (
+              {!isProUser && selectedImage ? (
                 <Image
                   style={{ borderRadius: 100, width: '85%', height: '85%' }}
                   source={{ uri: selectedImage }}
                 />
-              ) : data?.image ? (
+              ) : isProUser && selectedImagePro ? (
+                <Image
+                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
+                  source={{ uri: selectedImagePro }}
+                />
+              ) : !isProUser && data?.image ? (
                 <Image
                   style={{ borderRadius: 100, width: '85%', height: '85%' }}
                   source={{ uri: `${data?.image}` }}
+                />
+              ) : isProUser && data?.imagePro ? (
+                <Image
+                  style={{ borderRadius: 100, width: '85%', height: '85%' }}
+                  source={{ uri: `${data?.imagePro}` }}
                 />
               ) : (
                 <Image

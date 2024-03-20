@@ -113,8 +113,8 @@ const MenuSuperior = () => {
 
   const renderModalContent = () => {
     const items = [
-      { id: 1, name: 'Comprar Planes Personales', icon: 'shopping-cart' },
-      { id: 2, name: 'Comprar Plan Corporativo', icon: 'shopping-cart' },
+      /* { id: 1, name: 'Comprar Planes Personales', icon: 'shopping-cart' },
+      { id: 2, name: 'Comprar Plan Corporativo', icon: 'shopping-cart' }, */
       { id: 3, name: 'Cambiar Material de la Tarjeta', icon: 'restore' },
       { id: 4, name: 'Ver Tienda', icon: 'storefront-outline' },
       { id: 5, name: 'Acerca De', icon: 'information-outline' },

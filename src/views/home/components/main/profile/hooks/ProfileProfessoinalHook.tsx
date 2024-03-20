@@ -67,7 +67,7 @@ const ProfileProfessionalHook = ({
       (proCareer) => proCareer
     );
 
-    if (emails) {
+    /* if (emails) {
       const isEmailValid = emails.every((email) => validateEmail(email as string));
       if (!isEmailValid) {
         setStatus("El correo no es valido ó no se pueden dejar espacios en blanco");
@@ -75,6 +75,7 @@ const ProfileProfessionalHook = ({
         return;
       }
     }
+
     if (phones) {
       const isPhoneValid = phones.every((phone) => validatePhoneNumber(phone as string));
       if (!isPhoneValid) {
@@ -91,7 +92,7 @@ const ProfileProfessionalHook = ({
         setisEmailPhoneRight(true);
         return;
       }
-    }
+    } 
 
     if (isProUser && education) {
       const allObjectsFilled = dataForm?.education?.every(obj => obj.title !== "" && obj.institution !== "" && obj.year !== "");
@@ -110,6 +111,7 @@ const ProfileProfessionalHook = ({
         return;
       }
     }
+    */
 
     setIsLoadingSendData(true);
     if (userId) {
@@ -444,7 +446,7 @@ const ProfileProfessionalHook = ({
           if (count === 0) {
             dataFormClone.professional_career = [
               {
-                label: "Carrera profesional",
+                label: "Trayectoria Profesional",
                 company: '',
                 position: '',
                 data_init: '',
@@ -662,7 +664,7 @@ const ProfileProfessionalHook = ({
             data,
             value[0],
             false,
-            "Carrera profesional"
+            "Trayectoria Profesional"
           );
         } else if (value[0] == 'urls') {
           const data = value[1] as UrlDataFormValues[];

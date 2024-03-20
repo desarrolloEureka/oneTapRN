@@ -72,8 +72,9 @@ const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
 };
 
 /* Actualizar react query*/
-const SendDataImage = async (userId: string, base64String: string) => {
-  await updateUserData(userId, { image: base64String });
+const SendDataImage = async (isProUser: boolean, userId: string, base64String: string) => {
+  let imageDataKey = isProUser ? 'imagePro' : 'image';
+  await updateUserData(userId, { [imageDataKey]: base64String });
   const updatedUser = await getUserByIdFireStore(userId);
   if (updatedUser.exists()) {
     const userData = await updatedUser.data() as UserData;

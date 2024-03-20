@@ -6,6 +6,7 @@ import { SendTemplateSelected } from '../../../../../reactQuery/users';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useQueryClient } from '@tanstack/react-query';
 import CustomModalLoading from '../profile/CustomModalLoading';
+import { GetAllBackgroundImages } from '../../../../../reactQuery/home';
 
 interface TemplateType {
     id: string;
@@ -44,6 +45,8 @@ const CustomCheckbox = ({
     const [isUpdate, setIsUpdate] = useState(false);
     const [fakeData, setFakeData] = useState(templates || []);
     const [isLoadingSendData, setIsLoadingSendData] = useState(false);
+    const backgrounds = GetAllBackgroundImages();
+    const firstBackgroundId = backgrounds.data && backgrounds.data.length > 0 ? backgrounds.data[0]?.id : null;
 
     const handleSaveTemplate = async (background_id: string) => {
         if (!uid || !selectedTemplate || !templates) {
@@ -76,6 +79,7 @@ const CustomCheckbox = ({
                     type: optionSelected,
                     id: value.id,
                     checked: true,
+                    background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
                 });
                 await setFakeData(fakeDataCloneFilter);
                 await SendTemplateSelected(userId, fakeDataCloneFilter, queryClient);
@@ -86,6 +90,7 @@ const CustomCheckbox = ({
                     type: optionSelected,
                     id: value.id,
                     checked: true,
+                    background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
                 });
                 await setFakeData(fakeDataClone);
                 userId &&
