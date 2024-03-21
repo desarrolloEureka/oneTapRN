@@ -45,6 +45,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-oneTap-oneTapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneTap-oneTapTests.release.xcconfig"; path = "Target Support Files/Pods-oneTap-oneTapTests/Pods-oneTap-oneTapTests.release.xcconfig"; sourceTree = "<group>"; };
 		8D975EFB1AE06562D8DD5F1F /* Pods_oneTap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_oneTap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F0A759FA2B9CD3590060D891 /* oneTap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = oneTap.entitlements; path = oneTap/oneTap.entitlements; sourceTree = "<group>"; };
 		F0ABA3CA2B887DF100BE117A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0ABA3CD2B8886C800BE117A /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		F0ABA3CE2B8886D600BE117A /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		13B07FAE1A68108700A75B9A /* oneTap */ = {
 			isa = PBXGroup;
 			children = (
+				F0A759FA2B9CD3590060D891 /* oneTap.entitlements */,
 				F0ABA3CC2B88864F00BE117A /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -519,7 +521,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = oneTap/oneTap.entitlements;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = 4S9M3BBK2S;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = oneTap/Info.plist;
@@ -549,7 +552,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = oneTap/oneTap.entitlements;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = 4S9M3BBK2S;
 				INFOPLIST_FILE = oneTap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "One Tap";
