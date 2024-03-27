@@ -8,6 +8,7 @@ import {
     handleDataProps,
 } from '../../../../../types/profile';
 import { UserData } from '../../../../../types/user';
+import TextAreaForm from './TextAreaForm';
 
 const FormDataUser = ({
     handleDataSet,
@@ -83,12 +84,7 @@ const FormDataUser = ({
                         if (
                             !Array.isArray(value[1]) &&
                             (value[0] == 'company' ||
-                                value[0] == 'position' ||
-                                value[0] == 'professional_profile' ||
-                                value[0] == 'other_competencies' ||
-                                value[0] == 'skills' ||
-                                value[0] == 'languages' ||
-                                value[0] == 'achievements_recognitions')
+                                value[0] == 'position')
                         ) {
                             const index = value[0] as keyof typeof dataForm;
                             const myValue = (user && user.profile
@@ -110,6 +106,35 @@ const FormDataUser = ({
                                         null
                                     }
                                     <ItemForm
+                                        label={value[1].label}
+                                        handleSwitch={(e: any) => handleSwitch(e)}
+                                        handleData={handleData}
+                                        name={index}
+                                        checked={value[1].checked}
+                                        key={key}
+                                        icon={value[1].icon}
+                                        myValue={myValue}
+                                        index={index}
+                                    />
+                                </View>
+                            );
+                        } else if (
+                            value[0] == 'professional_profile' ||
+                            value[0] == 'other_competencies' ||
+                            value[0] == 'skills' ||
+                            value[0] == 'languages' ||
+                            value[0] == 'achievements_recognitions'
+                        ) {
+                            const index = value[0] as keyof typeof dataForm;
+                            const myValue = (user && user.profile
+                                ? isProUser
+                                    ? user.profile.professional?.[index]
+                                    : user.profile?.social?.[index]
+                                : dataForm && dataForm[index]) as unknown as DataFormValues;
+                                
+                            return (
+                                <View style={{ paddingBottom: key === 16 ? 30 : undefined, marginBottom: key === 16 ? 25 : undefined, backgroundColor: "#e9e9e9" }} key={key}>
+                                    <TextAreaForm
                                         label={value[1].label}
                                         handleSwitch={(e: any) => handleSwitch(e)}
                                         handleData={handleData}

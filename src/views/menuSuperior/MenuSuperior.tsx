@@ -114,13 +114,13 @@ const MenuSuperior = () => {
   const renderModalContent = () => {
     const items = [
       /* { id: 1, name: 'Comprar Planes Personales', icon: 'shopping-cart' },
-      { id: 2, name: 'Comprar Plan Corporativo', icon: 'shopping-cart' }, */
+      { id: 2, name: 'Comprar Plan Corporativo', icon: 'shopping-cart' }, 
       { id: 3, name: 'Cambiar Material de la Tarjeta', icon: 'restore' },
-      { id: 4, name: 'Ver Tienda', icon: 'storefront-outline' },
+      { id: 4, name: 'Ver Tienda', icon: 'storefront-outline' },*/
       { id: 5, name: 'Acerca De', icon: 'information-outline' },
       { id: 6, name: 'Políticas de Privacidad', icon: 'lock' },
       { id: 7, name: 'Términos y Condiciones', icon: 'file-contract' },
-      { id: 8, name: 'Políticas de Devolución', icon: 'shopping-basket-remove' },
+    /*   { id: 8, name: 'Políticas de Devolución', icon: 'shopping-basket-remove' }, */
       { id: 9, name: 'Preguntas Frecuentes', icon: 'chat-question-outline' },
       { id: 10, name: 'Cambiar Contraseña', icon: 'password' },
       { id: 11, name: 'Eliminar Cuenta', icon: 'deleteuser' },

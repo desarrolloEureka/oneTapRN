@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { profileStyles } from '../../../styles/profileStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -16,19 +16,19 @@ const TextAreaForm = ({
     handleSwitch,
     handleData,
     checked,
-    myValue,
     icon,
-    value,
-    dataForm,
-    index,
+    myValue,
+    subindex,
 }: ItemFormParams) => {
 
     const dataRef = useRef<any>(null);
+    const [inputText, setInputText] = useState('');
+
     useEffect(() => {
-        if (dataRef.current && myValue && dataForm && index) {
+        if (dataRef.current && myValue) {
             dataRef.current = myValue;
         }
-    }, [dataForm, dataRef, index, myValue]);
+    }, [dataRef, myValue, inputText]);
 
     return (
         <View style={{ height: 110, justifyContent: 'center', flexDirection: 'row' }}>
@@ -52,7 +52,7 @@ const TextAreaForm = ({
                                 :
                                 icon === 'AccessibilityOutlinedIcon' ?
                                     <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                                      {/*   <FontAwesome6 name="person" size={28} color="#02AF9B" /> */}
+                                        {/*   <FontAwesome6 name="person" size={28} color="#02AF9B" /> */}
                                         {/* <MaterialCommunityIcons name="head-lightbulb-outline" size={28} color="#02AF9B" /> */}
                                         <FontAwesome5 name="medal" size={28} color="#02AF9B" />
 
@@ -69,7 +69,11 @@ const TextAreaForm = ({
                         <View style={{ height: "100%", width: "85%", alignItems: 'center', justifyContent: 'center' }}>
                             <TextInput
                                 ref={dataRef}
-                                value={value}
+                                value={
+                                    myValue && !Array.isArray(myValue)
+                                        ? myValue?.text
+                                        : myValue && myValue[subindex as number]?.text
+                                }
                                 multiline
                                 numberOfLines={3}
                                 style={profileStyles.inputBox}
@@ -85,8 +89,15 @@ const TextAreaForm = ({
             <View style={{ flexDirection: 'column', alignItems: 'center', height: "100%", width: "20%" }}>
                 <CustomSwitchGeneral
                     name={name}
-                    handleSwitch={({ checked: boolean, name: string }) => handleSwitch({ checked, name })}
-                    checked={checked}
+                    subindex={subindex}
+                    handleSwitch={(e: any) =>
+                        handleSwitch({ checked, name, subindex, currentDataRef: dataRef })
+                    }
+                    checked={
+                        myValue && !Array.isArray(myValue)
+                            ? myValue?.checked
+                            : myValue && myValue[subindex as number]?.checked
+                    }
                 />
             </View>
         </View>

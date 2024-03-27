@@ -56,6 +56,9 @@ const Main = () => {
   const [isModalAlertBg, setIsModalAlertBg] = useState(false);
   const [isAlertProfileSocial, setIsAlertProfileSocial] = useState(false);
   const [isAlertProfilePro, setIsAlertProfilePro] = useState(false);
+  const [fakeData, setFakeData] = useState(data?.templateData || []);
+  const firstBackgroundId = dataBackgrounds.data && dataBackgrounds.data.length > 0 ? dataBackgrounds.data[0]?.id : null;
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const handleModalAlertBg = (status: boolean) => setIsModalAlertBg(!isModalAlertBg);
   const handleAlertProfileSocial = (status: boolean) => setIsAlertProfileSocial(!isAlertProfileSocial);
@@ -170,20 +173,59 @@ const Main = () => {
     }, 5000);
   };
 
+  const selectTemplate = async (value: any) => {
+    setIsLoadingSendData(true);
+    const userId = data?.uid;
+    const optionSelected = tab as TemplateTypes;
+
+    if (userId && fakeData.length > 0) {
+      const fakeDataClone = [...fakeData];
+      const fakeDataCloneFilter = fakeDataClone.filter(
+        (val) => val.type !== optionSelected
+      );
+      fakeDataCloneFilter.push({
+        type: optionSelected,
+        id: value.id,
+        checked: true,
+        background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+      });
+      await setFakeData(fakeDataCloneFilter);
+      await SendTemplateSelected(userId, fakeDataCloneFilter, queryClient);
+      await setIsUpdate(!isUpdate);
+    } else {
+      const fakeDataClone = [...fakeData];
+      fakeDataClone.push({
+        type: optionSelected,
+        id: value.id,
+        checked: true,
+        background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+      });
+      await setFakeData(fakeDataClone);
+      userId &&
+        (await SendTemplateSelected(userId, fakeDataClone, queryClient));
+      await setIsUpdate(!isUpdate);
+    }
+    await setIsLoadingSendData(false);
+  };
+
 
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
       <View style={{ height: 145, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ height: '50%', width: '100%', flexDirection: 'row' }}>
-          <View style={{ height: '100%', width: '50%', flexDirection: 'row' }}>
-            <View style={{ height: '95%', width: '25%', justifyContent: 'center', alignItems: 'flex-end', marginLeft: 7 }}>
+
+          <View style={{ height: '100%', width: '20%', flexDirection: 'row' }}>
+            <View style={{ height: '95%', width: '55%', justifyContent: 'center', alignItems: 'flex-end', marginLeft: 14, marginTop: 3 }}>
               <Image
                 resizeMode='contain'
-                style={{ width: '85%', height: '85%' }}
+                style={{ width: '100%', height: '100%' }}
                 source={require('../../../../images/logo_inicio.png')}
               />
             </View>
-            <View style={{ height: '90%', width: '40%', justifyContent: 'center', alignItems: 'flex-end', marginLeft: 4 }}>
+          </View>
+
+          <View style={{ height: '100%', width: '60%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+            <View style={{ height: '100%', width: '40%', justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity style={{ height: '94%', width: '95%', justifyContent: 'center', alignItems: 'center' }} onPress={copyToClipboard}>
                 <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>Copiar URL</Text>
                 <Feather name="copy" size={23} color="#396593" />
@@ -193,8 +235,9 @@ const Main = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ height: '100%', width: '50%', alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row' }}>
-            <View style={{ height: '100%', width: '35%', justifyContent: 'center', alignItems: 'flex-end' }}>
+
+          <View style={{ height: '100%', width: '20%', alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row' }}>
+            <View style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'flex-end' }}>
               <MenuSuperior />
             </View>
           </View>
@@ -300,14 +343,18 @@ const Main = () => {
 
                         </View>
                       </View>
-                      <View style={{ height: "65%", width: "98%", justifyContent: 'center', alignItems: 'center' }}>
+
+                      <TouchableOpacity
+                        disabled={itemData ? itemData?.checked : false}
+                        style={{ height: "65%", width: "98%", justifyContent: 'center', alignItems: 'center' }} onPress={() => selectTemplate(item)}>
                         <View style={{ height: "98%", width: "98%" }}>
                           <Image
                             source={{ uri: `${item.image}` }}
                             style={{ flex: 1, resizeMode: 'contain' }}
                           />
                         </View>
-                      </View>
+                      </TouchableOpacity>
+
                       <View style={{ height: "15%", width: "100%", alignItems: 'flex-end', flexDirection: 'row' }}>
                         <View style={{ height: "100%", width: "50%", justifyContent: 'center' }}>
                           <View style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }}>
