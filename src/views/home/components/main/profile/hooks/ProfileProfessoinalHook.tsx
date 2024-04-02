@@ -244,6 +244,10 @@ const ProfileProfessionalHook = ({
     key != undefined &&
       subindex &&
       fillFields(index, key, text, undefined, undefined, subindex);
+      
+    setTimeout(() => {
+      setModalIcons(!isModalIcons);
+    }, 500);
   };
 
   const handleData = ({

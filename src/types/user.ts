@@ -7,6 +7,7 @@ export interface TemplateData {
   checked: boolean;
 }
 export interface UserData {
+  isActiveByAdmin: boolean;
   uid: string;
   email: string;
   emailVerified: boolean;

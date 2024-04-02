@@ -58,7 +58,7 @@ const Login = () => {
   };
 
   const userIsLogged = useCallback(() => {
-    if (data && data?.isActive) {
+    if (data && data?.isActive === true && data?.isActiveByAdmin === true) {
       setErrorForm(null);
       navigation.navigate('Home');
       setPassword('');

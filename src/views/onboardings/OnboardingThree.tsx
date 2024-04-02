@@ -16,7 +16,7 @@ const OnboardingThree = () => {
         <Image
           resizeMode='cover'
           source={require('../../images/onboarding_3.png')}
-          style={{ width: "100%" }}
+          style={{ height: "100%", width: "100%"}}
         />
       </View>
       <View style={{ height: "100%", width: "100%", position: 'absolute' }}>
