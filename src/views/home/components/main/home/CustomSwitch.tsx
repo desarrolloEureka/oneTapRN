@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {Switch, View, Alert, Platform} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Switch, View, Alert, Platform } from 'react-native';
 import {
   GetUser,
   SendSwitchActivateCard,
   SendSwitchProfile
 } from '../../../../../reactQuery/users';
+import LogOut from '../../../../../hooks/logOut/LogOut';
 
 const CustomSwitch = ({
   profile,
@@ -13,36 +14,86 @@ const CustomSwitch = ({
   profile: boolean;
   handleModalAlert?: () => void;
 }) => {
-  const {data} = GetUser();
+  const [flag, setFlag] = useState(false);
+  const { data } = GetUser(flag, setFlag);
   const [switchProfile, setSwitchProfile] = useState(false);
   const [switchCard, setSwitchCard] = useState(false);
+  const { logOut } = LogOut();
 
   const handleSwitchChange = async () => {
     const userId = data?.uid;
     const plan = data?.plan;
-    if (userId) {
-      if (profile && plan === 'standard') {
-        setSwitchProfile(switchProfile);
-        handleModalAlert && handleModalAlert();
+
+    if (profile && plan === 'standard') {
+      setSwitchProfile(switchProfile);
+      handleModalAlert && handleModalAlert();
+    } else {
+      if (userId && profile) {
+        setSwitchProfile(!switchProfile);
+        await SendSwitchProfile(userId, !switchProfile);
       } else {
-        if (profile) {
-          setSwitchProfile(!switchProfile);
-          await SendSwitchProfile(userId, !switchProfile);
-        } else {
-          setSwitchCard(!switchCard);
-          await SendSwitchActivateCard(userId, !switchCard);
-        }
+        setSwitchCard(!switchCard);
+        setFlag(!flag);
       }
     }
+  }
+
+  const handleSwitchContinue = async () => {
+    const userId = data?.uid;
+    if (userId && data?.isActiveByAdmin === true) {
+      SendSwitchActivateCard(userId, switchCard);
+    } else {
+      logOut();
+    }
+  }
+
+  /* const handleSwitchChange = async () => {
+    const userId = data?.uid;
+    const plan = data?.plan;
+    console.log("handleSwitchChange");
+
+    if (profile && plan === 'standard') {
+      setSwitchProfile(switchProfile);
+      handleModalAlert && handleModalAlert();
+    } else {
+      if (userId && profile) {
+        setSwitchProfile(!switchProfile);
+        await SendSwitchProfile(userId, !switchProfile);
+      } else {
+        console.log("Entreeeeeeeeeeeee 2");
+        setFlag(!flag);
+      }
+    }
+
   };
 
-  const handleSwitchToggle1 = () => {
-    setSwitchCard(!switchCard);
-    Alert.alert('Alerta', 'Su perfil no se va a mostrar', [
-      {text: 'Cancelar', onPress: () => setSwitchCard(true)},
-      {text: 'OK', onPress: handleSwitchChange}
-    ]);
-  };
+  const handleSwitchContinue = async () => {
+    const userId = data?.uid;
+    console.log("data?.isActiveByAdmin  ", data?.isActiveByAdmin);
+
+    if (userId && data?.isActiveByAdmin === true) {
+
+      if (switchCard === true) {
+        setSwitchCard(false);
+        Alert.alert('Alerta', 'Su perfil no se va a mostrar', [
+          { text: 'Cancelar', onPress: () => setSwitchCard(true) },
+          { text: 'OK', onPress: handleSwitchChange }
+        ]);
+      } else {
+        setSwitchCard(true);
+      }
+
+      SendSwitchActivateCard(userId, !switchCard);
+    } else {
+      logOut();
+    }
+
+  }; */
+
+  useEffect(() => {
+    handleSwitchContinue();
+  }, [flag, data])
+
 
   useEffect(() => {
     if (data) {
@@ -60,25 +111,19 @@ const CustomSwitch = ({
     <View>
       <Switch
         value={profile ? switchProfile : switchCard}
-        onValueChange={
-          !profile
-            ? !switchCard
-              ? handleSwitchChange
-              : handleSwitchToggle1
-            : handleSwitchChange
-        }
+        onValueChange={handleSwitchChange}
         trackColor={
           profile
-            ? {false: '#02AF9B', true: '#02AF9B'}
-            : {false: '#ABA9A6', true: '#02AF9B'}
+            ? { false: '#02AF9B', true: '#02AF9B' }
+            : { false: '#ABA9A6', true: '#02AF9B' }
         }
         thumbColor={'#f4f3f4'}
         ios_backgroundColor="#02AF9B"
         style={{
           transform:
             platform == 'android'
-              ? [{scaleX: 1.3}, {scaleY: 1.3}]
-              : [{scaleX: 1}, {scaleY: 1}]
+              ? [{ scaleX: 1.3 }, { scaleY: 1.3 }]
+              : [{ scaleX: 1 }, { scaleY: 1 }]
         }}
       />
     </View>
