@@ -799,7 +799,9 @@ const ModalIcons = ({
                             key: keyItem
                           })
                         }>
-                        <IconZoom />
+                        <IconZoom
+                          color="#02AF9B"
+                        />
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -1119,7 +1121,9 @@ const ModalIcons = ({
                             key: keyItem
                           })
                         }>
-                        <IconWhatsAppB />
+                        <IconWhatsAppB
+                          color="#02AF9B"
+                        />
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -1329,7 +1333,9 @@ const ModalIcons = ({
                             key: keyItem
                           })
                         }>
-                        <IconVSCO />
+                        <IconVSCO
+                          color="#02AF9B"
+                        />
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -1767,7 +1773,9 @@ const ModalIcons = ({
                             key: keyItem
                           })
                         }>
-                        <IconBooking />
+                        <IconBooking
+                          color="#02AF9B"
+                        />
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -1927,7 +1935,9 @@ const ModalIcons = ({
                             key: keyItem
                           })
                         }>
-                        <IconOnlyFans />
+                        <IconOnlyFans
+                          color="#02AF9B"
+                        />
                       </TouchableOpacity>
                     </View>
                   </View>

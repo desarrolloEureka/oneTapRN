@@ -80,6 +80,8 @@ const Main = () => {
         navigation.navigate('Profile');
       } else if (tabName === 'Professional') {
         navigation.navigate('ProfileProfessional');
+      } else if (tabName === 'ShareQR') {
+        navigation.navigate('ShareQR');
       } else {
         navigation.navigate('Home');
       }
@@ -187,7 +189,8 @@ const Main = () => {
         type: optionSelected,
         id: value.id,
         checked: true,
-        background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+        //background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+        background_id: '7ynTMVt3M6VFV3KykOXQ',
       });
       await setFakeData(fakeDataCloneFilter);
       await SendTemplateSelected(userId, fakeDataCloneFilter, queryClient);
@@ -198,7 +201,8 @@ const Main = () => {
         type: optionSelected,
         id: value.id,
         checked: true,
-        background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+        //background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+        background_id: '7ynTMVt3M6VFV3KykOXQ',
       });
       await setFakeData(fakeDataClone);
       userId &&
@@ -226,13 +230,13 @@ const Main = () => {
 
           <View style={{ height: '100%', width: '60%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
             <View style={{ height: '100%', width: '40%', justifyContent: 'center', alignItems: 'center' }}>
-              <TouchableOpacity style={{ height: '94%', width: '95%', justifyContent: 'center', alignItems: 'center' }} onPress={copyToClipboard}>
+              {/* <TouchableOpacity style={{ height: '94%', width: '95%', justifyContent: 'center', alignItems: 'center' }} onPress={copyToClipboard}>
                 <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>Copiar URL</Text>
                 <Feather name="copy" size={23} color="#396593" />
                 {copiedText === true &&
                   <Text style={{ fontSize: 11, fontWeight: 'bold', color: '#030124' }}>¡Copiado!</Text>
                 }
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
 
@@ -241,7 +245,6 @@ const Main = () => {
               <MenuSuperior />
             </View>
           </View>
-
         </View>
 
         <View style={{ height: '50%', width: '90%', flexDirection: 'row' }}>
@@ -385,19 +388,24 @@ const Main = () => {
         flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#E9E9E9', height: 80, position: 'absolute', bottom: 0, width: '100%'
       }}>
 
-        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Home')}>
+        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Home')}>
           <Icon name="home" size={25} color="black" />
           <Text style={{ color: 'black' }}>Home</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Social')}>
+        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Social')}>
           <Icon name="users" size={25} color="black" />
           <Text style={{ color: 'black' }}>Social</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{ height: "100%", width: "33.3%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Professional')}>
+        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Professional')}>
           <Ionicons name="newspaper-sharp" size={28} color="black" />
           <Text style={{ color: 'black' }}>PRO</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('ShareQR')}>
+          <Ionicons name="newspaper-sharp" size={28} color="black" />
+          <Text style={{ color: 'black' }}>QR</Text>
         </TouchableOpacity>
 
       </View>

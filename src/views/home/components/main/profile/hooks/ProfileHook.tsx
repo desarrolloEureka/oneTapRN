@@ -35,6 +35,7 @@ const ProfileHook = ({
   const [itemUrlKey, setItemUrlKey] = useState(0);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [itemDetail, setItemDetail] = useState(0);
+  const [isAlertSave, setIsAlertSave] = useState(false);
 
   /* Delete items */
   const [itemDelete, setItemDelete] = useState<
@@ -138,6 +139,7 @@ const ProfileHook = ({
     name?: string
     subindex?: number
   }) => {
+    setIsAlertSave(true);
     const isChecked = checked;
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
@@ -162,6 +164,10 @@ const ProfileHook = ({
         setDataForm(dataFormClone);
       }
     }
+
+    setTimeout(() => {
+      setIsAlertSave(false);
+    }, 5000);
   };
 
   const fillFields = (
@@ -438,6 +444,7 @@ const ProfileHook = ({
   );
 
   const handleSwitchAll = (val: any) => {
+    setIsAlertSave(true);
     setSwitchValue(!switchValue);
     const isChecked = val?.checked;
     const dataFormClone = { ...dataForm };
@@ -465,6 +472,11 @@ const ProfileHook = ({
     const dataFormChecked = Object.fromEntries(newData);
     handleDataSet && handleDataSet(dataFormChecked);
     setAllChecked(true);
+
+
+    setTimeout(() => {
+      setIsAlertSave(false);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -600,7 +612,8 @@ const ProfileHook = ({
     isEmailPhoneRight,
     setisEmailPhoneRight,
     noDeleted,
-    handleModalAlertLimit
+    handleModalAlertLimit,
+    isAlertSave
   };
 };
 

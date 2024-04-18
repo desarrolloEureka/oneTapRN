@@ -19,6 +19,7 @@ import Politicas from './src/views/opcionesMenu/Politicas';
 import Terminos from './src/views/opcionesMenu/Terminos';
 import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassword';
 import {RouteStackParamList} from './src/types/navigation';
+import ShareQR from './src/views/home/components/main/share/ShareQR';
 
 const Stack = createNativeStackNavigator<RouteStackParamList>();
 
@@ -53,6 +54,7 @@ const App = () => {
           <Stack.Screen name="Politicas" component={Politicas} />
           <Stack.Screen name="Plantillas" component={Plantillas} />
           <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="ShareQR" component={ShareQR} />
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>

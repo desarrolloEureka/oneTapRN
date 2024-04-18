@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { GetLoginQuery } from '../../reactQuery/users';
+import { GetLoginQuery, SendPreView } from '../../reactQuery/users';
 import { LoginError } from '../../types/login';
 import { StackNavigation } from '../../types/navigation';
 
@@ -59,6 +59,8 @@ const Login = () => {
 
   const userIsLogged = useCallback(() => {
     if (data && data?.isActive === true && data?.isActiveByAdmin === true) {
+      const url = `http://on-tap-tawny.vercel.app/es/views/cardView?uid=${data?.uid}`;
+      data && SendPreView(data?.uid, url);
       setErrorForm(null);
       navigation.navigate('Home');
       setPassword('');

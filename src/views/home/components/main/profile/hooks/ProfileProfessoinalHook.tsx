@@ -52,6 +52,7 @@ const ProfileProfessionalHook = ({
   const [isEmailPhoneRight, setisEmailPhoneRight] = useState(false);
   const [status, setStatus] = useState<string>('');
   const [flag, setFlag] = useState(false);
+  const [isAlertSave, setIsAlertSave] = useState(false);
 
   /* Propios */
   const [isLoadingSendData, setIsLoadingSendData] = useState(false);
@@ -184,6 +185,7 @@ const ProfileProfessionalHook = ({
     name?: string
     subindex?: number
   }) => {
+    setIsAlertSave(true);
     const isChecked = checked;
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
@@ -210,6 +212,10 @@ const ProfileProfessionalHook = ({
         setDataForm(dataFormClone);
       }
     }
+
+    setTimeout(() => {
+      setIsAlertSave(false);
+    }, 5000);
   };
 
   const fillFields = (
@@ -244,7 +250,7 @@ const ProfileProfessionalHook = ({
     key != undefined &&
       subindex &&
       fillFields(index, key, text, undefined, undefined, subindex);
-      
+
     setTimeout(() => {
       setModalIcons(!isModalIcons);
     }, 500);
@@ -587,6 +593,7 @@ const ProfileProfessionalHook = ({
   );
 
   const handleSwitchAll = (val: any) => {
+    setIsAlertSave(true);
     setSwitchValue(!switchValue);
     const isChecked = val?.checked;
     const dataFormClone = { ...dataForm };
@@ -614,6 +621,10 @@ const ProfileProfessionalHook = ({
     const dataFormChecked = Object.fromEntries(newData);
     handleDataSet && handleDataSet(dataFormChecked);
     setAllChecked(true);
+
+    setTimeout(() => {
+      setIsAlertSave(false);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -745,7 +756,8 @@ const ProfileProfessionalHook = ({
     isLoadingSendData,
     setIsLoadingSendData,
     switchValue,
-    setSwitchValue
+    setSwitchValue,
+    isAlertSave
   };
 };
 

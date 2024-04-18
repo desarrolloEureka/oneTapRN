@@ -1,17 +1,15 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
-const IconZoom = (props: any) => (
+const IconZoom = ({ color }: { color: string }) => (
   <Svg
     width="24px"
     height="24px"
     viewBox="0 0 24 24"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
   >
     <Path
       d="M0 8C0 3.58172 3.58172 0 8 0H16C20.4183 0 24 3.58172 24 8V16C24 20.4183 20.4183 24 16 24H8C3.58172 24 0 20.4183 0 16V8Z"
-      fill="#02AF9B"
+      fill={color}
     />
     <Path
       d="M5 9C5 8.44772 5.44772 8 6 8H12C13.6569 8 15 9.34315 15 11V15C15 15.5523 14.5523 16 14 16H8C6.34315 16 5 14.6569 5 13V9Z"
