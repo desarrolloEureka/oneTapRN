@@ -7,6 +7,17 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
+import FontAwesome6Brands from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5Brands from 'react-native-vector-icons/FontAwesome5';
+import IconZoom from './icons/IconZoom';
+import IconWhatsAppB from './icons/IconWhatsAppB';
+import IconVSCO from './icons/IconVSCO';
+import IconBooking from './icons/IconBooking';
+import IconOnlyFans from './icons/IconOnlyFans';
+
 import {
   CareerDataFormValues,
   IndexDataForm,
@@ -103,7 +114,7 @@ const ItemFormUrl = ({
           </View>
           <TouchableOpacity style={{ height: "100%", width: "35%", justifyContent: 'center', flexDirection: 'row' }} onPress={() => { handleAddData('urls'); }}>
             <View style={{ height: '100%', width: '20%', alignItems: 'center', justifyContent: 'center', }}>
-              <Icon name="plus-circle" size={20} color="#02AF9B" />
+              <Icon name="plus-circle" size={20} color="#396593" />
             </View>
             <View
               style={{ height: '100%', width: '50%', justifyContent: 'center' }}>
@@ -240,7 +251,227 @@ const ItemFormUrl = ({
                         borderRadius: 80,
                       }}
                       onPress={() => handleModalIcons(val, key)}>
-                      <Fontisto name="world-o" size={32} color="#396593" />
+
+                      {val.icon === 'www' ?
+                        <FontAwesome5 name="link" size={20} color="#396593" />
+                        :
+                        val.icon === 'facebook' ?
+                          <Ionicons
+                            name="logo-facebook"
+                            size={25}
+                            color="#396593"
+                          />
+                          :
+                          val.icon === 'threads' ?
+                            <FontAwesome6Brands
+                              name="square-threads"
+                              size={25}
+                              color="#396593"
+                            />
+                            :
+                            val.icon === 'tiktok' ?
+                              <FontAwesome6Brands
+                                name="tiktok"
+                                size={21}
+                                color="#396593"
+                              />
+                              :
+                              val.icon === 'linkedin' ?
+                                <Ionicons
+                                  name="logo-linkedin"
+                                  size={25}
+                                  color="#396593"
+                                />
+                                :
+                                val.icon === 'messenger' ?
+                                  <Fontisto name="messenger" size={25} color="#396593" />
+                                  :
+                                  val.icon === 'instagram' ?
+                                    <Ionicons
+                                      name="logo-instagram"
+                                      size={25}
+                                      color="#396593"
+                                    />
+                                    :
+                                    val.icon === 'snapchat' ?
+                                      <FontAwesome
+                                        name="snapchat-square"
+                                        size={25}
+                                        color="#396593"
+                                      />
+                                      :
+                                      val.icon === 'twitter' ?
+                                        <FontAwesome6Brands
+                                          name="square-x-twitter"
+                                          size={25}
+                                          color="#396593"
+                                        />
+                                        :
+                                        val.icon === 'twitch' ?
+                                          <FontAwesome6Brands
+                                            name="twitch"
+                                            size={25}
+                                            color="#396593"
+                                          />
+                                          :
+                                          val.icon === 'youtube' ?
+                                            <FontAwesome6Brands
+                                              name="youtube"
+                                              size={25}
+                                              color="#396593"
+                                            />
+                                            :
+                                            val.icon === 'whatsapp' ?
+                                              <FontAwesome6Brands
+                                                name="whatsapp"
+                                                size={25}
+                                                color="#396593"
+                                              />
+                                              :
+                                              val.icon === 'zoom' ?
+                                                <IconZoom
+                                                  color="#396593"
+                                                />
+                                                :
+                                                val.icon === 'line' ?
+                                                  <FontAwesome6Brands
+                                                    name="line"
+                                                    size={25}
+                                                    color="#396593"
+                                                  />
+                                                  :
+                                                  val.icon === 'gmail' ?
+                                                    <MaterialCommunityIcons
+                                                      name="gmail"
+                                                      size={25}
+                                                      color="#396593"
+                                                    />
+                                                    :
+                                                    val.icon === 'email' ?
+                                                      <MaterialCommunityIcons
+                                                        name="email"
+                                                        size={25}
+                                                        color="#396593"
+                                                      />
+                                                      :
+                                                      val.icon === 'phone' ?
+                                                        <FontAwesome name="phone" size={25} color="#396593" /> :
+                                                        val.icon === 'telegram' ?
+                                                          <FontAwesome6Brands
+                                                            name="telegram"
+                                                            size={25}
+                                                            color="#396593"
+                                                          />
+                                                          :
+                                                          val.icon === 'whatsappbusiness' ?
+                                                            <IconWhatsAppB
+                                                              color="#396593"
+                                                            />
+                                                            :
+                                                            val.icon === 'skype' ?
+                                                              <FontAwesome6Brands
+                                                                name="skype"
+                                                                size={25}
+                                                                color="#396593"
+                                                              />
+                                                              :
+                                                              val.icon === 'wechat' ?
+                                                                <AntDesign name="wechat" size={25} color="#396593" />
+                                                                :
+                                                                val.icon === 'paypal' ?
+                                                                  <FontAwesome6Brands
+                                                                    name="paypal"
+                                                                    size={25}
+                                                                    color="#396593"
+                                                                  />
+                                                                  :
+                                                                  val.icon === 'vsco' ?
+                                                                    <IconVSCO
+                                                                      color="#396593"
+                                                                    />
+                                                                    :
+                                                                    val.icon === 'tumblr' ?
+                                                                      <FontAwesome6Brands
+                                                                        name="square-tumblr"
+                                                                        size={25}
+                                                                        color="#396593"
+                                                                      />
+                                                                      :
+                                                                      val.icon === 'vimeo' ?
+                                                                        <FontAwesome6Brands
+                                                                          name="vimeo-v"
+                                                                          size={25}
+                                                                          color="#396593"
+                                                                        />
+                                                                        :
+                                                                        val.icon === 'spotify' ?
+                                                                          <FontAwesome6Brands
+                                                                            name="spotify"
+                                                                            size={25}
+                                                                            color="#396593"
+                                                                          />
+                                                                          :
+                                                                          val.icon === 'deezer' ?
+                                                                            <FontAwesome6Brands
+                                                                              name="deezer"
+                                                                              size={25}
+                                                                              color="#396593"
+                                                                            />
+                                                                            :
+                                                                            val.icon === 'applemusic' ?
+                                                                              <Fontisto name="applemusic" size={25} color="#396593" />
+                                                                              :
+                                                                              val.icon === 'googlemaps' ?
+                                                                                <MaterialCommunityIcons
+                                                                                  name="google-maps"
+                                                                                  size={25}
+                                                                                  color="#396593"
+                                                                                />
+                                                                                :
+                                                                                val.icon === 'tripadvisor' ?
+                                                                                  <FontAwesome5Brands
+                                                                                    name="tripadvisor"
+                                                                                    size={25}
+                                                                                    color="#396593"
+                                                                                  />
+                                                                                  :
+                                                                                  val.icon === 'booking' ?
+                                                                                    <IconBooking
+                                                                                      color="#396593"
+                                                                                    />
+                                                                                    :
+                                                                                    val.icon === 'tinder' ?
+                                                                                      <Fontisto name="tinder" size={25} color="#396593" />
+                                                                                      :
+                                                                                      val.icon === 'amazon' ?
+                                                                                        <FontAwesome6Brands
+                                                                                          name="amazon"
+                                                                                          size={25}
+                                                                                          color="#396593"
+                                                                                        />
+                                                                                        :
+                                                                                        val.icon === 'onlyfans' ?
+                                                                                          <IconOnlyFans
+                                                                                            color="#396593"
+                                                                                          />
+                                                                                          :
+                                                                                          val.icon === 'airbnb' ?
+                                                                                            <FontAwesome6Brands
+                                                                                              name="airbnb"
+                                                                                              size={25}
+                                                                                              color="#396593"
+                                                                                            />
+                                                                                            :
+                                                                                            val.icon === 'pinterest' ?
+                                                                                              <FontAwesome6Brands
+                                                                                                name="pinterest"
+                                                                                                size={25}
+                                                                                                color="#396593"
+                                                                                              />
+                                                                                              :
+                                                                                              <Fontisto name="world-o" size={32} color="#396593" />
+                      }
+
                     </TouchableOpacity>
                     <Text style={{ fontSize: 12, textAlign: 'center', color: 'black' }}>
                       Seleccionar Icono

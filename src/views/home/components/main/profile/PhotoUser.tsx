@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   Text,
   TouchableOpacity,
   SafeAreaView,
   Image,
-  Alert
+  Alert,
+  Modal
 } from 'react-native';
 import {
   launchImageLibrary,
   ImageLibraryOptions,
-  MediaType
+  MediaType,
+  launchCamera
 } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { profileStyles } from '../../../styles/profileStyles';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SendDataImage } from '../../../../../reactQuery/users';
 import { GetUser } from '../../../../../reactQuery/users';
 import { UserData } from '../../../../../types/user';
+import { StackNavigation } from '../../../../../types/navigation';
+import CustomModalAlert from './CustomModalAlert';
 
-const PhotoUser = ({ name, isProUser }: { name?: string; isProUser: boolean; }) => {
+const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser: boolean; isAlertSave: boolean }) => {
+  const navigation = useNavigation<StackNavigation>();
   const user = GetUser();
   const data = user.data as unknown as UserData;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedImagePro, setSelectedImagePro] = useState<string | null>(null);
+  const [openModalImageProfile, setOpenModalImageProfile] = useState(false);
 
   useEffect(() => {
     // Recuperar la imagen almacenada en AsyncStorage al cargar el componente
@@ -49,6 +57,57 @@ const PhotoUser = ({ name, isProUser }: { name?: string; isProUser: boolean; }) 
     fetchAsyncStorageImage();
   }, []);
 
+  const openModalImage = async () => {
+    setOpenModalImageProfile(true);
+  };
+
+  const openCameraPicker = async () => {
+    const options: ImageLibraryOptions = {
+      mediaType: 'photo' as MediaType,
+      includeBase64: true,
+      quality: 1,
+      maxWidth: 300,
+      maxHeight: 300
+    };
+
+    try {
+      const response = await launchCamera(options);
+      if (response.didCancel) {
+        console.log('El usuario canceló la captura de imagen');
+      } else if (response.errorCode) {
+        console.log('Error al capturar imagen: ', response.errorMessage);
+      } else {
+        //console.log('Imagen capturada: ', response);
+        const asset = response.assets && response.assets[0];
+
+        if (asset && asset.uri && asset.base64 && data && data?.uid) {
+          if (isProUser === true) {
+            setSelectedImagePro(asset.uri);
+            await AsyncStorage.setItem('selectedImagePro', asset.uri);
+          } else {
+            setSelectedImage(asset.uri);
+            await AsyncStorage.setItem('selectedImage', asset.uri);
+          }
+
+          await setOpenModalImageProfile(false);
+          await SendDataImage(
+            isProUser,
+            data?.uid,
+            `data:${asset.type};base64,${asset.base64}`
+          );
+
+        } else {
+          Alert.alert(
+            'Error',
+            'La selección de imagen no es válida. Inténtalo de nuevo.'
+          );
+        }
+      }
+    } catch (error) {
+      console.log('Error al capturar imagen: ', error);
+    }
+  };
+
   const openImagePicker = async () => {
     try {
       const options: ImageLibraryOptions = {
@@ -62,10 +121,10 @@ const PhotoUser = ({ name, isProUser }: { name?: string; isProUser: boolean; }) 
       const result = await launchImageLibrary(options);
 
       if (result.didCancel || result.errorMessage) {
-        Alert.alert(
-          'Error',
-          'El usuario canceló la selección o hubo un error. Inténtalo de nuevo'
-        );
+        /*  Alert.alert(
+           'Error',
+           'El usuario canceló la selección o hubo un error. Inténtalo de nuevo'
+         ); */
         return;
       }
 
@@ -79,12 +138,14 @@ const PhotoUser = ({ name, isProUser }: { name?: string; isProUser: boolean; }) 
           setSelectedImage(asset.uri);
           await AsyncStorage.setItem('selectedImage', asset.uri);
         }
+        await setOpenModalImageProfile(false);
 
         await SendDataImage(
           isProUser,
           data?.uid,
           `data:${asset.type};base64,${asset.base64}`
         );
+
       } else {
         Alert.alert(
           'Error',
@@ -133,8 +194,8 @@ const PhotoUser = ({ name, isProUser }: { name?: string; isProUser: boolean; }) 
             <View style={profileStyles.containerEdit}>
               <TouchableOpacity
                 style={profileStyles.containerPencil}
-                onPress={openImagePicker}>
-                <Icon name="pencil" size={20} color="#396593" />
+                onPress={openModalImage}>
+                <FontAwesome name="pencil" size={20} color="#396593" />
               </TouchableOpacity>
             </View>
           </View>
@@ -146,7 +207,55 @@ const PhotoUser = ({ name, isProUser }: { name?: string; isProUser: boolean; }) 
               </Text>
             </View>
           </View>
+
+          {isAlertSave === true && (
+            <View style={{ height: '25%', width: '65%', margin: 5 }}>
+              <View style={profileStyles.borderTargetAlert}>
+                <Text style={{ color: "white", fontSize: 16 }}>
+                  Recuerde guardar los datos
+                </Text>
+              </View>
+            </View>
+          )}
+
         </View>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={openModalImageProfile}
+          onRequestClose={() => setOpenModalImageProfile(false)}
+        >
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.5)' }}>
+            <View style={{ height: '100%', width: '100%', justifyContent: 'flex-end' }}>
+              <TouchableOpacity style={{ height: '77%', width: '100%' }} onPress={() => setOpenModalImageProfile(false)}></TouchableOpacity>
+              <View style={{ height: '23%', width: '100%', backgroundColor: 'white', borderTopRightRadius: 25, borderTopLeftRadius: 25, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ height: '80%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                  <TouchableOpacity style={{ height: '50%', width: '100%', justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0.5 }} onPress={openCameraPicker}>
+                    <View style={{ height: '100%', width: '50%', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', }}>
+                      <View style={{ height: '100%', width: '30%', justifyContent: 'center', alignItems: 'center' }}>
+                        <FontAwesome name="camera" size={32} color="black" />
+                      </View>
+                      <View style={{ height: '100%', width: '50%', justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ color: 'black', fontSize: 19 }}>Camara</Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ height: '50%', width: '100%', justifyContent: 'center', alignItems: 'center' }} onPress={openImagePicker}>
+                    <View style={{ height: '100%', width: '50%', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', }}>
+                      <View style={{ height: '100%', width: '30%', justifyContent: 'center', alignItems: 'center' }}>
+                        <MaterialCommunityIcons name="image-multiple" size={37} color="black" />
+                      </View>
+                      <View style={{ height: '100%', width: '50%', justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ color: 'black', fontSize: 19 }}>Galeria</Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </SafeAreaView>
     </GestureHandlerRootView>
   );

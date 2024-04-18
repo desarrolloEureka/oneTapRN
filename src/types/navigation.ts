@@ -21,6 +21,8 @@ export type RouteStackParamList = {
   Politicas: undefined;
   Plantillas: undefined;
   Splash: undefined;
+  CameraView: undefined;
+  ShareQR: undefined;
 };
 
 export type StackNavigation = StackNavigationProp<RouteStackParamList>;

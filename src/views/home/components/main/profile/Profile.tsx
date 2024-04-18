@@ -67,7 +67,8 @@ const Profile = () => {
     itemUrlKey,
     itemUrlSelected,
     handleModalIcons,
-    isModalIcons
+    isModalIcons,
+    isAlertSave
   } = ProfileHook({
     isProUser: false
   });
@@ -93,6 +94,8 @@ const Profile = () => {
         navigation.navigate('Profile');
       } else if (tabName === 'Professional') {
         navigation.navigate('ProfileProfessional');
+      } else if (tabName === 'ShareQR') {
+        navigation.navigate('ShareQR');
       } else {
         navigation.navigate('Home');
       }
@@ -126,6 +129,7 @@ const Profile = () => {
               <PhotoUser
                 name={user.profile && user.profile.social ? user.profile.social?.name?.text || '' : ''}
                 isProUser={false}
+                isAlertSave={isAlertSave}
               />
 
               <View
@@ -279,56 +283,32 @@ const Profile = () => {
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
 
-        <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                  alignItems: 'center',
-                  backgroundColor: '#E9E9E9',
-                  height: 80,
-                  position: 'absolute',
-                  bottom: 0,
-                  width: '100%'
-                }}>
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    width: '33.3%',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                  onPress={() => handleTabPress('Home')}>
-                  <Icon name="home" size={25} color="black" />
-                  <Text style={{ color: 'black' }}>Home</Text>
-                </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    width: '33.3%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderTopWidth: 3.5,
-                    borderColor: '#396593'
-                  }}
-                  onPress={() => handleTabPress('Social')}>
-                  <FontAwesome name="users" size={25} color="black" />
-                  <Text style={{ color: 'black' }}>Social</Text>
-                </TouchableOpacity>
+        <View style={{
+          flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#E9E9E9', height: 80, position: 'absolute', bottom: 0, width: '100%'
+        }}>
 
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    width: '33.3%',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                  onPress={() => handleTabPress('Professional')}>
-                  <Ionicons name="newspaper-sharp" size={28} color="black" />
-                  <Text style={{ color: 'black' }}>PRO</Text>
-                </TouchableOpacity>
-              </View>
-              
+          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Home')}>
+            <Icon name="home" size={25} color="black" />
+            <Text style={{ color: 'black' }}>Home</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Social')}>
+            <FontAwesome name="users" size={25} color="black" />
+            <Text style={{ color: 'black' }}>Social</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Professional')}>
+            <Ionicons name="newspaper-sharp" size={28} color="black" />
+            <Text style={{ color: 'black' }}>PRO</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('ShareQR')}>
+            <Ionicons name="newspaper-sharp" size={28} color="black" />
+            <Text style={{ color: 'black' }}>QR</Text>
+          </TouchableOpacity>
+
+        </View>
       </SafeAreaView>
     )
   );

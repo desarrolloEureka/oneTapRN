@@ -79,7 +79,8 @@ const CustomCheckbox = ({
                     type: optionSelected,
                     id: value.id,
                     checked: true,
-                    background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+                    //background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+                    background_id: '7ynTMVt3M6VFV3KykOXQ',
                 });
                 await setFakeData(fakeDataCloneFilter);
                 await SendTemplateSelected(userId, fakeDataCloneFilter, queryClient);
@@ -90,7 +91,8 @@ const CustomCheckbox = ({
                     type: optionSelected,
                     id: value.id,
                     checked: true,
-                    background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+                    //background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
+                    background_id: '7ynTMVt3M6VFV3KykOXQ',
                 });
                 await setFakeData(fakeDataClone);
                 userId &&
