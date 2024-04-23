@@ -24,7 +24,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const GetAllUserQuery = () => {
-
   const query = useQuery({
     queryKey: ['user'],
     queryFn: async () => await getAllUsers(),
@@ -199,7 +198,7 @@ const SendInactiveUser = async (userId: string) => {
   return res;
 };
 
-const GetUser = (flag?: boolean, setFlag?: (e: boolean) => void) =>
+const GetUser = (refetch?: boolean) =>
   useQuery({
     queryKey: ['user'],
     queryFn: async () => {
@@ -213,16 +212,13 @@ const GetUser = (flag?: boolean, setFlag?: (e: boolean) => void) =>
           await AsyncStorage.setItem('@user', JSON.stringify(getUser));
           return getUser;
         } else {
-          setFlag && setFlag(false);
           return user;
         }
       } else {
-        setFlag && setFlag(false);
         return null;
       }
     },
-    //refetchOnWindowFocus: refetch ?? false,
-    enabled: !!flag,
+    refetchOnWindowFocus: refetch ?? false,
   });
 
 const SendPreView = async (userId: string, url: string) => {

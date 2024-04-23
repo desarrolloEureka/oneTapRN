@@ -14,13 +14,13 @@ const CustomSwitch = ({
   profile: boolean;
   handleModalAlert?: () => void;
 }) => {
-  const [flag, setFlag] = useState(false);
-  const { data } = GetUser(flag, setFlag);
+  const { data, refetch } = GetUser();
   const [switchProfile, setSwitchProfile] = useState(false);
   const [switchCard, setSwitchCard] = useState(false);
   const { logOut } = LogOut();
 
   const handleSwitchChange = async () => {
+    refetch();
     const userId = data?.uid;
     const plan = data?.plan;
 
@@ -33,67 +33,18 @@ const CustomSwitch = ({
         await SendSwitchProfile(userId, !switchProfile);
       } else {
         setSwitchCard(!switchCard);
-        setFlag(!flag);
+        if (userId) {
+          if (data?.isActiveByAdmin === true) {
+            SendSwitchActivateCard(userId, !switchCard);
+          } else {
+            SendSwitchActivateCard(userId, false);
+            logOut();
+          }
+          refetch(); // Actualizar datos después de activar/desactivar la tarjeta
+        }
       }
     }
   }
-
-  const handleSwitchContinue = async () => {
-    const userId = data?.uid;
-    if (userId && data?.isActiveByAdmin === true) {
-      SendSwitchActivateCard(userId, switchCard);
-    } else {
-      logOut();
-    }
-  }
-
-  /* const handleSwitchChange = async () => {
-    const userId = data?.uid;
-    const plan = data?.plan;
-    console.log("handleSwitchChange");
-
-    if (profile && plan === 'standard') {
-      setSwitchProfile(switchProfile);
-      handleModalAlert && handleModalAlert();
-    } else {
-      if (userId && profile) {
-        setSwitchProfile(!switchProfile);
-        await SendSwitchProfile(userId, !switchProfile);
-      } else {
-        console.log("Entreeeeeeeeeeeee 2");
-        setFlag(!flag);
-      }
-    }
-
-  };
-
-  const handleSwitchContinue = async () => {
-    const userId = data?.uid;
-    console.log("data?.isActiveByAdmin  ", data?.isActiveByAdmin);
-
-    if (userId && data?.isActiveByAdmin === true) {
-
-      if (switchCard === true) {
-        setSwitchCard(false);
-        Alert.alert('Alerta', 'Su perfil no se va a mostrar', [
-          { text: 'Cancelar', onPress: () => setSwitchCard(true) },
-          { text: 'OK', onPress: handleSwitchChange }
-        ]);
-      } else {
-        setSwitchCard(true);
-      }
-
-      SendSwitchActivateCard(userId, !switchCard);
-    } else {
-      logOut();
-    }
-
-  }; */
-
-  useEffect(() => {
-    handleSwitchContinue();
-  }, [flag, data])
-
 
   useEffect(() => {
     if (data) {

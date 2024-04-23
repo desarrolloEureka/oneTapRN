@@ -123,7 +123,7 @@ const ShareQR = () => {
                     </TouchableOpacity>
                 </View>
                 {copiedText === true && (<View style={{ height: '35%', width: '80%', justifyContent: 'flex-start', alignItems: 'center' }}>
-                    <Text>¡Copiado!</Text>
+                    <Text style={{ color: 'black' }}>¡Copiado!</Text>
                 </View>)}
 
             </View>
@@ -148,8 +148,8 @@ const ShareQR = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('ShareQR')}>
-                    <Ionicons name="newspaper-sharp" size={28} color="black" />
-                    <Text style={{ color: 'black' }}>QR</Text>
+                    <Ionicons name="share" size={28} color="black" />
+                    <Text style={{ color: 'black' }}>Compartir</Text>
                 </TouchableOpacity>
 
             </View>
