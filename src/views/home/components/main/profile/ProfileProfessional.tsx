@@ -68,7 +68,9 @@ const ProfileProfessional = () => {
     isLoadingSendData,
     setIsLoadingSendData,
     switchValue,
-    isAlertSave
+    isAlertSave,
+    isAlertEmptyData,
+    setIsEmptyData
   } = ProfileProfessionalHook({
     isProUser: true
   });
@@ -270,6 +272,15 @@ const ProfileProfessional = () => {
               />
 
               <CustomModalAlert
+                isModalAlert={isAlertEmptyData}
+                handleModalAlert={setIsEmptyData}
+                title={'One Tap dice!'}
+                description={
+                  'No se encontró información registrada para ese dato.'
+                }
+              />
+
+              <CustomModalAlert
                 isModalAlert={isEmailPhoneRight}
                 handleModalAlert={setisEmailPhoneRight}
                 title={'One Tap dice!'}
@@ -301,8 +312,8 @@ const ProfileProfessional = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('ShareQR')}>
-            <Ionicons name="newspaper-sharp" size={28} color="black" />
-            <Text style={{ color: 'black' }}>QR</Text>
+            <Ionicons name="share" size={28} color="black" />
+            <Text style={{ color: 'black' }}>Compartir</Text>
           </TouchableOpacity>
 
         </View>

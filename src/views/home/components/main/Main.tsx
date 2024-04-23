@@ -404,8 +404,8 @@ const Main = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('ShareQR')}>
-          <Ionicons name="newspaper-sharp" size={28} color="black" />
-          <Text style={{ color: 'black' }}>QR</Text>
+          <Ionicons name="share" size={28} color="black" />
+          <Text style={{ color: 'black' }}>Compartir</Text>
         </TouchableOpacity>
 
       </View>

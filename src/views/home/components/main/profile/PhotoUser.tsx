@@ -25,6 +25,7 @@ import { GetUser } from '../../../../../reactQuery/users';
 import { UserData } from '../../../../../types/user';
 import { StackNavigation } from '../../../../../types/navigation';
 import CustomModalAlert from './CustomModalAlert';
+import { PermissionsAndroid } from 'react-native';
 
 const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser: boolean; isAlertSave: boolean }) => {
   const navigation = useNavigation<StackNavigation>();
@@ -62,6 +63,23 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
   };
 
   const openCameraPicker = async () => {
+
+    const cameraPermission = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: "Permiso para usar la cámara",
+        message: "Esta aplicación necesita tu permiso para usar la cámara.",
+        buttonNeutral: "Preguntar después",
+        buttonNegative: "Cancelar",
+        buttonPositive: "Aceptar"
+      }
+    );
+
+    if (cameraPermission !== PermissionsAndroid.RESULTS.GRANTED) {
+      Alert.alert("Permiso denegado", "No se puede acceder a la cámara porque no se otorgaron los permisos necesarios.");
+      return;
+    }
+
     const options: ImageLibraryOptions = {
       mediaType: 'photo' as MediaType,
       includeBase64: true,

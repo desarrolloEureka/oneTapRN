@@ -40,6 +40,8 @@ const ProfileProfessionalHook = ({
   const [itemUrlKey, setItemUrlKey] = useState(0);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [itemDetail, setItemDetail] = useState(0);
+  const [isAlertEmptyData, setIsEmptyData] = useState(false);
+
   /* Delete items */
   const [itemDelete, setItemDelete] = useState<
     { index: string; subindex: string } | {}
@@ -201,15 +203,41 @@ const ProfileProfessionalHook = ({
         dataFormClone[index]?.label != 'professional_career' ||
         dataFormClone[index]?.label != 'urls')
     ) {
-      dataFormClone[index]!.checked = !isChecked;
-      setDataForm(dataFormClone);
+      if (dataFormClone[index]?.text?.length === 0 && !isChecked) {
+        setIsEmptyData(true);
+      } else {
+        dataFormClone[index]!.checked = !isChecked;
+        setDataForm(dataFormClone);
+      }
     } else {
       let dataAux = dataFormClone[index] as DataFormValues[];
+      let dataUrl = dataFormClone[index] as UrlDataFormValues[];
+      let dataEduca = dataFormClone[index] as EducationDataFormValues[];
+      let dataCareer = dataFormClone[index] as CareerDataFormValues[];
+
       if (dataAux && subindex != undefined) {
-        dataAux[subindex].checked = !isChecked;
-        currentDataRef.current.length > 0 &&
-          (currentDataRef.current[subindex].checked = !isChecked);
-        setDataForm(dataFormClone);
+        if (!isChecked && dataAux[subindex]) {
+          const isEmptyText = dataAux[subindex].text?.length === 0 && index !== 'urls';
+          const isEmptyUrls = index === 'urls' && (dataUrl[subindex]?.name?.length === 0 || dataUrl[subindex]?.url?.length === 0 || dataUrl[subindex]?.icon?.length === 0);
+          const isEmptyEduca = index === 'education' && (dataEduca[subindex]?.title?.length === 0 || dataEduca[subindex]?.institution?.length === 0 || dataEduca[subindex]?.year?.length === 0);
+          const isEmptyCareer = index === 'professional_career' && (dataCareer[subindex]?.company?.length === 0 || dataCareer[subindex]?.position?.length === 0 || dataCareer[subindex]?.data_init?.length === 0 || dataCareer[subindex]?.data_end?.length === 0);
+
+          if (isEmptyText || isEmptyUrls || isEmptyEduca || isEmptyCareer) {
+            setIsEmptyData(true);
+          } else {
+            dataAux[subindex].checked = !isChecked;
+            currentDataRef.current.length > 0 &&
+              (currentDataRef.current[subindex].checked = !isChecked);
+            setDataForm(dataFormClone);
+          }
+        } else {
+          dataAux[subindex].checked = !isChecked;
+          currentDataRef.current.length > 0 &&
+            (currentDataRef.current[subindex].checked = !isChecked);
+          setDataForm(dataFormClone);
+        }
+
+
       }
     }
 
@@ -361,7 +389,7 @@ const ProfileProfessionalHook = ({
               {
                 label: "labelPhone",
                 text: '',
-                checked: true,
+                checked: false,
                 principal: false,
                 social: true,
                 professional: true,
@@ -373,7 +401,7 @@ const ProfileProfessionalHook = ({
             dataFormClone[index]?.unshift({
               label: dataFormClone[index]![0].label,
               text: '',
-              checked: true,
+              checked: false,
               principal: false,
               social: true,
               professional: true,
@@ -392,7 +420,7 @@ const ProfileProfessionalHook = ({
               {
                 label: "Correo",
                 text: '',
-                checked: true,
+                checked: false,
                 principal: false,
                 social: true,
                 professional: true,
@@ -404,7 +432,7 @@ const ProfileProfessionalHook = ({
             dataFormClone[index]?.unshift({
               label: dataFormClone[index]![0].label,
               text: '',
-              checked: true,
+              checked: false,
               principal: false,
               social: true,
               professional: true,
@@ -425,7 +453,7 @@ const ProfileProfessionalHook = ({
                 title: '',
                 institution: '',
                 year: '',
-                checked: true,
+                checked: false,
                 principal: false,
                 social: false,
                 professional: true,
@@ -439,7 +467,7 @@ const ProfileProfessionalHook = ({
               title: '',
               institution: '',
               year: '',
-              checked: true,
+              checked: false,
               principal: false,
               social: false,
               professional: true,
@@ -461,7 +489,7 @@ const ProfileProfessionalHook = ({
                 position: '',
                 data_init: '',
                 data_end: '',
-                checked: true,
+                checked: false,
                 principal: false,
                 social: false,
                 professional: true,
@@ -476,7 +504,7 @@ const ProfileProfessionalHook = ({
               position: '',
               data_init: '',
               data_end: '',
-              checked: true,
+              checked: false,
               principal: false,
               social: false,
               professional: true,
@@ -497,7 +525,7 @@ const ProfileProfessionalHook = ({
               name: '',
               url: '',
               icon: '',
-              checked: true,
+              checked: false,
               principal: false,
               social: false,
               professional: true,
@@ -510,7 +538,7 @@ const ProfileProfessionalHook = ({
             name: '',
             url: '',
             icon: '',
-            checked: true,
+            checked: false,
             principal: false,
             social: false,
             professional: true,
@@ -757,7 +785,9 @@ const ProfileProfessionalHook = ({
     setIsLoadingSendData,
     switchValue,
     setSwitchValue,
-    isAlertSave
+    isAlertSave,
+    isAlertEmptyData,
+    setIsEmptyData
   };
 };
 
