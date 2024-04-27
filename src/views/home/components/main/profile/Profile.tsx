@@ -70,7 +70,9 @@ const Profile = () => {
     isModalIcons,
     isAlertSave,
     isAlertEmptyData,
-    setIsEmptyData
+    setIsEmptyData,
+    isAlertEmptyDataAll,
+    setIsEmptyDataAll
   } = ProfileHook({
     isProUser: false
   });
@@ -271,6 +273,14 @@ const Profile = () => {
                 description={
                   'La información del usuario ha sido registrada con éxito.'
                 }
+              />
+
+              <CustomModalAlert
+                isModalAlert={isAlertEmptyDataAll}
+                handleModalAlert={setIsEmptyDataAll}
+                title={'One Tap dice!'}
+                description={"No fue posible activar ciertos datos porque están vacíos."}
+                isClosed
               />
 
               <CustomModalAlert

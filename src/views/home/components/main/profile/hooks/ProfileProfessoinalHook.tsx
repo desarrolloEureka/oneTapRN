@@ -41,6 +41,7 @@ const ProfileProfessionalHook = ({
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [itemDetail, setItemDetail] = useState(0);
   const [isAlertEmptyData, setIsEmptyData] = useState(false);
+  const [isAlertEmptyDataAll, setIsEmptyDataAll] = useState(false);
 
   /* Delete items */
   const [itemDelete, setItemDelete] = useState<
@@ -557,8 +558,49 @@ const ProfileProfessionalHook = ({
     label?: string
   ) => {
     data.map((el) => {
-      el.checked = checked;
-      el.label = label ?? el.label;
+      if (checked === true) {
+        if (label === 'urls') {
+          if (el.name != "" && el.icon != "" && el.url != "") {
+            el.checked = checked;
+            el.label = label ?? el.label;
+          } else {
+            setIsEmptyDataAll(true);
+          }
+
+        } else if (label === 'emails') {
+          if (el.text != "") {
+            el.checked = checked;
+            el.label = label ?? el.label;
+          } else {
+            setIsEmptyDataAll(true);
+          }
+
+        } else if (label === 'phones') {
+          if (el.text != "") {
+            el.checked = checked;
+            el.label = label ?? el.label;
+          } else {
+            setIsEmptyDataAll(true);
+          }
+        } else if (label === 'education') {
+          if (el.title != "" && el.institution != "" && el.year != "") {
+            el.checked = checked;
+            el.label = label ?? el.label;
+          } else {
+            setIsEmptyDataAll(true);
+          }
+        } else if (label === 'professional_career') {
+          if (el.company != "" && el.position != "" && el.data_init != "" && el.data_end != "") {
+            el.checked = checked;
+            el.label = label ?? el.label;
+          } else {
+            setIsEmptyDataAll(true);
+          }
+        }
+      } else {
+        el.checked = checked;
+        el.label = label ?? el.label;
+      }
     });
     return [value, data];
   };
@@ -569,8 +611,17 @@ const ProfileProfessionalHook = ({
     checked?: boolean,
     label?: string
   ) => {
-    data.checked = checked;
-    data.label = label ?? data.label;
+    if (checked === true) {
+      if (data && data.text != '') {
+        data.checked = checked;
+        data.label = label ?? data.label;
+      } else {
+        setIsEmptyDataAll(true);
+      }
+    } else {
+      data.checked = checked;
+      data.label = label ?? data.label;
+    }
     return [value, data];
   };
 
@@ -630,19 +681,19 @@ const ProfileProfessionalHook = ({
     const newData = items.map((value) => {
       if (value[0] == 'phones' || value[0] == 'emails') {
         const data = value[1] as DataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
+        return checkedItems(data, value[0], !isChecked, value[0]);
       } else if (value[0] == 'education') {
         const data = value[1] as EducationDataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
+        return checkedItems(data, value[0], !isChecked, value[0]);
       } else if (value[0] == 'professional_career') {
         const data = value[1] as CareerDataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
+        return checkedItems(data, value[0], !isChecked, value[0]);
       } else if (value[0] == 'urls') {
         const data = value[1] as UrlDataFormValues[];
-        return checkedItems(data, value[0], !isChecked);
+        return checkedItems(data, value[0], !isChecked, value[0]);
       } else {
         const data = value[1] as DataFormValues;
-        return checkedItem(data, value[0], !isChecked);
+        return checkedItem(data, value[0], !isChecked, value[0]);
       }
     });
 
@@ -787,7 +838,9 @@ const ProfileProfessionalHook = ({
     setSwitchValue,
     isAlertSave,
     isAlertEmptyData,
-    setIsEmptyData
+    setIsEmptyData,
+    isAlertEmptyDataAll,
+    setIsEmptyDataAll
   };
 };
 
