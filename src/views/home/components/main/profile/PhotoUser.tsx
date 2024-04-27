@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -7,55 +6,35 @@ import {
   SafeAreaView,
   Image,
   Alert,
-  Modal
+  Modal,
+  PermissionsAndroid
 } from 'react-native';
 import {
   launchImageLibrary,
+  launchCamera,
   ImageLibraryOptions,
   MediaType,
-  launchCamera
 } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { profileStyles } from '../../../styles/profileStyles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SendDataImage } from '../../../../../reactQuery/users';
-import { GetUser } from '../../../../../reactQuery/users';
+import { SendDataImage, GetUser } from '../../../../../reactQuery/users';
 import { UserData } from '../../../../../types/user';
-import { StackNavigation } from '../../../../../types/navigation';
-import CustomModalAlert from './CustomModalAlert';
-import { PermissionsAndroid } from 'react-native';
 
 const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser: boolean; isAlertSave: boolean }) => {
-  const navigation = useNavigation<StackNavigation>();
-  const user = GetUser();
-  const data = user.data as unknown as UserData;
+  const { data, refetch } = GetUser();
+  //const user = GetUser();
+  //const data = user.data as unknown as UserData;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedImagePro, setSelectedImagePro] = useState<string | null>(null);
   const [openModalImageProfile, setOpenModalImageProfile] = useState(false);
 
   useEffect(() => {
-    // Recuperar la imagen almacenada en AsyncStorage al cargar el componente
-    const fetchAsyncStorageImage = async () => {
-      try {
-        const storedImage = await AsyncStorage.getItem('selectedImage');
-        const storedImagePro = await AsyncStorage.getItem('selectedImagePro');
-        if (storedImage) {
-          setSelectedImage(storedImage);
-        }
-        if (storedImagePro) {
-          setSelectedImagePro(storedImagePro);
-        }
-      } catch (error: any) {
-        console.error(
-          'Error al recuperar la imagen desde AsyncStorage:',
-          error.message
-        );
-      }
-    };
-
-    fetchAsyncStorageImage();
+    setSelectedImage(null);
+    setSelectedImagePro(null);
+    refetch();
   }, []);
 
   const openModalImage = async () => {
@@ -95,7 +74,6 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
       } else if (response.errorCode) {
         console.log('Error al capturar imagen: ', response.errorMessage);
       } else {
-        //console.log('Imagen capturada: ', response);
         const asset = response.assets && response.assets[0];
 
         if (asset && asset.uri && asset.base64 && data && data?.uid) {
@@ -132,8 +110,8 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
         mediaType: 'photo' as MediaType,
         includeBase64: true,
         quality: 1,
-        maxWidth: 300,
-        maxHeight: 300
+        maxHeight: 1080,
+        maxWidth: 1080
       };
 
       const result = await launchImageLibrary(options);
@@ -220,7 +198,6 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
           <View style={{ height: '25%', width: '45%' }}>
             <View style={profileStyles.borderTargetName}>
               <Text style={profileStyles.textName}>
-                {/* Hola {data && data?.user_name} */}
                 Hola {name ?? ''}
               </Text>
             </View>

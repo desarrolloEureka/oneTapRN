@@ -1,7 +1,7 @@
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useRef, useState } from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View, FlatList, Image } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { RouteStackParamList } from '../../../../../types/navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -99,25 +99,25 @@ const ShareQR = () => {
 
             <View style={{ height: '30%', width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <View style={{ height: '35%', width: '80%', justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableOpacity style={{ height: '55%', width: '100%', justifyContent: 'flex-start', alignItems: 'center', borderRadius: 30, borderWidth: 0.2, flexDirection: 'row' }} onPress={copyToClipboard}>
+                    <TouchableOpacity style={{ height: '55%', width: '100%', justifyContent: 'flex-start', alignItems: 'center', borderRadius: 30, borderWidth: 0.2, flexDirection: 'row', backgroundColor: '#02AF9B' }} onPress={copyToClipboard}>
                         <View style={{ height: '100%', width: '25%', justifyContent: 'center', alignItems: 'center', }}>
-                            <Feather name="copy" size={23} color="#396593" />
+                            <Feather name="copy" size={24} color="#396593" />
                         </View>
                         <View style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center', position: 'absolute' }}>
-                            <Text style={{ fontSize: 14.5, color: 'black', fontWeight: '500' }}>
-                                Copiar URL
+                            <Text style={{ fontSize: 14.5, color: 'white', fontWeight: '500' }}>
+                                Compartir URL del Perfil
                             </Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={{ height: '35%', width: '80%', justifyContent: 'flex-start', alignItems: 'center' }}>
-                    <TouchableOpacity style={{ height: '55%', width: '100%', justifyContent: 'flex-start', alignItems: 'center', borderRadius: 30, borderWidth: 0.2, flexDirection: 'row' }} onPress={handleShare}>
+                    <TouchableOpacity style={{ height: '55%', width: '100%', justifyContent: 'flex-start', alignItems: 'center', borderRadius: 30, borderWidth: 0.2, flexDirection: 'row', backgroundColor: '#02AF9B' }} onPress={handleShare}>
                         <View style={{ height: '100%', width: '25%', justifyContent: 'center', alignItems: 'center', }}>
-                            <Feather name="share" size={23} color="#396593" />
+                            <Feather name="share" size={24} color="#396593" />
                         </View>
                         <View style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center', position: 'absolute' }}>
-                            <Text style={{ fontSize: 14.5, color: 'black', fontWeight: '500' }}>
-                                Compartir URL
+                            <Text style={{ fontSize: 14.5, color: 'white', fontWeight: '500' }}>
+                                Compartir Perfil
                             </Text>
                         </View>
                     </TouchableOpacity>

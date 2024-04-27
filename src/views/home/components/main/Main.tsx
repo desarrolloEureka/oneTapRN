@@ -175,7 +175,7 @@ const Main = () => {
     }, 5000);
   };
 
-  const selectTemplate = async (value: any) => {
+  /* const selectTemplate = async (value: any) => {
     setIsLoadingSendData(true);
     const userId = data?.uid;
     const optionSelected = tab as TemplateTypes;
@@ -210,8 +210,31 @@ const Main = () => {
       await setIsUpdate(!isUpdate);
     }
     await setIsLoadingSendData(false);
-  };
+  }; */
 
+  const selectTemplate = async (value: { id: string }) => {
+    setIsLoadingSendData(true);
+    const userId = data?.uid;
+    const optionSelected = tab as TemplateTypes;
+
+    let updatedFakeData = [...fakeData];
+    if (fakeData.length > 0) {
+      updatedFakeData = updatedFakeData.filter((val) => val.type !== optionSelected);
+    }
+    updatedFakeData.push({
+      type: optionSelected,
+      id: value.id,
+      checked: true,
+      background_id: '7ynTMVt3M6VFV3KykOXQ',
+    });
+
+    await setFakeData(updatedFakeData);
+    if (userId) {
+      await SendTemplateSelected(userId, updatedFakeData, queryClient);
+    }
+    setIsUpdate(!isUpdate);
+    setIsLoadingSendData(false);
+  };
 
   return (
     <SafeAreaView style={homeStyles.rootContainer}>
@@ -318,7 +341,7 @@ const Main = () => {
                     <View style={{ height: "95%", width: "95%", backgroundColor: "#02AF9B", borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
                       <View style={{ height: "20%", width: "100%", alignItems: 'flex-end', flexDirection: 'row' }}>
                         <View style={{ height: "100%", width: "50%", justifyContent: 'center' }}>
-                          <TouchableOpacity disabled={itemData ? !itemData?.checked : true} style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleNavigatePreview(background)}>
+                          <TouchableOpacity /* disabled={itemData ? !itemData?.checked : true} */ style={{ height: "100%", width: "60%", justifyContent: 'center', alignItems: 'center' }} onPress={() => handleNavigatePreview(background)}>
                             <Ionicons name="eye-sharp" size={15} color="white" />
                             <Text style={{ fontSize: 10, color: "white" }}>
                               Vista{'\n'}Previa
@@ -435,9 +458,17 @@ const Main = () => {
         isModalAlert={isModalAlertBg}
         handleModalAlert={handleModalAlertBg}
         title="One Tap dice!"
-        description={"No se ha seleccionado un fondo para la plantilla"}
+        description={"No es posible mostrar la vista previa porque no has seleccionado esta plantilla"}
         isClosed={true}
       />
+
+      {/*  <CustomModalAlert
+        isModalAlert={isModalAlertBg}
+        handleModalAlert={handleModalAlertBg}
+        title="One Tap dice!"
+        description={"No se ha seleccionado un fondo para la plantilla"}
+        isClosed={true}
+      /> */}
 
       <CustomModalAlert
         handleModalAlert={handleAlertProfileSocial}

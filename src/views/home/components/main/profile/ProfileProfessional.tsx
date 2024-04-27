@@ -70,7 +70,9 @@ const ProfileProfessional = () => {
     switchValue,
     isAlertSave,
     isAlertEmptyData,
-    setIsEmptyData
+    setIsEmptyData,
+    isAlertEmptyDataAll,
+    setIsEmptyDataAll
   } = ProfileProfessionalHook({
     isProUser: true
   });
@@ -278,6 +280,15 @@ const ProfileProfessional = () => {
                 description={
                   'No se encontró información registrada para ese dato.'
                 }
+              />
+
+
+              <CustomModalAlert
+                isModalAlert={isAlertEmptyDataAll}
+                handleModalAlert={setIsEmptyDataAll}
+                title={'One Tap dice!'}
+                description={"No fue posible activar ciertos datos porque están vacíos."}
+                isClosed
               />
 
               <CustomModalAlert
