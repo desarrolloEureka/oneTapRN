@@ -62,9 +62,9 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
     const options: ImageLibraryOptions = {
       mediaType: 'photo' as MediaType,
       includeBase64: true,
-      quality: 1,
-      maxWidth: 300,
-      maxHeight: 300
+      quality: 0.5,
+      maxWidth: 600,
+      maxHeight: 600
     };
 
     try {
@@ -109,9 +109,9 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
       const options: ImageLibraryOptions = {
         mediaType: 'photo' as MediaType,
         includeBase64: true,
-        quality: 1,
-        maxHeight: 1080,
-        maxWidth: 1080
+        quality: 0.5,
+        maxHeight: 600,
+        maxWidth: 600
       };
 
       const result = await launchImageLibrary(options);
@@ -126,6 +126,7 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
 
       const asset = result.assets && result.assets[0];
       if (asset && asset.uri && asset.base64 && data && data?.uid) {
+        //console.log('asset ', asset.width, ' X ', asset.height);
 
         if (isProUser === true) {
           setSelectedImagePro(asset.uri);
@@ -203,7 +204,7 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
             </View>
           </View>
 
-          {isAlertSave === true && (
+          {/*  {isAlertSave === true && (
             <View style={{ height: '25%', width: '65%', margin: 5 }}>
               <View style={profileStyles.borderTargetAlert}>
                 <Text style={{ color: "white", fontSize: 16 }}>
@@ -211,7 +212,7 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
                 </Text>
               </View>
             </View>
-          )}
+          )} */}
 
         </View>
 

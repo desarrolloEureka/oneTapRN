@@ -29,7 +29,6 @@ import { RouteStackParamList } from '../../../../../types/navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { profile } from '../../../../../initialData/profileInitialData';
 
 const Profile = () => {
   const {
@@ -72,7 +71,8 @@ const Profile = () => {
     isAlertEmptyData,
     setIsEmptyData,
     isAlertEmptyDataAll,
-    setIsEmptyDataAll
+    setIsEmptyDataAll,
+    setIsAlertSave
   } = ProfileHook({
     isProUser: false
   });
@@ -266,12 +266,22 @@ const Profile = () => {
                   'La información del usuario no pudo ser registrada, por favor intenta de nuevo.'
                 }
               />
+
               <CustomModalAlert
                 isModalAlert={isDataSuccess}
                 handleModalAlert={setIsDataSuccess}
                 title={'One Tap dice!'}
                 description={
                   'La información del usuario ha sido registrada con éxito.'
+                }
+              />
+
+              <CustomModalAlert
+                isModalAlert={isAlertSave}
+                handleModalAlert={setIsAlertSave}
+                title={'One Tap dice!'}
+                description={
+                  'Recuerde guardar los datos.'
                 }
               />
 

@@ -72,7 +72,8 @@ const ProfileProfessional = () => {
     isAlertEmptyData,
     setIsEmptyData,
     isAlertEmptyDataAll,
-    setIsEmptyDataAll
+    setIsEmptyDataAll,
+    setIsAlertSave
   } = ProfileProfessionalHook({
     isProUser: true
   });
@@ -270,6 +271,15 @@ const ProfileProfessional = () => {
                 title={'One Tap dice!'}
                 description={
                   'La información del usuario ha sido registrada con éxito.'
+                }
+              />
+
+              <CustomModalAlert
+                isModalAlert={isAlertSave}
+                handleModalAlert={setIsAlertSave}
+                title={'One Tap dice!'}
+                description={
+                  'Recuerde guardar los datos.'
                 }
               />
 
