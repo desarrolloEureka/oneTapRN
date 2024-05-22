@@ -570,7 +570,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com;
+				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com.co;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/oneTap.app/oneTap";
 			};
@@ -594,7 +594,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com;
+				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com.co;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/oneTap.app/oneTap";
 			};
@@ -623,7 +623,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com;
+				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com.co;
 				PRODUCT_NAME = oneTap;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -653,7 +653,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com;
+				PRODUCT_BUNDLE_IDENTIFIER = onetaprn.appspot.com.co;
 				PRODUCT_NAME = oneTap;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

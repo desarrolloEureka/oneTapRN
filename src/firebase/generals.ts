@@ -1,4 +1,4 @@
-import { BackgroundImages, Templates } from '../types/home';
+import { BackgroundImages, LogosImages, Templates } from '../types/home';
 import { AllRefPropsFirebase } from '../types/userFirebase';
 import { collection, doc, getDocs } from 'firebase/firestore';
 import { dataBase } from './firebaseConfig';
@@ -29,4 +29,16 @@ export const getAllBackgroundImages = async () => {
     });
   }
   return backgroundImages;
+};
+
+export const getAllLogosImages = async () => {
+  const logosImages: LogosImages[] = [];
+  const querySnapshot = await getDocs(allRef({ ref: 'social_icons' }));
+  if (!querySnapshot.empty) {
+    querySnapshot.forEach((doc: any) => {
+      const dataResult = doc.data() as LogosImages;
+      logosImages.push({ ...dataResult, id: doc.id });
+    });
+  }
+  return logosImages;
 };
