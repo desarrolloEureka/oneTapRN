@@ -56,6 +56,7 @@ const ProfileProfessionalHook = ({
   const [status, setStatus] = useState<string>('');
   const [flag, setFlag] = useState(false);
   const [isAlertSave, setIsAlertSave] = useState(false);
+  const [isChangeData, setIsChangeData] = useState(false);
 
   /* Propios */
   const [isLoadingSendData, setIsLoadingSendData] = useState(false);
@@ -121,6 +122,7 @@ const ProfileProfessionalHook = ({
     if (userId) {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm, isProUser);
       if (isSendDataProfile?.success) {
+        setIsChangeData(false);
         setIsDataError(false);
         setIsDataSuccess(true);
         setIsLoadingSendData(false);
@@ -188,7 +190,8 @@ const ProfileProfessionalHook = ({
     name?: string
     subindex?: number
   }) => {
-    setIsAlertSave(true);
+    //setIsAlertSave(true);
+    setIsChangeData(true);
     const isChecked = checked;
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
@@ -242,9 +245,9 @@ const ProfileProfessionalHook = ({
       }
     }
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       setIsAlertSave(false);
-    }, 5000);
+    }, 5000); */
   };
 
   const fillFields = (
@@ -292,6 +295,7 @@ const ProfileProfessionalHook = ({
     key,
     currentDataRef,
   }: handleDataProps) => {
+    setIsChangeData(true);
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
     if (
@@ -597,9 +601,9 @@ const ProfileProfessionalHook = ({
         el.label = label ?? el.label;
       }
 
-      setTimeout(() => {
+      /* setTimeout(() => {
         setIsAlertSave(false);
-      }, 5000);
+      }, 5000); */
     });
     return [value, data];
   };
@@ -671,7 +675,8 @@ const ProfileProfessionalHook = ({
   );
 
   const handleSwitchAll = (val: any) => {
-    setIsAlertSave(true);
+    //setIsAlertSave(true);
+    setIsChangeData(true);
     setSwitchValue(!switchValue);
     const isChecked = val?.checked;
     const dataFormClone = { ...dataForm };
@@ -700,9 +705,9 @@ const ProfileProfessionalHook = ({
     handleDataSet && handleDataSet(dataFormChecked);
     setAllChecked(true);
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       setIsAlertSave(false);
-    }, 5000);
+    }, 5000); */
   };
 
   useEffect(() => {
@@ -840,7 +845,9 @@ const ProfileProfessionalHook = ({
     setIsEmptyData,
     isAlertEmptyDataAll,
     setIsEmptyDataAll,
-    setIsAlertSave
+    setIsAlertSave,
+    isChangeData,
+    setIsChangeData
   };
 };
 

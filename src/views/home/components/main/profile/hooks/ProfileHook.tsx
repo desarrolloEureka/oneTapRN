@@ -36,6 +36,8 @@ const ProfileHook = ({
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [itemDetail, setItemDetail] = useState(0);
   const [isAlertSave, setIsAlertSave] = useState(false);
+  const [isChangeData, setIsChangeData] = useState(false);
+
   const [isAlertEmptyData, setIsEmptyData] = useState(false);
   const [isAlertEmptyDataAll, setIsEmptyDataAll] = useState(false);
 
@@ -93,6 +95,7 @@ const ProfileHook = ({
     if (userId) {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm, isProUser);
       if (isSendDataProfile?.success) {
+        setIsChangeData(false);
         setIsDataError(false);
         setIsDataSuccess(true);
         setIsLoadingSendData(false);
@@ -141,7 +144,8 @@ const ProfileHook = ({
     name?: string
     subindex?: number
   }) => {
-    setIsAlertSave(true);
+    //setIsAlertSave(true);
+    setIsChangeData(true);
     const isChecked = checked;
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
@@ -189,9 +193,9 @@ const ProfileHook = ({
       }
     }
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       setIsAlertSave(false);
-    }, 5000);
+    }, 5000); */
   };
 
   const fillFields = (
@@ -231,6 +235,7 @@ const ProfileHook = ({
     key,
     currentDataRef,
   }: handleDataProps) => {
+    setIsChangeData(true);
     const dataFormClone = { ...dataForm };
     const index = name as keyof typeof dataFormClone;
     if (
@@ -521,7 +526,8 @@ const ProfileHook = ({
   );
 
   const handleSwitchAll = (val: any) => {
-    setIsAlertSave(true);
+    //setIsAlertSave(true);
+    setIsChangeData(true);
     setSwitchValue(!switchValue);
     const isChecked = val?.checked;
     const dataFormClone = { ...dataForm };
@@ -695,7 +701,9 @@ const ProfileHook = ({
     setIsEmptyData,
     isAlertEmptyDataAll,
     setIsEmptyDataAll,
-    setIsAlertSave
+    setIsAlertSave,
+    isChangeData,
+    setIsChangeData
   };
 };
 

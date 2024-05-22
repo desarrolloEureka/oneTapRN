@@ -72,7 +72,9 @@ const Profile = () => {
     setIsEmptyData,
     isAlertEmptyDataAll,
     setIsEmptyDataAll,
-    setIsAlertSave
+    setIsAlertSave,
+    isChangeData,
+    setIsChangeData
   } = ProfileHook({
     isProUser: false
   });
@@ -87,21 +89,47 @@ const Profile = () => {
   };
 
   const handleBackPress = () => {
-    navigation.goBack();
+    if (isChangeData) {
+      setIsAlertSave(true);
+      setTimeout(() => {
+        setIsAlertSave(false);
+        navigation.goBack();
+      }, 4000);
+    } else {
+      navigation.goBack();
+    }
   };
 
   const handleTabPress = (tabName: string) => {
     if (tabName === 'Professional' && userData?.data?.plan === 'standard') {
       setIsModalAlertNavigation(true);
     } else {
-      if (tabName === 'Social') {
-        navigation.navigate('Profile');
-      } else if (tabName === 'Professional') {
-        navigation.navigate('ProfileProfessional');
-      } else if (tabName === 'ShareQR') {
-        navigation.navigate('ShareQR');
+      //console.log('isChangeData ', isChangeData);
+      if (isChangeData) {
+        setIsAlertSave(true);
+        setTimeout(() => {
+          setIsAlertSave(false);
+          if (tabName === 'Social') {
+            navigation.navigate('Profile');
+          } else if (tabName === 'Professional') {
+            navigation.navigate('ProfileProfessional');
+          } else if (tabName === 'ShareQR') {
+            navigation.navigate('ShareQR');
+          } else {
+            navigation.navigate('Home');
+          }
+        }, 4000);
+
       } else {
-        navigation.navigate('Home');
+        if (tabName === 'Social') {
+          navigation.navigate('Profile');
+        } else if (tabName === 'Professional') {
+          navigation.navigate('ProfileProfessional');
+        } else if (tabName === 'ShareQR') {
+          navigation.navigate('ShareQR');
+        } else {
+          navigation.navigate('Home');
+        }
       }
     }
   };
@@ -281,7 +309,7 @@ const Profile = () => {
                 handleModalAlert={setIsAlertSave}
                 title={'One Tap dice!'}
                 description={
-                  'Recuerde guardar los datos.'
+                  'Ha realizado cambios. Recuerde guardarlos usando la opción "Guardar".'
                 }
               />
 
