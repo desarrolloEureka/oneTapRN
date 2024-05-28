@@ -61,6 +61,7 @@ const ProfileProfessionalHook = ({
   /* Propios */
   const [isLoadingSendData, setIsLoadingSendData] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
+  const [navigationItem, setNavigationItem] = useState('');
 
   const handleSendProfile = async (isProUser: boolean) => {
     const userId = data?.uid;
@@ -244,10 +245,6 @@ const ProfileProfessionalHook = ({
 
       }
     }
-
-    /* setTimeout(() => {
-      setIsAlertSave(false);
-    }, 5000); */
   };
 
   const fillFields = (
@@ -600,10 +597,6 @@ const ProfileProfessionalHook = ({
         el.checked = checked;
         el.label = label ?? el.label;
       }
-
-      /* setTimeout(() => {
-        setIsAlertSave(false);
-      }, 5000); */
     });
     return [value, data];
   };
@@ -704,10 +697,6 @@ const ProfileProfessionalHook = ({
     const dataFormChecked = Object.fromEntries(newData);
     handleDataSet && handleDataSet(dataFormChecked);
     setAllChecked(true);
-
-    /* setTimeout(() => {
-      setIsAlertSave(false);
-    }, 5000); */
   };
 
   useEffect(() => {
@@ -847,7 +836,9 @@ const ProfileProfessionalHook = ({
     setIsEmptyDataAll,
     setIsAlertSave,
     isChangeData,
-    setIsChangeData
+    setIsChangeData,
+    navigationItem,
+    setNavigationItem
   };
 };
 

@@ -57,6 +57,8 @@ const ProfileHook = ({
   /* Propios */
   const [isLoadingSendData, setIsLoadingSendData] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
+  const [navigationItem, setNavigationItem] = useState('');
+
 
   const handleSendProfile = async (isProUser: boolean) => {
     const userId = data?.uid;
@@ -192,10 +194,6 @@ const ProfileHook = ({
         }
       }
     }
-
-    /* setTimeout(() => {
-      setIsAlertSave(false);
-    }, 5000); */
   };
 
   const fillFields = (
@@ -447,10 +445,6 @@ const ProfileHook = ({
         el.checked = checked;
         el.label = label ?? el.label;
       }
-
-      setTimeout(() => {
-        setIsAlertSave(false);
-      }, 5000);
     });
     return [value, data];
   };
@@ -467,10 +461,6 @@ const ProfileHook = ({
         data.label = label ?? data.label;
       } else {
         setIsEmptyDataAll(true);
-
-        setTimeout(() => {
-          setIsAlertSave(false);
-        }, 5000);
       }
     } else {
       data.checked = checked;
@@ -555,11 +545,6 @@ const ProfileHook = ({
     const dataFormChecked = Object.fromEntries(newData);
     handleDataSet && handleDataSet(dataFormChecked);
     setAllChecked(true);
-
-
-    setTimeout(() => {
-      setIsAlertSave(false);
-    }, 5000);
   };
 
   useEffect(() => {
@@ -703,7 +688,9 @@ const ProfileHook = ({
     setIsEmptyDataAll,
     setIsAlertSave,
     isChangeData,
-    setIsChangeData
+    setIsChangeData,
+    navigationItem,
+    setNavigationItem
   };
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import Feather from 'react-native-vector-icons/Feather';
 
 import {
   CareerDataFormValues,
@@ -248,7 +249,8 @@ const ItemFormUrl = ({
                           style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
                         />
                         :
-                        <Fontisto name="world-o" size={32} color="#396593" />
+                        /* <Fontisto name="world-o" size={32} color="#396593" /> */
+                        <Feather name="link-2" size={30} color="#9ca3af" />
                       }
                     </TouchableOpacity>
                     <Text style={{ fontSize: 12, textAlign: 'center', color: 'black' }}>

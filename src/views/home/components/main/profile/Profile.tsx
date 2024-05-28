@@ -29,6 +29,7 @@ import { RouteStackParamList } from '../../../../../types/navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import CustomModalAlertSave from './CustomModalAlertSave';
 
 const Profile = () => {
   const {
@@ -74,7 +75,9 @@ const Profile = () => {
     setIsEmptyDataAll,
     setIsAlertSave,
     isChangeData,
-    setIsChangeData
+    setIsChangeData,
+    navigationItem,
+    setNavigationItem
   } = ProfileHook({
     isProUser: false
   });
@@ -91,10 +94,6 @@ const Profile = () => {
   const handleBackPress = () => {
     if (isChangeData) {
       setIsAlertSave(true);
-      setTimeout(() => {
-        setIsAlertSave(false);
-        navigation.goBack();
-      }, 4000);
     } else {
       navigation.goBack();
     }
@@ -104,23 +103,11 @@ const Profile = () => {
     if (tabName === 'Professional' && userData?.data?.plan === 'standard') {
       setIsModalAlertNavigation(true);
     } else {
-      //console.log('isChangeData ', isChangeData);
       if (isChangeData) {
         setIsAlertSave(true);
-        setTimeout(() => {
-          setIsAlertSave(false);
-          if (tabName === 'Social') {
-            navigation.navigate('Profile');
-          } else if (tabName === 'Professional') {
-            navigation.navigate('ProfileProfessional');
-          } else if (tabName === 'ShareQR') {
-            navigation.navigate('ShareQR');
-          } else {
-            navigation.navigate('Home');
-          }
-        }, 4000);
-
+        setNavigationItem(tabName);
       } else {
+        setIsAlertSave(false);
         if (tabName === 'Social') {
           navigation.navigate('Profile');
         } else if (tabName === 'Professional') {
@@ -130,6 +117,43 @@ const Profile = () => {
         } else {
           navigation.navigate('Home');
         }
+      }
+    }
+  };
+
+  const handleAcept = async () => {
+    setIsAlertSave(false);
+    setIsChangeData(false);
+    await handleSendProfile(false);
+    setTimeout(() => {
+      setIsDataSuccess(false);
+      if (navigationItem) {
+        if (navigationItem === 'Social') {
+          navigation.navigate('Profile');
+        } else if (navigationItem === 'Professional') {
+          navigation.navigate('ProfileProfessional');
+        } else if (navigationItem === 'ShareQR') {
+          navigation.navigate('ShareQR');
+        } else {
+          navigation.navigate('Home');
+        }
+      }
+    }, 1200);
+
+  };
+
+  const handleCancel = async () => {
+    setIsAlertSave(false);
+    setIsChangeData(false);
+    if (navigationItem) {
+      if (navigationItem === 'Social') {
+        navigation.navigate('Profile');
+      } else if (navigationItem === 'Professional') {
+        navigation.navigate('ProfileProfessional');
+      } else if (navigationItem === 'ShareQR') {
+        navigation.navigate('ShareQR');
+      } else {
+        navigation.navigate('Home');
       }
     }
   };
@@ -304,13 +328,14 @@ const Profile = () => {
                 }
               />
 
-              <CustomModalAlert
+              <CustomModalAlertSave
                 isModalAlert={isAlertSave}
                 handleModalAlert={setIsAlertSave}
                 title={'One Tap dice!'}
-                description={
-                  'Ha realizado cambios. Recuerde guardarlos usando la opción "Guardar".'
-                }
+                handleAcept={handleAcept}
+                handleCancel={handleCancel}
+                description={'Ha modificado datos. ¿Desea guardar los cambios antes de continuar?'}
+              //description={'Ha realizado cambios. ¿Desea continuar sin guardar?'}
               />
 
               <CustomModalAlert
