@@ -1,4 +1,4 @@
-package onetaprn.appspot.com.co
+package onetaprn.appspot.com
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity
