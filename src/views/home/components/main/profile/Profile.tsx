@@ -82,6 +82,8 @@ const Profile = () => {
     isProUser: false
   });
 
+  //console.log("Data----> ", data);
+
   const [isModalAlertNavigation, setIsModalAlertNavigation] = useState(false);
   const navigation =
     useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
@@ -334,7 +336,7 @@ const Profile = () => {
                 title={'One Tap dice!'}
                 handleAcept={handleAcept}
                 handleCancel={handleCancel}
-                description={'Ha modificado datos. ¿Desea guardar los cambios antes de continuar?'}
+                description={'Has modificado tus datos. ¿Deseas guardar los cambios antes de continuar?'}
               //description={'Ha realizado cambios. ¿Desea continuar sin guardar?'}
               />
 

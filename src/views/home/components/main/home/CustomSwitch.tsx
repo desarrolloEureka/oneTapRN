@@ -32,6 +32,14 @@ const CustomSwitch = ({
         setSwitchProfile(!switchProfile);
         await SendSwitchProfile(userId, !switchProfile);
       } else {
+
+        if (!switchCard === false) {
+          Alert.alert(
+            'Info',
+            'Al desactivar esta opción, tu perfil no será visible para nadie.'
+          );
+        }
+
         setSwitchCard(!switchCard);
         if (userId) {
           if (data?.isActiveByAdmin === true) {

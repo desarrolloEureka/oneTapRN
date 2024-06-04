@@ -65,63 +65,10 @@ const ProfileProfessionalHook = ({
 
   const handleSendProfile = async (isProUser: boolean) => {
     const userId = data?.uid;
-    const emails = dataForm?.emails?.map((email) => email.text);
-    const phones = dataForm?.phones?.map((phone) => phone.text);
-    const urls = dataForm?.urls?.map((urls) => urls);
-    const education = dataForm?.education?.map((education) => education);
-    const professionalCareer = dataForm?.professional_career?.map(
-      (proCareer) => proCareer
-    );
-
-    /* if (emails) {
-      const isEmailValid = emails.every((email) => validateEmail(email as string));
-      if (!isEmailValid) {
-        setStatus("El correo no es valido ó no se pueden dejar espacios en blanco");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
-
-    if (phones) {
-      const isPhoneValid = phones.every((phone) => validatePhoneNumber(phone as string));
-      if (!isPhoneValid) {
-        setStatus("El teléfono no es valido ó no se pueden dejar espacios en blanco");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
-
-    if (urls) {
-      const allObjectsFilled = dataForm?.urls?.every(obj => obj.name !== "" && obj.url !== "" && obj.icon !== "");
-      if (!allObjectsFilled) {
-        setStatus("No se pueden dejar espacios en blanco en urls");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    } 
-
-    if (isProUser && education) {
-      const allObjectsFilled = dataForm?.education?.every(obj => obj.title !== "" && obj.institution !== "" && obj.year !== "");
-      if (!allObjectsFilled) {
-        setStatus("No se pueden dejar espacios en blanco en educación");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
-
-    if (isProUser && professionalCareer) {
-      const allObjectsFilled = dataForm?.professional_career?.every(obj => obj.company !== "" && obj.position !== "" && obj.data_init !== "" && obj.data_end !== "");
-      if (!allObjectsFilled) {
-        setStatus("No se pueden dejar espacios en blanco en trayectoria");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
-    */
-
     setIsLoadingSendData(true);
+
     if (userId) {
-      const isSendDataProfile = await SendDataUserProfile(userId, dataForm, isProUser);
+      const isSendDataProfile = await SendDataUserProfile(userId, dataForm, true);
       if (isSendDataProfile?.success) {
         setIsChangeData(false);
         setIsDataError(false);
@@ -136,6 +83,79 @@ const ProfileProfessionalHook = ({
       setIsLoadingSendData(false);
     }
   };
+
+  /*  const handleSendProfile = async (isProUser: boolean) => {
+     const userId = data?.uid;
+     const emails = dataForm?.emails?.map((email) => email.text);
+     const phones = dataForm?.phones?.map((phone) => phone.text);
+     const urls = dataForm?.urls?.map((urls) => urls);
+     const education = dataForm?.education?.map((education) => education);
+     const professionalCareer = dataForm?.professional_career?.map(
+       (proCareer) => proCareer
+     );
+ 
+      if (emails) {
+       const isEmailValid = emails.every((email) => validateEmail(email as string));
+       if (!isEmailValid) {
+         setStatus("El correo no es valido ó no se pueden dejar espacios en blanco");
+         setisEmailPhoneRight(true);
+         return;
+       }
+     }
+ 
+     if (phones) {
+       const isPhoneValid = phones.every((phone) => validatePhoneNumber(phone as string));
+       if (!isPhoneValid) {
+         setStatus("El teléfono no es valido ó no se pueden dejar espacios en blanco");
+         setisEmailPhoneRight(true);
+         return;
+       }
+     }
+ 
+     if (urls) {
+       const allObjectsFilled = dataForm?.urls?.every(obj => obj.name !== "" && obj.url !== "" && obj.icon !== "");
+       if (!allObjectsFilled) {
+         setStatus("No se pueden dejar espacios en blanco en urls");
+         setisEmailPhoneRight(true);
+         return;
+       }
+     } 
+ 
+     if (isProUser && education) {
+       const allObjectsFilled = dataForm?.education?.every(obj => obj.title !== "" && obj.institution !== "" && obj.year !== "");
+       if (!allObjectsFilled) {
+         setStatus("No se pueden dejar espacios en blanco en educación");
+         setisEmailPhoneRight(true);
+         return;
+       }
+     }
+ 
+     if (isProUser && professionalCareer) {
+       const allObjectsFilled = dataForm?.professional_career?.every(obj => obj.company !== "" && obj.position !== "" && obj.data_init !== "" && obj.data_end !== "");
+       if (!allObjectsFilled) {
+         setStatus("No se pueden dejar espacios en blanco en trayectoria");
+         setisEmailPhoneRight(true);
+         return;
+       }
+     }
+ 
+     setIsLoadingSendData(true);
+     if (userId) {
+       const isSendDataProfile = await SendDataUserProfile(userId, dataForm, isProUser);
+       if (isSendDataProfile?.success) {
+         setIsChangeData(false);
+         setIsDataError(false);
+         setIsDataSuccess(true);
+         setIsLoadingSendData(false);
+       } else {
+         setIsDataError(true);
+         setIsDataSuccess(false);
+         setIsLoadingSendData(false);
+       }
+     } else {
+       setIsLoadingSendData(false);
+     }
+   }; */
 
   const handleModalAlertLimit = () => {
     setIsModalAlertLimit(!isModalAlertLimit);
@@ -346,7 +366,8 @@ const ProfileProfessionalHook = ({
     }
   };
 
-  const handleDeleteData = () => {
+  const handleDeleteData = async () => {
+    setIsChangeData(true);
     setIsDataLoad(false);
     const index =
       itemDelete && 'index' in itemDelete ? itemDelete['index'] : undefined;
@@ -356,22 +377,191 @@ const ProfileProfessionalHook = ({
         : undefined;
     const dataFormClone = { ...dataForm };
     const dataAux: any = dataFormClone[index as keyof typeof dataForm];
-    if (
-      dataAux?.length > 1 &&
-      Array.isArray(dataAux) &&
-      subindex !== undefined
-    ) {
+
+    if (dataAux?.length > 1 && Array.isArray(dataAux) && subindex !== undefined) {
       dataAux.splice(parseInt(subindex, 10), 1); // Elimina el elemento en la posición subindex
-      setDataForm(dataFormClone);
+      await setDataForm(dataFormClone);
 
       setTimeout(() => {
         setIsModalAlert(false);
         setSuccessDelete(true);
       }, 500);
     } else {
-      setNoDeleted(true);
+      //setNoDeleted(true);
+      if (subindex !== undefined && subindex) {
+        if (dataAux[subindex].label === "urls") {
+          dataAux[subindex] = {
+            label: 'urls',
+            name: '',
+            url: '',
+            icon: '',
+            checked: false,
+            principal: true,
+            social: false,
+            professional: false,
+            order: 13,
+          };
+        } else if (dataAux[subindex].label === "emails") {
+          dataAux[subindex] = {
+            label: 'emails',
+            text: '',
+            checked: false,
+            principal: true,
+            social: true,
+            professional: false,
+            icon: 'EmailOutlinedIcon',
+            order: 10,
+          };
+        } else if (dataAux[subindex].label === "phones") {
+          dataAux[subindex] = {
+            label: 'phones',
+            text: '',
+            checked: false,
+            principal: true,
+            social: true,
+            professional: false,
+            icon: 'LocalPhoneOutlinedIcon',
+            order: 9,
+          };
+        } else if (dataAux[subindex]?.label === "education") {
+          dataAux[subindex] = {
+            label: 'education',
+            title: '',
+            institution: '',
+            year: '',
+            checked: false,
+            principal: true,
+            social: false,
+            professional: true,
+            icon: '',
+            order: 11,
+          };
+
+        } else if (dataAux[subindex]?.label === "professional_career") {
+          dataAux[subindex] = {
+            label: 'professional_career',
+            company: '',
+            position: '',
+            data_init: '',
+            data_end: '',
+            checked: false,
+            principal: true,
+            social: false,
+            professional: true,
+            icon: '',
+            order: 12,
+          };
+        }
+
+        await setDataForm(dataFormClone);
+        setTimeout(() => {
+          setIsModalAlert(false);
+          setSuccessDelete(true);
+        }, 700);
+      }
     }
   };
+
+  /*   const handleDeleteData = async () => {
+      setIsChangeData(true);
+      setIsDataLoad(false);
+      const index =
+        itemDelete && 'index' in itemDelete ? itemDelete['index'] : undefined;
+      const subindex =
+        itemDelete && 'subindex' in itemDelete
+          ? itemDelete['subindex']
+          : undefined;
+      const dataFormClone = { ...dataForm };
+      const dataAux: any = dataFormClone[index as keyof typeof dataForm];
+  
+      if (dataAux?.length > 1 && Array.isArray(dataAux) && subindex !== undefined) {
+        dataAux.splice(parseInt(subindex, 10), 1); // Elimina el elemento en la posición subindex
+        await setDataForm(dataFormClone);
+  
+        setTimeout(() => {
+          setIsModalAlert(false);
+          setSuccessDelete(true);
+        }, 500);
+  
+      } else {
+        console.log("dataAux[subindex]?.label ", subindex && dataAux[subindex]?.label);
+        console.log();
+  
+        if (subindex !== undefined && subindex) {
+          if (dataAux[subindex]?.label === "urls") {
+            dataAux[subindex] = {
+              label: 'urls',
+              name: '',
+              url: '',
+              icon: '',
+              checked: false,
+              principal: true,
+              social: false,
+              professional: false,
+              order: 13,
+            };
+          } else if (dataAux[subindex]?.label === "emails") {
+            dataAux[subindex] = {
+              label: 'emails',
+              text: '',
+              checked: false,
+              principal: true,
+              social: true,
+              professional: false,
+              icon: 'EmailOutlinedIcon',
+              order: 10,
+            };
+          } else if (dataAux[subindex]?.label === "phones") {
+            dataAux[subindex] = {
+              label: 'phones',
+              text: '',
+              checked: false,
+              principal: true,
+              social: true,
+              professional: false,
+              icon: 'LocalPhoneOutlinedIcon',
+              order: 9,
+            };
+          } else if (dataAux[subindex]?.label === "education") {
+            dataAux[subindex] = {
+              label: 'education',
+              title: '',
+              institution: '',
+              year: '',
+              checked: false,
+              principal: true,
+              social: false,
+              professional: true,
+              icon: '',
+              order: 11,
+            };
+  
+          } else if (dataAux[subindex]?.label === "professional_career") {
+            dataAux[subindex] = {
+              label: 'professional_career',
+              company: '',
+              position: '',
+              data_init: '',
+              data_end: '',
+              checked: false,
+              principal: true,
+              social: false,
+              professional: true,
+              icon: '',
+              order: 12,
+            };
+          }
+        }
+  
+        await setDataForm(dataFormClone);
+        setTimeout(() => {
+          setIsModalAlert(false);
+          setSuccessDelete(true);
+        }, 500);
+      }
+  
+      //console.log(dataFormClone);
+    }; */
 
   const handleAddData = (index: string) => {
     const dataFormClone = { ...dataForm };

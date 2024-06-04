@@ -131,7 +131,7 @@ const FormDataUser = ({
                                     ? user.profile.professional?.[index]
                                     : user.profile?.social?.[index]
                                 : dataForm && dataForm[index]) as unknown as DataFormValues;
-                                
+
                             return (
                                 <View style={{ paddingBottom: key === 16 ? 30 : undefined, marginBottom: key === 16 ? 25 : undefined, backgroundColor: "#e9e9e9" }} key={key}>
                                     <TextAreaForm

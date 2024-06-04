@@ -105,7 +105,7 @@ const ShareQR = () => {
                         </View>
                         <View style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center', position: 'absolute' }}>
                             <Text style={{ fontSize: 14.5, color: 'white', fontWeight: '500' }}>
-                                Compartir URL del Perfil
+                                Copiar URL del Perfil
                             </Text>
                         </View>
                     </TouchableOpacity>

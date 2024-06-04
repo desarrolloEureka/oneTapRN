@@ -49,12 +49,31 @@ const ItemForm = ({
     }
   }, [dataRef, myValue, inputText]);
 
+
   return (
     <View style={{ height: 115, justifyContent: 'center', flexDirection: 'row' }}>
       <View style={{ flexDirection: 'column', alignItems: 'center', height: '90%', width: '80%' }}>
         <View style={{ flexDirection: 'column', alignItems: 'flex-start', height: '100%', width: '100%', paddingLeft: 10, }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', height: '20%', width: '90%', }}>
-            <Text style={profileStyles.label}>{label}</Text>
+            {/* <Text style={profileStyles.label}>{label}</Text> */}
+            <Text style={profileStyles.label}>  {label === 'name' ? 'Nombres' :
+              label === 'last_name' ? 'Apellidos' :
+                label === 'profession' ? 'Profesión' :
+                  label === 'occupation' ? 'Ocupación' :
+                    label === 'address' ? 'Dirección' :
+                      label === 'company' ? 'Empresa' :
+                        label === 'position' ? 'Cargo' :
+                          label === 'professional_profile' ? 'Perfil Profesional' :
+                            label === 'other_competencies' ? 'Otras Competencias' :
+                              label === 'skills' ? 'Habilidades' :
+                                label === 'languages' ? 'Idiomas' :
+                                  label === 'achievements_recognitions' ? 'Logros y reconocimientos' :
+                                    label === 'phones' ? 'Telefono' :
+                                      label === 'emails' ? 'Correo' :
+                                        label === 'urls' ? 'urls' :
+                                          label}
+            </Text>
+
           </View>
 
           <View style={{ flexDirection: 'row', alignItems: 'center', height: '55%', width: '90%', borderBottomWidth: 1, borderBottomColor: '#9b9db3', }}>

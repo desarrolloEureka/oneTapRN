@@ -332,7 +332,7 @@ const ProfileProfessional = () => {
                 title={'One Tap dice!'}
                 handleAcept={handleAcept}
                 handleCancel={handleCancel}
-                description={'Ha modificado datos. ¿Desea guardar los cambios antes de continuar?'}
+                description={'Has modificado tus datos. ¿Deseas guardar los cambios antes de continuar?'}
               //description={'Ha realizado cambios. ¿Desea continuar sin guardar?'}
               />
 

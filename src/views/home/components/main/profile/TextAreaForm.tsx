@@ -3,12 +3,10 @@ import { View, Text, TextInput } from 'react-native';
 import { profileStyles } from '../../../styles/profileStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ItemFormParams } from '../../../../../types/profile';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
-
 
 const TextAreaForm = ({
     label,
@@ -36,7 +34,24 @@ const TextAreaForm = ({
                 <View style={{ flexDirection: 'column', alignItems: 'flex-start', height: "100%", width: "100%", paddingLeft: 10 }}>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', height: "20%", width: "100%" }}>
-                        <Text style={profileStyles.label}>{label}</Text>
+                        {/* <Text style={profileStyles.label}>{label}</Text> */}
+                        <Text style={profileStyles.label}>  {label === 'name' ? 'Nombres' :
+                            label === 'last_name' ? 'Apellidos' :
+                                label === 'profession' ? 'Profesión' :
+                                    label === 'occupation' ? 'Ocupación' :
+                                        label === 'address' ? 'Dirección' :
+                                            label === 'company' ? 'Empresa' :
+                                                label === 'position' ? 'Cargo' :
+                                                    label === 'professional_profile' ? 'Perfil Profesional' :
+                                                        label === 'other_competencies' ? 'Otras Competencias' :
+                                                            label === 'skills' ? 'Habilidades' :
+                                                                label === 'languages' ? 'Idiomas' :
+                                                                    label === 'achievements_recognitions' ? 'Logros y reconocimientos' :
+                                                                        label === 'phones' ? 'Telefono' :
+                                                                            label === 'emails' ? 'Correo' :
+                                                                                label === 'urls' ? 'urls' :
+                                                                                    label}
+                        </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', height: "80%", width: "90%", borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
