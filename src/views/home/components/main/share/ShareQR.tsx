@@ -68,7 +68,8 @@ const ShareQR = () => {
     useEffect(() => {
         if (data && data.preview) {
             const url = data?.preview;
-            const nuevaURL = url && url.replace('localhost:3000', 'on-tap-tawny.vercel.app');
+            //const nuevaURL = url && url.replace('localhost:3000', 'on-tap-tawny.vercel.app');
+            const nuevaURL = url && url.replace('localhost:3000', 'backoffice.onetap.com.co');
             setUrlGlobal(nuevaURL);
         }
     }, [])

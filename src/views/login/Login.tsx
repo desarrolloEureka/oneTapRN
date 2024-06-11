@@ -59,7 +59,8 @@ const Login = () => {
 
   const userIsLogged = useCallback(() => {
     if (data && data?.isActive === true && data?.isActiveByAdmin === true) {
-      const url = `http://on-tap-tawny.vercel.app/es/views/cardView?uid=${data?.uid}`;
+      //const url = `http://on-tap-tawny.vercel.app/es/views/cardView?uid=${data?.uid}`;
+      const url = `https://backoffice.onetap.com.co/es/views/cardView?uid=${data?.uid}`;
       data && SendPreView(data?.uid, url);
       setErrorForm(null);
       navigation.navigate('Home');
