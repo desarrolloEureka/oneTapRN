@@ -7,7 +7,8 @@ import {
   Image,
   Alert,
   Modal,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Platform
 } from 'react-native';
 import {
   launchImageLibrary,
@@ -22,6 +23,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SendDataImage, GetUser } from '../../../../../reactQuery/users';
 import { UserData } from '../../../../../types/user';
+import { PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 
 const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser: boolean; isAlertSave: boolean }) => {
   const { data, refetch } = GetUser();
@@ -43,21 +45,23 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
 
   const openCameraPicker = async () => {
 
-    const cameraPermission = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-      {
-        title: "Permiso para usar la cámara",
-        message: "Esta aplicación necesita tu permiso para usar la cámara.",
-        buttonNeutral: "Preguntar después",
-        buttonNegative: "Cancelar",
-        buttonPositive: "Aceptar"
-      }
-    );
+    if (Platform.OS === 'android') {
+      const cameraPermission = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: "Permiso para usar la cámara",
+          message: "Esta aplicación necesita tu permiso para usar la cámara.",
+          buttonNeutral: "Preguntar después",
+          buttonNegative: "Cancelar",
+          buttonPositive: "Aceptar"
+        }
+      );
 
-    if (cameraPermission !== PermissionsAndroid.RESULTS.GRANTED) {
-      Alert.alert("Permiso denegado", "No se puede acceder a la cámara porque no se otorgaron los permisos necesarios.");
-      return;
-    }
+      if (cameraPermission !== PermissionsAndroid.RESULTS.GRANTED) {
+        Alert.alert("Permiso denegado", "No se puede acceder a la cámara porque no se otorgaron los permisos necesarios.");
+        return;
+      }
+    } 
 
     const options: ImageLibraryOptions = {
       mediaType: 'photo' as MediaType,
