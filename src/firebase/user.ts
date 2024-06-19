@@ -199,7 +199,7 @@ export const updateTemplateSelectedFirebase = async (
   await updateDoc(userDocRef, newData);
 };
 
-export const updateDataUserProfile = async (
+/* export const updateDataUserProfile = async (
   userId: string,
   data: SocialDataForm | ProfessionalDataForm,
   isProUser: boolean
@@ -210,10 +210,29 @@ export const updateDataUserProfile = async (
       : { 'profile.social': data };
     const userDocRef = doc(dataBase, 'users', userId);
     const res = await updateDoc(userDocRef, profRef);
-    return res;
+    console.log('res ', res);
+    return true;
   } catch (error: any) {
     console.debug('error message', error.message);
     return null;
+  }
+}; */
+
+export const updateDataUserProfile = async (
+  userId: string,
+  data: SocialDataForm | ProfessionalDataForm,
+  isProUser: boolean
+) => {
+  try {
+    const profRef = isProUser
+      ? { 'profile.professional': data }
+      : { 'profile.social': data };
+    const userDocRef = doc(dataBase, 'users', userId);
+    await updateDoc(userDocRef, profRef);
+    return true;
+  } catch (error: any) {
+    console.error('Error updating user profile data: ', error.message);
+    return false;
   }
 };
 

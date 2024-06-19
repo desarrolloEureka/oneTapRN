@@ -42,7 +42,7 @@ const Main = () => {
   const dataBackgrounds = GetAllBackgroundImages();
   const route = useRoute();
   const dataTemplateFilter = templates.data?.filter(elemento => elemento.type === tab);
-  const { data, error } = GetUser();
+  const { data, refetch } = GetUser();
   const [selectedTemplate, setSelectedTemplate] = useState<string>();
   const [isLoadingSendData, setIsLoadingSendData] = useState(false);
   const [templateSelect, setTemplateSelect] = useState<TemplateType>({
@@ -129,6 +129,9 @@ const Main = () => {
     return () => subscription.remove();
   });
 
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const handleSelectBackground = (item: BackgroundType) => {
     const data = {
@@ -174,43 +177,6 @@ const Main = () => {
       setIscopiedText(false);
     }, 5000);
   };
-
-  /* const selectTemplate = async (value: any) => {
-    setIsLoadingSendData(true);
-    const userId = data?.uid;
-    const optionSelected = tab as TemplateTypes;
-
-    if (userId && fakeData.length > 0) {
-      const fakeDataClone = [...fakeData];
-      const fakeDataCloneFilter = fakeDataClone.filter(
-        (val) => val.type !== optionSelected
-      );
-      fakeDataCloneFilter.push({
-        type: optionSelected,
-        id: value.id,
-        checked: true,
-        //background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
-        background_id: '7ynTMVt3M6VFV3KykOXQ',
-      });
-      await setFakeData(fakeDataCloneFilter);
-      await SendTemplateSelected(userId, fakeDataCloneFilter, queryClient);
-      await setIsUpdate(!isUpdate);
-    } else {
-      const fakeDataClone = [...fakeData];
-      fakeDataClone.push({
-        type: optionSelected,
-        id: value.id,
-        checked: true,
-        //background_id: firstBackgroundId !== null ? firstBackgroundId : undefined,
-        background_id: '7ynTMVt3M6VFV3KykOXQ',
-      });
-      await setFakeData(fakeDataClone);
-      userId &&
-        (await SendTemplateSelected(userId, fakeDataClone, queryClient));
-      await setIsUpdate(!isUpdate);
-    }
-    await setIsLoadingSendData(false);
-  }; */
 
   const selectTemplate = async (value: { id: string }) => {
     setIsLoadingSendData(true);
