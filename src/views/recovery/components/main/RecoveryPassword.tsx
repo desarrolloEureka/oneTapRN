@@ -19,14 +19,14 @@ const RecoveryPassword = () => {
 
   const handleNextPress = async () => {
     const res = await resetPasswordFirebase(email);
-    console.log('res ', res);
     setStatusSendEmail(res as any);
 
     if (res === 'success') {
       Alert.alert(
-        'Éxito',
+        'Enhorabuena',
         'Se ha enviado un correo para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada.',
       );
+      navigation.goBack();
     } else if (res === 'user_not_found') {
       Alert.alert(
         'Error',
