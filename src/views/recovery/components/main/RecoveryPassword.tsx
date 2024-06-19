@@ -15,18 +15,27 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const RecoveryPassword = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
+  const [statusSendEmail, setStatusSendEmail] = useState('');
 
   const handleNextPress = async () => {
-    try {
-      await resetPasswordFirebase(email);
+    const res = await resetPasswordFirebase(email);
+    console.log('res ', res);
+    setStatusSendEmail(res as any);
+
+    if (res === 'success') {
       Alert.alert(
-        'Alerta',
-        'Si el correo existe en nuestra base de datos, un email será entregado para reestablecer tu contraseña'
+        'Éxito',
+        'Se ha enviado un correo para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada.',
       );
-    } catch (error) {
+    } else if (res === 'user_not_found') {
       Alert.alert(
         'Error',
-        'Hubo un problema al intentar reiniciar la contraseña. Por favor, inténtalo de nuevo.'
+        'El correo electrónico no está registrado. Por favor, verifica y vuelve a intentarlo.',
+      );
+    } else if (res === 'send_email_failed') {
+      Alert.alert(
+        'Error',
+        'Hubo un problema al intentar enviar el correo de restablecimiento. Por favor, inténtalo de nuevo.',
       );
     }
   };

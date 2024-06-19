@@ -63,24 +63,58 @@ const ProfileProfessionalHook = ({
   const [switchValue, setSwitchValue] = useState(false);
   const [navigationItem, setNavigationItem] = useState('');
 
+  /*   const handleSendProfile = async (isProUser: boolean) => {
+      const userId = data?.uid;
+      setIsLoadingSendData(true);
+  
+      if (userId) {
+        const isSendDataProfile = await SendDataUserProfile(userId, dataForm, true);
+        if (isSendDataProfile?.success) {
+          setIsChangeData(false);
+          setIsDataError(false);
+          setIsDataSuccess(true);
+          setIsLoadingSendData(false);
+        } else {
+          setIsDataError(true);
+          setIsDataSuccess(false);
+          setIsLoadingSendData(false);
+        }
+      } else {
+        setIsLoadingSendData(false);
+      }
+    }; */
+
   const handleSendProfile = async (isProUser: boolean) => {
     const userId = data?.uid;
+
+    if (!userId) {
+      console.log('No userId found');
+      setIsLoadingSendData(false);
+      return;
+    }
     setIsLoadingSendData(true);
 
-    if (userId) {
+    try {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm, true);
+      //console.log('isSendDataProfile result:', isSendDataProfile);
+
       if (isSendDataProfile?.success) {
+        console.log('Data sent successfully');
         setIsChangeData(false);
         setIsDataError(false);
         setIsDataSuccess(true);
-        setIsLoadingSendData(false);
       } else {
+        console.log('Failed to send data');
         setIsDataError(true);
         setIsDataSuccess(false);
-        setIsLoadingSendData(false);
       }
-    } else {
+    } catch (error) {
+      console.error('Error sending profile data:', error);
+      setIsDataError(true);
+      setIsDataSuccess(false);
+    } finally {
       setIsLoadingSendData(false);
+      //console.log('Finished handleSendProfile');
     }
   };
 
