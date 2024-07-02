@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View, FlatList, Image } from 'react-native';
-import { BackHandler } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View, FlatList, Image, BackHandler } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteStackParamList } from '../../../../types/navigation';
+import { RouteStackParamList, StackNavigation } from '../../../../types/navigation';
 import { homeStyles } from '../../styles/homeStyles';
 import MenuSuperior from '../../../menuSuperior/MenuSuperior';
 import CustomSwitch from './home/CustomSwitch';
@@ -22,6 +21,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import CustomModalLoading from './profile/CustomModalLoading';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { TemplateData } from '../../../../types/user';
+import TabNav from '../tabNav/TabNav';
 
 interface BackgroundType {
   id: string;
@@ -35,6 +35,7 @@ interface TemplateType {
 }
 
 const Main = () => {
+  const navigation = useNavigation<StackNavigation>();
   const { tab, setTab } = HomeHook();
   const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,10 +64,6 @@ const Main = () => {
   const handleModalAlertBg = (status: boolean) => setIsModalAlertBg(!isModalAlertBg);
   const handleAlertProfileSocial = (status: boolean) => setIsAlertProfileSocial(!isAlertProfileSocial);
   const handleAlertProfilePro = (status: boolean) => setIsAlertProfilePro(!isAlertProfilePro);
-
-  const navigation =
-    useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
-
   const handleModalBackground = (item?: Templates) => {
     item && setSelectedTemplate(item.id);
     setIsModalOpen(!isModalOpen);
@@ -113,7 +110,6 @@ const Main = () => {
   };
 
   const onBackPress = () => {
-    const currentRoute = route.name;
     const index = navigation.getState().index;
     if (index < 2) {
       BackHandler.exitApp();
@@ -122,12 +118,9 @@ const Main = () => {
   };
 
   useEffect(() => {
-    const subscription = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onBackPress
-    );
+    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
     return () => subscription.remove();
-  });
+  }, []);
 
   useEffect(() => {
     refetch();
@@ -373,31 +366,11 @@ const Main = () => {
         </View>
       </View>
 
-      <View style={{
-        flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#E9E9E9', height: 80, position: 'absolute', bottom: 0, width: '100%'
-      }}>
-
-        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Home')}>
-          <Icon name="home" size={25} color="black" />
-          <Text style={{ color: 'black' }}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Social')}>
-          <Icon name="users" size={25} color="black" />
-          <Text style={{ color: 'black' }}>Social</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Professional')}>
-          <Ionicons name="newspaper-sharp" size={28} color="black" />
-          <Text style={{ color: 'black' }}>PRO</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('ShareQR')}>
-          <Ionicons name="share" size={28} color="black" />
-          <Text style={{ color: 'black' }}>Compartir</Text>
-        </TouchableOpacity>
-
-      </View>
+     
+      <TabNav
+          handleTabPress={handleTabPress}
+          numberNav={1}
+        />
 
       {
         dataBackgrounds?.data &&

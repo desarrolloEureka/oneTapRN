@@ -1,7 +1,7 @@
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/views/home/Home';
 import Plantillas from './src/views/home/components/main/home/Plantillas';
 import PreviewTemplate from './src/views/home/components/main/home/PreviewTemplate';
@@ -18,13 +18,13 @@ import AcercaDe from './src/views/opcionesMenu/AcercaDe';
 import Politicas from './src/views/opcionesMenu/Politicas';
 import Terminos from './src/views/opcionesMenu/Terminos';
 import RecoveryPassword from './src/views/recovery/components/main/RecoveryPassword';
-import {RouteStackParamList} from './src/types/navigation';
+import { RouteStackParamList } from './src/types/navigation';
 import ShareQR from './src/views/home/components/main/share/ShareQR';
-
-const Stack = createNativeStackNavigator<RouteStackParamList>();
 
 // Crea una instancia de QueryClient
 const queryClient = new QueryClient();
+
+const Stack = createNativeStackNavigator<RouteStackParamList>();
 
 const App = () => {
   return (
@@ -34,7 +34,9 @@ const App = () => {
           screenOptions={{
             headerShown: false,
           }}
-          initialRouteName="Splash">
+          initialRouteName="Splash"
+        >
+          <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="PreviewTemplate" component={PreviewTemplate} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
@@ -43,17 +45,13 @@ const App = () => {
           <Stack.Screen name="OnboardingOne" component={OnboardingOne} />
           <Stack.Screen name="OnboardingTwo" component={OnboardingTwo} />
           <Stack.Screen name="OnboardingThree" component={OnboardingThree} />
-          <Stack.Screen
-            name="OnboardingInicioSesion"
-            component={OnboardingInicioSesion}
-          />
+          <Stack.Screen name="OnboardingInicioSesion" component={OnboardingInicioSesion} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="RecoveryPassword" component={RecoveryPassword} />
           <Stack.Screen name="AcercaDe" component={AcercaDe} />
           <Stack.Screen name="Terminos" component={Terminos} />
           <Stack.Screen name="Politicas" component={Politicas} />
           <Stack.Screen name="Plantillas" component={Plantillas} />
-          <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="ShareQR" component={ShareQR} />
         </Stack.Navigator>
       </NavigationContainer>

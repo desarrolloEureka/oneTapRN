@@ -26,9 +26,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GetUser } from '../../../../../reactQuery/users';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteStackParamList } from '../../../../../types/navigation';
+import { RouteStackParamList, StackNavigation } from '../../../../../types/navigation';
 import ProfileProfessionalHook from './hooks/ProfileProfessoinalHook';
 import CustomModalAlertSave from './CustomModalAlertSave';
+import TabNav from '../../tabNav/TabNav';
 
 const ProfileProfessional = () => {
   const {
@@ -83,9 +84,8 @@ const ProfileProfessional = () => {
     isProUser: true
   });
 
+  const navigation = useNavigation<StackNavigation>();
   const [isModalAlertNavigation, setIsModalAlertNavigation] = useState(false);
-  const navigation =
-    useNavigation<StackNavigationProp<RouteStackParamList, 'Home'>>();
   const userData = GetUser();
 
   const handleDataSet = (data: SocialDataForm) => {
@@ -366,31 +366,12 @@ const ProfileProfessional = () => {
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
 
-        <View style={{
-          flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#E9E9E9', height: 80, position: 'absolute', bottom: 0, width: '100%'
-        }}>
 
-          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Home')}>
-            <Icon name="home" size={25} color="black" />
-            <Text style={{ color: 'black' }}>Home</Text>
-          </TouchableOpacity>
+        <TabNav
+          handleTabPress={handleTabPress}
+          numberNav={3}
+        />
 
-          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('Social')}>
-            <FontAwesome name="users" size={25} color="black" />
-            <Text style={{ color: 'black' }}>Social</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center', borderTopWidth: 3.5, borderColor: '#396593' }} onPress={() => handleTabPress('Professional')}>
-            <Ionicons name="newspaper-sharp" size={28} color="black" />
-            <Text style={{ color: 'black' }}>PRO</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{ height: "100%", width: "25%", alignItems: 'center', justifyContent: 'center' }} onPress={() => handleTabPress('ShareQR')}>
-            <Ionicons name="share" size={28} color="black" />
-            <Text style={{ color: 'black' }}>Compartir</Text>
-          </TouchableOpacity>
-
-        </View>
       </SafeAreaView>
     )
   );
