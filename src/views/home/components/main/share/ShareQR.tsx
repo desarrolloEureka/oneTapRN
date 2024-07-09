@@ -1,12 +1,9 @@
 
-import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { RouteStackParamList, StackNavigation } from '../../../../../types/navigation';
+import { StackNavigation } from '../../../../../types/navigation';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GetUser } from '../../../../../reactQuery/users';
 import QRCode from 'react-native-qrcode-svg';
 import Feather from 'react-native-vector-icons/Feather';
@@ -55,6 +52,7 @@ const ShareQR = () => {
     const handleShare = async () => {
         Share.open({
             title: 'Compartir enlace',
+            message: '',
             type: 'url',
             url: urlGlobal,
         })

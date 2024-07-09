@@ -139,7 +139,7 @@ const Profile = () => {
           navigation.navigate('Home');
         }
       }
-    }, 1200);
+    }, 2100);
 
   };
 
