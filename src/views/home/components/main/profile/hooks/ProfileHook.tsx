@@ -232,10 +232,11 @@ const ProfileHook = ({
       if (dataAux && subindex != undefined) {
 
         if (!isChecked && dataAux[subindex]) {
-          const isEmptyText = dataAux[subindex].text?.length === 0 && index !== 'urls';
+          const isEmptyText = dataAux[subindex].text?.length === 0 && index !== 'urls' && index !== 'phones';
           const isEmptyUrls = index === 'urls' && (dataUrl[subindex]?.name?.length === 0 || dataUrl[subindex]?.url?.length === 0 || dataUrl[subindex]?.icon?.length === 0);
+          const isEmptyPhone = index === 'phones' && (dataAux[subindex]?.indicative?.length === 0 || dataAux[subindex]?.indicative === undefined || dataAux[subindex]?.text?.length === 0);
 
-          if (isEmptyText || isEmptyUrls) {
+          if (isEmptyText || isEmptyUrls || isEmptyPhone) {
             setIsEmptyData(true);
           } else {
             dataAux[subindex].checked = !isChecked;
@@ -289,6 +290,7 @@ const ProfileHook = ({
     subindex,
     key,
     currentDataRef,
+    type
   }: handleDataProps) => {
     setIsChangeData(true);
     const dataFormClone = { ...dataForm };
@@ -305,7 +307,24 @@ const ProfileHook = ({
       setDataForm(dataFormClone);
       setIsDataLoad(true);
     } else {
-      if (index == 'phones' || index == 'emails') {
+      if (index == 'phones') {
+        const dataAux = dataFormClone[index];
+        if (dataAux && key != undefined) {
+          if (type === false) {
+            dataAux[key].indicative = text;
+            currentDataRef.current.length > 0 &&
+              (currentDataRef.current[key].indicative = text);
+            dataAux && setDataForm(dataFormClone);
+          } else {
+
+            dataAux[key].text = text;
+            currentDataRef.current.length > 0 &&
+              (currentDataRef.current[key].text = text);
+            dataAux && setDataForm(dataFormClone);
+          }
+        }
+        setIsDataLoad(true);
+      } else if (index == 'emails') {
         const dataAux = dataFormClone[index];
         if (dataAux && key != undefined) {
           dataAux[key].text = text;
@@ -319,7 +338,12 @@ const ProfileHook = ({
         (subindex == 'name' || subindex == 'url' || subindex == 'icon') &&
         key != undefined
       ) {
-        currentDataRef.current[key][subindex] = text;
+
+        if (currentDataRef.current[key]) {
+          if (currentDataRef.current[key][subindex] !== undefined) {
+            currentDataRef.current[key][subindex] = text;
+          }
+        }
         fillFields(index, key, text, subindex);
       }
     }

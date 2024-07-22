@@ -60,6 +60,7 @@ export interface DataFormSortedArray {
 export type DataFormValues = {
   label?: string;
   text?: string;
+  indicative?: string;
   checked?: boolean;
   principal?: boolean;
   social?: boolean;
@@ -137,11 +138,12 @@ export type handleDataProps = {
   name: string;
   text: string;
   subindex?:
-    | EducationSubIndexDataForm
-    | CareerSubIndexDataForm
-    | NetworksSubIndexDataForm;
+  | EducationSubIndexDataForm
+  | CareerSubIndexDataForm
+  | NetworksSubIndexDataForm;
   key?: number;
   currentDataRef?: any;
+  type?: boolean;
 };
 export type handleDataNetworksProps = {
   name: string;
@@ -154,6 +156,7 @@ export interface ItemFormParams {
   label: string;
   name: IndexDataForm;
   handleSwitch: (e: any) => void;
+  handleOpenModalIndicative: ({ name, dataRef, subindex }: { name: string, dataRef: any, subindex: any }) => void;
   handleData: ({
     name,
     text,
@@ -164,6 +167,7 @@ export interface ItemFormParams {
   checked?: boolean;
   icon?: string;
   deleteAction?: boolean;
+  openModalIndicative: boolean;
   handleDeleteData?: ({ name }: { name: string }) => void;
   handleModalAlert?: ({
     index,
@@ -178,7 +182,7 @@ export interface ItemFormParams {
   subindex?: number;
   withCheck?: boolean;
   subLabel?:
-    | EducationSubIndexDataForm
-    | CareerSubIndexDataForm
-    | NetworksSubIndexDataForm;
+  | EducationSubIndexDataForm
+  | CareerSubIndexDataForm
+  | NetworksSubIndexDataForm;
 }

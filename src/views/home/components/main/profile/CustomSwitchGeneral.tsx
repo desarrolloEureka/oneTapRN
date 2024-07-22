@@ -74,7 +74,6 @@ const CustomSwitchGeneral = ({
       </View>
     </View>
 
-    /*    */
   );
 };
 

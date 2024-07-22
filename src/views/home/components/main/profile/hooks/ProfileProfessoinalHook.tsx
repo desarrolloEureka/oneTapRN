@@ -276,12 +276,13 @@ const ProfileProfessionalHook = ({
 
       if (dataAux && subindex != undefined) {
         if (!isChecked && dataAux[subindex]) {
-          const isEmptyText = dataAux[subindex].text?.length === 0 && index !== 'urls';
+          const isEmptyText = dataAux[subindex].text?.length === 0 && index !== 'urls' && index !== 'phones';
           const isEmptyUrls = index === 'urls' && (dataUrl[subindex]?.name?.length === 0 || dataUrl[subindex]?.url?.length === 0 || dataUrl[subindex]?.icon?.length === 0);
           const isEmptyEduca = index === 'education' && (dataEduca[subindex]?.title?.length === 0 || dataEduca[subindex]?.institution?.length === 0 || dataEduca[subindex]?.year?.length === 0);
           const isEmptyCareer = index === 'professional_career' && (dataCareer[subindex]?.company?.length === 0 || dataCareer[subindex]?.position?.length === 0 || dataCareer[subindex]?.data_init?.length === 0 || dataCareer[subindex]?.data_end?.length === 0);
+          const isEmptyPhone = index === 'phones' && (dataAux[subindex]?.indicative?.length === 0 || dataAux[subindex]?.indicative === undefined || dataAux[subindex]?.text?.length === 0);
 
-          if (isEmptyText || isEmptyUrls || isEmptyEduca || isEmptyCareer) {
+          if (isEmptyText || isEmptyUrls || isEmptyEduca || isEmptyCareer || isEmptyPhone) {
             setIsEmptyData(true);
           } else {
             dataAux[subindex].checked = !isChecked;
@@ -345,6 +346,7 @@ const ProfileProfessionalHook = ({
     subindex,
     key,
     currentDataRef,
+    type
   }: handleDataProps) => {
     setIsChangeData(true);
     const dataFormClone = { ...dataForm };
@@ -361,7 +363,23 @@ const ProfileProfessionalHook = ({
       setDataForm(dataFormClone);
       setIsDataLoad(true);
     } else {
-      if (index == 'phones' || index == 'emails') {
+      if (index == 'phones') {
+        const dataAux = dataFormClone[index];
+        if (dataAux && key != undefined) {
+          if (type === false) {
+            dataAux[key].indicative = text;
+            currentDataRef.current.length > 0 &&
+              (currentDataRef.current[key].indicative = text);
+            dataAux && setDataForm(dataFormClone);
+          } else {
+            dataAux[key].text = text;
+            currentDataRef.current.length > 0 &&
+              (currentDataRef.current[key].text = text);
+            dataAux && setDataForm(dataFormClone);
+          }
+        }
+        setIsDataLoad(true);
+      } else if (index == 'emails') {
         const dataAux = dataFormClone[index];
         if (dataAux && key != undefined) {
           dataAux[key].text = text;
@@ -377,7 +395,11 @@ const ProfileProfessionalHook = ({
           subindex == 'institution') &&
         key != undefined
       ) {
-        currentDataRef.current[key][subindex] = text;
+        if (currentDataRef.current[key]) {
+          if (currentDataRef.current[key][subindex] !== undefined) {
+            currentDataRef.current[key][subindex] = text;
+          }
+        }
         fillFields(index, key, text, subindex);
       } else if (
         index == 'professional_career' &&
@@ -387,14 +409,22 @@ const ProfileProfessionalHook = ({
           subindex == 'position') &&
         key != undefined
       ) {
-        currentDataRef.current[key][subindex] = text;
+        if (currentDataRef.current[key]) {
+          if (currentDataRef.current[key][subindex] !== undefined) {
+            currentDataRef.current[key][subindex] = text;
+          }
+        }
         fillFields(index, key, text, undefined, subindex);
       } else if (
         index == 'urls' &&
         (subindex == 'name' || subindex == 'url' || subindex == 'icon') &&
         key != undefined
       ) {
-        currentDataRef.current[key][subindex] = text;
+        if (currentDataRef.current[key]) {
+          if (currentDataRef.current[key][subindex] !== undefined) {
+            currentDataRef.current[key][subindex] = text;
+          }
+        }
         fillFields(index, key, text, undefined, undefined, subindex);
       }
     }

@@ -9,6 +9,8 @@ import { ItemFormParams } from '../../../../../types/profile';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import CountryFlag from "react-native-country-flag";
+import { countries } from '../../../../../globals/constants';
 
 const ItemForm = ({
   label,
@@ -22,24 +24,40 @@ const ItemForm = ({
   myValue,
   index,
   subindex,
+  openModalIndicative,
+  handleOpenModalIndicative
 }: ItemFormParams) => {
   const dataRef = useRef<any>(null);
   const [inputText, setInputText] = useState('');
 
   const value = () => {
     if (
-      index != 'phones' &&
-      index != 'education' &&
-      index != 'emails' &&
-      index != 'urls' &&
-      index != 'professional_career'
+      index !== 'phones' &&
+      index !== 'education' &&
+      index !== 'emails' &&
+      index !== 'urls' &&
+      index !== 'professional_career'
     ) {
       return dataRef?.current?.text ?? myValue?.text;
     } else {
       if (dataRef.current && dataRef.current.length) {
-        return dataRef?.current[subindex as any]?.text;
+        if (index === 'phones') {
+          return dataRef?.current[subindex as any];
+        } else {
+          return dataRef?.current[subindex as any]?.text;
+        }
       }
     }
+  };
+
+  const getCountryFlag = (item: any) => {
+    const country = countries.find(country => country.id === item);
+    return country ? country.flag : '';
+  };
+
+  const getCountryName = (item: any) => {
+    const country = countries.find(country => country.id === item);
+    return country ? country.code : '';
   };
 
   useEffect(() => {
@@ -47,15 +65,13 @@ const ItemForm = ({
       dataRef.current = myValue;
       value();
     }
-  }, [dataRef, myValue, inputText]);
-
+  }, [myValue, inputText]);
 
   return (
     <View style={{ height: 115, justifyContent: 'center', flexDirection: 'row' }}>
       <View style={{ flexDirection: 'column', alignItems: 'center', height: '90%', width: '80%' }}>
         <View style={{ flexDirection: 'column', alignItems: 'flex-start', height: '100%', width: '100%', paddingLeft: 10, }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', height: '20%', width: '90%', }}>
-            {/* <Text style={profileStyles.label}>{label}</Text> */}
             <Text style={profileStyles.label}>  {label === 'name' ? 'Nombres' :
               label === 'last_name' ? 'Apellidos' :
                 label === 'profession' ? 'Profesión' :
@@ -73,10 +89,27 @@ const ItemForm = ({
                                         label === 'urls' ? 'urls' :
                                           label}
             </Text>
-
           </View>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', height: '55%', width: '90%', borderBottomWidth: 1, borderBottomColor: '#9b9db3', }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', height: '55%', width: '90%', borderBottomWidth: 1, borderBottomColor: '#9b9db3' }}>
+            {name === 'phones' &&
+              <View style={{ height: '100%', width: '35%', alignItems: 'flex-start', justifyContent: 'center' }}>
+                <TouchableOpacity style={{ display: 'flex', flexDirection: 'row', height: '70%', width: '98%', alignItems: 'center', justifyContent: 'center', borderColor: 'black', borderWidth: 1, borderRadius: 5 }}
+                  onPress={() => handleOpenModalIndicative({ name: name, dataRef: dataRef, subindex: subindex })}
+                >
+                  <View style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '75%', alignItems: 'center', justifyContent: 'center' }}>
+                    <CountryFlag isoCode={getCountryFlag(myValue && Array.isArray(myValue) ? myValue[subindex as number]?.indicative : 'CO+57')} size={12} />
+                    <Text>
+                      {" " + getCountryName(myValue && Array.isArray(myValue) ? myValue[subindex as number]?.indicative : '+57')}
+                    </Text>
+                  </View>
+                  <View style={{ height: '100%', width: '25%', alignItems: 'flex-start', justifyContent: 'center' }}>
+                    <MaterialIcons name="keyboard-arrow-down" size={24} color="#02AF9B" />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            }
+
             {icon === 'PersonOutlinedIcon' ? (
               <View style={{ height: '100%', width: '15%', alignItems: 'center', justifyContent: 'center' }}>
                 <Ionicons name="person-outline" size={28} color="#02AF9B" />
@@ -175,20 +208,11 @@ const ItemForm = ({
               </View>
             ) : icon === 'AccessibilityOutlinedIcon' ? (
               <View style={{ height: "100%", width: "15%", alignItems: 'center', justifyContent: 'center' }}>
-                {/*   <FontAwesome6 name="person" size={28} color="#02AF9B" /> */}
-                {/* <MaterialCommunityIcons name="head-lightbulb-outline" size={28} color="#02AF9B" /> */}
                 <FontAwesome5 name="medal" size={28} color="#02AF9B" />
-
               </View>
             ) : null}
 
-            <View
-              style={{
-                height: '100%',
-                width: '85%',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+            <View style={{ height: '100%', width: name === 'phones' ? '50%' : '85%', alignItems: 'center', justifyContent: 'center' }}>
               <TextInput
                 ref={dataRef}
                 id={`${name}-input`}
@@ -210,12 +234,11 @@ const ItemForm = ({
                     text: text,
                     currentDataRef: dataRef,
                     key: subindex,
+                    type: true
                   });
                 }}
                 value={
-                  myValue && !Array.isArray(myValue)
-                    ? myValue?.text
-                    : myValue && myValue[subindex as number]?.text
+                  myValue && !Array.isArray(myValue) ? myValue?.text : myValue && myValue[subindex as number]?.text
                 }
               />
             </View>
@@ -270,6 +293,7 @@ const ItemForm = ({
           />
         </View>
       )}
+
     </View>
   );
 };

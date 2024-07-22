@@ -64,6 +64,7 @@ const RecoveryPassword = () => {
               placeholder="Correo Electrónico"
               placeholderTextColor="white"
               underlineColorAndroid="transparent"
+              autoCapitalize="none"
               onChangeText={(text) => setEmail(text)}
             />
           </View>

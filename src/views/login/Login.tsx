@@ -179,6 +179,7 @@ const Login = () => {
                     secureTextEntry={!showPassword}
                     underlineColorAndroid="transparent"
                     value={password}
+                    autoCapitalize="none"
                     onChangeText={text => setPassword(text)}
                   />
                   <TouchableOpacity

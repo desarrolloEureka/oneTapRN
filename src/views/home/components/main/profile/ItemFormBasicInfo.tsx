@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ItemForm from './ItemForm';
@@ -13,6 +13,7 @@ import {
 } from '../../../../../types/profile';
 import CustomModalAlert from './CustomModalAlert';
 import { UserData } from '../../../../../types/user';
+import CustomModalIndicative from './CustomModalIndicative';
 
 const ItemFormBasicInfo = ({
     dataForm,
@@ -65,6 +66,30 @@ const ItemFormBasicInfo = ({
     isModalAlertLimit: boolean;
     handleDeleteData: () => void;
 }) => {
+
+    const [openModalIndicative, setOpenModalIndicative] = useState(false);
+    const [itemIndicative, setItemIndicative] = useState(null);
+
+    const handleOpenModalIndicative = (item: { name: any, dataRef: any, subindex: any }) => {
+        if (openModalIndicative === false) {
+            setItemIndicative(item as any);
+        } else {
+            setItemIndicative(null);
+        }
+        setOpenModalIndicative(!openModalIndicative);
+    }
+
+    const handleIndicative = (item: { name: any, currentDataRef: any, key: any, text: any }) => {
+        handleData({
+            name: item.name,
+            text: item.text,
+            currentDataRef: item.currentDataRef,
+            key: item.key,
+            type: false
+        });
+        setOpenModalIndicative(!openModalIndicative);
+    }
+
     return (
         <>
             <View style={{ height: labelArray.length > 1 ? 'auto' : 240, minHeight: 240, width: "100%", justifyContent: 'center', paddingTop: 20, paddingBottom: 20 }}>
@@ -120,6 +145,8 @@ const ItemFormBasicInfo = ({
                                         }
                                         myValue={myValue}
                                         index={index}
+                                        handleOpenModalIndicative={({ name, dataRef, subindex }) => handleOpenModalIndicative({ name, dataRef, subindex })}
+                                        openModalIndicative={openModalIndicative}
                                     />
                                 </View>
                             );
@@ -132,6 +159,12 @@ const ItemFormBasicInfo = ({
                 handleModalAlert={() => handleModalAlertLimit()}
                 title={"One Tap dice!"}
                 description="No es posible agregar mas datos"
+            />
+            <CustomModalIndicative
+                isModalAlert={openModalIndicative}
+                handleModalAlert={() => setOpenModalIndicative(false)}
+                handleData={({ name, currentDataRef, key, text }) => handleIndicative({ name, currentDataRef, key, text })}
+                itemIndicative={itemIndicative}
             />
         </>
     );
