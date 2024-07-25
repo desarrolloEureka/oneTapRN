@@ -3,10 +3,8 @@ import { SafeAreaView, Text, TouchableOpacity, View, FlatList, Image, BackHandle
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteStackParamList, StackNavigation } from '../../../../types/navigation';
+import { StackNavigation } from '../../../../types/navigation';
 import { homeStyles } from '../../styles/homeStyles';
 import MenuSuperior from '../../../menuSuperior/MenuSuperior';
 import CustomSwitch from './home/CustomSwitch';
@@ -86,6 +84,7 @@ const Main = () => {
   };
 
   const handleNavigatePreview = async (background: TemplateData | undefined) => {
+    console.log('PreviewTemplate ',tab)
     if (tab === 'social') {
       if (data?.profile?.social) {
         if (background) {
@@ -366,11 +365,11 @@ const Main = () => {
         </View>
       </View>
 
-     
+
       <TabNav
-          handleTabPress={handleTabPress}
-          numberNav={1}
-        />
+        handleTabPress={handleTabPress}
+        numberNav={1}
+      />
 
       {
         dataBackgrounds?.data &&

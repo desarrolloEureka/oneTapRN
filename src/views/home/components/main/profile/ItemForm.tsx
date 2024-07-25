@@ -99,7 +99,7 @@ const ItemForm = ({
                 >
                   <View style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '75%', alignItems: 'center', justifyContent: 'center' }}>
                     <CountryFlag isoCode={getCountryFlag(myValue && Array.isArray(myValue) ? myValue[subindex as number]?.indicative : 'CO+57')} size={12} />
-                    <Text>
+                    <Text style={{ color: "black" }}>
                       {" " + getCountryName(myValue && Array.isArray(myValue) ? myValue[subindex as number]?.indicative : '+57')}
                     </Text>
                   </View>
