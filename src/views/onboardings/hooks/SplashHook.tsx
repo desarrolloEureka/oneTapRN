@@ -34,7 +34,7 @@ const SplashHook = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       checkFirstTime();
-    }, 3150);
+    }, 3250);
     return () => clearTimeout(timer);
   }, [navigation]);
 

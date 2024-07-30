@@ -11,6 +11,7 @@ const Splash = () => {
       <LottieView
         source={require('../../images/splash_video.lottie.json')}
         autoPlay
+        loop={false}
         style={splashStyles.animation}
         resizeMode="cover"
       />
