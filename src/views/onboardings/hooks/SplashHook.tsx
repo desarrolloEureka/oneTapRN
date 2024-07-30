@@ -10,11 +10,12 @@ const SplashHook = () => {
     try {
       const isFirstTime = await AsyncStorage.getItem('firstTime');
       if (isFirstTime == null) {
-        navigation.push('OnboardingOne');
-        await AsyncStorage.setItem('firstTime', 'false');
+        setTimeout(() => {
+          navigation.push('OnboardingOne');
+          AsyncStorage.setItem('firstTime', 'false');
+        }, 3280);
       } else {
         const isUser = await AsyncStorage.getItem('@user');
-
         if (isUser) {
           const user = JSON.parse(isUser);
           if (user?.isActive) {
@@ -32,10 +33,7 @@ const SplashHook = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      checkFirstTime();
-    }, 3250);
-    return () => clearTimeout(timer);
+    checkFirstTime();
   }, [navigation]);
 
   return {};
