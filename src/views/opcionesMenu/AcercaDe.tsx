@@ -63,7 +63,7 @@ const AcercaDe = () => {
                 letterSpacing: 0.03,
                 textAlign: 'left',
                 color: "#030124"
-              }}>One Tap Versión 1.5</Text>
+              }}>One Tap Versión 1.6</Text>
               <Text style={{
                 fontFamily: 'Open Sans',
                 fontSize: 18,
@@ -72,7 +72,7 @@ const AcercaDe = () => {
                 letterSpacing: 0.03,
                 textAlign: 'left',
                 color: "#030124"
-              }}>2024-07-22</Text>
+              }}>2024-07-30</Text>
             </View>
 
             <View style={{ height: "20%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>

@@ -1,18 +1,19 @@
 import React from 'react';
-import {Image, View} from 'react-native';
+import { View } from 'react-native';
+import LottieView from 'lottie-react-native';
 import SplashHook from './hooks/SplashHook';
-import {splashStyles} from './styles/splashStyles';
+import { splashStyles } from './styles/splashStyles';
 
 const Splash = () => {
   SplashHook();
   return (
     <View style={splashStyles.container}>
-      <View style={splashStyles.imageContainer}>
-        <Image
-          source={require('../../images/logo_OT.png')}
-          style={splashStyles.image}
-        />
-      </View>
+      <LottieView
+        source={require('../../images/splash_video.lottie.json')}
+        autoPlay
+        style={splashStyles.animation}
+        resizeMode="cover"
+      />
     </View>
   );
 };
