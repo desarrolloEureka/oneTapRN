@@ -779,6 +779,12 @@ PODS:
   - hermes-engine/Pre-built (0.73.4)
   - leveldb-library (1.22.4)
   - libevent (2.1.12)
+  - lottie-ios (4.4.1)
+  - lottie-react-native (6.7.2):
+    - glog
+    - lottie-ios (= 4.4.1)
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - nanopb (2.30909.1):
     - nanopb/decode (= 2.30909.1)
     - nanopb/encode (= 2.30909.1)
@@ -1656,25 +1662,25 @@ PODS:
   - React-Mapbuffer (0.73.4):
     - glog
     - React-debug
-  - react-native-blob-util (0.19.6):
+  - react-native-blob-util (0.19.9):
     - React-Core
-  - react-native-document-picker (9.1.1):
+  - react-native-document-picker (9.3.0):
     - React-Core
   - react-native-image-picker (7.1.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - react-native-pdf (6.7.4):
+  - react-native-pdf (6.7.5):
     - React-Core
-  - react-native-safe-area-context (4.9.0):
+  - react-native-safe-area-context (4.10.7):
     - React-Core
-  - react-native-slider (4.5.0):
+  - react-native-slider (4.5.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
   - react-native-view-shot (3.8.0):
     - React-Core
-  - react-native-webview (13.8.1):
+  - react-native-webview (13.10.4):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1846,9 +1852,9 @@ PODS:
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
   - RecaptchaInterop (100.0.0)
-  - RNCAsyncStorage (1.22.1):
+  - RNCAsyncStorage (1.23.1):
     - React-Core
-  - RNCClipboard (1.14.0):
+  - RNCClipboard (1.14.1):
     - React-Core
   - RNCMaskedView (0.3.1):
     - React-Core
@@ -1866,24 +1872,25 @@ PODS:
     - RNFBApp
   - RNFS (2.20.0):
     - React-Core
-  - RNGestureHandler (2.15.0):
+  - RNGestureHandler (2.17.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
   - RNPermissions (4.1.5):
     - React-Core
-  - RNReanimated (3.7.1):
+  - RNReanimated (3.12.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
     - ReactCommon/turbomodule/core
-  - RNScreens (3.29.0):
+  - RNScreens (3.32.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNShare (10.1.0):
+    - React-RCTImage
+  - RNShare (10.2.1):
     - React-Core
-  - RNSVG (15.1.0):
+  - RNSVG (15.3.0):
     - React-Core
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
@@ -1896,6 +1903,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
+  - lottie-react-native (from `../node_modules/lottie-react-native`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -1982,6 +1990,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - libevent
+    - lottie-ios
     - nanopb
     - PromisesObjC
     - RecaptchaInterop
@@ -2001,6 +2010,8 @@ EXTERNAL SOURCES:
   hermes-engine:
     :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
     :tag: hermes-2023-11-17-RNv0.73.0-21043a3fc062be445e56a2c10ecd8be028dd9cc5
+  lottie-react-native:
+    :path: "../node_modules/lottie-react-native"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -2153,6 +2164,8 @@ SPEC CHECKSUMS:
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   leveldb-library: 06a69cc7582d64b29424a63e085e683cc188230a
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
+  lottie-react-native: 3444859381572e468f1b3a57cc5728968af868a6
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
@@ -2176,14 +2189,14 @@ SPEC CHECKSUMS:
   React-jsinspector: 9ac353eccf6ab54d1e0a33862ba91221d1e88460
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 114be72666d7e3e317c1a36fb566cd3ad712fcc8
-  react-native-blob-util: d8fa1a7f726867907a8e43163fdd8b441d4489ea
-  react-native-document-picker: 3599b238843369026201d2ef466df53f77ae0452
+  react-native-blob-util: 18b510205c080a453574a7d2344d64673d0ad9af
+  react-native-document-picker: 5b97e24a7f1a1e4a50a72c540a043f32d29a70a2
   react-native-image-picker: fefff630cfa3ee6a809f6ac6569981f4a34e0050
-  react-native-pdf: 79aa75e39a80c1d45ffe58aa500f3cf08f267a2e
-  react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
-  react-native-slider: f6f1c9e85cacac3172feefb16d34c1ced68d5e5b
+  react-native-pdf: 103940c90d62adfd259f63cca99c7c0c306b514c
+  react-native-safe-area-context: 422017db8bcabbada9ad607d010996c56713234c
+  react-native-slider: db7b76e91a602b306696c597e0ed1593e363a871
   react-native-view-shot: 6b7ed61d77d88580fed10954d45fad0eb2d47688
-  react-native-webview: dc191e100e5db2dbd3bc28793c789b95934904ca
+  react-native-webview: 5f9f5cc75ff7f1ab4857b85cb3d6b31b3b29962c
   React-nativeconfig: ca8b90c736cf3be019cb332ca42d93dd95b32e05
   React-NativeModulesApple: 1fdffcce7772e274baeab33a1900f45feba86cbd
   React-perflogger: 8a1e1af5733004bdd91258dcefbde21e0d1faccd
@@ -2205,21 +2218,21 @@ SPEC CHECKSUMS:
   React-utils: 21a798438d45e70ed9c2e2fe0894ee32ba7b7c5b
   ReactCommon: dcc65c813041388dead6c8b477444757425ce961
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  RNCAsyncStorage: 7deab901e27d1f989a83e8be6ce91b673772c848
-  RNCClipboard: 090462274cc05b02628bd158baf6d73c3abe8441
+  RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
+  RNCClipboard: 0a720adef5ec193aa0e3de24c3977222c7e52a37
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   RNFBApp: 9b25191f7a5e72c185b7e43fffb0d906869c4659
   RNFBAuth: 95acca18353778903885b2b25c25ddb81c050fed
   RNFBFirestore: be3b76650231721bad4e9b28bf3a09a3ce62f8bb
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNGestureHandler: 7feb85c5a30ebbcd4d5c7a851ba9e7eafb9860cb
+  RNGestureHandler: 3e87b5059b54bf1315bba9bc0252fb08d8e2d7b2
   RNPermissions: 294531ede5a64d1528463e88fffef05675842042
-  RNReanimated: 06342ad46707263f3009e00b88beca6188c3675d
-  RNScreens: 2b73f5eb2ac5d94fbd61fa4be0bfebd345716825
-  RNShare: b674d9f1cb0dc11116983bebd8712908a226a3ee
-  RNSVG: 50cf2c7018e57cf5d3522d98d0a3a4dd6bf9d093
+  RNReanimated: 5fdbe436bdb843bb5fcf081539fd03cd9f2a5705
+  RNScreens: e9eece68a6303235ba9c31a5b816cb416a88ae98
+  RNShare: 0fad69ae2d71de9d1f7b9a43acf876886a6cb99c
+  RNSVG: a48668fd382115bc89761ce291a81c4ca5f2fd2e
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  Yoga: 64cd2a583ead952b0315d5135bf39e053ae9be70
+  Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
 PODFILE CHECKSUM: e398eb840e6a863540ae643615eaf6f498fb8996
 

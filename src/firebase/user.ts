@@ -7,28 +7,24 @@ import {
   where,
   updateDoc,
   addDoc,
-  setDoc,
+  setDoc
 } from 'firebase/firestore';
-import { getAuth, updatePassword } from 'firebase/auth';
-import { dataBase } from './firebaseConfig';
+import {getAuth, updatePassword} from 'firebase/auth';
+import {dataBase} from './firebaseConfig';
 import {
   AllRefPropsFirebase,
   GetUserByLoginProps,
   LoginRefProps,
-  RefPropsFirebase,
+  RefPropsFirebase
 } from '../types/userFirebase';
-import {
-  DataForm,
-  ProfessionalDataForm,
-  SocialDataForm,
-} from '../types/profile';
+import {DataForm, ProfessionalDataForm, SocialDataForm} from '../types/profile';
 
-const ref = ({ ref, collection }: RefPropsFirebase) =>
+const ref = ({ref, collection}: RefPropsFirebase) =>
   doc(dataBase, collection, ref.document);
 
-const allRef = ({ ref }: AllRefPropsFirebase) => collection(dataBase, ref);
+const allRef = ({ref}: AllRefPropsFirebase) => collection(dataBase, ref);
 
-const loginRef = ({ user, password }: LoginRefProps) =>
+const loginRef = ({user, password}: LoginRefProps) =>
   query(
     collection(dataBase, 'users'),
     where('user_name', '==', user),
@@ -40,7 +36,7 @@ export const getUserByIdFireStore = async (user: string) =>
 
 // ref({ ref: user, collection: 'users' });
 
-export const getAllUsers = async () => await getDocs(allRef({ ref: 'users' }));
+export const getAllUsers = async () => await getDocs(allRef({ref: 'users'}));
 
 export const registerUserData = async (data: any) => {
   const docRef = await setDoc(doc(dataBase, 'users', data.uid), data);
@@ -82,8 +78,8 @@ export const updateDataUserProfile = async (
 ) => {
   try {
     const profRef = isProUser
-      ? { 'profile.professional': data }
-      : { 'profile.social': data };
+      ? {'profile.professional': data}
+      : {'profile.social': data};
     const userDocRef = doc(dataBase, 'users', userId);
     await updateDoc(userDocRef, profRef);
     return true;
@@ -108,7 +104,7 @@ export const updatePasswordFirebase = async (newPassword: string) => {
         console.debug('Contraseña actualizada correctamente');
         return true;
       })
-      .catch((error) => {
+      .catch(error => {
         console.debug('Error al actualizar la contraseña:', error.message);
         return false;
       });
@@ -125,10 +121,13 @@ export const updateSwitchActivateCard = async (
   try {
     const userDocRef = doc(dataBase, 'users', userId);
     await updateDoc(userDocRef, switchState);
-    //console.log('Switch activate card state updated successfully in Firebase');
+    console.log('Switch activate card state updated successfully in Firebase');
     return true;
   } catch (error: any) {
-    console.error('Error updating switch activate card state in Firebase:', error.message);
+    console.error(
+      'Error updating switch activate card state in Firebase:',
+      error.message
+    );
     return false;
   }
 };
