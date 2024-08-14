@@ -33,7 +33,6 @@ const FormEducation = ({
   }, [dataRef, myValue, inputText]);
 
   const value = () => {
-    //const i = subindex as any;
     if (dataRef.current && typeof dataRef.current === 'object') {
       if (dataRef.current[subindex as any]) {
         return subLabel && dataRef.current[subindex as any][subLabel];
@@ -88,7 +87,6 @@ const FormEducation = ({
             }}
             value={
               myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number] && myValue[subindex as number][subLabel]
-              //myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number][subLabel]
             }
           />
         </View>
@@ -102,7 +100,6 @@ const FormEducation = ({
             handleSwitch={(e: any) => handleSwitch({
               checked, name, subindex, currentDataRef: dataRef,
             })}
-            //checked={isChecked() ?? false}
             checked={
               myValue && subLabel && Array.isArray(myValue) && myValue[subindex as number]?.checked
             }

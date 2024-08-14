@@ -13,7 +13,6 @@ import {
 } from '../../../../../../types/profile';
 import { profile } from '../../../../../../initialData/profileInitialData';
 import { GetUser, SendDataUserProfile } from '../../../../../../reactQuery/users';
-import { validateEmail, validatePhoneNumber } from '../../../../../../globals/validateData';
 
 const ProfileHook = ({
   handleDataSet,
@@ -37,7 +36,6 @@ const ProfileHook = ({
   const [itemDetail, setItemDetail] = useState(0);
   const [isAlertSave, setIsAlertSave] = useState(false);
   const [isChangeData, setIsChangeData] = useState(false);
-
   const [isAlertEmptyData, setIsEmptyData] = useState(false);
   const [isAlertEmptyDataAll, setIsEmptyDataAll] = useState(false);
 
@@ -59,114 +57,33 @@ const ProfileHook = ({
   const [switchValue, setSwitchValue] = useState(false);
   const [navigationItem, setNavigationItem] = useState('');
 
-
-  /* const handleSendProfile = async (isProUser: boolean) => {
-    const userId = data?.uid;
-
-    setIsLoadingSendData(true);
-    if (userId) {
-      const isSendDataProfile = await SendDataUserProfile(userId, dataForm, false);
-      console.log('isSendDataProfile ', isSendDataProfile);
-      if (isSendDataProfile && isSendDataProfile?.success) {
-        setIsLoadingSendData(false);
-        setIsChangeData(false);
-        setIsDataError(false);
-        setIsDataSuccess(true);
-      } else {
-        setIsLoadingSendData(false);
-        setIsDataError(true);
-        setIsDataSuccess(false);
-      }
-    } else {
-      setIsLoadingSendData(false);
-    }
-  }; */
-
   const handleSendProfile = async (isProUser: boolean) => {
     const userId = data?.uid;
 
     if (!userId) {
-      console.log('No userId found');
       setIsLoadingSendData(false);
       return;
     }
 
-    //console.log('Starting handleSendProfile with userId:', userId);
     setIsLoadingSendData(true);
 
     try {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm, false);
-      //console.log('isSendDataProfile result:', isSendDataProfile);
-
       if (isSendDataProfile?.success) {
-        console.log('Data sent successfully');
         setIsChangeData(false);
         setIsDataError(false);
         setIsDataSuccess(true);
       } else {
-        console.log('Failed to send data');
         setIsDataError(true);
         setIsDataSuccess(false);
       }
     } catch (error) {
-      console.error('Error sending profile data:', error);
       setIsDataError(true);
       setIsDataSuccess(false);
     } finally {
       setIsLoadingSendData(false);
-      //console.log('Finished handleSendProfile');
     }
   };
-
-  /* const handleSendProfile = async (isProUser: boolean) => {
-    const userId = data?.uid;
-    const emails = dataForm?.emails?.map((email) => email.text);
-    const phones = dataForm?.phones?.map((phone) => phone.text);
-    const urls = dataForm?.urls?.map((urls) => urls);
-
-    if (emails) {
-      const isEmailValid = emails.every((email) => validateEmail(email as string));
-      if (!isEmailValid) {
-        setStatus("El correo no es valido ó no se pueden dejar espacios en blanco");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
-    if (phones) {
-      const isPhoneValid = phones.every((phone) => validatePhoneNumber(phone as string));
-      if (!isPhoneValid) {
-        setStatus("El teléfono no es valido ó no se pueden dejar espacios en blanco");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
-
-    if (urls) {
-      const allObjectsFilled = dataForm?.urls?.every(obj => obj.name !== "" && obj.url !== "" && obj.icon !== "");
-      if (!allObjectsFilled) {
-        setStatus("No se pueden dejar espacios en blanco en urls");
-        setisEmailPhoneRight(true);
-        return;
-      }
-    }
-
-    setIsLoadingSendData(true);
-    if (userId) {
-      const isSendDataProfile = await SendDataUserProfile(userId, dataForm, isProUser);
-      if (isSendDataProfile?.success) {
-        setIsChangeData(false);
-        setIsDataError(false);
-        setIsDataSuccess(true);
-        setIsLoadingSendData(false);
-      } else {
-        setIsDataError(true);
-        setIsDataSuccess(false);
-        setIsLoadingSendData(false);
-      }
-    } else {
-      setIsLoadingSendData(false);
-    }
-  }; */
 
   const handleModalAlert = (itemDelete: { index: string; subindex: string }) => {
     if (!isModalAlert) {
@@ -203,7 +120,6 @@ const ProfileHook = ({
     name?: string
     subindex?: number
   }) => {
-    //setIsAlertSave(true);
     setIsChangeData(true);
     const isChecked = checked;
     const dataFormClone = { ...dataForm };
@@ -212,10 +128,10 @@ const ProfileHook = ({
       index != 'phones' &&
       index != 'emails' &&
       index != 'urls' &&
-      (dataFormClone[index]?.label != 'phones' ||
-        dataFormClone[index]?.label != 'education' ||
-        dataFormClone[index]?.label != 'emails' ||
-        dataFormClone[index]?.label != 'professional_career' ||
+      (dataFormClone[index]?.label != 'phones' &&
+        dataFormClone[index]?.label != 'education' &&
+        dataFormClone[index]?.label != 'emails' &&
+        dataFormClone[index]?.label != 'professional_career' &&
         dataFormClone[index]?.label != 'urls')
     ) {
       if (dataFormClone[index]?.text?.length === 0 && !isChecked) {
@@ -362,7 +278,7 @@ const ProfileHook = ({
     const dataAux: any = dataFormClone[index as keyof typeof dataForm];
 
     if (dataAux?.length > 1 && Array.isArray(dataAux) && subindex !== undefined) {
-      dataAux.splice(parseInt(subindex, 10), 1); // Elimina el elemento en la posición subindex
+      dataAux.splice(parseInt(subindex, 10), 1);
       await setDataForm(dataFormClone);
 
       setTimeout(() => {
@@ -370,7 +286,6 @@ const ProfileHook = ({
         setSuccessDelete(true);
       }, 500);
     } else {
-      //setNoDeleted(true);
       if (subindex !== undefined && subindex) {
         if (dataAux[subindex].label === "urls") {
           dataAux[subindex] = {
@@ -487,7 +402,6 @@ const ProfileHook = ({
         }
       }
       if (index === 'urls') {
-        //if ((count != null || count != undefined) && count < 3) {
         if (count === 0) {
           dataFormClone.urls = [
             {
@@ -640,7 +554,6 @@ const ProfileHook = ({
   );
 
   const handleSwitchAll = (val: any) => {
-    //setIsAlertSave(true);
     setIsChangeData(true);
     setSwitchValue(!switchValue);
     const isChecked = val?.checked;
@@ -679,27 +592,6 @@ const ProfileHook = ({
     });
     setObjectDataSort(data);
   }, [dataForm, isProUser]);
-
-
-  /* 
-    useEffect(() => {
-    const data = Object.entries(dataForm as DataFormSorted).map(([key, value]): [string, any] => {
-      // Cambiar el label a español
-      const newValue = Array.isArray(value)
-        ? value.map(item => ({ ...item, label: validLabel(key) }))
-        : { ...value, label: validLabel(key) };
-      return [key, newValue];
-    }).sort((a, b) => {
-      const aa = Array.isArray(a[1]) ? a[1][0].order : a[1].order;
-      const bb = Array.isArray(b[1]) ? b[1][0].order : b[1].order;
-      return aa - bb;
-    });
-
-    //console.log('DataSort ', data);
-    setObjectDataSort(data);
-  }, [dataForm, isProUser]);
-  
-  */
 
   useEffect(() => {
     setFlag(true);

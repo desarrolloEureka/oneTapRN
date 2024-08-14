@@ -24,8 +24,6 @@ const PreviewTemplate = () => {
     }
   }, []);
 
-  //console.log(`https://backoffice.onetap.com.co/es/views/cardView?uid=${data.uid}&type=${tab}`)
-
   return (
     <SafeAreaView>
       <TouchableOpacity

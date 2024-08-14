@@ -333,7 +333,6 @@ const ProfileProfessional = () => {
                 handleAcept={handleAcept}
                 handleCancel={handleCancel}
                 description={'Has modificado tus datos. ¿Deseas guardar los cambios antes de continuar?'}
-              //description={'Ha realizado cambios. ¿Desea continuar sin guardar?'}
               />
 
               <CustomModalAlert

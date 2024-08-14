@@ -113,8 +113,6 @@ const ItemFormUrl = ({
 
         {labelArray.map((val, key) => {
           const datafilter = data?.find(item => item.name === val.icon);
-          //console.log('datafilter ', datafilter);
-
           if (index == 'urls') {
             const myValue = (user && user.profile
               ? isProUser
@@ -196,13 +194,11 @@ const ItemFormUrl = ({
                         }}>
                         <FormUrl
                           label={'Sitio Web/URL: '}
+                          name={index}
                           handleSwitch={(e: any) => handleSwitch(e)}
                           handleData={handleData}
-                          name={index}
                           checked={val.checked}
                           subindex={key}
-                          icon={val.icon}
-                          deleteAction={true}
                           handleDeleteData={handleDeleteData}
                           handleModalAlert={({ index, subindex }) =>
                             handleModalAlert({ index, subindex })
@@ -238,7 +234,6 @@ const ItemFormUrl = ({
                         width: '68%',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        //backgroundColor: 'white',
                         borderRadius: 80,
                       }}
                       onPress={() => handleModalIcons(val, key)}>

@@ -3,8 +3,8 @@ import {
   View,
   Text,
   Image,
-  StyleSheet,
   TouchableOpacity,
+  Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -17,18 +17,21 @@ const AcercaDe = () => {
   };
 
   return (
-    <View style={styles.container}>
-
-      {/* <View style={{ height: "7%", width: "100%" }}>
-        <TouchableOpacity style={{ height: "100%", width: "18%", alignItems: 'center', justifyContent: 'center' }} onPress={handleBackPress}>
-          <Icon name="arrow-back-ios" size={27} color="black" />
-        </TouchableOpacity>
-      </View> */}
-
-      <View style={{ height: '10%', width: '100%' }}>
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#e8e8e8'
+    }}>
+      <View style={{
+        height: Platform.OS === 'ios' ? '12%' : '10%',
+        width: '100%',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end'
+      }}>
         <TouchableOpacity
           style={{
-            height: '100%',
+            height: '70%',
             width: '18%',
             alignItems: 'center',
             justifyContent: 'center'
@@ -38,10 +41,17 @@ const AcercaDe = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={{ height: "90%", width: "100%" }}>
+      <View style={{ height: Platform.OS === 'ios' ? '88%' : '90%', width: '100%' }}>
         <View style={{ height: "35%", width: "100%" }}>
           <View style={{ height: "35%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontFamily: 'Open Sans', fontSize: 23, fontWeight: '700', lineHeight: 25, letterSpacing: 0.03, color: '#396593' }}>
+            <Text style={{
+              fontFamily: 'Open Sans',
+              fontSize: 23,
+              fontWeight: '700',
+              lineHeight: 25,
+              letterSpacing: 0.03,
+              color: '#396593'
+            }}>
               Acerca de
             </Text>
           </View>
@@ -63,7 +73,9 @@ const AcercaDe = () => {
                 letterSpacing: 0.03,
                 textAlign: 'left',
                 color: "#030124"
-              }}>One Tap Versión 1.6</Text>
+              }}>
+                One Tap Versión 1.6
+              </Text>
               <Text style={{
                 fontFamily: 'Open Sans',
                 fontSize: 18,
@@ -72,7 +84,9 @@ const AcercaDe = () => {
                 letterSpacing: 0.03,
                 textAlign: 'left',
                 color: "#030124"
-              }}>2024-07-30</Text>
+              }}>
+                2024-07-30
+              </Text>
             </View>
 
             <View style={{ height: "20%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
@@ -81,7 +95,9 @@ const AcercaDe = () => {
                 fontSize: 18,
                 fontWeight: '300',
                 color: "#030124"
-              }}>Todos los derechos reservados</Text>
+              }}>
+                Todos los derechos reservados
+              </Text>
               <Text style={{
                 fontFamily: 'Open Sans',
                 fontSize: 18,
@@ -90,7 +106,9 @@ const AcercaDe = () => {
                 letterSpacing: 0.03,
                 textAlign: 'left',
                 color: "#030124"
-              }}>REDACOL S.A.S</Text>
+              }}>
+                REDACOL S.A.S
+              </Text>
             </View>
 
             <View style={{ height: "20%", width: "100%", alignItems: 'center', justifyContent: 'flex-end', marginBottom: 5 }}>
@@ -102,7 +120,9 @@ const AcercaDe = () => {
                 letterSpacing: 0.03,
                 textAlign: 'center',
                 color: "#030124"
-              }}>Powered By:</Text>
+              }}>
+                Powered By:
+              </Text>
             </View>
 
             <View style={{ height: "30%", width: "100%", alignItems: 'center', justifyContent: 'center' }}>
@@ -116,14 +136,5 @@ const AcercaDe = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#e8e8e8',
-  },
-});
 
 export default AcercaDe;

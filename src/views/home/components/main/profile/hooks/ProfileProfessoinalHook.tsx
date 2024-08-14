@@ -88,7 +88,6 @@ const ProfileProfessionalHook = ({
     const userId = data?.uid;
 
     if (!userId) {
-      console.log('No userId found');
       setIsLoadingSendData(false);
       return;
     }
@@ -96,15 +95,13 @@ const ProfileProfessionalHook = ({
 
     try {
       const isSendDataProfile = await SendDataUserProfile(userId, dataForm, true);
-      //console.log('isSendDataProfile result:', isSendDataProfile);
-
       if (isSendDataProfile?.success) {
-        console.log('Data sent successfully');
+        //console.log('Data sent successfully');
         setIsChangeData(false);
         setIsDataError(false);
         setIsDataSuccess(true);
       } else {
-        console.log('Failed to send data');
+        //console.log('Failed to send data');
         setIsDataError(true);
         setIsDataSuccess(false);
       }
@@ -114,7 +111,6 @@ const ProfileProfessionalHook = ({
       setIsDataSuccess(false);
     } finally {
       setIsLoadingSendData(false);
-      //console.log('Finished handleSendProfile');
     }
   };
 
@@ -256,10 +252,10 @@ const ProfileProfessionalHook = ({
       index != 'emails' &&
       index != 'professional_career' &&
       index != 'urls' &&
-      (dataFormClone[index]?.label != 'phones' ||
-        dataFormClone[index]?.label != 'education' ||
-        dataFormClone[index]?.label != 'emails' ||
-        dataFormClone[index]?.label != 'professional_career' ||
+      (dataFormClone[index]?.label != 'phones' &&
+        dataFormClone[index]?.label != 'education' &&
+        dataFormClone[index]?.label != 'emails' &&
+        dataFormClone[index]?.label != 'professional_career' &&
         dataFormClone[index]?.label != 'urls')
     ) {
       if (dataFormClone[index]?.text?.length === 0 && !isChecked) {
@@ -525,107 +521,6 @@ const ProfileProfessionalHook = ({
       }
     }
   };
-
-  /*   const handleDeleteData = async () => {
-      setIsChangeData(true);
-      setIsDataLoad(false);
-      const index =
-        itemDelete && 'index' in itemDelete ? itemDelete['index'] : undefined;
-      const subindex =
-        itemDelete && 'subindex' in itemDelete
-          ? itemDelete['subindex']
-          : undefined;
-      const dataFormClone = { ...dataForm };
-      const dataAux: any = dataFormClone[index as keyof typeof dataForm];
-  
-      if (dataAux?.length > 1 && Array.isArray(dataAux) && subindex !== undefined) {
-        dataAux.splice(parseInt(subindex, 10), 1); // Elimina el elemento en la posición subindex
-        await setDataForm(dataFormClone);
-  
-        setTimeout(() => {
-          setIsModalAlert(false);
-          setSuccessDelete(true);
-        }, 500);
-  
-      } else {
-        console.log("dataAux[subindex]?.label ", subindex && dataAux[subindex]?.label);
-        console.log();
-  
-        if (subindex !== undefined && subindex) {
-          if (dataAux[subindex]?.label === "urls") {
-            dataAux[subindex] = {
-              label: 'urls',
-              name: '',
-              url: '',
-              icon: '',
-              checked: false,
-              principal: true,
-              social: false,
-              professional: false,
-              order: 13,
-            };
-          } else if (dataAux[subindex]?.label === "emails") {
-            dataAux[subindex] = {
-              label: 'emails',
-              text: '',
-              checked: false,
-              principal: true,
-              social: true,
-              professional: false,
-              icon: 'EmailOutlinedIcon',
-              order: 10,
-            };
-          } else if (dataAux[subindex]?.label === "phones") {
-            dataAux[subindex] = {
-              label: 'phones',
-              text: '',
-              checked: false,
-              principal: true,
-              social: true,
-              professional: false,
-              icon: 'LocalPhoneOutlinedIcon',
-              order: 9,
-            };
-          } else if (dataAux[subindex]?.label === "education") {
-            dataAux[subindex] = {
-              label: 'education',
-              title: '',
-              institution: '',
-              year: '',
-              checked: false,
-              principal: true,
-              social: false,
-              professional: true,
-              icon: '',
-              order: 11,
-            };
-  
-          } else if (dataAux[subindex]?.label === "professional_career") {
-            dataAux[subindex] = {
-              label: 'professional_career',
-              company: '',
-              position: '',
-              data_init: '',
-              data_end: '',
-              checked: false,
-              principal: true,
-              social: false,
-              professional: true,
-              icon: '',
-              order: 12,
-            };
-          }
-        }
-  
-        await setDataForm(dataFormClone);
-        setTimeout(() => {
-          setIsModalAlert(false);
-          setSuccessDelete(true);
-        }, 500);
-      }
-  
-      //console.log(dataFormClone);
-    }; */
 
   const handleAddData = (index: string) => {
     const dataFormClone = { ...dataForm };
@@ -922,7 +817,6 @@ const ProfileProfessionalHook = ({
   );
 
   const handleSwitchAll = (val: any) => {
-    //setIsAlertSave(true);
     setIsChangeData(true);
     setSwitchValue(!switchValue);
     const isChecked = val?.checked;

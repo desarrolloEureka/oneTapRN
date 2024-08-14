@@ -156,7 +156,7 @@ export interface ItemFormParams {
   label: string;
   name: IndexDataForm;
   handleSwitch: (e: any) => void;
-  handleOpenModalIndicative: ({ name, dataRef, subindex }: { name: string, dataRef: any, subindex: any }) => void;
+  handleOpenModalIndicative?: ({ name, dataRef, subindex }: { name: string, dataRef: any, subindex: any }) => void;
   handleData: ({
     name,
     text,
@@ -167,7 +167,7 @@ export interface ItemFormParams {
   checked?: boolean;
   icon?: string;
   deleteAction?: boolean;
-  openModalIndicative: boolean;
+  openModalIndicative?: boolean;
   handleDeleteData?: ({ name }: { name: string }) => void;
   handleModalAlert?: ({
     index,

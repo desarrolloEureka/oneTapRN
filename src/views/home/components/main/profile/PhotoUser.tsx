@@ -22,13 +22,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SendDataImage, GetUser } from '../../../../../reactQuery/users';
-import { UserData } from '../../../../../types/user';
-import { PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 
 const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser: boolean; isAlertSave: boolean }) => {
   const { data, refetch } = GetUser();
-  //const user = GetUser();
-  //const data = user.data as unknown as UserData;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedImagePro, setSelectedImagePro] = useState<string | null>(null);
   const [openModalImageProfile, setOpenModalImageProfile] = useState(false);
@@ -61,7 +57,7 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
         Alert.alert("Permiso denegado", "No se puede acceder a la cámara porque no se otorgaron los permisos necesarios.");
         return;
       }
-    } 
+    }
 
     const options: ImageLibraryOptions = {
       mediaType: 'photo' as MediaType,
@@ -121,16 +117,11 @@ const PhotoUser = ({ name, isProUser, isAlertSave }: { name?: string; isProUser:
       const result = await launchImageLibrary(options);
 
       if (result.didCancel || result.errorMessage) {
-        /*  Alert.alert(
-           'Error',
-           'El usuario canceló la selección o hubo un error. Inténtalo de nuevo'
-         ); */
         return;
       }
 
       const asset = result.assets && result.assets[0];
       if (asset && asset.uri && asset.base64 && data && data?.uid) {
-        //console.log('asset ', asset.width, ' X ', asset.height);
 
         if (isProUser === true) {
           setSelectedImagePro(asset.uri);

@@ -11,7 +11,6 @@ import {
   Keyboard
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { profileStyles } from '../../../styles/profileStyles';
 import PhotoUser from './PhotoUser';
 import FormDataUser from './FormDataUser';
@@ -24,11 +23,9 @@ import CustomSwitchGeneral from './CustomSwitchGeneral';
 import CustomModalLoading from './CustomModalLoading';
 import { SocialDataForm } from '../../../../../types/profile';
 import { GetUser } from '../../../../../reactQuery/users';
-import { RouteStackParamList, StackNavigation } from '../../../../../types/navigation';
+import { StackNavigation } from '../../../../../types/navigation';
 // Iconos
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomModalAlertSave from './CustomModalAlertSave';
 import TabNav from '../../tabNav/TabNav';
 
@@ -82,8 +79,6 @@ const Profile = () => {
   } = ProfileHook({
     isProUser: false
   });
-
-  //console.log("Data----> ", data);
   const navigation = useNavigation<StackNavigation>();
   const [isModalAlertNavigation, setIsModalAlertNavigation] = useState(false);
   const userData = GetUser();
@@ -336,7 +331,6 @@ const Profile = () => {
                 handleAcept={handleAcept}
                 handleCancel={handleCancel}
                 description={'Has modificado tus datos. ¿Deseas guardar los cambios antes de continuar?'}
-              //description={'Ha realizado cambios. ¿Desea continuar sin guardar?'}
               />
 
               <CustomModalAlert
@@ -367,7 +361,6 @@ const Profile = () => {
             </ScrollView>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
-
 
         <TabNav
           handleTabPress={handleTabPress}

@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { profileStyles } from '../../../styles/profileStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import CustomSwitchGeneral from './CustomSwitchGeneral';
 
@@ -14,8 +13,6 @@ const FormUrl = ({
   handleData,
   checked,
   deleteAction,
-  icon,
-  handleDeleteData,
   handleModalAlert,
   myValue,
   index,

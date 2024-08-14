@@ -43,7 +43,7 @@ const userDataToSend = (user: UserData, resultUser: any) => {
 
 const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
   const query = useQuery({
-    queryKey: ['user'],
+    queryKey: ['user', user],
     queryFn: async () => {
       const resultUser = await loginFirebase({
         user: user!,
@@ -61,7 +61,6 @@ const GetLoginQuery = ({ user, password, sendLogin }: GetLoginQueryProps) => {
           return null;
         }
       } else {
-        //create account if user not exist and exist in woocommerce
         return null;
       }
     },
@@ -93,26 +92,50 @@ const reBuildUserData = async (userData: UserData) => {
   }
 };
 
-const SendSwitchProfile = async (userId: string, switchState: boolean) => {
-  await updateSwitchProfileFirebase(userId, {
-    switch_profile: switchState,
-    preview: "https://backoffice.onetap.com.co/es/views/cardView?uid=" + userId
-  });
-  const updatedUser = await getUserByIdFireStore(userId);
-  if (updatedUser.exists()) {
-    const userData = await updatedUser.data() as UserData;
-    const getUser = await reBuildUserData(userData);
-    await AsyncStorage.setItem('@user', JSON.stringify(getUser));
+const SendSwitchProfile = async (userId: string, switchState: boolean): Promise<boolean> => {
+  try {
+    const success = await updateSwitchProfileFirebase(userId, {
+      switch_profile: switchState,
+      preview: `https://backoffice.onetap.com.co/es/views/cardView?uid=${userId}`
+    });
+
+    if (!success) {
+      return false;
+    }
+
+    const updatedUser = await getUserByIdFireStore(userId);
+    if (updatedUser.exists()) {
+      const userData = updatedUser.data() as UserData;
+      const getUser = await reBuildUserData(userData);
+      await AsyncStorage.setItem('@user', JSON.stringify(getUser));
+    }
+
+    return true;
+  } catch (error: any) {
+    console.error('Error in SendSwitchProfile:', error.message);
+    return false;
   }
 };
 
-const SendSwitchActivateCard = async (userId: string, switchState: boolean) => {
-  await updateSwitchActivateCard(userId, { switch_activateCard: switchState });
-  const updatedUser = await getUserByIdFireStore(userId);
-  if (updatedUser.exists()) {
-    const userData = await updatedUser.data() as UserData;
-    const getUser = await reBuildUserData(userData);
-    await AsyncStorage.setItem('@user', JSON.stringify(getUser));
+const SendSwitchActivateCard = async (userId: string, switchState: boolean): Promise<boolean> => {
+  try {
+    const success = await updateSwitchActivateCard(userId, { switch_activateCard: switchState });
+
+    if (!success) {
+      return false;
+    }
+
+    const updatedUser = await getUserByIdFireStore(userId);
+    if (updatedUser.exists()) {
+      const userData = updatedUser.data() as UserData;
+      const getUser = await reBuildUserData(userData);
+      await AsyncStorage.setItem('@user', JSON.stringify(getUser));
+    }
+
+    return true;
+  } catch (error: any) {
+    console.error('Error in SendSwitchActivateCard:', error.message);
+    return false;
   }
 };
 
@@ -154,64 +177,20 @@ const SendSwitchAllForm = async (userId: string, dataForm: any) => {
   await updateSwitchAllFirebase(userId, { switchAllForm: dataForm });
 };
 
-/* const SendDataUserProfile = async (userId: string, data: SocialDataForm | ProfessionalDataForm, isProUser: boolean) => {
-  return await updateDataUserProfile(userId, data, isProUser)
-    .then(async (response) => {
-      const updatedUser = await getUserByIdFireStore(userId);
-      if (updatedUser.exists()) {
-        const userData = await updatedUser.data() as UserData;
-        const getUser = await reBuildUserData(userData);
-        await AsyncStorage.setItem('@user', JSON.stringify(getUser));
-        return { success: true, error: false };
-      }
-    })
-    .catch((error) => {
-      console.error(error.message);
-      return { success: false, error: error.message };
-    });
-}; */
-
-/* const SendDataUserProfile = async (userId: string, data: SocialDataForm | ProfessionalDataForm, isProUser: boolean) => {
-  try {
-    const updateResult = await updateDataUserProfile(userId, data, isProUser);
-    if (updateResult) {
-      const updatedUser = await getUserByIdFireStore(userId);
-      if (updatedUser.exists()) {
-        const userData = updatedUser.data() as UserData;
-        const rebuiltUser = await reBuildUserData(userData);
-        await AsyncStorage.setItem('@user', JSON.stringify(rebuiltUser));
-        return { success: true, error: false };
-      }
-    }
-    return { success: false, error: 'Failed to update user profile.' };
-  } catch (error: any) {
-    console.error('Error updating user profile: ', error.message);
-    return { success: false, error: error.message };
-  }
-}; */
-
 const SendDataUserProfile = async (userId: string, data: SocialDataForm | ProfessionalDataForm, isProUser: boolean) => {
-  //console.log('Starting SendDataUserProfile for userId:', userId);
   try {
     const updateResult = await updateDataUserProfile(userId, data, isProUser);
-    //console.log('updateDataUserProfile result:', updateResult);
-
     if (updateResult) {
       const updatedUser = await getUserByIdFireStore(userId);
       if (updatedUser.exists()) {
         const userData = updatedUser.data() as UserData;
-        //console.log('updatedUser.data() ');
         const rebuiltUser = await reBuildUserData(userData);
-        //console.log('reBuildUserData ');
         await AsyncStorage.setItem('@user', JSON.stringify(rebuiltUser));
-        //console.log('User profile updated and saved to AsyncStorage');
         return { success: true, error: false };
       } else {
-        //console.log('User document does not exist');
         return { success: false, error: 'User document does not exist' };
       }
     } else {
-      //console.log('Failed to update user profile');
       return { success: false, error: 'Failed to update user profile' };
     }
   } catch (error: any) {

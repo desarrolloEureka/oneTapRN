@@ -23,19 +23,6 @@ const Terminos = () => {
       <View style={{ height: "93%", width: "100%" }}>
         <Pdf
           source={source}
-          onLoadComplete={(numberOfPages, filePath) => {
-            console.log(`Number of pages: ${numberOfPages}`);
-          }}
-          onPageChanged={(page, numberOfPages) => {
-            console.log(`Current page: ${page}`);
-          }}
-          onError={error => {
-            console.log(error);
-          }}
-          onPressLink={uri => {
-            console.log(`Link pressed: ${uri}`);
-          }}
-          // trustAllCerts={true}
           style={styles.pdf}
         />
       </View>

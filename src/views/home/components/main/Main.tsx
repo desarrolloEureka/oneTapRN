@@ -84,7 +84,6 @@ const Main = () => {
   };
 
   const handleNavigatePreview = async (background: TemplateData | undefined) => {
-    console.log('PreviewTemplate ',tab)
     if (tab === 'social') {
       if (data?.profile?.social) {
         if (background) {

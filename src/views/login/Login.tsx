@@ -23,44 +23,38 @@ const Login = () => {
   const navigation = useNavigation<StackNavigation>();
 
   const handleForgotPassword = () => {
+    setErrorForm(null);
     navigation.navigate('RecoveryPassword');
   };
 
   const handleGoTerms = () => {
+    setErrorForm(null);
     navigation.navigate('Terminos');
   };
 
   const { data, isLoading, isRefetching } = GetLoginQuery({
     user: email,
     password,
-    sendLogin
+    sendLogin,
   });
 
-  const loginHandle = async () => {
+  const loginHandle = () => {
     setErrorForm(null);
     if (email && password) {
-      setErrorForm(null);
       setSendLogin(true);
     } else {
       setSendLogin(false);
-      if (!email) {
-        setErrorForm({
-          errorType: 1,
-          errorMessage: 'El correo es obligatorio'
-        });
-      } else if (!password) {
-        setErrorForm({
-          errorType: 2,
-          errorMessage: 'La contraseña es obligatoria'
-        });
-      }
+      setErrorForm({
+        errorType: email ? 2 : 1,
+        errorMessage: email ? 'La contraseña es obligatoria' : 'El correo es obligatorio'
+      });
     }
   };
 
   const userIsLogged = useCallback(() => {
-    if (data && data?.isActive === true && data?.isActiveByAdmin === true && !sendLogin) {
-      const url = `https://backoffice.onetap.com.co/es/views/cardView?uid=${data?.uid}`;
-      data && SendPreView(data?.uid, url);
+    if (data && data.isActive && data.isActiveByAdmin && !sendLogin) {
+      const url = `https://backoffice.onetap.com.co/es/views/cardView?uid=${data.uid}`;
+      SendPreView(data.uid, url);
       setErrorForm(null);
       navigation.navigate('Home');
       setPassword('');
@@ -69,15 +63,10 @@ const Login = () => {
       setTimeout(() => {
         setErrorForm({
           errorType: 3,
-          errorMessage:
-            'Credenciales incorrectas. Por favor, inténtelo de nuevo.'
+          errorMessage: 'Credenciales incorrectas. Por favor, inténtelo de nuevo.'
         });
-      }, 4500);
-
-      setTimeout(() => {
-        setErrorForm(null);
         setSendLogin(false);
-      }, 2000);
+      }, 6500);
     }
   }, [data, navigation, sendLogin]);
 
