@@ -112,7 +112,7 @@ const SendSwitchProfile = async (userId: string, switchState: boolean): Promise<
 
     return true;
   } catch (error: any) {
-    console.error('Error in SendSwitchProfile:', error.message);
+    console.log('Error in SendSwitchProfile:', error.message);
     return false;
   }
 };

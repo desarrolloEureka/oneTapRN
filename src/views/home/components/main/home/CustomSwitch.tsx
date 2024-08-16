@@ -11,9 +11,7 @@ const CustomSwitch = ({ profile, handleModalAlert }: { profile: boolean; handleM
   const { logOut } = LogOut();
 
   const handleSwitchChange = async () => {
-    //if (!data?.uid) return;
-
-    if (!data?.uid || loading) return; // Ignorar si ya se está cargando
+    if (!data?.uid || loading) return;
     setLoading(true); // Empezar loading
 
     try {
@@ -54,7 +52,8 @@ const CustomSwitch = ({ profile, handleModalAlert }: { profile: boolean; handleM
       }
       //refetch();
     } catch (error) {
-      console.error('Error', 'Ocurrió un error al procesar la solicitud.');
+      Alert.alert('Error', 'Ocurrió un error al procesar la solicitud.');
+      console.log('Error', 'Ocurrió un error al procesar la solicitud.');
     } finally {
       setLoading(false);
     }

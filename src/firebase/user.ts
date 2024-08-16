@@ -55,10 +55,10 @@ export const updateSwitchProfileFirebase = async (
   try {
     const userDocRef = doc(dataBase, 'users', userId);
     await updateDoc(userDocRef, switchState);
-    //console.log('Switch state updated successfully in Firebase');
+    console.log('Switch state updated successfully in Firebase');
     return true;
   } catch (error: any) {
-    console.error('Error updating switch state in Firebase:', error.message);
+    console.log('Error updating switch state in Firebase:', error.message);
     return false;
   }
 };
